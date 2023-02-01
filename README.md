@@ -1,7 +1,7 @@
 # Assignment A2: Mesh Generator
 
   - Kyle Hagerman [hagermak@mcmaster.ca]
-  - Author #2 [email@mcmaster.ca]
+  - Arjun Karthik [kartha4@mcmaster.ca]
   - Author #3 [email@mcmaster.ca]
 
 ## How to run the product
