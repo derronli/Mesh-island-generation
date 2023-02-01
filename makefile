@@ -8,4 +8,6 @@ visualizer:
 	java -jar visualizer.jar ../generator/sample.mesh sample.svg
 	ls -lh sample.svg
 
-.PHONY: run
+.PHONY: generator
+
+.PHONY2: visualizer
