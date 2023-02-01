@@ -7,3 +7,5 @@ visualizer:
 	cd visualizer
 	java -jar visualizer.jar ../generator/sample.mesh sample.svg
 	ls -lh sample.svg
+
+.PHONY: run
