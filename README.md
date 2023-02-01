@@ -59,7 +59,7 @@ When you develop features and enrich the product, remember that you have first t
 
 ### Definition of Done
 
--- Insert here your definition of done for your features --
+-- Each feature compiles properly on maven, following all necessary business requirements.  --
 
 ### Product Backlog
 
