@@ -6,7 +6,7 @@
 
 ## How to run the product
 
-_This section needs to be edited to reflect how the user can interact with thefeature released in your project_
+_This section needs to be edited to reflect how the user can interact with the feature released in your project_
 
 ### Installation instructions
 
@@ -65,6 +65,9 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
+|    |               |      |       |     |        |
+|    |               |      |       |     |        |
+|    |               |      |       |     |        |
 |    |               |      |       |     |        |
 
 
