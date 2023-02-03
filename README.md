@@ -34,7 +34,7 @@ mosser@azrael generator %
 
 ### Visualizer
 
-To visualize an existing mesh, go the the `visualizer` directory, and use `java -jar` to run the product. The product take two arguments (so far): the file containing the mesh, and the name of the file to store the visualization (as an SVG image).
+To visualize an existing mesh, go to the `visualizer` directory, and use `java -jar` to run the product. The product take two arguments (so far): the file containing the mesh, and the name of the file to store the visualization (as an SVG image).
 
 ```
 mosser@azrael A2 % cd visualizer 
@@ -46,10 +46,10 @@ mosser@azrael visualizer % ls -lh sample.svg
 -rw-r--r--  1 mosser  staff    56K 29 Jan 10:53 sample.svg
 mosser@azrael visualizer %
 ```
-To viualize the SVG file:
+To visualize the SVG file:
 
   - Open it with a web browser
-  - Convert it into something else with tool slike `rsvg-convert`
+  - Convert it into something else with tools like `rsvg-convert`
 
 ## How to contribute to the project
 
@@ -65,7 +65,7 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
-|  F01  | Draw segments between vertices to visualize squares              |   Everyone   |       |     |    B    |
+|  F01  | Draw segments between vertices to visualize squares |   Everyone   |       |     |    B    |
 |    |               |      |       |     |        |
 |    |               |      |       |     |        |
 |    |               |      |       |     |        |
