@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
+// methods to use: getSegmentsList(),
+
 public class GraphicRenderer {
 
     private static final int THICKNESS = 3;

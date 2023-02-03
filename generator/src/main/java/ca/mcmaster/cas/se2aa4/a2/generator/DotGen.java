@@ -9,6 +9,8 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
+// make segment gen class, : addAllSegments()
+
 public class DotGen {
 
     private final int width = 500;
