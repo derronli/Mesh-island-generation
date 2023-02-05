@@ -2,7 +2,7 @@
 
   - Kyle Hagerman [hagermak@mcmaster.ca]
   - Arjun Karthik [kartha4@mcmaster.ca]
-  - Author #3 [email@mcmaster.ca]
+  - Derron Li [li1578@mcmaster.ca]
 
 ## How to run the product
 
