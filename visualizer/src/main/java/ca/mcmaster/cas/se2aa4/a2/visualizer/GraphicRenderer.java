@@ -41,9 +41,8 @@ public class GraphicRenderer {
             Color old = canvas.getColor();
             canvas.setColor(extractColor(s.getPropertiesList()));
             double[] positions = extractPosition(s.getPropertiesList());
-            //System.out.println(Arrays.toString(positions));
-            Line2D point = new Line2D.Double(positions[0], positions[1], positions[2], positions[3]);
-            canvas.fill(point);
+            Line2D line = new Line2D.Double(positions[0], positions[1], positions[2], positions[3]);
+            canvas.fill(line);
             canvas.setColor(old);
         }
     }
