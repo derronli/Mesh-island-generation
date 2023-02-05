@@ -1,7 +1,7 @@
-generator:
+g:
 	cd generator && java -jar generator.jar sample.mesh
 
-visualizer:
+v:
 	cd visualizer && java -jar visualizer.jar ../generator/sample.mesh sample.svg
 
 .PHONY: generator visualizer
