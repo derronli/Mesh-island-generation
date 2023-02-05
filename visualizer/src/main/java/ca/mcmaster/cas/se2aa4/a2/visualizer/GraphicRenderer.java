@@ -25,6 +25,16 @@ public class GraphicRenderer {
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
 
+        // Render segments.
+        for (Segment s: aMesh.getSegmentsList()) {
+            Color old = canvas.getColor();
+            canvas.setColor(extractColor(s.getPropertiesList()));
+            double[] positions = extractPosition(s.getPropertiesList());
+            Line2D line = new Line2D.Double(positions[0], positions[1], positions[2], positions[3]);
+            canvas.draw(line);
+            canvas.setColor(old);
+        }
+
         // Render vertices.
         for (Vertex v: aMesh.getVerticesList()) {
             double centre_x = v.getX() - (THICKNESS/2.0d);
@@ -36,15 +46,6 @@ public class GraphicRenderer {
             canvas.setColor(old);
         }
 
-        // Render segments.
-        for (Segment s: aMesh.getSegmentsList()) {
-            Color old = canvas.getColor();
-            canvas.setColor(extractColor(s.getPropertiesList()));
-            double[] positions = extractPosition(s.getPropertiesList());
-            Line2D line = new Line2D.Double(positions[0], positions[1], positions[2], positions[3]);
-            canvas.fill(line);
-            canvas.setColor(old);
-        }
     }
 
     private Color extractColor(List<Property> properties) {
