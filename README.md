@@ -65,9 +65,9 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
-|  F01  | Draw segments between vertices to visualize squares |   Everyone   |       |     |    B    |
-|    |               |      |       |     |        |
-|    |               |      |       |     |        |
-|    |               |      |       |     |        |
+|  F01  |  Draw segments between vertices to visualize squares  |  Everyone  |  02/03/23  |  02/05/23  |  D  |
+|  F02  |  Explanation  |  S  |  .  |  .  |  B  |
+|  F03  |  Explanation  |  S  |  .  |  .  |  B  |
+|  F04  |  Explanation  |  S  |  .  |  .  |  B  |
 
 
