@@ -31,13 +31,17 @@ public class DotGen {
                 vertices.add(Vertex.newBuilder().setX((double) x+square_size).setY((double) y+square_size).build());
 
                 // Adds segments.
-                Property positions = Property.newBuilder().setKey("position").setValue((double) x + "," + (double) y + "," + ((double) x+square_size) + "," + (double) y).build();
+                String posProperty = (double) x + "," + (double) y + "," + ((double) x+square_size) + "," + (double) y;
+                Property positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
                 segments.add(Segment.newBuilder().addProperties(positions).build());
-                positions = Property.newBuilder().setKey("position").setValue((double) x + "," + ((double) y+square_size) + "," + ((double) x+square_size) + "," + ((double) y+square_size)).build();
+                posProperty = (double) x + "," + ((double) y+square_size) + "," + ((double) x+square_size) + "," + ((double) y+square_size);
+                positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
                 segments.add(Segment.newBuilder().addProperties(positions).build());
-                positions = Property.newBuilder().setKey("position").setValue(((double) x+square_size) + "," + (double) y + "," + ((double) x+square_size) + "," + ((double) y+square_size)).build();
+                posProperty = ((double) x+square_size) + "," + (double) y + "," + ((double) x+square_size) + "," + ((double) y+square_size);
+                positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
                 segments.add(Segment.newBuilder().addProperties(positions).build());
-                positions = Property.newBuilder().setKey("position").setValue((double) x + "," + ((double) y+square_size) + "," + (double) x + "," + ((double) y+square_size)).build();
+                posProperty = (double) x + "," + (double) y + "," + (double) x + "," + ((double) y+square_size);
+                positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
                 segments.add(Segment.newBuilder().addProperties(positions).build());
             }
         }
