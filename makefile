@@ -5,7 +5,7 @@ v:
 	cd visualizer && java -jar visualizer.jar ../generator/sample.mesh sample.svg
 
 s:
-	mvn clean
+	mvn clean install
 	mvn compile
 	mvn package
 
