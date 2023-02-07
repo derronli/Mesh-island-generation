@@ -15,8 +15,6 @@ import java.awt.geom.Line2D;
 import java.util.Arrays;
 import java.util.List;
 
-// methods to use: getSegmentsList(),
-
 public class GraphicRenderer {
 
     private static final int THICKNESS = 3;
