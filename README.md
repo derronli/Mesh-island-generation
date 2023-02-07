@@ -80,3 +80,10 @@ When you develop features and enrich the product, remember that you have first t
 |  F  |  Template  |  S  |  .  |  .  |  B  |
 
 
+## ideas
+segments are in 3D array. First [] says if horizontal or vertical segment. Next two [] say position
+
+vertices in 2D array
+
+
+
