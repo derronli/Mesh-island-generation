@@ -66,8 +66,17 @@ When you develop features and enrich the product, remember that you have first t
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
 |  F01  |  Draw segments between vertices to visualize squares  |  Everyone  |  02/03/23  |  02/05/23  |  D  |
-|  F02  |  Explanation  |  S  |  .  |  .  |  B  |
-|  F03  |  Explanation  |  S  |  .  |  .  |  B  |
-|  F04  |  Explanation  |  S  |  .  |  .  |  B  |
+|  F02  |  Mesh generates at a precision model of 2 decimal places  |  S  |  .  |  .  |  B  |
+|  F03  |  Mesh has minimal vertices  |  S  |  .  |  .  |  B  |
+|  F04  |  Mesh has minimal segments  |  S  |  .  |  .  |  B  |
+|  F05  |  Mesh has minimal polygons  |  S  |  .  |  .  |  B  |
+|  F06  |  Polygon has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F07  |  Vertex has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F08  |  Segment has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F09  |  Polygon has changeable thickness  |  S  |  .  |  .  |  B  |
+|  F10  |  Vertex has changeable thickness  |  S  |  .  |  .  |  B  |
+|  F11  |  Segment has changeable thickness  |  S  |  .  |  .  |  B  |
+|  F12  |  User can switch into debug mode for different colour display  |  S  |  .  |  .  |  B  |
+|  F  |  Template  |  S  |  .  |  .  |  B  |
 
 
