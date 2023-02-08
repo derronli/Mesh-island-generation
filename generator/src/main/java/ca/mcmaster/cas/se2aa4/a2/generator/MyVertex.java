@@ -56,6 +56,11 @@ public class MyVertex {
     public double[] getPoint(){
         return new double[] {getX(), getY()};
     }
+
+    /**
+     * Extracts the colour from the vertex and returns as array.
+     * @return RBG value of vertex colour
+     */
     public int[] getColour(){
         String val = null;
         for(Property p: vertex.getPropertiesList()) {
