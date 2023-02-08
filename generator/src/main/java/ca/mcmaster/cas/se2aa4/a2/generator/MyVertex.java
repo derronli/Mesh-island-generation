@@ -77,4 +77,7 @@ public class MyVertex {
         return new int[]{red, green, blue};
     }
 
+    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+        return vertex.getPropertiesList();
+    }
 }

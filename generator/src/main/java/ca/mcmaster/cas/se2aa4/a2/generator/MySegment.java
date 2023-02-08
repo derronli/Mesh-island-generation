@@ -64,5 +64,23 @@ public class MySegment {
     public int getV2Index(){
         return segment.getV2Idx();
     }
+    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+        return segment.getPropertiesList();
+    }
+    public int[] getColour(){
+        String val = null;
+        for(Property p: segment.getPropertiesList()) {
+            if (p.getKey().equals("rgb_color")) {
+                val = p.getValue();
+            }
+        }
+        if (val == null)
+            return new int[] {0, 0, 0};
+        String[] raw = val.split(",");
+        int red = Integer.parseInt(raw[0]);
+        int green = Integer.parseInt(raw[1]);
+        int blue = Integer.parseInt(raw[2]);
+        return new int[]{red, green, blue};
+    }
 
 }
