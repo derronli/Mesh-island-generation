@@ -87,3 +87,13 @@ vertices in 2D array
 
 
 
+## stuff to remember from teams
+
+- You can organize your code "as you wish". The generator and visualizer are yours now, the starting pack was just here to demonstrate how to read/write the Mesh structure.
+  As you need to work with ordered indexes, and a Set is by definition not ordered, you'll have to "do something about it", eventually.
+- the centroid of a polygon is not a “random” point but its… centroid. It should be defined as a vertex (like any other point), but will not be used as a corner of any polygon.
+- You are not allowed to modify anything in the “it” package. This part of the source code is off limit, and you should consider it a black box. It is up to you to find the right way to _develop_ your generator and visualizer, taking this assumption as a fixed point.
+- Polygons do have indexes, based on the order that are added into the mesh (like segments and vertices). That being said, contrarily to vertices and segment, their indexes are not used as references elsewhere.
+- 
+
+
