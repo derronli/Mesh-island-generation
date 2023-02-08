@@ -2,7 +2,7 @@ package ca.mcmaster.cas.se2aa4.a2.generator;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Random;
@@ -19,8 +19,8 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
-        Set<Vertex> vertices = new HashSet<>();
-        Set<Segment> segments = new HashSet<>();
+        Set<Vertex> vertices = new LinkedHashSet<>();
+        Set<Segment> segments = new LinkedHashSet<>();
         // Create all the vertices
         for(int x = 0; x < width; x += square_size) {
             for(int y = 0; y < height; y += square_size) {
@@ -46,7 +46,7 @@ public class DotGen {
             }
         }
         // Distribute colors randomly. Vertices are immutable, need to enrich them
-        Set<Vertex> verticesWithColors = new HashSet<>();
+        Set<Vertex> verticesWithColors = new LinkedHashSet<>();
         Random bag = new Random();
         for(Vertex v: vertices){
             int red = bag.nextInt(255);
@@ -57,7 +57,7 @@ public class DotGen {
             Vertex colored = Vertex.newBuilder(v).addProperties(color).build();
             verticesWithColors.add(colored);
         }
-        Set<Segment> segmentsWithColors = new HashSet<>();
+        Set<Segment> segmentsWithColors = new LinkedHashSet<>();
         for(Segment s: segments){
             double[] positions = extractPosition(s.getPropertiesList());
             int[] col1 = findVertexColour(verticesWithColors, new double[] {positions[0], positions[1]});

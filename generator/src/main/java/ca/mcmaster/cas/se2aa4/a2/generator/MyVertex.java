@@ -39,7 +39,7 @@ public class MyVertex {
      */
     public void setColour(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-        vertex = Vertex.newBuilder(vertex).addProperties(color).build();
+        vertex = Vertex.newBuilder(vertex).setProperties(0, color).build();
     }
 
 
