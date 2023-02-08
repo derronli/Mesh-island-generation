@@ -12,7 +12,6 @@ public class MyVertex {
     public MyVertex(double x, double y){
         this.index = totalIndex;
         totalIndex++;
-
         vertex = Vertex.newBuilder().setX(x).setY(y).build();
     }
 
@@ -20,7 +19,7 @@ public class MyVertex {
     // Setters
     public void setColour(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-        vertex = Vertex.newBuilder().setX(getX()).setY(getY()).addProperties(color).build();
+        vertex = Vertex.newBuilder(vertex).addProperties(color).build();
     }
     // Getters
     public int getIndex() {

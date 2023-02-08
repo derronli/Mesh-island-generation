@@ -7,28 +7,61 @@ public class MySegment {
 
     private static int totalIndex = 0;
     private final int index;
-    private final int v1Index, v2Index;
+    private MyVertex v1, v2;
     private Segment segment;
 
     public MySegment(MyVertex v1, MyVertex v2){
         this.index = totalIndex;
         totalIndex++;
-        v1Index = v1.getIndex();
-        v2Index = v2.getIndex();
-
-        segment = null;
+        this.v1 = v1;
+        this.v2 = v2;
+        initSegment();
     }
 
+    // Setters
+
+    /**
+     * Create new segment with a specified colour rather than the default.
+     * @param colorCode RGB code, comma separated
+     */
+    public void setColour(String colorCode){
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        segment = Segment.newBuilder(segment).addProperties(color).build();
+    }
+
+    /**
+     * Initializes segment based on colours of its vertices, taking the average of their colours. Sets position property
+     * to vertex coordinates.
+     */
+    public void initSegment(){
+
+        // Sets the position.
+        String posProperty = v1.getX() + "," + v1.getY() + "," + v2.getX() + "," + v2.getY();
+        Property positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
+
+        // Sets the colour.
+        int [] col1 = v1.getColour();
+        int [] col2 = v2.getColour();
+        int red = (col1[0] + col2[0]) / 2;
+        int green = (col1[1] + col2[1]) / 2;
+        int blue = (col1[2] + col2[2]) / 2;
+        String colorCode = red + "," + green + "," + blue;
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+
+        // Stores in segment.
+        segment = Segment.newBuilder().addProperties(positions).addProperties(color).build();
+
+    }
 
     // Getters
     public int getIndex() {
         return index;
     }
     public int getV1Index(){
-        return v1Index;
+        return v1.getIndex();
     }
     public int getV2Index(){
-        return v2Index;
+        return v2.getIndex();
     }
 
 }
