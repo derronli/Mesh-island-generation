@@ -19,21 +19,10 @@ public class MySegment {
         initSegment();
     }
 
-    // Setters
-
-    /**
-     * Create new segment with a specified colour rather than the default.
-     * @param colorCode RGB code, comma separated
-     */
-    public void setColour(String colorCode){
-        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-        segment = Segment.newBuilder(segment).addProperties(color).build();
-    }
-
     /**
      * Initializes segment based on colours of its vertices, taking the average of their colours.
      */
-    public void initSegment(){
+    private void initSegment(){
 
         // Sets the colour.
         int [] col1 = v1.getColour();
@@ -48,6 +37,18 @@ public class MySegment {
         segment = Segment.newBuilder().setV1Idx(v1.getIndex()).setV2Idx(v2.getIndex()).addProperties(color).build();
 
     }
+
+    // Setters
+    /**
+     * Create new segment with a specified colour rather than the default.
+     * @param colorCode RGB code, comma separated
+     */
+    public void setColour(String colorCode){
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        segment = Segment.newBuilder(segment).addProperties(color).build();
+    }
+
+
 
     // Getters
     public int getIndex() {
