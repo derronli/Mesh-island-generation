@@ -7,7 +7,8 @@ public class MySegment {
 
     private static int totalIndex = 0;
     private final int index;
-    private MyVertex v1, v2;
+    private final MyVertex v1;
+    private final MyVertex v2;
     private Segment segment;
 
     public MySegment(MyVertex v1, MyVertex v2){
@@ -30,14 +31,9 @@ public class MySegment {
     }
 
     /**
-     * Initializes segment based on colours of its vertices, taking the average of their colours. Sets position property
-     * to vertex coordinates.
+     * Initializes segment based on colours of its vertices, taking the average of their colours.
      */
     public void initSegment(){
-
-        // Sets the position.
-        String posProperty = v1.getX() + "," + v1.getY() + "," + v2.getX() + "," + v2.getY();
-        Property positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
 
         // Sets the colour.
         int [] col1 = v1.getColour();
@@ -49,7 +45,7 @@ public class MySegment {
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
 
         // Stores in segment.
-        segment = Segment.newBuilder().addProperties(positions).addProperties(color).build();
+        segment = Segment.newBuilder().setV1Idx(v1.getIndex()).setV2Idx(v2.getIndex()).addProperties(color).build();
 
     }
 
@@ -58,10 +54,10 @@ public class MySegment {
         return index;
     }
     public int getV1Index(){
-        return v1.getIndex();
+        return segment.getV1Idx();
     }
     public int getV2Index(){
-        return v2.getIndex();
+        return segment.getV2Idx();
     }
 
 }
