@@ -19,8 +19,23 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
+        /*
         Set<Vertex> vertices = new LinkedHashSet<>();
         Set<Segment> segments = new LinkedHashSet<>();
+
+         */
+
+        Set<MyVertex> myVertices = new LinkedHashSet<>();
+        Set<MySegment> mySegments = new LinkedHashSet<>();
+
+        // Create all vertices.
+        for(int x = 0; x <= width; x += square_size) {
+            for (int y = 0; y <= height; y += square_size) {
+                myVertices.add(new MyVertex(x, y));
+            }
+        }
+
+        /*
         // Create all the vertices
         for(int x = 0; x < width; x += square_size) {
             for(int y = 0; y < height; y += square_size) {
@@ -72,8 +87,21 @@ public class DotGen {
         }
 
         return Mesh.newBuilder().addAllVertices(verticesWithColors).addAllSegments(segmentsWithColors).build();
+
+         */
     }
 
+    // Finds if there is a vertex at a certain point, creating a new one if there is not.
+    private MyVertex findVertex(Set<MyVertex> myVertices, double x, double y){
+        for (MyVertex vertex : myVertices){
+            if (vertex.existsAtPoint(x, y)){
+                return vertex;
+            }
+        }
+        return new MyVertex(x, y);
+    }
+
+    /*
     private int[] findVertexColour(Set<Vertex> vertices, double[] pos){
         for (Vertex v : vertices){
             if (Double.compare(v.getX(), pos[0]) == 0 && Double.compare(v.getY(), pos[1]) == 0){
@@ -83,6 +111,9 @@ public class DotGen {
         return new int[] {0, 0, 0};
     }
 
+     */
+
+    /*
     private int[] extractColor(java.util.List<Property> properties) {
         String val = null;
         for(Property p: properties) {
@@ -115,5 +146,7 @@ public class DotGen {
         double y2 = Double.parseDouble(raw[3]);
         return new double[] {x1, y1, x2, y2};
     }
+
+     */
 
 }
