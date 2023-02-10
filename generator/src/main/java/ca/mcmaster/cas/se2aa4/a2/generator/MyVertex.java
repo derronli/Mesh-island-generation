@@ -66,6 +66,7 @@ public class MyVertex {
     public double[] getPoint(){
         return new double[] {getX(), getY()};
     }
+    public Vertex getVertex(){ return vertex; }
 
     /**
      * Extracts the colour from the vertex and returns as array.

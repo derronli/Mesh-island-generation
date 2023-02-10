@@ -77,6 +77,7 @@ public class MySegment {
     public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
         return segment.getPropertiesList();
     }
+    public Segment getSegment() { return segment; }
     public int[] getColour(){
         String val = null;
         for(Property p: segment.getPropertiesList()) {
