@@ -32,6 +32,16 @@ public class MyVertex {
         vertex = Vertex.newBuilder().setX(x).setY(y).addProperties(color).build();
     }
 
+    /**
+     * Checks if the input coordinates are the coordinates at which this vertex exists.
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return true if this vertex exists at the input coordinates, false if input coordinates are unique
+     */
+    public boolean existsAtPoint(double x, double y){
+        return Double.compare(x, getX()) == 0 && Double.compare(y, getY()) == 0;
+    }
+
     // Setters
     /**
      * Create new vertex with a specified colour rather than the default.
@@ -56,6 +66,7 @@ public class MyVertex {
     public double[] getPoint(){
         return new double[] {getX(), getY()};
     }
+    public Vertex getVertex(){ return vertex; }
 
     /**
      * Extracts the colour from the vertex and returns as array.

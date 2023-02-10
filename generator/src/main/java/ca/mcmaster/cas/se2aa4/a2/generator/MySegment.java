@@ -42,6 +42,16 @@ public class MySegment {
 
     }
 
+    /**
+     * Checks if this segment has the indices input as its indices.
+     * @param idx1 first index of a vertex to check
+     * @param idx2 second index of a vertex to check
+     * @return true if this segment is a connection between the two input vertices
+     */
+    public boolean existsHere(int idx1, int idx2){
+        return (idx1 == getV1Index() && idx2 == getV2Index()) || (idx1 == getV2Index() && idx2 == getV1Index());
+    }
+
     // Setters
     /**
      * Create new segment with a specified colour rather than the default.
@@ -67,6 +77,7 @@ public class MySegment {
     public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
         return segment.getPropertiesList();
     }
+    public Segment getSegment() { return segment; }
     public int[] getColour(){
         String val = null;
         for(Property p: segment.getPropertiesList()) {
