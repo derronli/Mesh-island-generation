@@ -8,7 +8,7 @@ public class Tester {
 
     public static void main(String[] args){
 
-        
+
         // Tests vertex class
         /**
         MyVertex v1 = new MyVertex(4,5);
