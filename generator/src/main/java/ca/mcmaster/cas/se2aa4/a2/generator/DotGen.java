@@ -31,7 +31,14 @@ public class DotGen {
         // Create all vertices.
         for(int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
-                myVertices.add(new MyVertex(x, y));
+                MyVertex vertex = new MyVertex(x, y);
+                if (x < 150 && y < 150 || x > 350 && y > 350){
+                    vertex.setThickness(10);
+                }
+                else{
+                    vertex.setThickness(3);
+                }
+                myVertices.add(vertex);
             }
         }
 
@@ -48,16 +55,32 @@ public class DotGen {
                 MyVertex v4 = findVertex(myVertices, x2, y2);
 
                 if (segmentDoesNotExist(mySegments, v1, v2)){
-                    mySegments.add(new MySegment(v1, v2));
+                    MySegment s1 = new MySegment(v1, v2);
+                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
+                        s1.setThickness(2);
+                    }
+                    mySegments.add(s1);
                 }
                 if (segmentDoesNotExist(mySegments, v1, v3)){
-                    mySegments.add(new MySegment(v1, v3));
+                    MySegment s2 = new MySegment(v1, v3);
+                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
+                        s2.setThickness(2);
+                    }
+                    mySegments.add(s2);
                 }
                 if (segmentDoesNotExist(mySegments, v2, v4)){
-                    mySegments.add(new MySegment(v2, v4));
+                    MySegment s3 = new MySegment(v2, v4);
+                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
+                        s3.setThickness(2);
+                    }
+                    mySegments.add(s3);
                 }
                 if (segmentDoesNotExist(mySegments, v3, v4)){
-                    mySegments.add(new MySegment(v3, v4));
+                    MySegment s4 = new MySegment(v3, v4);
+                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
+                        s4.setThickness(2);
+                    }
+                    mySegments.add(s4);
                 }
 
 
