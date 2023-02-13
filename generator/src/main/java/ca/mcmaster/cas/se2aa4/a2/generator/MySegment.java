@@ -20,6 +20,23 @@ public class MySegment {
     }
 
     /**
+     * Tells the user if an input segment is adjacent to this instance.
+     * @param other other segment being checked
+     * @return true if the other segment is adjacent
+     */
+    public boolean isAdjacent(MySegment other){
+        if (other.getV1Index() == this.getV1Index() && other.getV2Index() != this.getV2Index())
+            return true;
+        if (other.getV1Index() != this.getV1Index() && other.getV2Index() == this.getV2Index())
+            return true;
+        if (other.getV1Index() == this.getV2Index() && other.getV2Index() != this.getV1Index())
+            return true;
+        if (other.getV1Index() != this.getV2Index() && other.getV2Index() == this.getV1Index())
+            return true;
+        return false;
+    }
+
+    /**
      * Initializes segment based on colours of its vertices, taking the average of their colours.
      */
     private void initSegment(){
