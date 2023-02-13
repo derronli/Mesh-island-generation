@@ -97,3 +97,6 @@ vertices in 2D array
 - 
 
 
+## Documentation
+To get thickness of lines, extract the thickness from the properties list using the key 'thickness'
+
