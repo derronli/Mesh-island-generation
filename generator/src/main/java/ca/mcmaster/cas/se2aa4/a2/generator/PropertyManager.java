@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
 public class PropertyManager {
 
-    public static String getProperty(java.lang.Iterable<? extends ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> values,
+    public static String getProperty(java.lang.Iterable<? extends Property> values,
                                      String key){
         String val = null;
         for(Property p: values) {
