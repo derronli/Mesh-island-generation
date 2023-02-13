@@ -63,24 +63,6 @@ public class GraphicRenderer {
         return new Color(red, green, blue);
     }
 
-    private double[] extractPosition(List<Property> properties) {
-        String val = null;
-        for(Property p: properties) {
-            if (p.getKey().equals("position")) {
-                System.out.println(p.getValue());
-                val = p.getValue();
-            }
-        }
-        if (val == null)
-            return new double[0];
-        String[] raw = val.split(",");
-        double x1 = Double.parseDouble(raw[0]);
-        double y1 = Double.parseDouble(raw[1]);
-        double x2 = Double.parseDouble(raw[2]);
-        double y2 = Double.parseDouble(raw[3]);
-        return new double[] {x1, y1, x2, y2};
-    }
-
     private double[] extractPosition(List<Vertex> vertices, int v1Idx, int v2Idx) {
         Vertex v1 = vertices.get(v1Idx);
         Vertex v2 = vertices.get(v2Idx);
