@@ -33,12 +33,8 @@ public class MySegment {
         String colorCode = red + "," + green + "," + blue;
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
 
-        // REMOVE POSITIONS AFTER FIXING RENDER TO NOT USE IT
-        String posProperty = v1.getX() + "," + v1.getY() + "," + v2.getX() + "," + v2.getY();
-        Property positions = Property.newBuilder().setKey("position").setValue(posProperty).build();
-
         // Stores in segment.
-        segment = Segment.newBuilder().setV1Idx(v1.getIndex()).setV2Idx(v2.getIndex()).addProperties(color).addProperties(positions).build();
+        segment = Segment.newBuilder().setV1Idx(v1.getIndex()).setV2Idx(v2.getIndex()).addProperties(color).build();
 
     }
 

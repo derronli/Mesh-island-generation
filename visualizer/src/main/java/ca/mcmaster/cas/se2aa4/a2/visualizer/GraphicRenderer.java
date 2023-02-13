@@ -27,8 +27,8 @@ public class GraphicRenderer {
         for (Segment s: aMesh.getSegmentsList()) {
             Color old = canvas.getColor();
             canvas.setColor(extractColor(s.getPropertiesList()));
-            double[] positions = extractPosition(s.getPropertiesList());
-            Line2D line = new Line2D.Double(positions[0], positions[1], positions[2], positions[3]);
+            double[] position = extractPosition(aMesh.getVertices(s.getV1Idx()), aMesh.getVertices(s.getV2Idx()));
+            Line2D line = new Line2D.Double(position[0], position[1], position[2], position[3]);
             canvas.draw(line);
             canvas.setColor(old);
         }
@@ -78,6 +78,14 @@ public class GraphicRenderer {
         double y1 = Double.parseDouble(raw[1]);
         double x2 = Double.parseDouble(raw[2]);
         double y2 = Double.parseDouble(raw[3]);
+        return new double[] {x1, y1, x2, y2};
+    }
+
+    private double[] extractPosition(Vertex v1, Vertex v2) {
+        double x1 = v1.getX();
+        double y1 = v1.getY();
+        double x2 = v2.getX();
+        double y2 = v2.getY();
         return new double[] {x1, y1, x2, y2};
     }
 

@@ -67,8 +67,8 @@ When you develop features and enrich the product, remember that you have first t
 |:--:|---------------|------|-------|-----|--------|
 |  F01  |  Draw segments between vertices to visualize squares  |  Everyone  |  02/03/23  |  02/05/23  |  D  |
 |  F02  |  Mesh generates at a precision model of 2 decimal places  |  Derron  |  .  |  .  |  B  |
-|  F03  |  Mesh has minimal vertices  |  Kyle  |  .  |  .  |  B  |
-|  F04  |  Mesh has minimal segments  |  Kyle  |  .  |  .  |  B  |
+|  F03  |  Mesh has minimal vertices  |  Kyle  |  02/03/23  |  02/07/23  |  D  |
+|  F04  |  Mesh has minimal segments  |  Kyle  |  02/05/23  |  02/09/23  |  D  |
 |  F05  |  Mesh has minimal polygons  |  Arjun  |  .  |  .  |  B  |
 |  F06  |  Polygon has changeable colour transparency  |  S  |  .  |  .  |  B  |
 |  F07  |  Vertex has changeable colour transparency  |  S  |  .  |  .  |  B  |

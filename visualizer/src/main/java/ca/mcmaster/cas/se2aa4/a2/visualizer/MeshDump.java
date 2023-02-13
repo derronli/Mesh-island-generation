@@ -39,6 +39,7 @@ public class MeshDump {
         System.out.println("|Segments| = " + segments.size());
         for (Segment s : segments){
             StringBuffer line = new StringBuffer();
+            line.append(String.format("(%d,%d)",s.getV1Idx(), s.getV2Idx()));
             line.append(" [");
             for(Property p: s.getPropertiesList()){
                 line.append(String.format("%s -> %s, ", p.getKey(), p.getValue()));
