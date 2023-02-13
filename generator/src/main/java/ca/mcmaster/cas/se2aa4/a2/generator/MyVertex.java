@@ -52,6 +52,25 @@ public class MyVertex {
         vertex = Vertex.newBuilder(vertex).setProperties(0, color).build();
     }
 
+    /**
+     * Sets the thickness of this vertex.
+     * @param thickness int value of thickness wanted
+     */
+    public void setThickness(int thickness){
+        Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
+
+        String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
+
+        // If thickness property does not already exist.
+        if (val == null) {
+            vertex = Vertex.newBuilder(vertex).addProperties(thick).build();
+        }
+        // If thickness value needs to be changed.
+        else{
+            vertex = Vertex.newBuilder(vertex).setProperties(1, thick).build();
+        }
+    }
+
 
     // Getters
     public int getIndex() {
@@ -73,19 +92,10 @@ public class MyVertex {
      * @return RBG value of vertex colour
      */
     public int[] getColour(){
-        String val = null;
-        for(Property p: vertex.getPropertiesList()) {
-            if (p.getKey().equals("rgb_color")) {
-                val = p.getValue();
-            }
-        }
+        String val = PropertyManager.getProperty(this.getPropertiesList(), "rgb_color");
         if (val == null)
             return new int[] {0, 0, 0};
-        String[] raw = val.split(",");
-        int red = Integer.parseInt(raw[0]);
-        int green = Integer.parseInt(raw[1]);
-        int blue = Integer.parseInt(raw[2]);
-        return new int[]{red, green, blue};
+        return PropertyManager.extractColor(val);
     }
 
     public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
