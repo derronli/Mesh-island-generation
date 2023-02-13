@@ -1,7 +1,7 @@
-package ca.mcmaster.cas.se2aa4.a2.generator;
+package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
-
+import java.awt.Color;
 import java.util.List;
 
 public class PropertyManager {
@@ -17,11 +17,12 @@ public class PropertyManager {
         return val;
     }
 
-    public static int[] extractColor(String val){
+    public static Color extractColor(String val){
         String[] raw = val.split(",");
         int red = Integer.parseInt(raw[0]);
         int green = Integer.parseInt(raw[1]);
         int blue = Integer.parseInt(raw[2]);
-        return new int[]{red, green, blue};
+        return new Color(red, green, blue);
     }
 }
+

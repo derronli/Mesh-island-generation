@@ -47,20 +47,10 @@ public class GraphicRenderer {
     }
 
     private Color extractColor(List<Property> properties) {
-        String val = null;
-        for(Property p: properties) {
-            if (p.getKey().equals("rgb_color")) {
-                System.out.println(p.getValue());
-                val = p.getValue();
-            }
-        }
+        String val = PropertyManager.getProperty(properties, "rgb_color");
         if (val == null)
             return Color.BLACK;
-        String[] raw = val.split(",");
-        int red = Integer.parseInt(raw[0]);
-        int green = Integer.parseInt(raw[1]);
-        int blue = Integer.parseInt(raw[2]);
-        return new Color(red, green, blue);
+        return PropertyManager.extractColor(val);
     }
 
     private double[] extractPosition(List<Vertex> vertices, int v1Idx, int v2Idx) {

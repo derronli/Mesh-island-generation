@@ -74,8 +74,8 @@ When you develop features and enrich the product, remember that you have first t
 |  F07  |  Vertex has changeable colour transparency  |  S  |  .  |  .  |  B  |
 |  F08  |  Segment has changeable colour transparency  |  S  |  .  |  .  |  B  |
 |  F09  |  Polygon has changeable thickness  |  S  |  .  |  .  |  B  |
-|  F10  |  Vertex has changeable thickness  |  S  |  .  |  .  |  B  |
-|  F11  |  Segment has changeable thickness  |  S  |  .  |  .  |  B  |
+|  F10  |  Vertex has changeable thickness  |  Kyle  |  02/13/23  |  .  |  B  |
+|  F11  |  Segment has changeable thickness  |  Kyle  |  02/13/23  |  .  |  B  |
 |  F12  |  User can switch into debug mode for different colour display  |  S  |  .  |  .  |  B  |
 |  F  |  Template  |  S  |  .  |  .  |  B  |
 
