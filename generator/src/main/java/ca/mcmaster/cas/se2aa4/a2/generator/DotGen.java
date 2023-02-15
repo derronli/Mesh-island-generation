@@ -68,6 +68,12 @@ public class DotGen {
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s1.setThickness(2);
                     }
+
+                    // testing transparency
+                    if (x <= 300 && x >= 200) {
+                        s1.setTrans(150);
+                    }
+
                     mySegments.add(s1);
                 }
                 if (segmentDoesNotExist(mySegments, v1, v3)){
@@ -77,6 +83,12 @@ public class DotGen {
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s2.setThickness(2);
                     }
+
+                    // testing transparency
+                    if (x <= 300 && x >= 200) {
+                        s2.setTrans(150);
+                    }
+
                     mySegments.add(s2);
                 }
                 if (segmentDoesNotExist(mySegments, v2, v4)){
@@ -86,15 +98,27 @@ public class DotGen {
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s3.setThickness(2);
                     }
+
+                    // testing transparency
+                    if (x <= 300 && x >= 200) {
+                        s3.setTrans(150);
+                    }
+
                     mySegments.add(s3);
                 }
                 if (segmentDoesNotExist(mySegments, v3, v4)){
-                    MySegment s4 = new MySegment(v3, v4);
+                    MySegment s4 = new MySegment(v3, v4, 50);
 
                     // testing thickness
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s4.setThickness(2);
                     }
+
+                    // testing transparency
+                    if (x <= 300 && x >= 200) {
+                        s4.setTrans(150);
+                    }
+
                     mySegments.add(s4);
                 }
 
@@ -128,7 +152,7 @@ public class DotGen {
     // Checks if a segment in the list already goes between the input vertices.
     private boolean segmentDoesNotExist(Set<MySegment> segments, MyVertex v1, MyVertex v2){
         for (MySegment segment : segments){
-            if (segment.existsHere(v1.getIndex(), v2.getIndex())){
+            if (segment.equals(v1.getIndex(), v2.getIndex())){
                 return false;
             }
         }
