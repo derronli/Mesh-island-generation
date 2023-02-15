@@ -22,6 +22,10 @@ public class PropertyManager {
         int red = Integer.parseInt(raw[0]);
         int green = Integer.parseInt(raw[1]);
         int blue = Integer.parseInt(raw[2]);
+        if (raw.length == 4){
+            int alpha = Integer.parseInt(raw[3]);
+            return new int[] {red, green, blue, alpha};
+        }
         return new int[]{red, green, blue};
     }
 }

@@ -17,6 +17,14 @@ public class MyVertex {
         initVertex(x, y);
     }
 
+    // Initializer if user specifies alpha value from creation.
+    public MyVertex(double x, double y, int alpha){
+        this.index = totalIndex;
+        totalIndex++;
+        initVertex(x, y);
+        setTrans(alpha);
+    }
+
     /**
      * Initializes vertex with a random colour.
      * @param x x-position of vertex
@@ -45,10 +53,22 @@ public class MyVertex {
     // Setters
     /**
      * Create new vertex with a specified colour rather than the default.
-     * @param colorCode RGB code, comma separated
+     * @param colorCode RGB code, comma separated. Can include alpha value if wanted.
      */
     public void setColour(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        vertex = Vertex.newBuilder(vertex).setProperties(0, color).build();
+    }
+
+    /**
+     * Sets the transparency value of the vertex.
+     * @param alpha transparency value, from 0 to 255.
+     */
+    public void setTrans(int alpha){
+        String colorCode = PropertyManager.getProperty(getPropertiesList(), "rgb_color");
+        int[] colors = PropertyManager.extractColor(colorCode);
+        String newColorCode = colors[0] + "," + colors[1] + "," + colors[2] + "," + alpha;
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(newColorCode).build();
         vertex = Vertex.newBuilder(vertex).setProperties(0, color).build();
     }
 
