@@ -153,5 +153,8 @@ public class MySegment {
             return new int[] {0, 0, 0};
         return PropertyManager.extractColor(val);
     }
+    public double[] getMiddle(){
+        return new double[]{(v1.getX() + v2.getX()) / 2, (v1.getY() + v2.getY()) / 2};
+    }
 
 }
