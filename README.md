@@ -71,7 +71,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F04  |  Mesh has minimal segments  |  Kyle  |  02/05/23  |  02/09/23  |  D  |
 |  F05  |  Mesh has minimal polygons  |  Arjun  |  .  |  .  |  B  |
 |  F06  |  Polygon has changeable colour transparency  |  S  |  .  |  .  |  B  |
-|  F07  |  Vertex has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F07  |  Vertex has changeable colour transparency  |  Kyle  |  02/14/23  |  02/15/23  |  D  |
 |  F08  |  Segment has changeable colour transparency  |  S  |  .  |  .  |  B  |
 |  F09  |  Polygon has changeable thickness  |  S  |  .  |  .  |  B  |
 |  F10  |  Vertex has changeable thickness  |  Kyle  |  02/13/23  |  02/13/23  |  D  |
@@ -100,4 +100,6 @@ vertices in 2D array
 ## Documentation
 To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'. 
 Change the thickness in the generator code itself if you would like.
+
+Transparency values are from 0 to 255.
 

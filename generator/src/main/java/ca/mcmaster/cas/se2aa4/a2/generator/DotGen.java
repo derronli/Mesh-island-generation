@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Random;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
@@ -31,13 +30,21 @@ public class DotGen {
         // Create all vertices.
         for(int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
-                MyVertex vertex = new MyVertex(x, y);
+                MyVertex vertex = new MyVertex(x, y, 250);
+
+                // testing thickness
                 if (x < 150 && y < 150 || x > 350 && y > 350){
                     vertex.setThickness(10);
                 }
                 else{
                     vertex.setThickness(3);
                 }
+
+                // testing transparency
+                if (x < 100 && y < 100 || x > 350 && y < 100){
+                    vertex.setTrans(100);
+                }
+
                 myVertices.add(vertex);
             }
         }
@@ -56,6 +63,8 @@ public class DotGen {
 
                 if (segmentDoesNotExist(mySegments, v1, v2)){
                     MySegment s1 = new MySegment(v1, v2);
+
+                    // testing thickness
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s1.setThickness(2);
                     }
@@ -63,6 +72,8 @@ public class DotGen {
                 }
                 if (segmentDoesNotExist(mySegments, v1, v3)){
                     MySegment s2 = new MySegment(v1, v3);
+
+                    // testing thickness
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s2.setThickness(2);
                     }
@@ -70,6 +81,8 @@ public class DotGen {
                 }
                 if (segmentDoesNotExist(mySegments, v2, v4)){
                     MySegment s3 = new MySegment(v2, v4);
+
+                    // testing thickness
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s3.setThickness(2);
                     }
@@ -77,6 +90,8 @@ public class DotGen {
                 }
                 if (segmentDoesNotExist(mySegments, v3, v4)){
                     MySegment s4 = new MySegment(v3, v4);
+
+                    // testing thickness
                     if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
                         s4.setThickness(2);
                     }
