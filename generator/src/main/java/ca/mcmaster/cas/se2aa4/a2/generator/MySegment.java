@@ -19,6 +19,16 @@ public class MySegment {
         initSegment();
     }
 
+    // Initializer if user specifies alpha value from creation.
+    public MySegment(MyVertex v1, MyVertex v2, int alpha){
+        this.index = totalIndex;
+        totalIndex++;
+        this.v1 = v1;
+        this.v2 = v2;
+        initSegment();
+        setTrans(alpha);
+    }
+
     /**
      * Tells the user if an input segment is adjacent to this instance.
      * @param other other segment being checked
@@ -37,7 +47,7 @@ public class MySegment {
     }
 
     /**
-     * Initializes segment based on colours of its vertices, taking the average of their colours.
+     * Initializes segment based on colours of its vertices, taking the average of their colours and alpha values if applicable.
      */
     private void initSegment(){
 
@@ -48,6 +58,21 @@ public class MySegment {
         int green = (col1[1] + col2[1]) / 2;
         int blue = (col1[2] + col2[2]) / 2;
         String colorCode = red + "," + green + "," + blue;
+
+        // Sets colorCode to average of alpha values if applicable.
+        if (col1.length == 4 && col2.length == 4){
+            int alpha =  (col1[3] + col2[3]) / 2;
+            colorCode = red + "," + green + "," + blue + "," + alpha;
+        }
+        else if (col1.length == 4){
+            int alpha =  (col1[3] + 255) / 2;
+            colorCode = red + "," + green + "," + blue + "," + alpha;
+        }
+        else if (col2.length == 4){
+            int alpha =  (col2[3] + 255) / 2;
+            colorCode = red + "," + green + "," + blue + "," + alpha;
+        }
+
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
 
         // Stores in segment.
@@ -61,9 +86,10 @@ public class MySegment {
      * @param idx2 second index of a vertex to check
      * @return true if this segment is a connection between the two input vertices
      */
-    public boolean existsHere(int idx1, int idx2){
+    public boolean equals(int idx1, int idx2){
         return (idx1 == getV1Index() && idx2 == getV2Index()) || (idx1 == getV2Index() && idx2 == getV1Index());
     }
+
 
     // Setters
     /**
@@ -72,6 +98,18 @@ public class MySegment {
      */
     public void setColour(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        segment = Segment.newBuilder(segment).setProperties(0, color).build();
+    }
+
+    /**
+     * Sets the transparency value of the vertex.
+     * @param alpha transparency value, from 0 to 255.
+     */
+    public void setTrans(int alpha){
+        String colorCode = PropertyManager.getProperty(getPropertiesList(), "rgb_color");
+        int[] colors = PropertyManager.extractColor(colorCode);
+        String newColorCode = colors[0] + "," + colors[1] + "," + colors[2] + "," + alpha;
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(newColorCode).build();
         segment = Segment.newBuilder(segment).setProperties(0, color).build();
     }
 

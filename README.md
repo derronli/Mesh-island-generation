@@ -72,7 +72,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F05  |  Mesh has minimal polygons  |  Arjun  |  .  |  .  |  B  |
 |  F06  |  Polygon has changeable colour transparency  |  S  |  .  |  .  |  B  |
 |  F07  |  Vertex has changeable colour transparency  |  Kyle  |  02/14/23  |  02/15/23  |  D  |
-|  F08  |  Segment has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F08  |  Segment has changeable colour transparency  |  Kyle  |  02/15/23  |  02/15/23  |  D  |
 |  F09  |  Polygon has changeable thickness  |  S  |  .  |  .  |  B  |
 |  F10  |  Vertex has changeable thickness  |  Kyle  |  02/13/23  |  02/13/23  |  D  |
 |  F11  |  Segment has changeable thickness  |  Kyle  |  02/13/23  |  02/13/23  |  D  |
