@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a2.generator;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -97,6 +98,16 @@ public class DotGen {
                 mySegments.add(s2);
                 mySegments.add(s3);
                 mySegments.add(s4);
+
+                ArrayList<MySegment> segments = new ArrayList<MySegment>();
+                segments.add(s1);
+                segments.add(s2);
+                segments.add(s3);
+                segments.add(s4);
+                if (polygonDoesNotExist(myPolygons, segments)){
+                    PolygonClass polygon = new PolygonClass(segments);
+                    myPolygons.add(polygon);
+                }
 
             }
         }
