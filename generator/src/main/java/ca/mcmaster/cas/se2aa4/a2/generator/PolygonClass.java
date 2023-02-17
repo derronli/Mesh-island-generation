@@ -13,7 +13,7 @@ public class PolygonClass {
     //set colour method and changes all segments in list to said colour
     //consider hashmap
     //
-    // centroid getter
+    // centroid getter (return vertex itself)
 
     private int width = 500;
     private int height = 500;
