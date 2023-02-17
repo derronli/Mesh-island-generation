@@ -8,7 +8,6 @@ import java.util.Set;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 public class DotGen {
@@ -18,17 +17,15 @@ public class DotGen {
     private final int square_size = 20;
 
     public Mesh generate() {
-        /*
-        Set<Vertex> vertices = new LinkedHashSet<>();
-        Set<Segment> segments = new LinkedHashSet<>();
-
-         */
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
+        Set<PolygonClass> myPolygons = new LinkedHashSet<>();
 
         createVertices(myVertices);
-        createSegments(mySegments, myVertices);
+        createSegNPoly(mySegments, myPolygons, myVertices);
+
+        System.out.println(mySegments.size());
 
         return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).build();
 
@@ -59,80 +56,47 @@ public class DotGen {
         }
     }
 
-    // Creates segments connecting vertices as square shapes.
-    private void createSegments(Set<MySegment> mySegments, Set<MyVertex> myVertices){
+    // Creates segments connecting vertices as square shapes and polygons for these segments.
+    private void createSegNPoly(Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<MyVertex> myVertices){
         for(int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
 
                 int x2 = x + square_size;
                 int y2 = y + square_size;
 
+                // Creates vertices in a square.
                 MyVertex v1 = findVertex(myVertices, x, y);
                 MyVertex v2 = findVertex(myVertices, x2, y);
                 MyVertex v3 = findVertex(myVertices, x, y2);
                 MyVertex v4 = findVertex(myVertices, x2, y2);
 
-                if (segmentDoesNotExist(mySegments, v1, v2)){
-                    MySegment s1 = new MySegment(v1, v2);
+                // Creates/finds the segments which connect the 4 vertices in a square shape.
+                MySegment s1 = findSegment(mySegments, v1, v2);
+                MySegment s2 = findSegment(mySegments, v1, v3);
+                MySegment s3 = findSegment(mySegments, v2, v4);
+                MySegment s4 = findSegment(mySegments, v3, v4);
 
-                    // testing thickness
-                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
-                        s1.setThickness(2);
-                    }
-
-                    // testing transparency
-                    if (x <= 300 && x >= 200) {
-                        s1.setTrans(150);
-                    }
-
-                    mySegments.add(s1);
-                }
-                if (segmentDoesNotExist(mySegments, v1, v3)){
-                    MySegment s2 = new MySegment(v1, v3);
-
-                    // testing thickness
-                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
-                        s2.setThickness(2);
-                    }
-
-                    // testing transparency
-                    if (x <= 300 && x >= 200) {
-                        s2.setTrans(150);
-                    }
-
-                    mySegments.add(s2);
-                }
-                if (segmentDoesNotExist(mySegments, v2, v4)){
-                    MySegment s3 = new MySegment(v2, v4);
-
-                    // testing thickness
-                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
-                        s3.setThickness(2);
-                    }
-
-                    // testing transparency
-                    if (x <= 300 && x >= 200) {
-                        s3.setTrans(150);
-                    }
-
-                    mySegments.add(s3);
-                }
-                if (segmentDoesNotExist(mySegments, v3, v4)){
-                    MySegment s4 = new MySegment(v3, v4, 50);
-
-                    // testing thickness
-                    if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
-                        s4.setThickness(2);
-                    }
-
-                    // testing transparency
-                    if (x <= 300 && x >= 200) {
-                        s4.setTrans(150);
-                    }
-
-                    mySegments.add(s4);
+                // testing thickness
+                if (x >= 100 && x <= 400 && y >= 100 && y <= 400){
+                    s1.setThickness(2);
+                    s2.setThickness(2);
+                    s3.setThickness(2);
+                    s4.setThickness(2);
                 }
 
+                // testing transparency
+                if (x <= 300 && x >= 200) {
+                    s1.setTrans(150);
+                    s2.setTrans(150);
+                    s3.setTrans(150);
+                    s4.setTrans(150);
+                }
+
+                // Adds all segments to set, if they already exist and were found, it will just not add.
+                mySegments.add(s1);
+                mySegments.add(s2);
+                mySegments.add(s3);
+                mySegments.add(s4);
 
             }
         }
@@ -156,11 +120,10 @@ public class DotGen {
         return oVertices;
     }
 
-
-    // Checks if a segment in the list already goes between the input vertices.
-    private boolean segmentDoesNotExist(Set<MySegment> segments, MyVertex v1, MyVertex v2){
-        for (MySegment segment : segments){
-            if (segment.equals(v1.getIndex(), v2.getIndex())){
+    // Checks if a polygon in the list already represents the specified connection of segments.
+    private boolean polygonDoesNotExist(Set<PolygonClass> polygons, List<MySegment> segments){
+        for (PolygonClass polygon : polygons){
+            if (polygon.equals(segments)){
                 return false;
             }
         }
@@ -175,6 +138,16 @@ public class DotGen {
             }
         }
         return new MyVertex(x, y);
+    }
+
+    // Finds if there is a segment connecting two points, creating a new one if there is not.
+    private MySegment findSegment(Set<MySegment> segments, MyVertex v1, MyVertex v2){
+        for (MySegment segment : segments){
+            if (segment.equals(v1.getIndex(), v2.getIndex())){
+                return segment;
+            }
+        }
+        return new MySegment(v1, v2);
     }
 
 }
