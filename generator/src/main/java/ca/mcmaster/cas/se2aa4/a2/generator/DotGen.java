@@ -27,7 +27,16 @@ public class DotGen {
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
 
-        // Create all vertices.
+        createVertices(myVertices);
+        createSegments(mySegments, myVertices);
+
+        return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).build();
+
+    }
+
+    // Create all vertices.
+    private void createVertices(Set<MyVertex> myVertices){
+
         for(int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
                 MyVertex vertex = new MyVertex(x, y, 250);
@@ -48,8 +57,10 @@ public class DotGen {
                 myVertices.add(vertex);
             }
         }
+    }
 
-        // Creates segments connecting vertices as square shapes.
+    // Creates segments connecting vertices as square shapes.
+    private void createSegments(Set<MySegment> mySegments, Set<MyVertex> myVertices){
         for(int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
 
@@ -125,9 +136,6 @@ public class DotGen {
 
             }
         }
-
-        return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).build();
-
     }
 
     // Goes through MySegment list and returns list of all the segments each one contains.
