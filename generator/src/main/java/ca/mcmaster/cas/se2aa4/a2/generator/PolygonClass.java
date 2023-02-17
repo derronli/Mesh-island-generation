@@ -13,6 +13,7 @@ public class PolygonClass {
     //set colour method and changes all segments in list to said colour
     //consider hashmap
     //
+    // centroid getter
 
     private int width = 500;
     private int height = 500;
@@ -83,5 +84,15 @@ public class PolygonClass {
     public void setPolyColour(String colorCode){
 
     }
+
+    /**
+     * Sets the centroid to a certain colour.
+     * @param colorCode string colour code to set centroid to
+     */
+    public void setCentroidColour(String colorCode){
+
+    }
+    
+
 
 }
