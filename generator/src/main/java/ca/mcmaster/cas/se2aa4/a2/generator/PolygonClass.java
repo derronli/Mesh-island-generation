@@ -92,7 +92,15 @@ public class PolygonClass {
     public void setCentroidColour(String colorCode){
 
     }
-    
+
+    /**
+     * Returns if the input list of segments is the same segments this instance contains.
+     * @param segments list of segments we are checking against.
+     * @return if this polygon represents the input list of segments.
+     */
+    public boolean equals(List<MySegment> segments){
+        return true;
+    }
 
 
 }
