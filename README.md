@@ -81,9 +81,7 @@ When you develop features and enrich the product, remember that you have first t
 
 
 ## ideas
-segments are in 3D array. First [] says if horizontal or vertical segment. Next two [] say position
-
-vertices in 2D array
+empty for now
 
 
 
