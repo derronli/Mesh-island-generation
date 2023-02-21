@@ -16,7 +16,18 @@ import java.util.List;
 public class GraphicRenderer {
 
     private static final int THICKNESS = 3;
-    public void render(Mesh aMesh, Graphics2D canvas) {
+    public void render(Mesh aMesh, Graphics2D canvas, String commandArg) {
+
+        MyRenderer renderer;
+        if (commandArg.equals("-X")){
+            renderer = new MyRenderer();
+        }
+        else {
+            renderer = new MyRenderer();
+        }
+
+        renderer.render(aMesh, canvas);
+
         canvas.setColor(Color.BLACK);
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
@@ -54,6 +65,11 @@ public class GraphicRenderer {
             canvas.setColor(old);
         }
 
+    }
+
+    public void render(Mesh aMesh, Graphics2D canvas){
+        MyRenderer renderer = new MyRenderer();
+        renderer.render(aMesh, canvas);
     }
 
     private Color extractColor(List<Property> properties) {

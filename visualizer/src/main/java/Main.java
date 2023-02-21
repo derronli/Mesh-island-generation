@@ -25,7 +25,12 @@ public class Main {
         Graphics2D canvas = SVGCanvas.build((int) Math.ceil(max_x), (int) Math.ceil(max_y));
         GraphicRenderer renderer = new GraphicRenderer();
         // Painting the mesh on the canvas
-        renderer.render(aMesh, canvas);
+        if (args.length == 3){
+            renderer.render(aMesh, canvas, args[2]);
+        }
+        else {
+            renderer.render(aMesh, canvas);
+        }
         // Storing the result in an SVG file
         SVGCanvas.write(canvas, output);
         // Dump the mesh to stdout
