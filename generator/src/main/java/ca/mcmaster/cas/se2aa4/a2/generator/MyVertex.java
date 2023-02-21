@@ -46,8 +46,13 @@ public class MyVertex {
      * @param y y-coordinate
      * @return true if this vertex exists at the input coordinates, false if input coordinates are unique
      */
-    public boolean existsAtPoint(double x, double y){
-        return Double.compare(x, getX()) == 0 && Double.compare(y, getY()) == 0;
+    public boolean existsAtPoint(double x, double y, double PRECISION){
+        //return Double.compare(x, getX()) == 0 && Double.compare(y, getY()) == 0;
+        return Double.compare(round(x, PRECISION), round(getX(), PRECISION)) == 0 && Double.compare(round(y, PRECISION), round(getY(), PRECISION)) == 0;
+    }
+    // Rounds double value to 2 decimal places
+    private double round(double n, double PRECISION) {
+        return Math.round(n / PRECISION) * PRECISION;
     }
 
     // Setters
