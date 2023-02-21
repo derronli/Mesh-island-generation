@@ -13,6 +13,10 @@ public class MyRenderer {
     protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
 
     public void render(Mesh aMesh, Graphics2D canvas){
+        canvas.setColor(Color.BLACK);
+        Stroke stroke = new BasicStroke(0.5f);
+        canvas.setStroke(stroke);
+        
         drawPolygons(aMesh, canvas);
         drawSegments(aMesh, canvas);
         drawVertices(aMesh, canvas);
