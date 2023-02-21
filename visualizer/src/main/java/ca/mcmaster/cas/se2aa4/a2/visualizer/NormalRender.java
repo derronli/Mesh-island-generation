@@ -1,5 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
@@ -50,6 +51,25 @@ public class NormalRender extends MyRenderer {
     }
 
     protected void drawPolygons(Mesh aMesh, Graphics2D canvas){
+        List<Segment> segments = aMesh.getSegmentsList();
+        List<Vertex> vertices = aMesh.getVerticesList();
+
+        for (Polygon p : aMesh.getPolygonsList()){
+            float strokeThickness = extractThicknessStroke(p.getPropertiesList());
+            Stroke oldStroke = canvas.getStroke();
+            Color old = canvas.getColor();
+
+            canvas.setStroke(new BasicStroke(strokeThickness));
+            canvas.setColor(extractColor(p.getPropertiesList()));
+
+            java.awt.Polygon polygon = createPolygon(p, segments, vertices);
+            canvas.fill(polygon);
+
+            // Resetting canvas.
+            canvas.setColor(old);
+            canvas.setStroke(oldStroke);
+
+        }
 
     }
 
