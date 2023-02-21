@@ -138,6 +138,7 @@ public class MyMesh {
                 return p;
             }
         }
+        return null;
     }
 
     // Goes through MySegment list and returns list of all the segments each one contains.
