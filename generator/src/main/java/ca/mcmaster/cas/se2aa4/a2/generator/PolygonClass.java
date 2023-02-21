@@ -67,17 +67,17 @@ public class PolygonClass {
 
         //while
 
-        for (int i = 0; i<segments.size(); i++){
-
-            for (int j = 1; j<segments.size(); j++){
-                MySegment temp = orderedSegments.get(i);
-                if (temp.isAdjacent(segments.get(j))){
-                    orderedSegments.add(segments.get(j));
-                    segments.set(j, null);
-                    break;
+        while (orderedSegments.size() != segments.size()){
+            for (MySegment segment : segments) {
+                if (!orderedSegments.contains(segment)) {
+                    MySegment last = orderedSegments.get(orderedSegments.size() - 1);
+                    if (last.isAdjacent(segment)) {
+                        orderedSegments.add(segment);
+                    }
                 }
             }
         }
+
         //checking if segments are ordered
         System.out.println(orderedSegments.toString());
         return orderedSegments;
