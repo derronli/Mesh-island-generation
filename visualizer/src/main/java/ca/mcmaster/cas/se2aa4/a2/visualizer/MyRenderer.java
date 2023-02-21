@@ -2,6 +2,8 @@ package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
 import java.awt.*;
 import java.util.List;
@@ -31,6 +33,39 @@ public class MyRenderer {
         double x2 = v2.getX();
         double y2 = v2.getY();
         return new double[] {x1, y1, x2, y2};
+    }
+
+    protected java.awt.Polygon createPolygon(Polygon polygon, List<Segment> segments, List<Vertex> vertices){
+        List<Integer> segmentIdxList = polygon.getSegmentIdxsList();
+
+        // Number of vertices is number of segments multiplied by 2.
+        int numVertices = segmentIdxList.size() * 2;
+
+        int[] xCoords = new int[numVertices];
+        int[] yCoords = new int[numVertices];
+        int count = 0;
+
+        // Goes through segments by index.
+        for (Integer index : segmentIdxList){
+            Segment segment = segments.get(index);
+
+            // Goes through vertices of each segment and adds their coordinates to array.
+            Vertex v1 = vertices.get(segment.getV1Idx());
+            Vertex v2 = vertices.get(segment.getV2Idx());
+            xCoords[count] = (int) v1.getX();
+            yCoords[count] = (int) v1.getY();
+
+            count++;
+
+            xCoords[count] = (int) v2.getX();
+            yCoords[count] = (int) v2.getY();
+
+            count++;
+
+        }
+
+
+        return new java.awt.Polygon(xCoords, yCoords, numVertices);
     }
 
 }
