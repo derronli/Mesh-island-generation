@@ -13,16 +13,22 @@ import java.util.List;
 public class NormalRender extends MyRenderer {
 
     protected void drawVertices(Mesh aMesh, Graphics2D canvas){
+        // Render vertices.
+        for (Vertex v: aMesh.getVerticesList()) {
+            Color old = canvas.getColor();
+            canvas.setColor(extractColor(v.getPropertiesList()));
 
+            int thick = extractThicknessVer(v.getPropertiesList());
+            double centre_x = v.getX() - (thick/2.0d);
+            double centre_y = v.getY() - (thick/2.0d);
+            Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, thick, thick);
+            canvas.fill(point);
+
+            // Resetting canvas.
+            canvas.setColor(old);
+        }
     }
-    protected void drawSegments(Mesh aMesh, Graphics2D canvas){}
-    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
-
-    private void everything(Mesh aMesh, Graphics2D canvas){
-        canvas.setColor(Color.BLACK);
-        Stroke stroke = new BasicStroke(0.5f);
-        canvas.setStroke(stroke);
-
+    protected void drawSegments(Mesh aMesh, Graphics2D canvas){
         // Render segments.
         for (Segment s: aMesh.getSegmentsList()) {
             float strokeThickness = extractThicknessStroke(s.getPropertiesList());
@@ -40,23 +46,8 @@ public class NormalRender extends MyRenderer {
             canvas.setColor(old);
             canvas.setStroke(oldStroke);
         }
-
-        // Render vertices.
-        for (Vertex v: aMesh.getVerticesList()) {
-            Color old = canvas.getColor();
-            canvas.setColor(extractColor(v.getPropertiesList()));
-
-            int thick = extractThicknessVer(v.getPropertiesList());
-            double centre_x = v.getX() - (thick/2.0d);
-            double centre_y = v.getY() - (thick/2.0d);
-            Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, thick, thick);
-            canvas.fill(point);
-
-            // Resetting canvas.
-            canvas.setColor(old);
-        }
-
     }
+    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
 
     private static final int THICKNESS = 3;
 
