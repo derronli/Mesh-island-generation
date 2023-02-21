@@ -8,18 +8,18 @@ import java.util.List;
 
 public class MyRenderer {
 
-    private void drawVertices(){}
-    private void drawSegments(){}
-    private void drawPolygons(){}
+    protected void drawVertices(Mesh aMesh, Graphics2D canvas){}
+    protected void drawSegments(Mesh aMesh, Graphics2D canvas){}
+    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
 
     public void render(Mesh aMesh, Graphics2D canvas){
-        drawPolygons();
-        drawSegments();
-        drawVertices();
+        drawPolygons(aMesh, canvas);
+        drawSegments(aMesh, canvas);
+        drawVertices(aMesh, canvas);
     }
 
     // Gets the position of a segment based on its vertices.
-    private double[] extractPosition(List<Vertex> vertices, int v1Idx, int v2Idx) {
+    protected double[] extractPosition(List<Vertex> vertices, int v1Idx, int v2Idx) {
         Vertex v1 = vertices.get(v1Idx);
         Vertex v2 = vertices.get(v2Idx);
         double x1 = v1.getX();
