@@ -28,6 +28,7 @@ public class NormalRender extends MyRenderer {
             canvas.setColor(old);
         }
     }
+
     protected void drawSegments(Mesh aMesh, Graphics2D canvas){
         // Render segments.
         for (Segment s: aMesh.getSegmentsList()) {
@@ -47,7 +48,10 @@ public class NormalRender extends MyRenderer {
             canvas.setStroke(oldStroke);
         }
     }
-    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
+
+    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){
+
+    }
 
     private static final int THICKNESS = 3;
 
