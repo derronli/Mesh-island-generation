@@ -33,6 +33,7 @@ public class MyMesh {
 
         createVertices(myVertices);
         createSegNPoly(mySegments, myPolygons, myVertices);
+        setAllNeighbours(myPolygons);
 
         System.out.println(mySegments.size());
 
@@ -132,6 +133,12 @@ public class MyMesh {
                 // add p index to the polygon.neighbours instance var
                 polygon.addNeighbour(p.getIndex());
             }
+        }
+    }
+
+    private void setAllNeighbours(Set<PolygonClass> myPolygons) {
+        for (PolygonClass p : myPolygons) {
+            setNeighbours(myPolygons, p);
         }
     }
 
