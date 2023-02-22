@@ -23,7 +23,7 @@ public class GraphicRenderer {
             renderer = new DebugRenderer();
         }
         else {
-            renderer = new MyRenderer();
+            renderer = new NormalRender();
         }
 
         renderer.render(aMesh, canvas);
