@@ -126,9 +126,8 @@ public class PolygonClass {
         centroid = new MyVertex(x,y);
     }
 
-    private void setNeighbourIndices (List <Integer> indices) {
-        neighbourIndices = new ArrayList<>();
-        neighbourIndices.addAll(indices);
+    public void setNeighbourIndices () {
+        polygon = Polygon.newBuilder(polygon).addAllNeighborIdxs(neighbourIndices).build();
     }
 
     /**

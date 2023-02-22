@@ -139,6 +139,7 @@ public class MyMesh {
     private void setAllNeighbours(Set<PolygonClass> myPolygons) {
         for (PolygonClass p : myPolygons) {
             setNeighbours(myPolygons, p);
+            p.setNeighbourIndices();
         }
     }
 
