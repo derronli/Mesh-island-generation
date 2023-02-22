@@ -79,7 +79,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F12  |  User can switch into debug mode for different colour display  |  Derron  |  02/20/23  |  02/22/23  |  D  |
 |  F13  |  Debug mode displays the centroids in a red colour  |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
 |  F14  |  Debug mode displays the neighbourhood relations in grey |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
-|  F15  |  Debug mode displays the polygon, vertices, and segments in black and purple |  Derron  |  02/20/23  |  02/22/23  |  D  |
+|  F15  |  Debug mode displays the polygon, vertices, and segments in black and white |  Derron  |  02/20/23  |  02/22/23  |  D  |
 |  F  |  Template  |  S  |  .  |  .  |  B  |
 
 
