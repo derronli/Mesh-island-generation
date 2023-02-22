@@ -248,4 +248,7 @@ public class PolygonClass {
         return index;
     }
 
+    public Polygon getPolygon() {
+        return polygon;
+    }
 }
