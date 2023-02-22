@@ -5,6 +5,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PolygonClass {
@@ -69,6 +70,36 @@ public class PolygonClass {
 
 
 
+    }
+
+    private String averageSegColours(){
+
+        int[] red = new int[segments.size()];
+        int[] green = new int[segments.size()];
+        int[] blue = new int[segments.size()];
+        int[] trans = new int[segments.size()];
+
+        for (int i = 0; i < segments.size(); i++){
+            String colorCode = PropertyManager.getProperty(segments.get(i).getPropertiesList(), "rbg_color");
+            int[] color = PropertyManager.extractColor(colorCode);
+            red[i] = color[0];
+            green[i] = color[1];
+            blue[i] = color[2];
+
+            if (color.length == 4){
+                trans[i] = color[3];
+            }
+            else{
+                trans[i] = 255;
+            }
+
+        }
+        int avRed = Arrays.stream(red).sum() / red.length;
+        int avGreen = Arrays.stream(green).sum() / red.length;
+        int avBlue = Arrays.stream(blue).sum() / red.length;
+        int avTrans = Arrays.stream(trans).sum() / red.length;
+
+        return avRed + "," + avBlue + "," + avGreen + "," + avTrans;
     }
 
     //return centroid method to add to list of vertices
