@@ -59,7 +59,7 @@ When you develop features and enrich the product, remember that you have first t
 
 ### Definition of Done
 
--- Each feature compiles properly on maven, following all necessary business requirements.  --
+-- Each feature compiles properly on maven, functioning both on the generation side and the visualizing side, following all necessary business requirements.  --
 
 ### Product Backlog
 
