@@ -24,7 +24,7 @@ public class PolygonClass {
     private final int index;
 
     private List <MySegment> segments;
-    private List <Integer> neighbourIndices;
+    private List <Integer> neighbourIndices = new ArrayList<>();
     private MyVertex centroid;
 
     private Polygon polygon;
@@ -71,14 +71,7 @@ public class PolygonClass {
 
         //Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
 
-        if (transparency){
-            polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
-            this.setTransparency(alpha);
-        }
-        else{
-            polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
-        }
-        polygon.newBuilder().addAllNeighborIdxs(neighbourIndices).build();
+        polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
     }
 
     //return centroid method to add to list of vertices
