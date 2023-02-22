@@ -83,7 +83,7 @@ public class PolygonClass {
         int[] trans = new int[segments.size()];
 
         for (int i = 0; i < segments.size(); i++){
-            String colorCode = PropertyManager.getProperty(segments.get(i).getPropertiesList(), "rbg_color");
+            String colorCode = PropertyManager.getProperty(segments.get(i).getPropertiesList(), "rgb_color");
             int[] color = PropertyManager.extractColor(colorCode);
             red[i] = color[0];
             green[i] = color[1];
