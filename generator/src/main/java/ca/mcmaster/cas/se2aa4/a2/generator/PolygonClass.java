@@ -78,6 +78,7 @@ public class PolygonClass {
         else{
             polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
         }
+        polygon.newBuilder().addAllNeighborIdxs(neighbourIndices).build();
     }
 
     //return centroid method to add to list of vertices
@@ -154,7 +155,7 @@ public class PolygonClass {
         return null;
     }
 
-    public String getColour (List <Property> properties){
+    public String getColor (List <Property> properties){
         String color = PropertyManager.getProperty(properties, "rgb_color");
         return color;
     }
