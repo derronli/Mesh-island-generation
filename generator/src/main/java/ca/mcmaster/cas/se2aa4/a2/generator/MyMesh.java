@@ -36,7 +36,10 @@ public class MyMesh {
 
         System.out.println(mySegments.size());
 
-        return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).addAllPolygons(extractPolygons(myPolygons)).build();
+        Set<Vertex> vertices = extractVertices(myVertices);
+        Set<Segment> segments = extractSegments(mySegments);
+        Set<Polygon> polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
 
     }
 
