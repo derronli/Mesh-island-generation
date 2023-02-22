@@ -20,7 +20,7 @@ public class GraphicRenderer {
 
         MyRenderer renderer;
         if (commandArg.equals("-X")){
-            renderer = new MyRenderer();
+            renderer = new DebugRenderer();
         }
         else {
             renderer = new MyRenderer();
