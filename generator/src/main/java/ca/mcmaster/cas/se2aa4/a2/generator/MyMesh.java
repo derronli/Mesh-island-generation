@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 import java.util.*;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
@@ -35,7 +36,7 @@ public class MyMesh {
 
         System.out.println(mySegments.size());
 
-        return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).build();
+        return Mesh.newBuilder().addAllVertices(extractVertices(myVertices)).addAllSegments(extractSegments(mySegments)).addAllPolygons(extractPolygons(myPolygons)).build();
 
     }
 
@@ -115,6 +116,7 @@ public class MyMesh {
                 if (polygonDoesNotExist(myPolygons, segments)){
                     PolygonClass polygon = new PolygonClass(segments);
                     myPolygons.add(polygon);
+                    myVertices.add(polygon.getCentroid());
                 }
 
             }
@@ -139,6 +141,15 @@ public class MyMesh {
             }
         }
         return null;
+    }
+
+    // Goes through PolygonClass list and returns list of all the polygons each one contains.
+    private Set<Polygon> extractPolygons(Set<PolygonClass> myPolygons){
+        Set<Polygon> oPolygons = new LinkedHashSet<>();
+        for (PolygonClass polygon : myPolygons){
+            oPolygons.add(polygon.getPolygon());
+        }
+        return oPolygons;
     }
 
     // Goes through MySegment list and returns list of all the segments each one contains.
