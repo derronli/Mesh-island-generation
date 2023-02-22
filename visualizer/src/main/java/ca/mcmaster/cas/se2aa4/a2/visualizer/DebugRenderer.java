@@ -137,4 +137,26 @@ public class DebugRenderer extends MyRenderer{
         }
     }
 
+    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){
+        List<Segment> segments = aMesh.getSegmentsList();
+        List<Vertex> vertices = aMesh.getVerticesList();
+
+        for (Polygon p : aMesh.getPolygonsList()){
+            float strokeThickness = 0.5f;
+            Stroke oldStroke = canvas.getStroke();
+            Color old = canvas.getColor();
+
+            canvas.setStroke(new BasicStroke(strokeThickness));
+            canvas.setColor(Color.WHITE);
+
+            java.awt.Polygon polygon = createPolygon(p, segments, vertices);
+            canvas.fill(polygon);
+
+            // Resetting canvas.
+            canvas.setColor(old);
+            canvas.setStroke(oldStroke);
+
+        }
+
+    }
 }
