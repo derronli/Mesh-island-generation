@@ -35,8 +35,17 @@ public class PolygonClass {
         this.segments = orderSegments(segments);
         calcCentroid();
         initPolygon();
+    }
+    //create second constructor to take alpha
 
-
+    public PolygonClass (List <MySegment> segments, int alpha){
+        this.index = totalIndex;
+        totalIndex++;
+        //this.segments = segments;
+        this.segments = orderSegments(segments);
+        calcCentroid();
+        initPolygon();
+        setTransparency(alpha);
     }
 
     private void initPolygon() {
@@ -49,13 +58,34 @@ public class PolygonClass {
         //take neighbourIndices and set it using property
         //setting neighbour list
 
-        polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).build(); //pass in polygon in future uses
+
+        //add property colour, start with green
+        //if alpha, add transparency,
+
+        Property color = Property.newBuilder().setKey("rgb_color").setValue("0,255,0").build(); //set to green
+        polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build(); //pass in polygon in future uses
+
+        Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
+
+
+
     }
+
+    //return centroid method to add to list of vertices
+    //
 
     private List <Integer> convertSegments (){
         //convert list of segments to indices separated by commas
         List <Integer> convert = new ArrayList<>();
+
+        for (MySegment segment : segments) {
+            convert.add(segment.getIndex());
+        }
         return convert;
+    }
+
+    public MyVertex getCentroid (){
+        return centroid;
     }
 
     private List <MySegment> orderSegments (List <MySegment> segments){
@@ -96,6 +126,10 @@ public class PolygonClass {
         centroid = new MyVertex(x,y);
     }
 
+    private void setNeighbourIndices (List <Integer> indices) {
+        neighbourIndices.addAll(indices);
+    }
+
     /**
      * Tells if other polygon has a neighbouring segment to this.
      * @param other other polygon we are checking against
@@ -111,6 +145,36 @@ public class PolygonClass {
             }
         }
         return null;
+    }
+
+    public String getColour (){
+        String color = "";
+        return color;
+    }
+    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+        return polygon.getPropertiesList();
+    }
+    public void setTransparency (int alpha){
+        String colorCode = PropertyManager.getProperty(getPropertiesList(), "rgb_color");
+        int[] colors = PropertyManager.extractColor(colorCode);
+        String newColorCode = colors[0] + "," + colors[1] + "," + colors[2] + "," + alpha;
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(newColorCode).build();
+        polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
+    }
+
+    public void setThick (int thickness){
+        Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
+
+        String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
+
+        // If thickness property does not already exist.
+        if (val == null) {
+            polygon = Polygon.newBuilder(polygon).addProperties(thick).build();
+        }
+        // If thickness value needs to be changed.
+        else{
+            polygon = Polygon.newBuilder(polygon).setProperties(1, thick).build();
+        }
     }
 
     public boolean isNeighbour(PolygonClass other){
@@ -143,7 +207,8 @@ public class PolygonClass {
     }
 
     public void setPolygonColour(String colorCode){
-
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
 
     /**
@@ -176,6 +241,7 @@ public class PolygonClass {
 
     public void addNeighbour (int index){
         //add to list of neighbours
+        neighbourIndices.add(index);
     }
 
     public int getIndex(){
