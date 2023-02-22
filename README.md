@@ -66,17 +66,20 @@ When you develop features and enrich the product, remember that you have first t
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
 |  F01  |  Draw segments between vertices to visualize squares  |  Everyone  |  02/03/23  |  02/05/23  |  D  |
-|  F02  |  Mesh generates at a precision model of 2 decimal places  |  Derron  |  .  |  .  |  B  |
+|  F02  |  Mesh generates at a precision model of 2 decimal places  |  Derron  |  02/06/23  |  02/08/23  |  D  |
 |  F03  |  Mesh has minimal vertices  |  Kyle  |  02/03/23  |  02/07/23  |  D  |
 |  F04  |  Mesh has minimal segments  |  Kyle  |  02/05/23  |  02/09/23  |  D  |
-|  F05  |  Mesh has minimal polygons  |  Arjun  |  .  |  .  |  B  |
-|  F06  |  Polygon has changeable colour transparency  |  S  |  .  |  .  |  B  |
+|  F05  |  Mesh has minimal polygons  |  Arjun/Derron  |  02/09/23  |  02/14/23  |  D  |
+|  F06  |  Polygon has changeable colour transparency  |  Arjun  |  02/09/23  |  02/14/23  |  D  |
 |  F07  |  Vertex has changeable colour transparency  |  Kyle  |  02/14/23  |  02/15/23  |  D  |
 |  F08  |  Segment has changeable colour transparency  |  Kyle  |  02/15/23  |  02/15/23  |  D  |
-|  F09  |  Polygon has changeable thickness  |  S  |  .  |  .  |  B  |
+|  F09  |  Polygon has changeable thickness  | Arjun |  02/09/23  |  02/14/23  |  D  |
 |  F10  |  Vertex has changeable thickness  |  Kyle  |  02/13/23  |  02/13/23  |  D  |
 |  F11  |  Segment has changeable thickness  |  Kyle  |  02/13/23  |  02/13/23  |  D  |
-|  F12  |  User can switch into debug mode for different colour display  |  S  |  .  |  .  |  B  |
+|  F12  |  User can switch into debug mode for different colour display  |  Derron  |  02/20/23  |  02/22/23  |  D  |
+|  F13  |  Debug mode displays the centroids in a red colour  |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
+|  F14  |  Debug mode displays the neighbourhood relations in grey |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
+|  F15  |  Debug mode displays the polygon, vertices, and segments in black and purple |  Derron  |  02/20/23  |  02/22/23  |  D  |
 |  F  |  Template  |  S  |  .  |  .  |  B  |
 
 
