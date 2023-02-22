@@ -20,6 +20,7 @@ public class PolygonClass {
     private int height = 500;
     private int square_size = 20;
     private static int totalIndex = 0;
+    private int alpha;
     private final int index;
 
     private List <MySegment> segments;
@@ -27,6 +28,8 @@ public class PolygonClass {
     private MyVertex centroid;
 
     private Polygon polygon;
+
+    private boolean transparency = false;
 
     public PolygonClass (List <MySegment> segments){
         this.index = totalIndex;
@@ -41,6 +44,7 @@ public class PolygonClass {
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
+        transparency = true;
         //this.segments = segments;
         this.segments = orderSegments(segments);
         calcCentroid();
@@ -63,12 +67,17 @@ public class PolygonClass {
         //if alpha, add transparency,
 
         Property color = Property.newBuilder().setKey("rgb_color").setValue("0,255,0").build(); //set to green
-        polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build(); //pass in polygon in future uses
+        //pass in polygon in future uses
 
-        Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
+        //Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
 
-
-
+        if (transparency){
+            polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
+            this.setTransparency(alpha);
+        }
+        else{
+            polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
+        }
     }
 
     //return centroid method to add to list of vertices
@@ -90,8 +99,6 @@ public class PolygonClass {
 
     private List <MySegment> orderSegments (List <MySegment> segments){
         //checking initial segments list
-        System.out.println(segments.toString());
-
         List <MySegment> orderedSegments = new ArrayList<>();
         orderedSegments.add(segments.get(0));
 
@@ -109,7 +116,6 @@ public class PolygonClass {
         }
 
         //checking if segments are ordered
-        System.out.println(orderedSegments.toString());
         return orderedSegments;
     }
 
@@ -127,6 +133,7 @@ public class PolygonClass {
     }
 
     private void setNeighbourIndices (List <Integer> indices) {
+        neighbourIndices = new ArrayList<>();
         neighbourIndices.addAll(indices);
     }
 
@@ -147,8 +154,8 @@ public class PolygonClass {
         return null;
     }
 
-    public String getColour (){
-        String color = "";
+    public String getColour (List <Property> properties){
+        String color = PropertyManager.getProperty(properties, "rgb_color");
         return color;
     }
     public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
@@ -200,13 +207,13 @@ public class PolygonClass {
      * Sets all the segments in the polygon to the same colour.
      * @param colorCode string colour code to set segments to
      */
-    public void setSegmentsColour(String colorCode){
+    public void setSegmentsColor(String colorCode){
         for (int i = 0; i<segments.size(); i++){
             segments.get(i).setColour(colorCode);
         }
     }
 
-    public void setPolygonColour(String colorCode){
+    public void setPolygonColor(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
         polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
