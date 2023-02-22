@@ -39,7 +39,7 @@ public class MyRenderer {
         List<Integer> segmentIdxList = polygon.getSegmentIdxsList();
 
         // Number of vertices is number of segments multiplied by 2.
-        int numVertices = segmentIdxList.size() * 2;
+        int numVertices = segmentIdxList.size();
 
         int[] xCoords = new int[numVertices];
         int[] yCoords = new int[numVertices];
@@ -52,20 +52,37 @@ public class MyRenderer {
             // Goes through vertices of each segment and adds their coordinates to array.
             Vertex v1 = vertices.get(segment.getV1Idx());
             Vertex v2 = vertices.get(segment.getV2Idx());
-            xCoords[count] = (int) v1.getX();
-            yCoords[count] = (int) v1.getY();
+            if (isNewVertex(xCoords, yCoords, v1)) {
+                xCoords[count] = (int) v1.getX();
+                yCoords[count] = (int) v1.getY();
+
+
+            }
+            else {
+                xCoords[count] = (int) v2.getX();
+                yCoords[count] = (int) v2.getY();
+
+            }
 
             count++;
 
-            xCoords[count] = (int) v2.getX();
-            yCoords[count] = (int) v2.getY();
 
-            count++;
+
+
 
         }
 
 
         return new java.awt.Polygon(xCoords, yCoords, numVertices);
+    }
+
+    private boolean isNewVertex(int[] xCoords, int[] yCoords, Vertex v) {
+        for (int i = 0; i < xCoords.length; i++) {
+            if (v.getX() == xCoords[i] && v.getY() == yCoords[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
