@@ -67,7 +67,7 @@ public class PolygonClass {
         //add property colour, start with green
         //if alpha, add transparency,
 
-        Property color = Property.newBuilder().setKey("rgb_color").setValue("0,255,0").build(); //set to green
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build(); //set to green
         //pass in polygon in future uses
 
         //Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
