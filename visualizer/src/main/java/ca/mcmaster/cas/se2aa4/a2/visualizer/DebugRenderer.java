@@ -23,7 +23,7 @@ public class DebugRenderer extends MyRenderer{
             Color old = canvas.getColor();
 
             canvas.setStroke(new BasicStroke(strokeThickness));
-            canvas.setColor(Color.BLACK);
+            canvas.setColor(Color.WHITE);
 
             double[] position = extractPosition(aMesh.getVerticesList(), s.getV1Idx(), s.getV2Idx());
             Line2D line = new Line2D.Double(position[0], position[1], position[2], position[3]);
@@ -52,7 +52,7 @@ public class DebugRenderer extends MyRenderer{
         for (Vertex v: aMesh.getVerticesList()) {
 
             Color old = canvas.getColor();
-            canvas.setColor(Color.BLACK); // colour for vertices
+            canvas.setColor(Color.WHITE); // colour for vertices
 
             Ellipse2D point = drawDot(v);
             canvas.fill(point);
@@ -137,4 +137,26 @@ public class DebugRenderer extends MyRenderer{
         }
     }
 
+    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){
+        List<Segment> segments = aMesh.getSegmentsList();
+        List<Vertex> vertices = aMesh.getVerticesList();
+
+        for (Polygon p : aMesh.getPolygonsList()){
+            float strokeThickness = 0.5f;
+            Stroke oldStroke = canvas.getStroke();
+            Color old = canvas.getColor();
+
+            canvas.setStroke(new BasicStroke(strokeThickness));
+            canvas.setColor(Color.BLACK);
+
+            java.awt.Polygon polygon = createPolygon(p, segments, vertices);
+            canvas.fill(polygon);
+
+            // Resetting canvas.
+            canvas.setColor(old);
+            canvas.setStroke(oldStroke);
+
+        }
+
+    }
 }
