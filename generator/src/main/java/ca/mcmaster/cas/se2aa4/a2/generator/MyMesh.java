@@ -21,6 +21,7 @@ public class MyMesh {
 
     private final int NUM_POLYGONS = 100;
     private final Random rand = new Random();
+    private final int RELAXATION_LEVEL = 5;
 
     // Equality is defined as being within 0.01 of each other
     private boolean isEqual(MyVertex v1, MyVertex v2) {
@@ -268,47 +269,78 @@ public class MyMesh {
         MyVertex v1, v2;
         MySegment s;
         Coordinate c1, c2;
+        int count = 0;
 
+        do {
 
-        for (org.locationtech.jts.geom.Polygon p : polygons) {
-            polyCoords = p.getCoordinates();
-            // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
-            ArrayList<MySegment> polySegments = new ArrayList<>();
-            for (int i = 0; i < polyCoords.length; i++) {
-                // Gets Coordinate pair
-                c1 = polyCoords[i];
-                // Handles edge case of the last point not having a + 1 index
-                // Last point should connect to the originally FIRST point
-                if (i == polyCoords.length - 1) {
-                    c2 = polyCoords[0];
-                } else {
-                    c2 = polyCoords[i + 1];
+            for (org.locationtech.jts.geom.Polygon p : polygons) {
+                polyCoords = p.getCoordinates();
+                // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
+                ArrayList<MySegment> polySegments = new ArrayList<>();
+                for (int i = 0; i < polyCoords.length; i++) {
+                    // Gets Coordinate pair
+                    c1 = polyCoords[i];
+                    // Handles edge case of the last point not having a + 1 index
+                    // Last point should connect to the originally FIRST point
+                    if (i == polyCoords.length - 1) {
+                        c2 = polyCoords[0];
+                    } else {
+                        c2 = polyCoords[i + 1];
+                    }
+                    if (c1.getX() > width || c1.getY() > height || c2.getX() > width || c2.getY() > height) {
+                        continue;
+                    }
+
+                    // Checks if (x,y) pair is a preexisting vertex -> will make new one if not
+                    v1 = findVertex(myVertices, c1.getX(), c1.getY());
+                    v2 = findVertex(myVertices, c2.getX(), c2.getY());
+
+                    myVertices.add(v1);
+                    myVertices.add(v2);
+
+                    s = findSegment(mySegments, v1, v2);
+
+                    mySegments.add(s);
+                    polySegments.add(s);
                 }
-                if (c1.getX() > width || c1.getY() > height || c2.getX() > width || c2.getY() > height) {
-                    continue;
+
+                if (polygonDoesNotExist(myPolygons, polySegments) && polySegments.size() > 0) {
+                    PolygonClass polygon = new PolygonClass(polySegments);
+                    myPolygons.add(polygon);
+                    myVertices.add(polygon.getCentroid()); // Don't want to add this until the last relaxed centroid
                 }
+            }
+            // Continue to compute the voronoi diagram -> as a part of lloyd relaxation
+            // Until the relaxation level is reached
+            count++;
 
-                // Checks if (x,y) pair is a preexisting vertex -> will make new one if not
-                v1 = findVertex(myVertices, c1.getX(), c1.getY());
-                v2 = findVertex(myVertices, c2.getX(), c2.getY());
-
-                myVertices.add(v1);
-                myVertices.add(v2);
-
-                s = findSegment(mySegments, v1, v2);
-
-                mySegments.add(s);
-                polySegments.add(s);
-
-
+            // Make sure its not the last relaxation level
+            if (count != RELAXATION_LEVEL) {
+                // Reset the collections in preparation of the next voronoi generation
+                myVertices = new LinkedHashSet<>();
+                mySegments = new LinkedHashSet<>();
+                polygons = relaxLloyd(myPolygons, voronoiPoints);
+                myPolygons = new LinkedHashSet<>();
             }
 
-//            if (polygonDoesNotExist(myPolygons, polySegments)) {
-//                PolygonClass polygon = new PolygonClass(polySegments);
-//                myPolygons.add(polygon);
-//                myVertices.add(polygon.getCentroid());
-//            }
+        } while (count < RELAXATION_LEVEL);
+    }
+
+    // Generates a new set of voronoiPoints and voronoi diagram given the previously generated polygon centroids
+    private List<org.locationtech.jts.geom.Polygon> relaxLloyd(Set<PolygonClass> myPolygons, Set<Coordinate> voronoiPoints) {
+        voronoiPoints = new LinkedHashSet<>();
+        MyVertex centroidVertex;
+        Coordinate newPoint;
+
+        // new voronoi points will be the previously computed centroids
+        for (PolygonClass p : myPolygons) {
+            centroidVertex = p.getCentroid();
+            newPoint = new Coordinate(centroidVertex.getX(), centroidVertex.getY());
+            voronoiPoints.add(newPoint);
         }
+
+        // Compute the new voronoi diagram with the set of voronoi points
+        return createVoronoiAboutPoints(voronoiPoints);
     }
 }
 
