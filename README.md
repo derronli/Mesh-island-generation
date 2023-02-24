@@ -94,7 +94,7 @@ When you develop features and enrich the product, remember that you have first t
 
 
 ## ideas
-empty for now
+new class to handle user input (is given dotgen and string args[], returns a mesh)
 
 
 # Documentation
