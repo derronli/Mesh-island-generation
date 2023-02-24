@@ -95,6 +95,11 @@ When you develop features and enrich the product, remember that you have first t
 
 ## ideas
 new class to handle user input (is given dotgen and string args[], returns a mesh)
+call dotgen, which accepts all the arguments, but new class sets values to default for ones that are not provided
+
+to do:
+1. new class to do all this
+2. modify dotgen and subsequent classes to use these new values passed in rather than hard coded
 
 
 # Documentation
