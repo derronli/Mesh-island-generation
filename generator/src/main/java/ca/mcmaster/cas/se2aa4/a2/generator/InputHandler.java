@@ -101,6 +101,7 @@ public class InputHandler {
     }
 
     private Mesh checkOptions(CommandLine line){
+        // Setting parameters for dotgen to default values.
         int polyTrans = alpha;
         int segTrans = alpha;
         int vertexTrans = alpha;
@@ -108,6 +109,7 @@ public class InputHandler {
         float segThick = POLYSEGTHICKNESS;
         int vertexThick = VERTEXTHICKNESS;
 
+        // logic to see which options were used and set variables accordingly.
         if(line.hasOption("pa")) {
             // initialise the member variable
             polyTrans = Integer.parseInt(line.getOptionValue("pa"));
@@ -132,10 +134,7 @@ public class InputHandler {
             // initialise the member variable
             vertexThick = Integer.parseInt(line.getOptionValue("vt"));
         }
-        // logic to see which options were used and set variables accordingly.
-
-
-        // order of arguments: same as readme
+        
         DotGen generator = new DotGen();
         return generator.generate(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
     }
