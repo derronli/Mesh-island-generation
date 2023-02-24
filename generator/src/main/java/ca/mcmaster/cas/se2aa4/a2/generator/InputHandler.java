@@ -37,7 +37,7 @@ public class InputHandler {
 
 
         DotGen generator = new DotGen();
-        return generator.generate();
+        return generator.generate(0, 0, 0, 0, 0, 0);
     }
 
 }
