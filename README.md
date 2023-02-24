@@ -128,3 +128,6 @@ outputFile 'i' numOfPolygons relaxationLevel (extra commands from legend)
 ### Example
 User wants output file sample.mesh, 200 polygons, relaxed mesh, polygon transparency of 200, and segment thickness of 10
 sample.mesh i 200 1 -pa 200 -st 10
+
+## Format for user input when running visualizer main file
+Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.
