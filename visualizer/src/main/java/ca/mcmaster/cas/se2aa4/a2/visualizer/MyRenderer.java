@@ -55,17 +55,12 @@ public class MyRenderer {
             if (isNewVertex(xCoords, yCoords, v1)) {
                 xCoords[count] = (int) v1.getX();
                 yCoords[count] = (int) v1.getY();
-
-
             }
             else {
                 xCoords[count] = (int) v2.getX();
                 yCoords[count] = (int) v2.getY();
-
             }
-
             count++;
-
         }
 
 
