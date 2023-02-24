@@ -104,37 +104,6 @@ public class MyMesh {
     }
 
     // Setters to use command line arguments for all values.
-    protected void setAllVertexTrans(Set<MyVertex> myVertices, int vertexTrans){
-        for (MyVertex v : myVertices) {
-            v.setTrans(vertexTrans);
-        }
-    }
-    protected void setAllSegTrans(Set<MySegment> mySegments, int segTrans){
-        for (MySegment s : mySegments) {
-            s.setTrans(segTrans);
-        }
-    }
-    protected void setAllPolyTrans(Set<PolygonClass> myPolygons, int polyTrans){
-        for (PolygonClass p : myPolygons) {
-            p.setTrans(polyTrans);
-        }
-    }
-    protected void setAllVertexThick(Set<MyVertex> myVertices, float vertexThick){
-        for (MyVertex v : myVertices) {
-            v.setThick(vertexThick);
-        }
-    }
-    protected void setAllSegThick(Set<MySegment> mySegments, float segThick){
-        for (MySegment s : mySegments) {
-            s.setThick(segThick);
-        }
-    }
-    protected void setAllPolyThick(Set<PolygonClass> myPolygons, float polyThick){
-        for (PolygonClass p : myPolygons) {
-            p.setThick(polyThick);
-        }
-    }
-
     protected void setShapeThick(Set<? extends MyShape> myShapes, float thickness){
         for (MyShape shape : myShapes){
             shape.setThick(thickness);
