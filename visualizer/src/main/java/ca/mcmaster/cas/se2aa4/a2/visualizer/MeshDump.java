@@ -1,7 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a2.visualizer;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
@@ -43,6 +43,26 @@ public class MeshDump {
             line.append(" [");
             for(Property p: s.getPropertiesList()){
                 line.append(String.format("%s -> %s, ", p.getKey(), p.getValue()));
+            }
+            line.append("]");
+            System.out.println(line);
+        }
+
+        // Dumps polygons.
+        List<Polygon> polygons = aMesh.getPolygonsList();
+        System.out.println("|Polygons| = " + polygons.size());
+        for (Polygon p : polygons){
+            StringBuffer line = new StringBuffer();
+
+            line.append("(");
+            for (int i = 0; i < p.getSegmentIdxsCount(); i++){
+                line.append(String.format("%d,", p.getSegmentIdxs(i)));
+            }
+            line.append(")");
+
+            line.append(" [");
+            for(Property pr: p.getPropertiesList()){
+                line.append(String.format("%s -> %s, ", pr.getKey(), pr.getValue()));
             }
             line.append("]");
             System.out.println(line);

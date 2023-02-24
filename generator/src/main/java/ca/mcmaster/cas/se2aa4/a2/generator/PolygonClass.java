@@ -38,7 +38,6 @@ public class PolygonClass {
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
-        //this.segments = segments;
         this.segments = orderSegments(segments);
         calcCentroid();
         initPolygon();
@@ -46,7 +45,7 @@ public class PolygonClass {
     }
 
     private void initPolygon() {
-        Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build(); //set to green
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build();
         //pass in polygon in future uses
 
         polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
@@ -226,7 +225,7 @@ public class PolygonClass {
     /**
      * Returns if the input list of segments is the same segments this instance contains.
      * @param segments list of segments we are checking against.
-     * @return if this polygon represents the input list of segments.
+     * @return true if this polygon represents the input list of segments.
      */
     public boolean equals(List<MySegment> segments) {
 
@@ -234,10 +233,19 @@ public class PolygonClass {
             return false;
         }
         else { //modify this such that we compare every element of this.segments to passed in segments
-            for (int i = 0; i < this.segments.size(); i++) {
-                if (this.segments.get(i).getIndex() != segments.get(i).getIndex()) {
-                    return false;
+            for (MySegment s1 : this.segments){
+
+
+                // Goes through each segment in input list, if we find one that equals what we are checking, go to next in loop.
+                for (MySegment s2 : segments){
+                    if (s1.getIndex() == s2.getIndex()) {
+                        break;
+                    }
                 }
+
+                // If we did not find a segment in input list that exists in our polygon, cannot be the same.
+                return false;
+
             }
             return true;
         }
