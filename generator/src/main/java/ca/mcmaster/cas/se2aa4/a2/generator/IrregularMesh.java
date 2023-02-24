@@ -20,7 +20,7 @@ public class IrregularMesh extends MyMesh{
     }
 
     public Structs.Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
-                                  int vertexThick) {
+                                  float vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();

@@ -15,7 +15,7 @@ public class MyMesh {
     protected final int PRECISION = 1;
 
 
-    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick) {
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, float vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
@@ -119,7 +119,7 @@ public class MyMesh {
             p.setTrans(polyTrans);
         }
     }
-    protected void setAllVertexThick(Set<MyVertex> myVertices, int vertexThick){
+    protected void setAllVertexThick(Set<MyVertex> myVertices, float vertexThick){
         for (MyVertex v : myVertices) {
             v.setThick(vertexThick);
         }
@@ -132,6 +132,17 @@ public class MyMesh {
     protected void setAllPolyThick(Set<PolygonClass> myPolygons, float polyThick){
         for (PolygonClass p : myPolygons) {
             p.setThick(polyThick);
+        }
+    }
+
+    protected void setShapeThick(Set<? extends MyShape> myShapes, float thickness){
+        for (MyShape shape : myShapes){
+            shape.setThick(thickness);
+        }
+    }
+    protected void setShapeTrans(Set<? extends MyShape> myShapes, int trans){
+        for (MyShape shape : myShapes){
+            shape.setTrans(trans);
         }
     }
 

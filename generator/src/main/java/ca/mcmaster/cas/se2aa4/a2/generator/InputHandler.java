@@ -5,7 +5,7 @@ import org.apache.commons.cli.*;
 
 public class InputHandler {
 
-    private final int VERTEXTHICKNESS = 3;
+    private final float VERTEXTHICKNESS = 3f;
     private final float POLYSEGTHICKNESS = 0.5f;
     private final int alpha = 255;
     private final int numPolygons = 100;
@@ -109,7 +109,7 @@ public class InputHandler {
         int vertexTrans = alpha;
         float polyThick = POLYSEGTHICKNESS;
         float segThick = POLYSEGTHICKNESS;
-        int vertexThick = VERTEXTHICKNESS;
+        float vertexThick = VERTEXTHICKNESS;
         int numPoly = numPolygons;
         int relax = relaxation;
 
@@ -136,7 +136,7 @@ public class InputHandler {
         }
         if(line.hasOption("vt")) {
             // initialise the member variable
-            vertexThick = Integer.parseInt(line.getOptionValue("vt"));
+            vertexThick = Float.parseFloat(line.getOptionValue("vt"));
         }
         if(line.hasOption("np")) {
             // initialise the member variable

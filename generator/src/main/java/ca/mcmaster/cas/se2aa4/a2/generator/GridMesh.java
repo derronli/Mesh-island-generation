@@ -13,7 +13,7 @@ public class GridMesh extends MyMesh{
 
     private final int square_size = 20;
 
-    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick) {
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, float vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
@@ -23,12 +23,18 @@ public class GridMesh extends MyMesh{
         createSegNPoly(mySegments, myPolygons, myVertices, polyTrans, segTrans, vertexTrans, polyThick, segThick);
         setAllNeighbours(myPolygons);
 
-        setAllPolyTrans(myPolygons, polyTrans);
-        setAllSegTrans(mySegments, segTrans);
-        setAllVertexTrans(myVertices, vertexTrans);
-        setAllPolyThick(myPolygons, polyThick);
-        setAllSegThick(mySegments, segThick);
-        setAllVertexThick(myVertices, vertexThick);
+//        setAllPolyTrans(myPolygons, polyTrans);
+//        setAllSegTrans(mySegments, segTrans);
+//        setAllVertexTrans(myVertices, vertexTrans);
+//        setAllPolyThick(myPolygons, polyThick);
+//        setAllSegThick(mySegments, segThick);
+//        setAllVertexThick(myVertices, vertexThick);
+        setShapeTrans(myPolygons, polyTrans);
+        setShapeTrans(mySegments, segTrans);
+        setShapeTrans(myVertices, vertexTrans);
+        setShapeThick(myPolygons, polyThick);
+        setShapeThick(mySegments, segThick);
+        setShapeThick(myVertices, vertexThick);
 
         Set<Vertex> vertices = extractVertices(myVertices);
         Set<Segment> segments = extractSegments(mySegments);
@@ -38,7 +44,7 @@ public class GridMesh extends MyMesh{
     }
 
     // Create all vertices.
-    private void createVertices(Set<MyVertex> myVertices, int vertexTrans, int vertexThick) {
+    private void createVertices(Set<MyVertex> myVertices, int vertexTrans, float vertexThick) {
 
         for (int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
