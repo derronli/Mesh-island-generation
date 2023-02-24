@@ -3,7 +3,7 @@ package ca.mcmaster.cas.se2aa4.a2.generator;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
-public class MySegment {
+public class MySegment implements MyShape {
 
     private static int totalIndex = 0;
     private final int index;
@@ -52,8 +52,8 @@ public class MySegment {
     private void initSegment(){
 
         // Sets the colour.
-        int [] col1 = v1.getColour();
-        int [] col2 = v2.getColour();
+        int [] col1 = v1.getColor();
+        int [] col2 = v2.getColor();
         int red = (col1[0] + col2[0]) / 2;
         int green = (col1[1] + col2[1]) / 2;
         int blue = (col1[2] + col2[2]) / 2;
@@ -96,7 +96,7 @@ public class MySegment {
      * Create new segment with a specified colour rather than the default.
      * @param colorCode RGB code, comma separated
      */
-    public void setColour(String colorCode){
+    public void setColor(String colorCode){
         Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
         segment = Segment.newBuilder(segment).setProperties(0, color).build();
     }
@@ -117,7 +117,7 @@ public class MySegment {
      * Sets the thickness of this segment.
      * @param thickness int value of thickness wanted
      */
-    public void setThickness(float thickness){
+    public void setThick(float thickness){
         Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
 
         String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
@@ -143,11 +143,11 @@ public class MySegment {
     public int getV2Index(){
         return segment.getV2Idx();
     }
-    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+    public java.util.List<Property> getPropertiesList() {
         return segment.getPropertiesList();
     }
     public Segment getSegment() { return segment; }
-    public int[] getColour(){
+    public int[] getColor(){
         String val = PropertyManager.getProperty(this.getPropertiesList(), "rgb_color");
         if (val == null)
             return new int[] {0, 0, 0};

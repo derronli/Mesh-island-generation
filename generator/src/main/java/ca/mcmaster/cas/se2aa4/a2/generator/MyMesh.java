@@ -116,17 +116,17 @@ public class MyMesh {
     }
     protected void setAllPolyTrans(Set<PolygonClass> myPolygons, int polyTrans){
         for (PolygonClass p : myPolygons) {
-            p.setTransparency(polyTrans);
+            p.setTrans(polyTrans);
         }
     }
     protected void setAllVertexThick(Set<MyVertex> myVertices, int vertexThick){
         for (MyVertex v : myVertices) {
-            v.setThickness(vertexThick);
+            v.setThick(vertexThick);
         }
     }
     protected void setAllSegThick(Set<MySegment> mySegments, float segThick){
         for (MySegment s : mySegments) {
-            s.setThickness(segThick);
+            s.setThick(segThick);
         }
     }
     protected void setAllPolyThick(Set<PolygonClass> myPolygons, float polyThick){
