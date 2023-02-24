@@ -1,6 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -8,48 +11,40 @@ import java.util.Set;
 
 public class GridMesh extends MyMesh{
 
-    public Structs.Mesh buildMesh() {
+    private final int square_size = 20;
+
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
 
-        createVertices(myVertices);
-        createSegNPoly(mySegments, myPolygons, myVertices);
+        createVertices(myVertices, vertexTrans, vertexThick);
+        createSegNPoly(mySegments, myPolygons, myVertices, polyTrans, segTrans, vertexTrans, polyThick, segThick);
 
-        Set<Structs.Vertex> vertices = extractVertices(myVertices);
-        Set<Structs.Segment> segments = extractSegments(mySegments);
-        Set<Structs.Polygon> polygons = extractPolygons(myPolygons);
-        return Structs.Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
+        Set<Vertex> vertices = extractVertices(myVertices);
+        Set<Segment> segments = extractSegments(mySegments);
+        Set<Polygon> polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
 
     }
 
     // Create all vertices.
-    private void createVertices(Set<MyVertex> myVertices) {
+    private void createVertices(Set<MyVertex> myVertices, int vertexTrans, int vertexThick) {
 
         for (int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
                 MyVertex vertex = new MyVertex(x, y, 250);
-
-                // testing thickness
-                if (x < 150 && y < 150 || x > 350 && y > 350) {
-                    vertex.setThickness(10);
-                } else {
-                    vertex.setThickness(3);
-                }
-
-                // testing transparency
-                if (x < 100 && y < 100 || x > 350 && y < 100) {
-                    vertex.setTrans(100);
-                }
-
+                vertex.setThickness(vertexThick);
+                vertex.setTrans(vertexTrans);
                 myVertices.add(vertex);
             }
         }
     }
 
     // Creates segments connecting vertices as square shapes and polygons for these segments.
-    private void createSegNPoly(Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<MyVertex> myVertices) {
+    private void createSegNPoly(Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<MyVertex> myVertices,
+                                int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick) {
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
 
@@ -68,28 +63,23 @@ public class GridMesh extends MyMesh{
                 MySegment s3 = findSegment(mySegments, v3, v4);
                 MySegment s4 = findSegment(mySegments, v4, v1);
 
-                // testing thickness
-                if (x >= 100 && x <= 400 && y >= 100 && y <= 400) {
-                    s1.setThickness(2);
-                    s2.setThickness(2);
-                    s3.setThickness(2);
-                    s4.setThickness(2);
-                }
+                // setting thickness
+                s1.setThickness(segThick);
+                s2.setThickness(segThick);
+                s3.setThickness(segThick);
+                s4.setThickness(segThick);
 
-                // testing transparency
-                if (x <= 300 && x >= 200) {
-                    s1.setTrans(100);
-                    s2.setTrans(100);
-                    s3.setTrans(100);
-                    s4.setTrans(100);
-                }
+                // setting transparency
+                s1.setTrans(segTrans);
+                s2.setTrans(segTrans);
+                s3.setTrans(segTrans);
+                s4.setTrans(segTrans);
 
                 // Adds all segments to set, if they already exist and were found, it will just not add.
                 mySegments.add(s1);
                 mySegments.add(s2);
                 mySegments.add(s3);
                 mySegments.add(s4);
-
 
                 ArrayList<MySegment> segments = new ArrayList<>();
                 segments.add(s1);
@@ -98,6 +88,9 @@ public class GridMesh extends MyMesh{
                 segments.add(s4);
                 if (polygonDoesNotExist(myPolygons, segments)) {
                     PolygonClass polygon = new PolygonClass(segments);
+                    polygon.setThick(polyThick);
+                    polygon.setTransparency(polyTrans);
+                    polygon.setCentroidTransparency(vertexTrans);
                     myPolygons.add(polygon);
                     myVertices.add(polygon.getCentroid());
                 }

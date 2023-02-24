@@ -1,26 +1,35 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-
 import java.util.*;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-import org.locationtech.jts.geom.*;
-import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 
 public class MyMesh {
 
     protected final int width = 500;
     protected final int height = 500;
-    protected final int square_size = 20;
 
     protected final int PRECISION = 1;
 
 
-    public Mesh buildMesh() {
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick) {
+
+        Set<MyVertex> myVertices = new LinkedHashSet<>();
+        Set<MySegment> mySegments = new LinkedHashSet<>();
+        Set<PolygonClass> myPolygons = new LinkedHashSet<>();
+
+        Set<Vertex> vertices = extractVertices(myVertices);
+        Set<Segment> segments = extractSegments(mySegments);
+        Set<Polygon> polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
+
+    }
+
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick
+            , int numPolygons, int relaxation) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();

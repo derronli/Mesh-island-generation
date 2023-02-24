@@ -122,7 +122,7 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 - -vt = vertex thickness (default = 3)
 
 Only applicable in irregular mesh
-- -np = number of polygons (default = 30)
+- -np = number of polygons (default = 100)
 - -rl = number of relaxations (default = 0)
 
 ## Grid

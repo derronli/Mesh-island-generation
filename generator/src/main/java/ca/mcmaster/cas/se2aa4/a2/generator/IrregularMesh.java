@@ -14,7 +14,8 @@ public class IrregularMesh extends MyMesh{
     private final Random rand = new Random();
     private final int RELAXATION_LEVEL = 5;
 
-    public Structs.Mesh buildMesh() {
+    public Structs.Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
+                                  int vertexThick, int numPolygons, int relaxation) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
