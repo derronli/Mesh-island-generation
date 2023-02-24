@@ -80,7 +80,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F13  |  Debug mode displays the centroids in a red colour  |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
 |  F14  |  Debug mode displays the neighbourhood relations in grey |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
 |  F15  |  Debug mode displays the polygon, vertices, and segments in black and purple |  Derron  |  02/20/23  |  02/22/23  |  D  |
-|  F16  |  User can switch between grid meshes or irregular mesh |  P  |  02/22/23 |  |  P  |
+|  F16  |  User can switch between grid meshes or irregular mesh |  Kyle  |  02/24/23 | 02/24/23 |  D  |
 |  F17  |  Points are randomly generated to construct the irregular meshes  |  P  |  02/22/23  |  |  P  |
 |  F18  |  Voronoi diagram for each point is calculated  |  P  |  02/22/23  |    |  P  |
 |  F19  |  Each randomly generated point is converted to a centroid for each polygon  |  P  |  02/22/23  |   |  P  |
