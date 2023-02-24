@@ -17,7 +17,7 @@ public class InputHandler {
 
 
 
-        Option help = new Option("-help", "display all possible inputs");
+        Option help = new Option("help", "display all possible inputs");
         Option pa = new Option("pa", "define polygon transparency (value from 0 to 255) (default = 255)");
 
 
