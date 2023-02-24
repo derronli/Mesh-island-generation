@@ -245,7 +245,7 @@ public class PolygonClass {
 
                 // If we did not find a segment in input list that exists in our polygon, cannot be the same.
                 return false;
-                
+
             }
             return true;
         }
