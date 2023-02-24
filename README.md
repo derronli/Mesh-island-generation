@@ -84,7 +84,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F17  |  Points are randomly generated to construct the irregular meshes  |  P  |  02/22/23  |  |  P  |
 |  F18  |  Voronoi diagram for each point is calculated  |  P  |  02/22/23  |    |  P  |
 |  F19  |  Each randomly generated point is converted to a centroid for each polygon  |  P  |  02/22/23  |   |  P  |
-|  F20  |  User can select to relax the mesh or not  |  P  |  02/22/23  |   |  P  |
+|  F20  |  User can select to relax the mesh or not  |  Kyle  |  02/24/23  |  02/24/23  |  D  |
 |  F21  |  Neighbourhood relations are computed using Delaunay's triangulation |  P  |  02/22/23  |   |  P  |
 |  F22  |  User can enter "help" mode if a -h or --help argument is inputted when running generator |  P  |  02/22/23  |   |  P  |
 |  F23  |  User can select the number of polygons they wish to generate through the command line  |  Kyle  |  02/24/23  |  02/24/23  |  D  |
