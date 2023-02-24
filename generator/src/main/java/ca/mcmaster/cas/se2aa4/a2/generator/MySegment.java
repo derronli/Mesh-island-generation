@@ -114,10 +114,10 @@ public class MySegment {
     }
 
     /**
-     * Sets the thickness of this vertex.
+     * Sets the thickness of this segment.
      * @param thickness int value of thickness wanted
      */
-    public void setThickness(int thickness){
+    public void setThickness(float thickness){
         Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
 
         String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");

@@ -165,7 +165,7 @@ public class PolygonClass {
         polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
 
-    public void setThick (int thickness){
+    public void setThick (float thickness){
         Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
 
         String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
@@ -215,11 +215,11 @@ public class PolygonClass {
     }
 
     /**
-     * Sets the centroid to a certain colour.
-     * @param colorCode string colour code to set centroid to
+     * Sets the centroid to a certain transparency.
+     * @param alpha transparency to set centroid to
      */
-    public void setCentroidColour(String colorCode){
-        centroid.setColour(colorCode);
+    public void setCentroidTransparency(int alpha){
+        centroid.setTrans(alpha);
     }
 
     /**

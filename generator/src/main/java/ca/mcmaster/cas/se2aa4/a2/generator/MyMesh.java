@@ -1,30 +1,46 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-
 import java.util.*;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-import org.locationtech.jts.geom.*;
-import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 
 public class MyMesh {
 
     protected final int width = 500;
     protected final int height = 500;
-    protected final int square_size = 20;
 
     protected final int PRECISION = 1;
 
 
-    public Mesh buildMesh() {
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
+
+        Set<Vertex> vertices = extractVertices(myVertices);
+        Set<Segment> segments = extractSegments(mySegments);
+        Set<Polygon> polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
+
+    }
+
+    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick
+            , int numPolygons, int relaxation) {
+
+        Set<MyVertex> myVertices = new LinkedHashSet<>();
+        Set<MySegment> mySegments = new LinkedHashSet<>();
+        Set<PolygonClass> myPolygons = new LinkedHashSet<>();
+
+        setAllPolyTrans(myPolygons, polyTrans);
+        setAllSegTrans(mySegments, segTrans);
+        setAllVertexTrans(myVertices, vertexTrans);
+        setAllPolyThick(myPolygons, polyThick);
+        setAllSegThick(mySegments, segThick);
+        setAllVertexThick(myVertices, vertexThick);
 
         Set<Vertex> vertices = extractVertices(myVertices);
         Set<Segment> segments = extractSegments(mySegments);
@@ -107,6 +123,39 @@ public class MyMesh {
         }
         return new MySegment(v1, v2);
     }
+
+    // Setters to use command line arguments for all values.
+    protected void setAllVertexTrans(Set<MyVertex> myVertices, int vertexTrans){
+        for (MyVertex v : myVertices) {
+            v.setTrans(vertexTrans);
+        }
+    }
+    protected void setAllSegTrans(Set<MySegment> mySegments, int segTrans){
+        for (MySegment s : mySegments) {
+            s.setTrans(segTrans);
+        }
+    }
+    protected void setAllPolyTrans(Set<PolygonClass> myPolygons, int polyTrans){
+        for (PolygonClass p : myPolygons) {
+            p.setTransparency(polyTrans);
+        }
+    }
+    protected void setAllVertexThick(Set<MyVertex> myVertices, int vertexThick){
+        for (MyVertex v : myVertices) {
+            v.setThickness(vertexThick);
+        }
+    }
+    protected void setAllSegThick(Set<MySegment> mySegments, float segThick){
+        for (MySegment s : mySegments) {
+            s.setThickness(segThick);
+        }
+    }
+    protected void setAllPolyThick(Set<PolygonClass> myPolygons, float polyThick){
+        for (PolygonClass p : myPolygons) {
+            p.setThick(polyThick);
+        }
+    }
+
 
 
 }

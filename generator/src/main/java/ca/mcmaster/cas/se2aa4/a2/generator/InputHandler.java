@@ -8,7 +8,7 @@ public class InputHandler {
     private final int VERTEXTHICKNESS = 3;
     private final float POLYSEGTHICKNESS = 0.5f;
     private final int alpha = 255;
-    private final int numPolygons = 30;
+    private final int numPolygons = 100;
     private final int relaxation = 0;
 
     public Mesh createMesh(String[] args){
@@ -128,11 +128,11 @@ public class InputHandler {
         }
         if(line.hasOption("pt")) {
             // initialise the member variable
-            polyThick = Integer.parseInt(line.getOptionValue("pt"));
+            polyThick = Float.parseFloat(line.getOptionValue("pt"));
         }
         if(line.hasOption("st")) {
             // initialise the member variable
-            segThick = Integer.parseInt(line.getOptionValue("st"));
+            segThick = Float.parseFloat(line.getOptionValue("st"));
         }
         if(line.hasOption("vt")) {
             // initialise the member variable
