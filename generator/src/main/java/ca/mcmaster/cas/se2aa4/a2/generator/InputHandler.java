@@ -133,17 +133,11 @@ public class InputHandler {
             vertexThick = Integer.parseInt(line.getOptionValue("vt"));
         }
         // logic to see which options were used and set variables accordingly.
-//        // has the buildfile argument been passed?
-//        if(line.hasOption("buildfile")) {
-//            // initialise the member variable
-//            this.buildfile = line.getOptionValue("buildfile");
-//        }
-        // initialize all necessary variables first, then check, and set to input if valid, default if not
 
 
         // order of arguments: same as readme
         DotGen generator = new DotGen();
-        return generator.generate();
+        return generator.generate(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
     }
 
 }

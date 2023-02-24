@@ -99,8 +99,11 @@ public class PolygonClass {
     private List <MySegment> orderSegments (List <MySegment> segments){
         List <MySegment> orderedSegments = new ArrayList<>();
         orderedSegments.add(segments.get(0));
+        int count = 0;
 
-        while (orderedSegments.size() != segments.size()){
+        //while
+
+        while (count < segments.size()){
             for (MySegment segment : segments) {
                 if (!orderedSegments.contains(segment)) {
                     MySegment last = orderedSegments.get(orderedSegments.size() - 1);
@@ -109,6 +112,7 @@ public class PolygonClass {
                     }
                 }
             }
+            count++;
         }
         return orderedSegments;
     }
