@@ -19,7 +19,7 @@ public class MyRenderer {
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
         
-        drawPolygons(aMesh, canvas);
+        // drawPolygons(aMesh, canvas);
         drawSegments(aMesh, canvas);
         drawVertices(aMesh, canvas);
     }
@@ -65,10 +65,6 @@ public class MyRenderer {
             }
 
             count++;
-
-
-
-
 
         }
 
