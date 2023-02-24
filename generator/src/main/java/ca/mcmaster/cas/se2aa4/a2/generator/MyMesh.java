@@ -35,6 +35,13 @@ public class MyMesh {
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
 
+        setAllPolyTrans(myPolygons, polyTrans);
+        setAllSegTrans(mySegments, segTrans);
+        setAllVertexTrans(myVertices, vertexTrans);
+        setAllPolyThick(myPolygons, polyThick);
+        setAllSegThick(mySegments, segThick);
+        setAllVertexThick(myVertices, vertexThick);
+
         Set<Vertex> vertices = extractVertices(myVertices);
         Set<Segment> segments = extractSegments(mySegments);
         Set<Polygon> polygons = extractPolygons(myPolygons);
@@ -116,6 +123,39 @@ public class MyMesh {
         }
         return new MySegment(v1, v2);
     }
+
+    // Setters to use command line arguments for all values.
+    protected void setAllVertexTrans(Set<MyVertex> myVertices, int vertexTrans){
+        for (MyVertex v : myVertices) {
+            v.setTrans(vertexTrans);
+        }
+    }
+    protected void setAllSegTrans(Set<MySegment> mySegments, int segTrans){
+        for (MySegment s : mySegments) {
+            s.setTrans(segTrans);
+        }
+    }
+    protected void setAllPolyTrans(Set<PolygonClass> myPolygons, int polyTrans){
+        for (PolygonClass p : myPolygons) {
+            p.setTransparency(polyTrans);
+        }
+    }
+    protected void setAllVertexThick(Set<MyVertex> myVertices, int vertexThick){
+        for (MyVertex v : myVertices) {
+            v.setThickness(vertexThick);
+        }
+    }
+    protected void setAllSegThick(Set<MySegment> mySegments, float segThick){
+        for (MySegment s : mySegments) {
+            s.setThickness(segThick);
+        }
+    }
+    protected void setAllPolyThick(Set<PolygonClass> myPolygons, float polyThick){
+        for (PolygonClass p : myPolygons) {
+            p.setThick(polyThick);
+        }
+    }
+
 
 
 }
