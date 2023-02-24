@@ -110,7 +110,7 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 - Arguments in '' specify exact input required to work (eg. must input 'g' as second arg to use a grid).  
 - For help mode, enter '-h' or '--help' as the first argument (and it will be the only one considered if used).  
 - For changing transparency or thickness from default value, consult legend for command to use, and then insert value wanted after a space.  
-- For relaxation level, enter '0' for not relaxed, and '1' for relaxed.
+- For relaxation level, if -rl is used, the mesh will be relaxed. Default relaxation level is off if argument is not specified.
 
 ## Legend
 - -pa = polygon transparency (0 to 255) (default = 255)
@@ -122,7 +122,7 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 
 Only applicable in irregular mesh
 - -np = number of polygons (default = 30)
-- -rl = relaxation level (default = 1)
+- -rl = relaxation level is on (default relaxation level is off if argument is not specified)
 
 ## Grid
 outputFile 'g' (extra commands from legend)
@@ -136,7 +136,7 @@ outputFile 'i' (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, 200 polygons, relaxed mesh, polygon transparency of 200, and segment thickness of 10
-sample.mesh i 200 1 -pa 200 -st 10
+sample.mesh i -np 200 -rl -pa 200 -st 10
 
 ## Format for user input when running visualizer main file
 Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.
