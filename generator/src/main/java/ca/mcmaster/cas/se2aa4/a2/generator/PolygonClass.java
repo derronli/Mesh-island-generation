@@ -1,6 +1,4 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
@@ -8,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PolygonClass {
+public class PolygonClass implements MyShape {
     //pass in segments
     //order the segments based on if they are adjacent
     //calculate the centroid of a polygon based on the segments
@@ -41,7 +39,7 @@ public class PolygonClass {
         this.segments = orderSegments(segments);
         calcCentroid();
         initPolygon();
-        setTransparency(alpha);
+        setTrans(alpha);
     }
 
     private void initPolygon() {
@@ -59,8 +57,7 @@ public class PolygonClass {
         int[] trans = new int[segments.size()];
 
         for (int i = 0; i < segments.size(); i++){
-            String colorCode = PropertyManager.getProperty(segments.get(i).getPropertiesList(), "rgb_color");
-            int[] color = PropertyManager.extractColor(colorCode);
+            int[] color = segments.get(i).getColor();
             red[i] = color[0];
             green[i] = color[1];
             blue[i] = color[2];
@@ -150,14 +147,17 @@ public class PolygonClass {
         return null;
     }
 
-    public String getColor (List <Property> properties){
-        String color = PropertyManager.getProperty(properties, "rgb_color");
-        return color;
+    public int[] getColor(){
+        String val = PropertyManager.getProperty(this.getPropertiesList(), "rgb_color");
+        if (val == null)
+            return new int[] {0, 0, 0};
+        return PropertyManager.extractColor(val);
     }
-    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+
+    public java.util.List<Property> getPropertiesList() {
         return polygon.getPropertiesList();
     }
-    public void setTransparency (int alpha){
+    public void setTrans(int alpha){
         String colorCode = PropertyManager.getProperty(getPropertiesList(), "rgb_color");
         int[] colors = PropertyManager.extractColor(colorCode);
         String newColorCode = colors[0] + "," + colors[1] + "," + colors[2] + "," + alpha;
@@ -196,7 +196,7 @@ public class PolygonClass {
      * @param segment segment to have its colour changed in this polygon
      */
     public void changeSegColour(MySegment segment, String colorCode){
-        segment.setColour(colorCode);
+        segment.setColor(colorCode);
     }
 
     /**
@@ -205,7 +205,7 @@ public class PolygonClass {
      */
     public void setSegmentsColor(String colorCode){
         for (int i = 0; i<segments.size(); i++){
-            segments.get(i).setColour(colorCode);
+            segments.get(i).setColor(colorCode);
         }
     }
 

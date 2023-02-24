@@ -5,7 +5,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
 import java.util.Random;
 
-public class MyVertex {
+public class MyVertex implements MyShape {
 
     private static int totalIndex = 0;
     private final int index;
@@ -50,7 +50,7 @@ public class MyVertex {
         //return Double.compare(x, getX()) == 0 && Double.compare(y, getY()) == 0;
         return Double.compare(round(x, PRECISION), round(getX(), PRECISION)) == 0 && Double.compare(round(y, PRECISION), round(getY(), PRECISION)) == 0;
     }
-    // Rounds double value to 2 decimal places
+    // Rounds double value to precision decimal places
     private double round(double n, double PRECISION) {
         return Math.round(n / PRECISION) * PRECISION;
     }
@@ -81,7 +81,7 @@ public class MyVertex {
      * Sets the thickness of this vertex.
      * @param thickness int value of thickness wanted
      */
-    public void setThickness(int thickness){
+    public void setThick(float thickness){
         Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
 
         String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
@@ -116,14 +116,14 @@ public class MyVertex {
      * Extracts the colour from the vertex and returns as array.
      * @return RBG value of vertex colour
      */
-    public int[] getColour(){
+    public int[] getColor(){
         String val = PropertyManager.getProperty(this.getPropertiesList(), "rgb_color");
         if (val == null)
             return new int[] {0, 0, 0};
         return PropertyManager.extractColor(val);
     }
 
-    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+    public java.util.List<Property> getPropertiesList() {
         return vertex.getPropertiesList();
     }
 }

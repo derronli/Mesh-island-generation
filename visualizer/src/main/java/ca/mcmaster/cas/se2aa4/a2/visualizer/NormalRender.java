@@ -19,7 +19,7 @@ public class NormalRender extends MyRenderer {
             Color old = canvas.getColor();
             canvas.setColor(extractColor(v.getPropertiesList()));
 
-            int thick = extractThicknessVer(v.getPropertiesList());
+            float thick = extractThicknessVer(v.getPropertiesList());
             double centre_x = v.getX() - (thick/2.0d);
             double centre_y = v.getY() - (thick/2.0d);
             Ellipse2D point = new Ellipse2D.Double(centre_x, centre_y, thick, thick);
@@ -83,11 +83,11 @@ public class NormalRender extends MyRenderer {
     }
 
     // Gets thickness from properties and uses default thickness if there is none.
-    private int extractThicknessVer(List<Property> properties){
+    private float extractThicknessVer(List<Property> properties){
         String raw = PropertyManager.getProperty(properties, "thickness");
         if (raw == null)
             return THICKNESS;
-        return Integer.parseInt(raw);
+        return Float.parseFloat(raw);
     }
 
     // Gets thickness from properties and uses default thickness if there is none.

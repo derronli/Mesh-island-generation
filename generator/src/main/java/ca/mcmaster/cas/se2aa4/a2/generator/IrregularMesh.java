@@ -20,7 +20,7 @@ public class IrregularMesh extends MyMesh{
     }
 
     public Structs.Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
-                                  int vertexThick) {
+                                  float vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
@@ -30,12 +30,12 @@ public class IrregularMesh extends MyMesh{
         VoronoiSegNPoly(myVertices, mySegments, myPolygons, voronoiPoints);
         setAllNeighbours(myPolygons);
 
-        setAllPolyTrans(myPolygons, polyTrans);
-        setAllSegTrans(mySegments, segTrans);
-        setAllVertexTrans(myVertices, vertexTrans);
-        setAllPolyThick(myPolygons, polyThick);
-        setAllSegThick(mySegments, segThick);
-        setAllVertexThick(myVertices, vertexThick);
+        setShapeTrans(myPolygons, polyTrans);
+        setShapeTrans(mySegments, segTrans);
+        setShapeTrans(myVertices, vertexTrans);
+        setShapeThick(myPolygons, polyThick);
+        setShapeThick(mySegments, segThick);
+        setShapeThick(myVertices, vertexThick);
 
         Set<Structs.Vertex> vertices = extractVertices(myVertices);
         Set<Structs.Segment> segments = extractSegments(mySegments);
