@@ -35,13 +35,6 @@ public class MyMesh {
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
 
-        setAllPolyTrans(myPolygons, polyTrans);
-        setAllSegTrans(mySegments, segTrans);
-        setAllVertexTrans(myVertices, vertexTrans);
-        setAllPolyThick(myPolygons, polyThick);
-        setAllSegThick(mySegments, segThick);
-        setAllVertexThick(myVertices, vertexThick);
-
         Set<Vertex> vertices = extractVertices(myVertices);
         Set<Segment> segments = extractSegments(mySegments);
         Set<Polygon> polygons = extractPolygons(myPolygons);

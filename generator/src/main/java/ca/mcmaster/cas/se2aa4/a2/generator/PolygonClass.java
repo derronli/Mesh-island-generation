@@ -215,14 +215,6 @@ public class PolygonClass {
     }
 
     /**
-     * Sets the centroid to a certain transparency.
-     * @param alpha transparency to set centroid to
-     */
-    public void setCentroidTransparency(int alpha){
-        centroid.setTrans(alpha);
-    }
-
-    /**
      * Returns if the input list of segments is the same segments this instance contains.
      * @param segments list of segments we are checking against.
      * @return true if this polygon represents the input list of segments.

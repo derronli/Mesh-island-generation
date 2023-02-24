@@ -22,6 +22,13 @@ public class GridMesh extends MyMesh{
         createVertices(myVertices, vertexTrans, vertexThick);
         createSegNPoly(mySegments, myPolygons, myVertices, polyTrans, segTrans, vertexTrans, polyThick, segThick);
 
+        setAllPolyTrans(myPolygons, polyTrans);
+        setAllSegTrans(mySegments, segTrans);
+        setAllVertexTrans(myVertices, vertexTrans);
+        setAllPolyThick(myPolygons, polyThick);
+        setAllSegThick(mySegments, segThick);
+        setAllVertexThick(myVertices, vertexThick);
+
         Set<Vertex> vertices = extractVertices(myVertices);
         Set<Segment> segments = extractSegments(mySegments);
         Set<Polygon> polygons = extractPolygons(myPolygons);
@@ -35,8 +42,6 @@ public class GridMesh extends MyMesh{
         for (int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
                 MyVertex vertex = new MyVertex(x, y, 250);
-                vertex.setThickness(vertexThick);
-                vertex.setTrans(vertexTrans);
                 myVertices.add(vertex);
             }
         }
@@ -63,18 +68,6 @@ public class GridMesh extends MyMesh{
                 MySegment s3 = findSegment(mySegments, v3, v4);
                 MySegment s4 = findSegment(mySegments, v4, v1);
 
-                // setting thickness
-                s1.setThickness(segThick);
-                s2.setThickness(segThick);
-                s3.setThickness(segThick);
-                s4.setThickness(segThick);
-
-                // setting transparency
-                s1.setTrans(segTrans);
-                s2.setTrans(segTrans);
-                s3.setTrans(segTrans);
-                s4.setTrans(segTrans);
-
                 // Adds all segments to set, if they already exist and were found, it will just not add.
                 mySegments.add(s1);
                 mySegments.add(s2);
@@ -88,9 +81,6 @@ public class GridMesh extends MyMesh{
                 segments.add(s4);
                 if (polygonDoesNotExist(myPolygons, segments)) {
                     PolygonClass polygon = new PolygonClass(segments);
-                    polygon.setThick(polyThick);
-                    polygon.setTransparency(polyTrans);
-                    polygon.setCentroidTransparency(vertexTrans);
                     myPolygons.add(polygon);
                     myVertices.add(polygon.getCentroid());
                 }
