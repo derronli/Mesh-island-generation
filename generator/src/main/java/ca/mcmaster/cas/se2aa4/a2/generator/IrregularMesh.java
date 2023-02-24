@@ -25,6 +25,13 @@ public class IrregularMesh extends MyMesh{
         VoronoiSegNPoly(myVertices, mySegments, myPolygons, voronoiPoints);
         setAllNeighbours(myPolygons);
 
+        setAllPolyTrans(myPolygons, polyTrans);
+        setAllSegTrans(mySegments, segTrans);
+        setAllVertexTrans(myVertices, vertexTrans);
+        setAllPolyThick(myPolygons, polyThick);
+        setAllSegThick(mySegments, segThick);
+        setAllVertexThick(myVertices, vertexThick);
+
         Set<Structs.Vertex> vertices = extractVertices(myVertices);
         Set<Structs.Segment> segments = extractSegments(mySegments);
         Set<Structs.Polygon> polygons = extractPolygons(myPolygons);

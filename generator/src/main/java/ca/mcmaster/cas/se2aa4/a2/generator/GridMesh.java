@@ -21,6 +21,7 @@ public class GridMesh extends MyMesh{
 
         createVertices(myVertices, vertexTrans, vertexThick);
         createSegNPoly(mySegments, myPolygons, myVertices, polyTrans, segTrans, vertexTrans, polyThick, segThick);
+        setAllNeighbours(myPolygons);
 
         setAllPolyTrans(myPolygons, polyTrans);
         setAllSegTrans(mySegments, segTrans);
