@@ -10,12 +10,17 @@ import java.util.*;
 
 public class IrregularMesh extends MyMesh{
 
-    private final int NUM_POLYGONS = 100;
+    private final int NUM_POLYGONS;
     private final Random rand = new Random();
-    private final int RELAXATION_LEVEL = 5;
+    private final int RELAXATION_LEVEL;
+
+    public IrregularMesh(int numPolygons, int relaxation){
+        NUM_POLYGONS = numPolygons;
+        RELAXATION_LEVEL = relaxation;
+    }
 
     public Structs.Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
-                                  int vertexThick, int numPolygons, int relaxation) {
+                                  int vertexThick) {
 
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
@@ -24,6 +29,13 @@ public class IrregularMesh extends MyMesh{
 
         VoronoiSegNPoly(myVertices, mySegments, myPolygons, voronoiPoints);
         setAllNeighbours(myPolygons);
+
+        setAllPolyTrans(myPolygons, polyTrans);
+        setAllSegTrans(mySegments, segTrans);
+        setAllVertexTrans(myVertices, vertexTrans);
+        setAllPolyThick(myPolygons, polyThick);
+        setAllSegThick(mySegments, segThick);
+        setAllVertexThick(myVertices, vertexThick);
 
         Set<Structs.Vertex> vertices = extractVertices(myVertices);
         Set<Structs.Segment> segments = extractSegments(mySegments);
