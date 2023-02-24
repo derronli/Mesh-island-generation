@@ -28,20 +28,6 @@ public class MyMesh {
 
     }
 
-    public Mesh buildMesh(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, int vertexThick
-            , int numPolygons, int relaxation) {
-
-        Set<MyVertex> myVertices = new LinkedHashSet<>();
-        Set<MySegment> mySegments = new LinkedHashSet<>();
-        Set<PolygonClass> myPolygons = new LinkedHashSet<>();
-
-        Set<Vertex> vertices = extractVertices(myVertices);
-        Set<Segment> segments = extractSegments(mySegments);
-        Set<Polygon> polygons = extractPolygons(myPolygons);
-        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
-
-    }
-
 
     // Sets input polygon's neighbours by checking it against all other polygons in set
     protected void setNeighbours(Set<PolygonClass> myPolygons, PolygonClass polygon) {

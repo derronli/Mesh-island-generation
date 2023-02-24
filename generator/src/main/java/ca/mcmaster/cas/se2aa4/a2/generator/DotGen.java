@@ -11,7 +11,7 @@ public class DotGen {
 
     public Mesh generate(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
                          int vertexThick, int numPolygons, int relaxation) {
-        MyMesh mesh = new IrregularMesh();
-        return mesh.buildMesh(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick, numPolygons, relaxation);
+        MyMesh mesh = new IrregularMesh(numPolygons, relaxation);
+        return mesh.buildMesh(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
     }
 }
