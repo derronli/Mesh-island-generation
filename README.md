@@ -106,13 +106,14 @@ to do:
 To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'.
 
 ## Format for user input when running generator main file
-- Different arguments accepted depending on if second arg is for a grid or an irregular mesh.  
-- Arguments in '' specify exact input required to work (eg. must input 'g' as second arg to use a grid).  
+- Different arguments accepted depending on if using a grid or an irregular mesh.
+- For a grid, that is the default, for an irregular mesh, use '-ir'.
 - For help mode, enter '-h' or '--help' as the first argument (and it will be the only one considered if used).  
 - For changing anything from default values, consult legend for command to use, and then insert value wanted after a space.  
 - For relaxation level, the value specifies the number of times lloyd relaxation is applied.
 
 ## Legend
+- -ir = use an irregular mesh instead of grid
 - -pa = polygon transparency (0 to 255) (default = 255)
 - -sa = segment transparency (0 to 255) (default = 255)
 - -va = vertex transparency (0 to 255) (default = 255)
@@ -125,18 +126,18 @@ Only applicable in irregular mesh
 - -rl = number of relaxations (default = 0)
 
 ## Grid
-outputFile 'g' (extra commands from legend)
+outputFile (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, polygon transparency of 200, and segment thickness of 10
-sample.mesh g -pa 200 -st 10
+sample.mesh -pa 200 -st 10
 
 ## Irregular
-outputFile 'i' (extra commands from legend)
+outputFile -ir (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, 200 polygons, relaxed mesh 5 times, polygon transparency of 200, and segment thickness of 10
-sample.mesh i -np 200 -rl 5 -pa 200 -st 10
+sample.mesh -ir -np 200 -rl 5 -pa 200 -st 10
 
 ## Format for user input when running visualizer main file
 Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.

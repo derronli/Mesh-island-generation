@@ -39,7 +39,8 @@ public class InputHandler {
     private Options createOptions(){
         Options options = new Options();
 
-        Option help = new Option("h or --help", "display all possible inputs");
+        Option help = new Option("h", "display all possible inputs");
+        Option type = new Option("ir", "creates an irregular mesh if used, grid if not used");
         Option pa = Option.builder("pa")
                 .argName("transparency")
                 .hasArg()
@@ -83,6 +84,7 @@ public class InputHandler {
 
         // add all options
         options.addOption(help);
+        options.addOption(type);
         options.addOption(pa);
         options.addOption(sa);
         options.addOption(va);
@@ -108,6 +110,8 @@ public class InputHandler {
         float polyThick = POLYSEGTHICKNESS;
         float segThick = POLYSEGTHICKNESS;
         int vertexThick = VERTEXTHICKNESS;
+        int numPoly = numPolygons;
+        int relax = relaxation;
 
         // logic to see which options were used and set variables accordingly.
         if(line.hasOption("pa")) {
@@ -134,9 +138,26 @@ public class InputHandler {
             // initialise the member variable
             vertexThick = Integer.parseInt(line.getOptionValue("vt"));
         }
-        
+        if(line.hasOption("np")) {
+            // initialise the member variable
+            numPoly = Integer.parseInt(line.getOptionValue("np"));
+        }
+        if(line.hasOption("rl")) {
+            // initialise the member variable
+            relax = Integer.parseInt(line.getOptionValue("rl"));
+        }
+
         DotGen generator = new DotGen();
+
+        // If using an irregular mesh, passes in more arguments.
+        if(line.hasOption("ir")){
+            return generator.generate(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick, numPoly, relax);
+        }
+
+        // If using grid mesh, passes in regular arguments.
         return generator.generate(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
+
+
     }
 
 }
