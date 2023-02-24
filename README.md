@@ -120,6 +120,10 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 - -st = segment thickness (default = 0.5)
 - -vt = vertex thickness (default = 3)
 
+Only applicable in irregular mesh
+- -np = number of polygons (default = 30)
+- -rl = relaxation level (default = 1)
+
 ## Grid
 outputFile 'g' (extra commands from legend)
 
@@ -128,7 +132,7 @@ User wants output file sample.mesh, polygon transparency of 200, and segment thi
 sample.mesh g -pa 200 -st 10
 
 ## Irregular
-outputFile 'i' numOfPolygons relaxationLevel (extra commands from legend)
+outputFile 'i' (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, 200 polygons, relaxed mesh, polygon transparency of 200, and segment thickness of 10
