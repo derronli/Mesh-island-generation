@@ -128,11 +128,11 @@ public class InputHandler {
         }
         if(line.hasOption("pt")) {
             // initialise the member variable
-            polyThick = Integer.parseInt(line.getOptionValue("pt"));
+            polyThick = Float.parseFloat(line.getOptionValue("pt"));
         }
         if(line.hasOption("st")) {
             // initialise the member variable
-            segThick = Integer.parseInt(line.getOptionValue("st"));
+            segThick = Float.parseFloat(line.getOptionValue("st"));
         }
         if(line.hasOption("vt")) {
             // initialise the member variable
