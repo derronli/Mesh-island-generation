@@ -9,7 +9,7 @@ public class InputHandler {
     private final float POLYSEGTHICKNESS = 0.5f;
     private final int alpha = 255;
     private final int numPolygons = 30;
-    private final int relaxation = 1;
+    private final int relaxation = 0;
 
     public Mesh createMesh(String[] args){
 
@@ -75,7 +75,11 @@ public class InputHandler {
                 .hasArg()
                 .desc("Choose number of polygons in irregular mesh (default = 30)")
                 .build();
-        Option rl = new Option("rl", "Turns on relaxed irregular mesh if used, not relaxed mesh if not used");
+        Option rl = Option.builder("rl")
+                .argName("relaxation level")
+                .hasArg()
+                .desc("Choose number of lloyd relaxations to apply in irregular mesh (default = 0)")
+                .build();
 
         // add all options
         options.addOption(help);
@@ -106,7 +110,27 @@ public class InputHandler {
 
         if(line.hasOption("pa")) {
             // initialise the member variable
-//            this.buildfile = line.getOptionValue("buildfile");
+            polyTrans = Integer.parseInt(line.getOptionValue("pa"));
+        }
+        if(line.hasOption("sa")) {
+            // initialise the member variable
+            segTrans = Integer.parseInt(line.getOptionValue("sa"));
+        }
+        if(line.hasOption("va")) {
+            // initialise the member variable
+            vertexTrans = Integer.parseInt(line.getOptionValue("va"));
+        }
+        if(line.hasOption("pt")) {
+            // initialise the member variable
+            polyThick = Integer.parseInt(line.getOptionValue("pt"));
+        }
+        if(line.hasOption("st")) {
+            // initialise the member variable
+            segThick = Integer.parseInt(line.getOptionValue("st"));
+        }
+        if(line.hasOption("vt")) {
+            // initialise the member variable
+            vertexThick = Integer.parseInt(line.getOptionValue("vt"));
         }
         // logic to see which options were used and set variables accordingly.
 //        // has the buildfile argument been passed?
