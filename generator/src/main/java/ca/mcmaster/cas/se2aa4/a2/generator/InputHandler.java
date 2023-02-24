@@ -37,7 +37,7 @@ public class InputHandler {
 
 
         DotGen generator = new DotGen();
-        return generator.generate(0, 0, 0, 0, 0, 0);
+        return generator.generate(alpha, alpha, alpha, POLYSEGTHICKNESS, POLYSEGTHICKNESS, VERTEXTHICKNESS);
     }
 
 }
