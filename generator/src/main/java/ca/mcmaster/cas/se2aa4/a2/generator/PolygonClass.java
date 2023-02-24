@@ -16,12 +16,7 @@ public class PolygonClass {
     //consider hashmap
     //
     // centroid getter (return vertex itself)
-
-    private int width = 500;
-    private int height = 500;
-    private int square_size = 20;
     private static int totalIndex = 0;
-    private int alpha;
     private final int index;
 
     private List <MySegment> segments;
@@ -29,8 +24,6 @@ public class PolygonClass {
     private MyVertex centroid;
 
     private Polygon polygon;
-
-    private boolean transparency = false;
 
     public PolygonClass (List <MySegment> segments){
         this.index = totalIndex;
@@ -45,7 +38,6 @@ public class PolygonClass {
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
-        transparency = true;
         //this.segments = segments;
         this.segments = orderSegments(segments);
         calcCentroid();
@@ -54,23 +46,8 @@ public class PolygonClass {
     }
 
     private void initPolygon() {
-        //centroid index needs to be set
-        //need list of segment indices, neighbour indices?
-        //generate a list of indices that represent the neighbouring polygons (do in mesh)
-        //method to assign a polygon's associated neighbour indices
-        //get polygon colour
-        //do thickness and transparency of polygon
-        //take neighbourIndices and set it using property
-        //setting neighbour list
-
-
-        //add property colour, start with green
-        //if alpha, add transparency,
-
         Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build(); //set to green
         //pass in polygon in future uses
-
-        //Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
 
         polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
     }
@@ -105,9 +82,6 @@ public class PolygonClass {
         return avRed + "," + avBlue + "," + avGreen + "," + avTrans;
     }
 
-    //return centroid method to add to list of vertices
-    //
-
     private List <Integer> convertSegments (){
         //convert list of segments to indices separated by commas
         List <Integer> convert = new ArrayList<>();
@@ -123,11 +97,8 @@ public class PolygonClass {
     }
 
     private List <MySegment> orderSegments (List <MySegment> segments){
-        //checking initial segments list
         List <MySegment> orderedSegments = new ArrayList<>();
         orderedSegments.add(segments.get(0));
-
-        //while
 
         while (orderedSegments.size() != segments.size()){
             for (MySegment segment : segments) {
@@ -139,8 +110,6 @@ public class PolygonClass {
                 }
             }
         }
-
-        //checking if segments are ordered
         return orderedSegments;
     }
 
