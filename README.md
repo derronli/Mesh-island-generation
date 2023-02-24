@@ -79,28 +79,64 @@ When you develop features and enrich the product, remember that you have first t
 |  F12  |  User can switch into debug mode for different colour display  |  Derron  |  02/20/23  |  02/22/23  |  D  |
 |  F13  |  Debug mode displays the centroids in a red colour  |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
 |  F14  |  Debug mode displays the neighbourhood relations in grey |  Derron/Arjun  |  02/20/23  |  02/22/23  |  D  |
-|  F15  |  Debug mode displays the polygon, vertices, and segments in black and white |  Derron  |  02/20/23  |  02/22/23  |  D  |
+|  F15  |  Debug mode displays the polygon, vertices, and segments in black and purple |  Derron  |  02/20/23  |  02/22/23  |  D  |
+|  F16  |  User can switch between grid meshes or irregular mesh |  P  |  02/22/23 |  |  P  |
+|  F17  |  Points are randomly generated to construct the irregular meshes  |  P  |  02/22/23  |  |  P  |
+|  F18  |  Voronoi diagram for each point is calculated  |  P  |  02/22/23  |    |  P  |
+|  F19  |  Each randomly generated point is converted to a centroid for each polygon  |  P  |  02/22/23  |   |  P  |
+|  F20  |  User can select to relax the mesh or not  |  P  |  02/22/23  |   |  P  |
+|  F21  |  Neighbourhood relations are computed using Delaunay's triangulation |  P  |  02/22/23  |   |  P  |
+|  F22  |  User can enter "help" mode if a -h or --help argument is inputted when running generator |  P  |  02/22/23  |   |  P  |
+|  F23  |  User can select the number of polygons they wish to generate through the command line  |  P  |  02/22/23  |   |  P  |
+
+
 |  F  |  Template  |  S  |  .  |  .  |  B  |
 
 
 ## ideas
-empty for now
+new class to handle user input (is given dotgen and string args[], returns a mesh)
+call dotgen, which accepts all the arguments, but new class sets values to default for ones that are not provided
+
+to do:
+1. new class to do all this
+2. modify dotgen and subsequent classes to use these new values passed in rather than hard coded
 
 
+# Documentation
+To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'.
 
-## stuff to remember from teams
+## Format for user input when running generator main file
+- Different arguments accepted depending on if second arg is for a grid or an irregular mesh.  
+- Arguments in '' specify exact input required to work (eg. must input 'g' as second arg to use a grid).  
+- For help mode, enter '-h' or '--help' as the first argument (and it will be the only one considered if used).  
+- For changing transparency or thickness from default value, consult legend for command to use, and then insert value wanted after a space.  
+- For relaxation level, enter '0' for not relaxed, and '1' for relaxed.
 
-- You can organize your code "as you wish". The generator and visualizer are yours now, the starting pack was just here to demonstrate how to read/write the Mesh structure.
-  As you need to work with ordered indexes, and a Set is by definition not ordered, you'll have to "do something about it", eventually.
-- the centroid of a polygon is not a “random” point but its… centroid. It should be defined as a vertex (like any other point), but will not be used as a corner of any polygon.
-- You are not allowed to modify anything in the “it” package. This part of the source code is off limit, and you should consider it a black box. It is up to you to find the right way to _develop_ your generator and visualizer, taking this assumption as a fixed point.
-- Polygons do have indexes, based on the order that are added into the mesh (like segments and vertices). That being said, contrarily to vertices and segment, their indexes are not used as references elsewhere.
-- 
+## Legend
+- -pa = polygon transparency (0 to 255) (default = 255)
+- -sa = segment transparency (0 to 255) (default = 255)
+- -va = vertex transparency (0 to 255) (default = 255)
+- -pt = polygon thickness (default = 0.5)
+- -st = segment thickness (default = 0.5)
+- -vt = vertex thickness (default = 3)
 
+Only applicable in irregular mesh
+- -np = number of polygons (default = 30)
+- -rl = relaxation level (default = 1)
 
-## Documentation
-To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'. 
-Change the thickness in the generator code itself if you would like.
+## Grid
+outputFile 'g' (extra commands from legend)
 
-Transparency values are from 0 to 255.
+### Example
+User wants output file sample.mesh, polygon transparency of 200, and segment thickness of 10
+sample.mesh g -pa 200 -st 10
 
+## Irregular
+outputFile 'i' (extra commands from legend)
+
+### Example
+User wants output file sample.mesh, 200 polygons, relaxed mesh, polygon transparency of 200, and segment thickness of 10
+sample.mesh i 200 1 -pa 200 -st 10
+
+## Format for user input when running visualizer main file
+Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.
