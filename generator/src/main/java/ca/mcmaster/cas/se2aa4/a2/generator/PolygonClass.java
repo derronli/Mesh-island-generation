@@ -40,6 +40,15 @@ public class PolygonClass {
         calcCentroid();
         initPolygon();
     }
+
+    public PolygonClass (List <MySegment> segments, double x, double y){
+        this.index = totalIndex;
+        totalIndex++;
+        //this.segments = segments;
+        this.segments = orderSegments(segments);
+        setCentroid(x, y);
+        initPolygon();
+    }
     //create second constructor to take alpha
 
     public PolygonClass (List <MySegment> segments, int alpha){
@@ -48,9 +57,13 @@ public class PolygonClass {
         transparency = true;
         //this.segments = segments;
         this.segments = orderSegments(segments);
-        calcCentroid();
+        // calcCentroid();
         initPolygon();
         setTransparency(alpha);
+    }
+
+    public void setCentroid(double x, double y) {
+        centroid = new MyVertex(x, y);
     }
 
     private void initPolygon() {

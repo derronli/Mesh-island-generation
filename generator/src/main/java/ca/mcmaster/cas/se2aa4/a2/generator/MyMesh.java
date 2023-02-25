@@ -21,7 +21,9 @@ public class MyMesh {
 
     private final int NUM_POLYGONS = 100;
     private final Random rand = new Random();
-    private final int RELAXATION_LEVEL = 5;
+    private final int RELAXATION_LEVEL = 20;
+
+    private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
     // Equality is defined as being within 0.01 of each other
     private boolean isEqual(MyVertex v1, MyVertex v2) {
@@ -36,11 +38,11 @@ public class MyMesh {
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
-        Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
+//        Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
 //        createVertices(myVertices);
 //        createSegNPoly(mySegments, myPolygons, myVertices);
-        VoronoiSegNPoly(myVertices, mySegments, myPolygons, voronoiPoints);
+        VoronoiSegNPoly(myVertices, mySegments, myPolygons);
         setAllNeighbours(myPolygons);
 
 
@@ -124,9 +126,9 @@ public class MyMesh {
                 segments.add(s3);
                 segments.add(s4);
                 if (polygonDoesNotExist(myPolygons, segments)) {
-                    PolygonClass polygon = new PolygonClass(segments);
-                    myPolygons.add(polygon);
-                    myVertices.add(polygon.getCentroid());
+//                    PolygonClass polygon = new PolygonClass(segments);
+//                    myPolygons.add(polygon);
+//                    myVertices.add(polygon.getCentroid());
                 }
 
             }
@@ -208,7 +210,7 @@ public class MyMesh {
         return new MyVertex(x, y);
     }
 
-    private boolean isDuplicatePoint(Set<Coordinate> voronoiPoints, double x, double y) {
+    private boolean isDuplicatePoint( double x, double y) {
         for (Coordinate point : voronoiPoints) {
             if (point.getX() == x && point.getY() == y) { // HAVE NOT IMPLEMENTED PRECISION YET
                 return true;
@@ -230,19 +232,18 @@ public class MyMesh {
     // ========================= CHANGES
     // DO WE WANT TO STORE THE POINTS AS VERTICES???
     // These points are only relevant to the original generation of the irregular mesh
-    private void createRandomPoints(Set<Coordinate> voronoiPoints) {
+    private void createRandomPoints() {
         int x = -1;
         int y = -1;
         Coordinate point;
 
         // Generates a random vertex for each polygon
-        for (int i = 0; i <= NUM_POLYGONS; i++) {
+        for (int i = 0; i < NUM_POLYGONS; i++) {
             // Keep generating random x and y until a unique coordinate is found
-            while ((x == -1 && y == -1) || isDuplicatePoint(voronoiPoints, x, y)) {
+            while ((x == -1 && y == -1) || isDuplicatePoint( x, y)) {
                 x = rand.nextInt(width);
                 y = rand.nextInt(height);
             }
-
             point = new Coordinate(x, y);
 
             // myVertices.add(vertex); // MIGHT BE UNNECESSARY -> ONLY NEED IT NOW BECAUSE OUR POINTS ARE STORED AS VERTEXES
@@ -252,19 +253,39 @@ public class MyMesh {
     }
     // RIGHT NOW ONLY INTEGERS
 
-    private List<org.locationtech.jts.geom.Polygon> createVoronoiAboutPoints(Set<Coordinate> voronoiPoints) {
+    private List<org.locationtech.jts.geom.Geometry> createVoronoiAboutPoints() {
+        List<org.locationtech.jts.geom.Geometry> polyList = new ArrayList<>();
         VoronoiDiagramBuilder voronoi = new VoronoiDiagramBuilder();
         GeometryFactory factory = new GeometryFactory();
 
-        createRandomPoints(voronoiPoints);
-
         voronoi.setSites(voronoiPoints);
-        return voronoi.getSubdivision().getVoronoiCellPolygons(factory);
 
+        Geometry g =  voronoi.getDiagram(factory); // creates voronoi
+
+
+
+        // Specifies size of canvas
+        Envelope envelope = new Envelope(0, width, 0, height);
+        g = g.intersection(factory.toGeometry(envelope));
+
+
+        // voronoi specifications
+//        voronoi.setClipEnvelope(envelope);
+//        System.out.println("------------------------------------------------");
+//        for (Coordinate c : voronoiPoints) {
+//            System.out.println(c.getX() + " " + c.getY());
+//        }
+
+        // Adding all geometries that make the voronoi to an arraylist
+        for (int k = 0; k < g.getNumGeometries(); k++) {
+            polyList.add(g.getGeometryN(k));
+        }
+        return polyList;
     }
 
-    private void VoronoiSegNPoly(Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<Coordinate> voronoiPoints) {
-        List<org.locationtech.jts.geom.Polygon> polygons = createVoronoiAboutPoints(voronoiPoints);
+    private void VoronoiSegNPoly(Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons) {
+        createRandomPoints();
+        List<org.locationtech.jts.geom.Geometry> polygons = createVoronoiAboutPoints();
         Coordinate[] polyCoords;
         MyVertex v1, v2;
         MySegment s;
@@ -272,8 +293,15 @@ public class MyMesh {
         int count = 0;
 
         do {
-
-            for (org.locationtech.jts.geom.Polygon p : polygons) {
+            System.out.println(count + " ==========================================");
+            for (Coordinate c :voronoiPoints) {
+                System.out.println(c.getX() + " " + c.getY());
+            }
+//            System.out.println("CENTROID");
+//            for (Geometry c : polygons) {
+//                System.out.println(c.getCentroid().getX() + " " + c.getCentroid().getY());
+//            }
+            for (org.locationtech.jts.geom.Geometry p : polygons) {
                 polyCoords = p.getCoordinates();
                 // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
                 ArrayList<MySegment> polySegments = new ArrayList<>();
@@ -287,9 +315,9 @@ public class MyMesh {
                     } else {
                         c2 = polyCoords[i + 1];
                     }
-                    if (c1.getX() > width || c1.getY() > height || c2.getX() > width || c2.getY() > height) {
-                        continue;
-                    }
+//                    if (c1.getX() > width || c1.getY() > height || c2.getX() > width || c2.getY() > height) {
+//                        continue;
+//                    }
 
                     // Checks if (x,y) pair is a preexisting vertex -> will make new one if not
                     v1 = findVertex(myVertices, c1.getX(), c1.getY());
@@ -305,7 +333,9 @@ public class MyMesh {
                 }
 
                 if (polygonDoesNotExist(myPolygons, polySegments) && polySegments.size() > 0) {
-                    PolygonClass polygon = new PolygonClass(polySegments);
+                    PolygonClass polygon = new PolygonClass(polySegments, p.getCentroid().getX(), p.getCentroid().getY());
+                    System.out.println("CENTROIDS========================================");
+                    System.out.println(p.getCentroid().getX() + " " + p.getCentroid().getY());
                     myPolygons.add(polygon);
                     myVertices.add(polygon.getCentroid()); // Don't want to add this until the last relaxed centroid
                 }
@@ -319,7 +349,7 @@ public class MyMesh {
                 // Reset the collections in preparation of the next voronoi generation
                 myVertices = new LinkedHashSet<>();
                 mySegments = new LinkedHashSet<>();
-                polygons = relaxLloyd(myPolygons, voronoiPoints);
+                polygons = relaxLloyd(myPolygons);
                 myPolygons = new LinkedHashSet<>();
             }
 
@@ -327,7 +357,7 @@ public class MyMesh {
     }
 
     // Generates a new set of voronoiPoints and voronoi diagram given the previously generated polygon centroids
-    private List<org.locationtech.jts.geom.Polygon> relaxLloyd(Set<PolygonClass> myPolygons, Set<Coordinate> voronoiPoints) {
+    private List<org.locationtech.jts.geom.Geometry> relaxLloyd(Set<PolygonClass> myPolygons) {
         voronoiPoints = new LinkedHashSet<>();
         MyVertex centroidVertex;
         Coordinate newPoint;
@@ -340,7 +370,7 @@ public class MyMesh {
         }
 
         // Compute the new voronoi diagram with the set of voronoi points
-        return createVoronoiAboutPoints(voronoiPoints);
+        return createVoronoiAboutPoints();
     }
 }
 
