@@ -126,14 +126,14 @@ Only applicable in irregular mesh
 - -rl = number of relaxations (default = 0)
 
 ## Grid
-outputFile (extra commands from legend)
+sample.mesh (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, polygon transparency of 200, and segment thickness of 10
 sample.mesh -pa 200 -st 10
 
 ## Irregular
-outputFile -ir (extra commands from legend)
+sample.mesh -ir (extra commands from legend)
 
 ### Example
 User wants output file sample.mesh, 200 polygons, relaxed mesh 5 times, polygon transparency of 200, and segment thickness of 10
