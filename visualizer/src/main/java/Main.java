@@ -21,6 +21,10 @@ public class Main {
             max_x = (Double.compare(max_x, v.getX()) < 0? v.getX(): max_x);
             max_y = (Double.compare(max_y, v.getY()) < 0? v.getY(): max_y);
         }
+        // TESTING hard code canvas size (we don't want guessing anymore)
+        max_x = 500;
+        max_y = 500; // MAY WANT TO REFACTOR THIS AT SOME POINT
+
         // Creating the Canvas to draw the mesh
         Graphics2D canvas = SVGCanvas.build((int) Math.ceil(max_x), (int) Math.ceil(max_y));
         GraphicRenderer renderer = new GraphicRenderer();

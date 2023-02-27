@@ -50,7 +50,11 @@ public class MyVertex implements MyShape {
         //return Double.compare(x, getX()) == 0 && Double.compare(y, getY()) == 0;
         return Double.compare(round(x, PRECISION), round(getX(), PRECISION)) == 0 && Double.compare(round(y, PRECISION), round(getY(), PRECISION)) == 0;
     }
-    // Rounds double value to precision decimal places
+    
+    public static void resetCount() {
+        totalIndex = 0;
+    }
+    // Rounds double value to 2 decimal places
     private double round(double n, double PRECISION) {
         return Math.round(n / PRECISION) * PRECISION;
     }

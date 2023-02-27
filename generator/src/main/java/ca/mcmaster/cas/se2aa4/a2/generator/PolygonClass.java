@@ -31,16 +31,26 @@ public class PolygonClass implements MyShape {
         calcCentroid();
         initPolygon();
     }
-    //create second constructor to take alpha
+    // Constuctor when centroid is specified as an input
+    public PolygonClass (List <MySegment> segments, double x, double y){
+        this.index = totalIndex;
+        totalIndex++;
+        //this.segments = segments;
+        this.segments = orderSegments(segments);
+        setCentroid(x, y);
+        initPolygon();
+    }
 
+    //create second constructor to take alpha
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
         this.segments = orderSegments(segments);
-        calcCentroid();
+        // calcCentroid();
         initPolygon();
         setTrans(alpha);
     }
+
 
     private void initPolygon() {
         Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build();
@@ -254,5 +264,15 @@ public class PolygonClass implements MyShape {
 
     public Polygon getPolygon() {
         return polygon;
+    }
+
+    // Resets index count for when the hashsets in Mesh are cleared
+    public static void resetCount() {
+        totalIndex = 0;
+    }
+
+    // Initializes centroid given x,y
+    public void setCentroid(double x, double y) {
+        centroid = new MyVertex(x, y);
     }
 }
