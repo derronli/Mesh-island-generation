@@ -1,20 +1,17 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
-import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 
 public class DotGen {
 
-    public Mesh generate() {
-        MyMesh mesh = new MyMesh();
-        return mesh.buildMesh();
+    public Mesh generate(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick, float vertexThick) {
+        MyMesh mesh = new GridMesh();
+        return mesh.buildMesh(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
+    }
+
+    public Mesh generate(int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick,
+                         float vertexThick, int numPolygons, int relaxation) {
+        MyMesh mesh = new IrregularMesh(numPolygons, relaxation);
+        return mesh.buildMesh(polyTrans, segTrans, vertexTrans, polyThick, segThick, vertexThick);
     }
 }

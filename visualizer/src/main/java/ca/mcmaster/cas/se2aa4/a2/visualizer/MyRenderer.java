@@ -19,7 +19,7 @@ public class MyRenderer {
         Stroke stroke = new BasicStroke(0.5f);
         canvas.setStroke(stroke);
         
-        // drawPolygons(aMesh, canvas);
+        drawPolygons(aMesh, canvas);
         drawSegments(aMesh, canvas);
         drawVertices(aMesh, canvas);
     }
@@ -55,17 +55,12 @@ public class MyRenderer {
             if (isNewVertex(xCoords, yCoords, v1)) {
                 xCoords[count] = (int) v1.getX();
                 yCoords[count] = (int) v1.getY();
-
-
             }
             else {
                 xCoords[count] = (int) v2.getX();
                 yCoords[count] = (int) v2.getY();
-
             }
-
             count++;
-
         }
 
 

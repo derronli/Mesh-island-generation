@@ -1,6 +1,4 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
@@ -8,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PolygonClass {
+public class PolygonClass implements MyShape {
     //pass in segments
     //order the segments based on if they are adjacent
     //calculate the centroid of a polygon based on the segments
@@ -16,12 +14,7 @@ public class PolygonClass {
     //consider hashmap
     //
     // centroid getter (return vertex itself)
-
-    private int width = 500;
-    private int height = 500;
-    private int square_size = 20;
     private static int totalIndex = 0;
-    private int alpha;
     private final int index;
 
     private List <MySegment> segments;
@@ -30,9 +23,6 @@ public class PolygonClass {
 
     private Polygon polygon;
 
-    private boolean transparency = false;
-
-    // Constructor when centroid is not an input -> calculates centroid
     public PolygonClass (List <MySegment> segments){
         this.index = totalIndex;
         totalIndex++;
@@ -55,33 +45,16 @@ public class PolygonClass {
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
-        transparency = true;
-        //this.segments = segments;
         this.segments = orderSegments(segments);
         // calcCentroid();
         initPolygon();
-        setTransparency(alpha);
+        setTrans(alpha);
     }
 
 
     private void initPolygon() {
-        //centroid index needs to be set
-        //need list of segment indices, neighbour indices?
-        //generate a list of indices that represent the neighbouring polygons (do in mesh)
-        //method to assign a polygon's associated neighbour indices
-        //get polygon colour
-        //do thickness and transparency of polygon
-        //take neighbourIndices and set it using property
-        //setting neighbour list
-
-
-        //add property colour, start with green
-        //if alpha, add transparency,
-
-        Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build(); //set to green
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build();
         //pass in polygon in future uses
-
-        //Property segment = Property.newBuilder().setKey("").setValue("0,0,0").build();
 
         polygon = Polygon.newBuilder().addAllSegmentIdxs(convertSegments()).addProperties(color).setCentroidIdx(centroid.getIndex()).build();
     }
@@ -94,8 +67,7 @@ public class PolygonClass {
         int[] trans = new int[segments.size()];
 
         for (int i = 0; i < segments.size(); i++){
-            String colorCode = PropertyManager.getProperty(segments.get(i).getPropertiesList(), "rgb_color");
-            int[] color = PropertyManager.extractColor(colorCode);
+            int[] color = segments.get(i).getColor();
             red[i] = color[0];
             green[i] = color[1];
             blue[i] = color[2];
@@ -116,9 +88,6 @@ public class PolygonClass {
         return avRed + "," + avBlue + "," + avGreen + "," + avTrans;
     }
 
-    //return centroid method to add to list of vertices
-    //
-
     private List <Integer> convertSegments (){
         //convert list of segments to indices separated by commas
         List <Integer> convert = new ArrayList<>();
@@ -134,7 +103,6 @@ public class PolygonClass {
     }
 
     private List <MySegment> orderSegments (List <MySegment> segments){
-        //checking initial segments list
         List <MySegment> orderedSegments = new ArrayList<>();
         orderedSegments.add(segments.get(0));
         int count = 0;
@@ -152,8 +120,6 @@ public class PolygonClass {
             }
             count++;
         }
-
-        //checking if segments are ordered
         return orderedSegments;
     }
 
@@ -191,14 +157,17 @@ public class PolygonClass {
         return null;
     }
 
-    public String getColor (List <Property> properties){
-        String color = PropertyManager.getProperty(properties, "rgb_color");
-        return color;
+    public int[] getColor(){
+        String val = PropertyManager.getProperty(this.getPropertiesList(), "rgb_color");
+        if (val == null)
+            return new int[] {0, 0, 0};
+        return PropertyManager.extractColor(val);
     }
-    public java.util.List<ca.mcmaster.cas.se2aa4.a2.io.Structs.Property> getPropertiesList() {
+
+    public java.util.List<Property> getPropertiesList() {
         return polygon.getPropertiesList();
     }
-    public void setTransparency (int alpha){
+    public void setTrans(int alpha){
         String colorCode = PropertyManager.getProperty(getPropertiesList(), "rgb_color");
         int[] colors = PropertyManager.extractColor(colorCode);
         String newColorCode = colors[0] + "," + colors[1] + "," + colors[2] + "," + alpha;
@@ -206,7 +175,7 @@ public class PolygonClass {
         polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
 
-    public void setThick (int thickness){
+    public void setThick (float thickness){
         Property thick = Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
 
         String val = PropertyManager.getProperty(this.getPropertiesList(), "thickness");
@@ -237,7 +206,7 @@ public class PolygonClass {
      * @param segment segment to have its colour changed in this polygon
      */
     public void changeSegColour(MySegment segment, String colorCode){
-        segment.setColour(colorCode);
+        segment.setColor(colorCode);
     }
 
     /**
@@ -246,7 +215,7 @@ public class PolygonClass {
      */
     public void setSegmentsColor(String colorCode){
         for (int i = 0; i<segments.size(); i++){
-            segments.get(i).setColour(colorCode);
+            segments.get(i).setColor(colorCode);
         }
     }
 
@@ -256,17 +225,9 @@ public class PolygonClass {
     }
 
     /**
-     * Sets the centroid to a certain colour.
-     * @param colorCode string colour code to set centroid to
-     */
-    public void setCentroidColour(String colorCode){
-        centroid.setColour(colorCode);
-    }
-
-    /**
      * Returns if the input list of segments is the same segments this instance contains.
      * @param segments list of segments we are checking against.
-     * @return if this polygon represents the input list of segments.
+     * @return true if this polygon represents the input list of segments.
      */
     public boolean equals(List<MySegment> segments) {
 
@@ -274,10 +235,19 @@ public class PolygonClass {
             return false;
         }
         else { //modify this such that we compare every element of this.segments to passed in segments
-            for (int i = 0; i < this.segments.size(); i++) {
-                if (this.segments.get(i).getIndex() != segments.get(i).getIndex()) {
-                    return false;
+            for (MySegment s1 : this.segments){
+
+
+                // Goes through each segment in input list, if we find one that equals what we are checking, go to next in loop.
+                for (MySegment s2 : segments){
+                    if (s1.getIndex() == s2.getIndex()) {
+                        break;
+                    }
                 }
+
+                // If we did not find a segment in input list that exists in our polygon, cannot be the same.
+                return false;
+
             }
             return true;
         }
