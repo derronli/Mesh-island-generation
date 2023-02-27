@@ -25,6 +25,7 @@ public class IrregularMesh extends MyMesh{
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
+        Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
 
         myPolygons = createVoronoiSegNPoly(myVertices, mySegments, myPolygons);
