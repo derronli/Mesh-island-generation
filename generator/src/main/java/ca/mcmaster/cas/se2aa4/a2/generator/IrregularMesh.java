@@ -1,9 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.*;
 import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 
 import java.util.*;
@@ -13,6 +11,8 @@ public class IrregularMesh extends MyMesh{
     private final int NUM_POLYGONS;
     private final Random rand = new Random();
     private final int RELAXATION_LEVEL;
+    private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
+
 
     public IrregularMesh(int numPolygons, int relaxation){
         NUM_POLYGONS = numPolygons;
@@ -25,9 +25,9 @@ public class IrregularMesh extends MyMesh{
         Set<MyVertex> myVertices = new LinkedHashSet<>();
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
-        Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
-        VoronoiSegNPoly(myVertices, mySegments, myPolygons, voronoiPoints);
+
+        myPolygons = createVoronoiSegNPoly(myVertices, mySegments, myPolygons);
         setAllNeighbours(myPolygons);
 
         setShapeTrans(myPolygons, polyTrans);
@@ -44,44 +44,52 @@ public class IrregularMesh extends MyMesh{
 
     }
 
-    // ========================= CHANGES
-    // DO WE WANT TO STORE THE POINTS AS VERTICES???
     // These points are only relevant to the original generation of the irregular mesh
-    private void createRandomPoints(Set<Coordinate> voronoiPoints) {
+    // Generates random Coordinate points and saves in hashset for initial generation of voronoi diagram
+    private void createRandomPoints() {
         int x = -1;
         int y = -1;
         Coordinate point;
 
         // Generates a random vertex for each polygon
-        for (int i = 0; i <= NUM_POLYGONS; i++) {
+        for (int i = 0; i < NUM_POLYGONS; i++) {
             // Keep generating random x and y until a unique coordinate is found
-            while ((x == -1 && y == -1) || isDuplicatePoint(voronoiPoints, x, y)) {
+            while ((x == -1 && y == -1) || isDuplicatePoint(x, y)) {
                 x = rand.nextInt(width);
                 y = rand.nextInt(height);
             }
-
             point = new Coordinate(x, y);
 
-            // myVertices.add(vertex); // MIGHT BE UNNECESSARY -> ONLY NEED IT NOW BECAUSE OUR POINTS ARE STORED AS VERTEXES
-            // WITHOUT THIS IT SCREWS WITH THE INDEXES
             voronoiPoints.add(point);
         }
     }
     // RIGHT NOW ONLY INTEGERS
-
-    private List<Polygon> createVoronoiAboutPoints(Set<Coordinate> voronoiPoints) {
+    // Generates the voronoi diagram Geometry object
+    private List<Geometry> createVoronoiAboutPoints() {
+        List<Geometry> polyList = new ArrayList<>();
         VoronoiDiagramBuilder voronoi = new VoronoiDiagramBuilder();
         GeometryFactory factory = new GeometryFactory();
 
-        createRandomPoints(voronoiPoints);
-
         voronoi.setSites(voronoiPoints);
-        return voronoi.getSubdivision().getVoronoiCellPolygons(factory);
 
+        Geometry g =  voronoi.getDiagram(factory); // creates voronoi
+
+        // Specifies size of canvas
+        Envelope envelope = new Envelope(0, width, 0, height);
+        g = g.intersection(factory.toGeometry(envelope));
+
+
+        // Adding all geometries that make the voronoi to an arraylist
+        for (int k = 0; k < g.getNumGeometries(); k++) {
+            polyList.add(g.getGeometryN(k));
+        }
+        return polyList;
     }
 
-    private void VoronoiSegNPoly(Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<Coordinate> voronoiPoints) {
-        List<org.locationtech.jts.geom.Polygon> polygons = createVoronoiAboutPoints(voronoiPoints);
+    // Converts the voronoi diagram object into vertices, segments and polygons (from JTS to io Structs)
+    private Set<PolygonClass> createVoronoiSegNPoly(Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons) {
+        createRandomPoints();
+        List<Geometry> polygons = createVoronoiAboutPoints();
         Coordinate[] polyCoords;
         MyVertex v1, v2;
         MySegment s;
@@ -89,8 +97,7 @@ public class IrregularMesh extends MyMesh{
         int count = 0;
 
         do {
-
-            for (org.locationtech.jts.geom.Polygon p : polygons) {
+            for (Geometry p : polygons) {
                 polyCoords = p.getCoordinates();
                 // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
                 ArrayList<MySegment> polySegments = new ArrayList<>();
@@ -103,11 +110,6 @@ public class IrregularMesh extends MyMesh{
                         c2 = polyCoords[0];
                     } else {
                         c2 = polyCoords[i + 1];
-                    }
-
-                    // Ensures we don't get any coordinates out of bounds.
-                    if (c1.getX() > width || c1.getY() > height || c2.getX() > width || c2.getY() > height) {
-                        continue;
                     }
 
                     // Checks if (x,y) pair is a preexisting vertex -> will make new one if not
@@ -124,7 +126,7 @@ public class IrregularMesh extends MyMesh{
                 }
 
                 if (polygonDoesNotExist(myPolygons, polySegments) && polySegments.size() > 0) {
-                    PolygonClass polygon = new PolygonClass(polySegments);
+                    PolygonClass polygon = new PolygonClass(polySegments, p.getCentroid().getX(), p.getCentroid().getY());
                     myPolygons.add(polygon);
                     myVertices.add(polygon.getCentroid()); // Don't want to add this until the last relaxed centroid
                 }
@@ -133,36 +135,33 @@ public class IrregularMesh extends MyMesh{
             // Until the relaxation level is reached
             count++;
 
-            // Make sure it's not the last relaxation level
+            // Make sure its not the last relaxation level
             if (count != RELAXATION_LEVEL) {
                 // Reset the collections in preparation of the next voronoi generation
-                myVertices = new LinkedHashSet<>();
-                mySegments = new LinkedHashSet<>();
-                polygons = relaxLloyd(myPolygons, voronoiPoints);
-                myPolygons = new LinkedHashSet<>();
+                MyVertex.resetCount();
+                MySegment.resetCount();
+                myVertices.clear();
+                mySegments.clear();
+                polygons = relaxLloyd(myPolygons);
+                PolygonClass.resetCount();
+                myPolygons.clear();
             }
 
         } while (count < RELAXATION_LEVEL);
+
+        return myPolygons;
     }
 
     // Generates a new set of voronoiPoints and voronoi diagram given the previously generated polygon centroids
-    private List<org.locationtech.jts.geom.Polygon> relaxLloyd(Set<PolygonClass> myPolygons, Set<Coordinate> voronoiPoints) {
+    private List<Geometry> relaxLloyd(Set<PolygonClass> myPolygons) {
         voronoiPoints = new LinkedHashSet<>();
         MyVertex centroidVertex;
         Coordinate newPoint;
-
-        // new voronoi points will be the previously computed centroids
-        for (PolygonClass p : myPolygons) {
-            centroidVertex = p.getCentroid();
-            newPoint = new Coordinate(centroidVertex.getX(), centroidVertex.getY());
-            voronoiPoints.add(newPoint);
-        }
-
         // Compute the new voronoi diagram with the set of voronoi points
-        return createVoronoiAboutPoints(voronoiPoints);
+        return createVoronoiAboutPoints();
     }
 
-    private boolean isDuplicatePoint(Set<Coordinate> voronoiPoints, double x, double y) {
+    private boolean isDuplicatePoint(double x, double y) {
         for (Coordinate point : voronoiPoints) {
             if (point.getX() == x && point.getY() == y) { // HAVE NOT IMPLEMENTED PRECISION YET
                 return true;
