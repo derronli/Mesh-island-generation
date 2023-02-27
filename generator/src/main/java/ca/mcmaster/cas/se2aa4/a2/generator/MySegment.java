@@ -80,6 +80,10 @@ public class MySegment {
 
     }
 
+    public static void resetCount() {
+        totalIndex = 0;
+    }
+
     /**
      * Checks if this segment has the indices input as its indices.
      * @param idx1 first index of a vertex to check

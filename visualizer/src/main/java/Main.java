@@ -23,7 +23,7 @@ public class Main {
         }
         // TESTING hard code canvas size (we don't want guessing anymore)
         max_x = 500;
-        max_y = 500;
+        max_y = 500; // MAY WANT TO REFACTOR THIS AT SOME POINT
 
         // Creating the Canvas to draw the mesh
         Graphics2D canvas = SVGCanvas.build((int) Math.ceil(max_x), (int) Math.ceil(max_y));

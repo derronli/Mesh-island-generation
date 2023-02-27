@@ -32,6 +32,7 @@ public class PolygonClass {
 
     private boolean transparency = false;
 
+    // Constructor when centroid is not an input -> calculates centroid
     public PolygonClass (List <MySegment> segments){
         this.index = totalIndex;
         totalIndex++;
@@ -40,7 +41,7 @@ public class PolygonClass {
         calcCentroid();
         initPolygon();
     }
-
+    // Constuctor when centroid is specified as an input
     public PolygonClass (List <MySegment> segments, double x, double y){
         this.index = totalIndex;
         totalIndex++;
@@ -49,8 +50,8 @@ public class PolygonClass {
         setCentroid(x, y);
         initPolygon();
     }
-    //create second constructor to take alpha
 
+    //create second constructor to take alpha
     public PolygonClass (List <MySegment> segments, int alpha){
         this.index = totalIndex;
         totalIndex++;
@@ -62,9 +63,6 @@ public class PolygonClass {
         setTransparency(alpha);
     }
 
-    public void setCentroid(double x, double y) {
-        centroid = new MyVertex(x, y);
-    }
 
     private void initPolygon() {
         //centroid index needs to be set
@@ -296,5 +294,15 @@ public class PolygonClass {
 
     public Polygon getPolygon() {
         return polygon;
+    }
+
+    // Resets index count for when the hashsets in Mesh are cleared
+    public static void resetCount() {
+        totalIndex = 0;
+    }
+
+    // Initializes centroid given x,y
+    public void setCentroid(double x, double y) {
+        centroid = new MyVertex(x, y);
     }
 }
