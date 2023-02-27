@@ -99,6 +99,17 @@ public class IrregularMesh extends MyMesh{
 
         do {
             for (Geometry p : polygons) {
+
+                // Reset counter in classes which serves to count index.
+                MyVertex.resetCount();
+                MySegment.resetCount();
+                PolygonClass.resetCount();
+
+                // Reset the collections in preparation of the next voronoi generation
+                myVertices.clear();
+                mySegments.clear();
+                myPolygons.clear();
+
                 polyCoords = p.getCoordinates();
                 // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
                 ArrayList<MySegment> polySegments = new ArrayList<>();
@@ -137,15 +148,8 @@ public class IrregularMesh extends MyMesh{
             count++;
 
             // Make sure it's not the last relaxation level
-            if (count != RELAXATION_LEVEL) {
-                // Reset the collections in preparation of the next voronoi generation
-                MyVertex.resetCount();
-                MySegment.resetCount();
-                myVertices.clear();
-                mySegments.clear();
+            if (count < RELAXATION_LEVEL) {
                 polygons = relaxLloyd(voronoiPoints, myPolygons);
-                PolygonClass.resetCount();
-                myPolygons.clear();
             }
 
         } while (count < RELAXATION_LEVEL);
