@@ -11,7 +11,7 @@ public class IrregularMesh extends MyMesh{
     private final int NUM_POLYGONS;
     private final Random rand = new Random();
     private final int RELAXATION_LEVEL;
-    private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
+ //   private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
 
     public IrregularMesh(int numPolygons, int relaxation){
@@ -28,7 +28,7 @@ public class IrregularMesh extends MyMesh{
         Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
 
-        myPolygons = createVoronoiSegNPoly(myVertices, mySegments, myPolygons);
+        createVoronoiSegNPoly(voronoiPoints, myVertices, mySegments, myPolygons);
         setAllNeighbours(myPolygons);
 
         setShapeTrans(myPolygons, polyTrans);
@@ -47,7 +47,7 @@ public class IrregularMesh extends MyMesh{
 
     // These points are only relevant to the original generation of the irregular mesh
     // Generates random Coordinate points and saves in hashset for initial generation of voronoi diagram
-    private void createRandomPoints() {
+    private void createRandomPoints(Set<Coordinate> voronoiPoints) {
         int x = -1;
         int y = -1;
         Coordinate point;
@@ -55,7 +55,7 @@ public class IrregularMesh extends MyMesh{
         // Generates a random vertex for each polygon
         for (int i = 0; i < NUM_POLYGONS; i++) {
             // Keep generating random x and y until a unique coordinate is found
-            while ((x == -1 && y == -1) || isDuplicatePoint(x, y)) {
+            while ((x == -1 && y == -1) || isDuplicatePoint(voronoiPoints, x, y)) {
                 x = rand.nextInt(width);
                 y = rand.nextInt(height);
             }
@@ -66,7 +66,7 @@ public class IrregularMesh extends MyMesh{
     }
     // RIGHT NOW ONLY INTEGERS
     // Generates the voronoi diagram Geometry object
-    private List<Geometry> createVoronoiAboutPoints() {
+    private List<Geometry> createVoronoiAboutPoints(Set<Coordinate> voronoiPoints) {
         List<Geometry> polyList = new ArrayList<>();
         VoronoiDiagramBuilder voronoi = new VoronoiDiagramBuilder();
         GeometryFactory factory = new GeometryFactory();
@@ -88,9 +88,9 @@ public class IrregularMesh extends MyMesh{
     }
 
     // Converts the voronoi diagram object into vertices, segments and polygons (from JTS to io Structs)
-    private Set<PolygonClass> createVoronoiSegNPoly(Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons) {
-        createRandomPoints();
-        List<Geometry> polygons = createVoronoiAboutPoints();
+    private void createVoronoiSegNPoly(Set<Coordinate> voronoiPoints, Set<MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons) {
+        createRandomPoints(voronoiPoints);
+        List<Geometry> polygons = createVoronoiAboutPoints(voronoiPoints);
         Coordinate[] polyCoords;
         MyVertex v1, v2;
         MySegment s;
@@ -136,33 +136,40 @@ public class IrregularMesh extends MyMesh{
             // Until the relaxation level is reached
             count++;
 
-            // Make sure its not the last relaxation level
+            // Make sure it's not the last relaxation level
             if (count != RELAXATION_LEVEL) {
                 // Reset the collections in preparation of the next voronoi generation
                 MyVertex.resetCount();
                 MySegment.resetCount();
                 myVertices.clear();
                 mySegments.clear();
-                polygons = relaxLloyd(myPolygons);
+                polygons = relaxLloyd(voronoiPoints, myPolygons);
                 PolygonClass.resetCount();
                 myPolygons.clear();
             }
 
         } while (count < RELAXATION_LEVEL);
 
-        return myPolygons;
     }
 
     // Generates a new set of voronoiPoints and voronoi diagram given the previously generated polygon centroids
-    private List<Geometry> relaxLloyd(Set<PolygonClass> myPolygons) {
-        voronoiPoints = new LinkedHashSet<>();
+    private List<Geometry> relaxLloyd(Set<Coordinate> voronoiPoints, Set<PolygonClass> myPolygons) {
+        voronoiPoints.clear();
         MyVertex centroidVertex;
         Coordinate newPoint;
+
+        // new voronoi points will be the previously computed centroids
+        for (PolygonClass p : myPolygons) {
+            centroidVertex = p.getCentroid();
+            newPoint = new Coordinate(centroidVertex.getX(), centroidVertex.getY());
+            voronoiPoints.add(newPoint);
+        }
+
         // Compute the new voronoi diagram with the set of voronoi points
-        return createVoronoiAboutPoints();
+        return createVoronoiAboutPoints(voronoiPoints);
     }
 
-    private boolean isDuplicatePoint(double x, double y) {
+    private boolean isDuplicatePoint(Set<Coordinate> voronoiPoints, double x, double y) {
         for (Coordinate point : voronoiPoints) {
             if (point.getX() == x && point.getY() == y) { // HAVE NOT IMPLEMENTED PRECISION YET
                 return true;
