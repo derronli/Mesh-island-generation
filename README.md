@@ -86,7 +86,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F19  |  Each randomly generated point is converted to a centroid for each polygon  |  P  |  02/22/23  |   |  P  |
 |  F20  |  User can select to relax the mesh or not  |  Kyle/Derron  |  02/24/23  |  02/24/23  |  D  |
 |  F21  |  Neighbourhood relations are computed using Delaunay's triangulation |  P  |  02/22/23  |   |  P  |
-|  F22  |  User can enter "help" mode if a -h or --help argument is inputted when running generator |  P  |  02/22/23  |   |  P  |
+|  F22  |  User can enter "help" mode if a -h argument is inputted when running generator |  P  |  02/22/23  |   |  P  |
 |  F23  |  User can select the number of polygons they wish to generate through the command line  |  Kyle/Derron  |  02/24/23  |  02/24/23  |  D  |
 
 
@@ -108,7 +108,7 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 ## Format for user input when running generator main file
 - Different arguments accepted depending on if using a grid or an irregular mesh.
 - For a grid, that is the default, for an irregular mesh, use '-ir'.
-- For help mode, enter '-h' or '--help' as the first argument (and it will be the only one considered if used).  
+- For help mode, enter '-h'.  
 - For changing anything from default values, consult legend for command to use, and then insert value wanted after a space.  
 - For relaxation level, the value specifies the number of times lloyd relaxation is applied.
 
