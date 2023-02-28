@@ -98,17 +98,18 @@ public class IrregularMesh extends MyMesh{
         int count = 0;
 
         do {
+
+            // Reset counter in classes which serves to count index.
+            MyVertex.resetCount();
+            MySegment.resetCount();
+            PolygonClass.resetCount();
+
+            // Reset the collections in preparation of the next voronoi generation
+            myVertices.clear();
+            mySegments.clear();
+            myPolygons.clear();
+
             for (Geometry p : polygons) {
-
-                // Reset counter in classes which serves to count index.
-                MyVertex.resetCount();
-                MySegment.resetCount();
-                PolygonClass.resetCount();
-
-                // Reset the collections in preparation of the next voronoi generation
-                myVertices.clear();
-                mySegments.clear();
-                myPolygons.clear();
 
                 polyCoords = p.getCoordinates();
                 // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
