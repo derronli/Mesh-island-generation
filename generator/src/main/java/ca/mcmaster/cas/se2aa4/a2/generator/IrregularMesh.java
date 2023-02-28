@@ -186,4 +186,8 @@ public class IrregularMesh extends MyMesh{
         return false;
     }
 
+    protected void setAllNeighbours(Set<PolygonClass> myPolygons) {
+        DelaunayTriangulation d = new DelaunayTriangulation(myPolygons, PRECISION);
+        d.createTriangulation();
+    }
 }
