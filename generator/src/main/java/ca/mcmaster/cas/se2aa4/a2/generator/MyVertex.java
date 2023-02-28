@@ -17,14 +17,6 @@ public class MyVertex implements MyShape {
         initVertex(x, y);
     }
 
-    // Initializer if user specifies alpha value from creation.
-    public MyVertex(double x, double y, int alpha){
-        this.index = totalIndex;
-        totalIndex++;
-        initVertex(x, y);
-        setTrans(alpha);
-    }
-
     /**
      * Initializes vertex with a random colour.
      * @param x x-position of vertex

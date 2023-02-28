@@ -5,12 +5,7 @@ import org.locationtech.jts.geom.GeometryCollection;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.triangulate.DelaunayTriangulationBuilder;
 
-import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.triangulate.quadedge.LocateFailureException;
-
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 

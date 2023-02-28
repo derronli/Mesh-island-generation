@@ -17,7 +17,7 @@ public class DebugRenderer extends MyRenderer{
     private static final int VER_THICKNESS = 3;
     protected void drawSegments (Mesh aMesh, Graphics2D canvas) {
         for (Segment s: aMesh.getSegmentsList()) {
-            // DEFAULT THICKNESS
+            // Default thickness
             float strokeThickness = 0.5f;
             Stroke oldStroke = canvas.getStroke();
             Color old = canvas.getColor();
@@ -29,7 +29,7 @@ public class DebugRenderer extends MyRenderer{
             Line2D line = new Line2D.Double(position[0], position[1], position[2], position[3]);
             canvas.draw(line);
 
-            // Resetting canvas.
+            // Resetting canvas
             canvas.setColor(old);
             canvas.setStroke(oldStroke);
         }
@@ -47,12 +47,12 @@ public class DebugRenderer extends MyRenderer{
         return point;
     }
 
-    // Draws every vertex by extracting vertex list from Mesh
+    // Draws every vertex by extracting vertex list from mesh
     protected void drawVertices(Mesh aMesh, Graphics2D canvas) {
         for (Vertex v: aMesh.getVerticesList()) {
 
             Color old = canvas.getColor();
-            canvas.setColor(Color.WHITE); // colour for vertices
+            canvas.setColor(Color.WHITE); // Colour for vertices
 
             Ellipse2D point = drawDot(v);
             canvas.fill(point);
@@ -115,11 +115,10 @@ public class DebugRenderer extends MyRenderer{
             // Iterate over each neighbour index
             for (Integer i : neighbourIdx) {
                 // Get (x,y) coordinates of current polygon centroid and each of its neighbours
-                // ASSUMPTION: i is index of polygon (neighbours are index as such)
                 neighbour = polygonList.get(i);
                 position = extractPosition(aMesh.getVerticesList(), polygon.getCentroidIdx(), neighbour.getCentroidIdx());
 
-                // ===== DRAWS THE SEGMENT BETWEEN THE 2 CENTROIDS
+                // Draws the segment between the two centroids
                 float strokeThickness = 0.5f;
                 Stroke oldStroke = canvas.getStroke();
                 Color old = canvas.getColor();
@@ -136,7 +135,6 @@ public class DebugRenderer extends MyRenderer{
             }
         }
     }
-
     protected void drawPolygons(Mesh aMesh, Graphics2D canvas){
         List<Segment> segments = aMesh.getSegmentsList();
         List<Vertex> vertices = aMesh.getVerticesList();

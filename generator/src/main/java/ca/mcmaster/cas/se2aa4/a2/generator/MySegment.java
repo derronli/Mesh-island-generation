@@ -19,16 +19,6 @@ public class MySegment implements MyShape {
         initSegment();
     }
 
-    // Initializer if user specifies alpha value from creation.
-    public MySegment(MyVertex v1, MyVertex v2, int alpha){
-        this.index = totalIndex;
-        totalIndex++;
-        this.v1 = v1;
-        this.v2 = v2;
-        initSegment();
-        setTrans(alpha);
-    }
-
     /**
      * Tells the user if an input segment is adjacent to this instance.
      * @param other other segment being checked
