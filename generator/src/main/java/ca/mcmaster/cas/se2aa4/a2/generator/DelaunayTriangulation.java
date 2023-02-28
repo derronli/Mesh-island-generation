@@ -17,16 +17,15 @@ import java.util.Set;
 public class DelaunayTriangulation {
 
     private DelaunayTriangulationBuilder builder = new DelaunayTriangulationBuilder();
-    private Set<Coordinate> voronoiPoints;
-    private List <MyVertex> myVertices;
-    private Set<MySegment> mySegments;
     private Set<PolygonClass> myPolygons;
 
-    public DelaunayTriangulation (Set<Coordinate> voronoiPoints, List <MyVertex> myVertices, Set<MySegment> mySegments, Set<PolygonClass> myPolygons) {
-        this.voronoiPoints = voronoiPoints;
-        this.myVertices = myVertices;
-        this.mySegments = mySegments;
+    private List <List<Coordinate>> neigbours;
+
+    private final double PRECISION;
+
+    public DelaunayTriangulation (Set<PolygonClass> myPolygons, double precision) {
         this.myPolygons = myPolygons;
+        this.PRECISION = precision;
     }
 
     private List <Coordinate> findCentroids (Set <PolygonClass> myPolygons) {
@@ -39,25 +38,26 @@ public class DelaunayTriangulation {
         return centroids;
     }
 
-    public void computeTriangulation (double precision){
+    private void initialTriangulation (){
         List <Coordinate> centroids = findCentroids(myPolygons);
 
         builder.setSites(centroids);
-        builder.setTolerance(precision);
+        builder.setTolerance(PRECISION);
         GeometryCollection triangle = (GeometryCollection) builder.getTriangles(new GeometryFactory());
 
 
         //initializing a list of neighbours for each centroid
-        List <List<Coordinate>> neigbours = new ArrayList<>(centroids.size());
+        neigbours = new ArrayList<>(centroids.size());
         for (int i = 0; i<centroids.size(); i++){
             neigbours.add(new ArrayList<>());
         }
-
         for (int i = 0; i< triangle.getNumGeometries(); i++){
             Coordinate [] triangleCentroid= triangle.getGeometryN(i).getCoordinates();
+            System.out.println(triangleCentroid.length);
             for (int j = 0; j<3; j++){
                 Coordinate cent = triangleCentroid[j];
                 List <Coordinate> centroidNeighbour = neigbours.get(centroids.indexOf(cent));
+                centroidNeighbour.add(cent);
                 for (int k = 0; k<3; k++){
                     Coordinate neighbour = triangleCentroid[k];
                     if (!neighbour.equals(cent) && !centroidNeighbour.contains(neighbour)){
@@ -65,7 +65,48 @@ public class DelaunayTriangulation {
                     }
                 }
             }
-
         }
     }
+    private PolygonClass returnPolygon (Coordinate c){
+        for (PolygonClass p: myPolygons){
+            double x = c.getX();
+            double y = c.getY();
+            if (p.checkIfCentroid(x,y,PRECISION)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    private void setNeighbourIndices(){
+        for (PolygonClass p: myPolygons){
+            p.setNeighbourIndices();
+        }
+    }
+
+    private void iterateNeighbours (){
+        for (List <Coordinate> coords: neigbours) {
+            for (Coordinate c1: coords){
+                for (Coordinate c2: coords){
+                    PolygonClass p1 = returnPolygon(c1);
+                    PolygonClass p2 = returnPolygon(c2);
+                    if (p1 == null || p2 == null || !p1.isNeighbour(p2)){
+                        continue;
+                    }
+                    p1.addNeighbour(p2.getIndex());
+                    p2.addNeighbour(p1.getIndex());
+                }
+            }
+        }
+    }
+
+    public void createTriangulation(){
+        initialTriangulation();
+        System.out.println(neigbours.get(0).size());
+        ;
+        iterateNeighbours();
+        setNeighbourIndices();
+    }
+
 }
+

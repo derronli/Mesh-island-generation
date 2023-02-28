@@ -255,7 +255,9 @@ public class PolygonClass implements MyShape {
 
     public void addNeighbour (int index){
         //add to list of neighbours
-        neighbourIndices.add(index);
+        if (!neighbourIndices.contains(index) && !(index == this.index)){
+            neighbourIndices.add(index);
+        }
     }
 
     public int getIndex(){
@@ -274,5 +276,8 @@ public class PolygonClass implements MyShape {
     // Initializes centroid given x,y
     public void setCentroid(double x, double y) {
         centroid = new MyVertex(x, y);
+    }
+    public boolean checkIfCentroid(double x, double y, double precision){
+        return centroid.existsAtPoint(x, y, precision);
     }
 }
