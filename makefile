@@ -34,4 +34,13 @@ runi: s gi v
 # run irregular with command line args
 runit: s git v
 
+# run grid with command line args
+rungtd: s gt vd
+
+# run irregular
+runid: s gi vd
+
+# run irregular with command line args
+runitd: s git vd
+
 .PHONY: generator visualizer
