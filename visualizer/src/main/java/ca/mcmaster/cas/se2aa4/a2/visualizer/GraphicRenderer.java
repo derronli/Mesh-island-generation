@@ -5,7 +5,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import java.awt.Graphics2D;
 
 public class GraphicRenderer {
-    
+
     public void render(Mesh aMesh, Graphics2D canvas, String commandArg) {
 
         MyRenderer renderer;
