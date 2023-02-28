@@ -34,6 +34,12 @@ public class MyRenderer {
         double y2 = v2.getY();
         return new double[] {x1, y1, x2, y2};
     }
+    private boolean equalVertex(Vertex v1, Vertex v2) {
+        if (v1 == null || v2 == null) {
+            return false;
+        }
+        return Double.compare(v1.getX(), v2.getX()) == 0 && Double.compare(v1.getY(), v2.getY()) == 0;
+    }
 
     protected java.awt.Polygon createPolygon(Polygon polygon, List<Segment> segments, List<Vertex> vertices){
         List<Integer> segmentIdxList = polygon.getSegmentIdxsList();
@@ -45,22 +51,45 @@ public class MyRenderer {
         int[] yCoords = new int[numVertices];
         int count = 0;
 
+        Vertex prevV1 = null;
+        Vertex prevV2 = null;
         // Goes through segments by index.
-        for (Integer index : segmentIdxList){
+        for (Integer index : segmentIdxList) {
+
             Segment segment = segments.get(index);
 
             // Goes through vertices of each segment and adds their coordinates to array.
             Vertex v1 = vertices.get(segment.getV1Idx());
             Vertex v2 = vertices.get(segment.getV2Idx());
-            if (isNewVertex(xCoords, yCoords, v1)) {
-                xCoords[count] = (int) v1.getX();
-                yCoords[count] = (int) v1.getY();
+
+            // V1 is connected
+            if ( (equalVertex(v1, prevV1) || equalVertex(v1, prevV2))) {
+                if (isNewVertex(xCoords, yCoords, v1)) {
+                    xCoords[count] = (int) v1.getX();
+                    yCoords[count] = (int) v1.getY();
+                }
+                else {
+                    xCoords[count] = (int) v2.getX();
+                    yCoords[count] = (int) v2.getY();
+                }
+
             }
+            // v1 is not connected (v2 must be connected b/c segments are in order)
             else {
-                xCoords[count] = (int) v2.getX();
-                yCoords[count] = (int) v2.getY();
+                if (isNewVertex(xCoords, yCoords, v2)) {
+                    xCoords[count] = (int) v2.getX();
+                    yCoords[count] = (int) v2.getY();
+                }
+                else {
+                    xCoords[count] = (int) v1.getX();
+                    yCoords[count] = (int) v1.getY();
+                }
             }
             count++;
+
+            prevV1 = v1;
+            prevV2 = v2;
+
         }
 
 
@@ -69,7 +98,7 @@ public class MyRenderer {
 
     private boolean isNewVertex(int[] xCoords, int[] yCoords, Vertex v) {
         for (int i = 0; i < xCoords.length; i++) {
-            if (v.getX() == xCoords[i] && v.getY() == yCoords[i]) {
+            if ((int) v.getX() == xCoords[i] && (int) v.getY() == yCoords[i]) {
                 return false;
             }
         }
