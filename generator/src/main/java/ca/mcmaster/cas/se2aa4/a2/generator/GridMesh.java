@@ -19,8 +19,8 @@ public class GridMesh extends MyMesh{
         Set<MySegment> mySegments = new LinkedHashSet<>();
         Set<PolygonClass> myPolygons = new LinkedHashSet<>();
 
-        createVertices(myVertices, vertexTrans, vertexThick);
-        createSegNPoly(mySegments, myPolygons, myVertices, polyTrans, segTrans, vertexTrans, polyThick, segThick);
+        createVertices(myVertices);
+        createSegNPoly(mySegments, myPolygons, myVertices);
         setAllNeighbours(myPolygons);
 
         setShapeTrans(myPolygons, polyTrans);
@@ -38,7 +38,7 @@ public class GridMesh extends MyMesh{
     }
 
     // Create all vertices.
-    private void createVertices(Set<MyVertex> myVertices, int vertexTrans, float vertexThick) {
+    private void createVertices(Set<MyVertex> myVertices) {
 
         for (int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
@@ -49,8 +49,7 @@ public class GridMesh extends MyMesh{
     }
 
     // Creates segments connecting vertices as square shapes and polygons for these segments.
-    private void createSegNPoly(Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<MyVertex> myVertices,
-                                int polyTrans, int segTrans, int vertexTrans, float polyThick, float segThick) {
+    private void createSegNPoly(Set<MySegment> mySegments, Set<PolygonClass> myPolygons, Set<MyVertex> myVertices) {
         for (int x = 0; x < width; x += square_size) {
             for (int y = 0; y < height; y += square_size) {
 

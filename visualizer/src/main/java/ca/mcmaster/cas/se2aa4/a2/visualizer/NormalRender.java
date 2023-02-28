@@ -64,6 +64,7 @@ public class NormalRender extends MyRenderer {
 
             java.awt.Polygon polygon = createPolygon(p, segments, vertices);
             canvas.fill(polygon);
+            canvas.draw(polygon);
 
             // Resetting canvas.
             canvas.setColor(old);
