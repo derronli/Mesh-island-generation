@@ -14,8 +14,6 @@ public class IrregularMesh extends MyMesh{
     private final int RELAXATION_LEVEL;
 
     private final PrecisionModel precisionModel = new PrecisionModel(1);
- //   private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
-
 
     public IrregularMesh(int numPolygons, int relaxation){
         NUM_POLYGONS = numPolygons;
@@ -67,8 +65,6 @@ public class IrregularMesh extends MyMesh{
             voronoiPoints.add(point);
         }
     }
-    // RIGHT NOW ONLY INTEGERS
-    // Generates the voronoi diagram Geometry object
     // Generates the voronoi diagram Geometry object
     private List<Geometry> createVoronoiAboutPoints(Set<Coordinate> voronoiPoints) {
         List<Geometry> polyList = new ArrayList<>();
@@ -89,10 +85,7 @@ public class IrregularMesh extends MyMesh{
         // Adding all geometries that make the voronoi to an arraylist
         for (int k = 0; k < g.getNumGeometries(); k++) {
             polyList.add(new ConvexHull(g.getGeometryN(k)).getConvexHull());
-            // polyList.add(g.getGeometryN(k));
         }
-
-
         return polyList;
     }
 
