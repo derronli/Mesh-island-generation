@@ -83,24 +83,11 @@ When you develop features and enrich the product, remember that you have first t
 |  F16  |  User can switch between grid meshes or irregular mesh |  Kyle  |  02/24/23 | 02/24/23 |  D  |
 |  F17  |  Points are randomly generated to construct the irregular meshes  |  Derron  |  02/22/23  | 02/25/23 |  D |
 |  F18  |  Voronoi diagram for each point is calculated  |  Derron  |  02/22/23  |  02/25/23  |  D  |
-|  F19  |  Each randomly generated point is converted to a centroid for each polygon  |  P  |  02/22/23  |   |  P  |
+|  F19  |  Each originally generated voronoi point is converted to a centroid to relax the mesh |  Derron  |  02/22/23  | 02/24/23 |  D  |
 |  F20  |  User can select to relax the mesh or not  |  Kyle/Derron  |  02/24/23  |  02/24/23  |  D  |
-|  F21  |  Neighbourhood relations are computed using Delaunay's triangulation |  P  |  02/22/23  |   |  P  |
+|  F21  |  Neighbourhood relations are computed using Delaunay's triangulation |  Arjun  |  02/22/23  | 02/27/23  |  D  |
 |  F22  |  User can enter "help" mode if a -h argument is inputted when running generator |  Kyle  |  02/24/23  |  02/24/23  |  D  |
 |  F23  |  User can select the number of polygons they wish to generate through the command line  |  Kyle/Derron  |  02/24/23  |  02/24/23  |  D  |
-
-
-|  F  |  Template  |  S  |  .  |  .  |  B  |
-
-
-## ideas
-new class to handle user input (is given dotgen and string args[], returns a mesh)
-call dotgen, which accepts all the arguments, but new class sets values to default for ones that are not provided
-
-to do:
-1. new class to do all this
-2. modify dotgen and subsequent classes to use these new values passed in rather than hard coded
-
 
 # Documentation
 To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'.
@@ -111,6 +98,23 @@ To get thickness of vertices and lines, extract the thickness from the propertie
 - For help mode, enter '-h'.  
 - For changing anything from default values, consult legend for command to use, and then insert value wanted after a space.  
 - For relaxation level, the value specifies the number of times lloyd relaxation is applied.
+
+## Part Two Scenario Description 
+- To generate a grid mesh in debug mode, you must input the following commands into the terminal: 
+- cd generator 
+- java -jar generator.jar sample.mesh
+- cd ..
+- cd visualizer 
+- java -jar visualizer.jar ../generator/sample.mesh sample.svg -X
+
+## Part Three Scenario Description
+- To generate an irregular mesh with the following specifications: 
+- 200 polygons, relaxed mesh 5 times, polygon transparency of 200, and segment thickness of 10, the rest being default values found below
+- cd generator 
+- java -jar generator.jar sample.mesh -ir -np 200 -rl 5 -pa 200 -st 10
+- cd ..
+- cd visualizer
+- java -jar visualizer.jar ../generator/sample.mesh sample.svg 
 
 ## Legend
 - -ir = use an irregular mesh instead of grid
@@ -141,3 +145,5 @@ sample.mesh -ir -np 200 -rl 5 -pa 200 -st 10
 
 ## Format for user input when running visualizer main file
 Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.
+
+
