@@ -23,7 +23,7 @@ public class DelaunayTriangulation {
         this.PRECISION = precision;
     }
 
-    private List <Coordinate> findCentroids (Set <PolygonClass> myPolygons) {
+    private List <Coordinate> findCentroids () {
         List <Coordinate> centroids = new ArrayList<>();
         for (PolygonClass polygon : myPolygons) {
             MyVertex centroidVertex = polygon.getCentroid();
@@ -34,7 +34,7 @@ public class DelaunayTriangulation {
     }
 
     private void initialTriangulation (){
-        List <Coordinate> centroids = findCentroids(myPolygons);
+        List <Coordinate> centroids = findCentroids();
 
         builder.setSites(centroids);
         builder.setTolerance(PRECISION);
