@@ -15,18 +15,12 @@ public class InputHandler {
 
         Options options = createOptions();
 
-        // If they ask for help, displays options, and exits without generating a mesh.
-        if (args.length > 0 && (args[0].equals("-h") || args[0].equals("--help"))){
-            displayHelp(options);
-            return null;
-        }
-
         // Parses options with arguments.
         CommandLineParser parser = new DefaultParser();
         try {
             // parse the command line arguments
             CommandLine line = parser.parse(options, args);
-            return checkOptions(line);
+            return checkOptions(line, options);
         }
         catch (ParseException exp) {
             // oops, something went wrong
@@ -102,7 +96,7 @@ public class InputHandler {
         formatter.printHelp("generator help", options);
     }
 
-    private Mesh checkOptions(CommandLine line){
+    private Mesh checkOptions(CommandLine line, Options options){
         // Setting parameters for dotgen to default values.
         int polyTrans = alpha;
         int segTrans = alpha;
@@ -112,6 +106,12 @@ public class InputHandler {
         float vertexThick = VERTEXTHICKNESS;
         int numPoly = numPolygons;
         int relax = relaxation;
+
+        // If they ask for help, displays options, and exits without generating a mesh.
+        if (line.hasOption("h")){
+            displayHelp(options);
+            return null;
+        }
 
         // logic to see which options were used and set variables accordingly.
         if(line.hasOption("pa")) {
