@@ -42,7 +42,7 @@ public class GridMesh extends MyMesh{
 
         for (int x = 0; x <= width; x += square_size) {
             for (int y = 0; y <= height; y += square_size) {
-                MyVertex vertex = new MyVertex(x, y, 250);
+                MyVertex vertex = new MyVertex(x, y);
                 myVertices.add(vertex);
             }
         }

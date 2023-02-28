@@ -7,13 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PolygonClass implements MyShape {
-    //pass in segments
-    //order the segments based on if they are adjacent
-    //calculate the centroid of a polygon based on the segments
-    //set colour method and changes all segments in list to said colour
-    //consider hashmap
-    //
-    // centroid getter (return vertex itself)
     private static int totalIndex = 0;
     private final int index;
 
@@ -26,31 +19,18 @@ public class PolygonClass implements MyShape {
     public PolygonClass (List <MySegment> segments){
         this.index = totalIndex;
         totalIndex++;
-        //this.segments = segments;
         this.segments = orderSegments(segments);
         calcCentroid();
         initPolygon();
     }
-    // Constuctor when centroid is specified as an input
+    // Constructor when centroid is specified as an input
     public PolygonClass (List <MySegment> segments, double x, double y){
         this.index = totalIndex;
         totalIndex++;
-        //this.segments = segments;
         this.segments = orderSegments(segments);
         setCentroid(x, y);
         initPolygon();
     }
-
-    //create second constructor to take alpha
-    public PolygonClass (List <MySegment> segments, int alpha){
-        this.index = totalIndex;
-        totalIndex++;
-        this.segments = orderSegments(segments);
-        // calcCentroid();
-        initPolygon();
-        setTrans(alpha);
-    }
-
 
     private void initPolygon() {
         Property color = Property.newBuilder().setKey("rgb_color").setValue(averageSegColours()).build();
