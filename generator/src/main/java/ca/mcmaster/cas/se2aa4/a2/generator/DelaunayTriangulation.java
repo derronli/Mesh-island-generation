@@ -98,7 +98,6 @@ public class DelaunayTriangulation {
     public void createTriangulation(){
         initialTriangulation();
         System.out.println(neigbours.get(0).size());
-        ;
         iterateNeighbours();
         setNeighbourIndices();
     }
