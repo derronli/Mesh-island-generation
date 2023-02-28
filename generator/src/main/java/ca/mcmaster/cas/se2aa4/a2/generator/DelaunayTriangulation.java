@@ -48,7 +48,6 @@ public class DelaunayTriangulation {
         }
         for (int i = 0; i< triangle.getNumGeometries(); i++){
             Coordinate [] triangleCentroid= triangle.getGeometryN(i).getCoordinates();
-            System.out.println(triangleCentroid.length);
             for (int j = 0; j<3; j++){
                 Coordinate cent = triangleCentroid[j];
                 List <Coordinate> centroidNeighbour = neigbours.get(centroids.indexOf(cent));
@@ -97,7 +96,6 @@ public class DelaunayTriangulation {
 
     public void createTriangulation(){
         initialTriangulation();
-        System.out.println(neigbours.get(0).size());
         iterateNeighbours();
         setNeighbourIndices();
     }

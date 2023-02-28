@@ -8,11 +8,11 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import java.awt.*;
 import java.util.List;
 
-public class MyRenderer {
+public abstract class MyRenderer {
 
-    protected void drawVertices(Mesh aMesh, Graphics2D canvas){}
-    protected void drawSegments(Mesh aMesh, Graphics2D canvas){}
-    protected void drawPolygons(Mesh aMesh, Graphics2D canvas){}
+    protected abstract void drawVertices(Mesh aMesh, Graphics2D canvas);
+    protected abstract void drawSegments(Mesh aMesh, Graphics2D canvas);
+    protected abstract void drawPolygons(Mesh aMesh, Graphics2D canvas);
 
     public void render(Mesh aMesh, Graphics2D canvas){
         canvas.setColor(Color.BLACK);
