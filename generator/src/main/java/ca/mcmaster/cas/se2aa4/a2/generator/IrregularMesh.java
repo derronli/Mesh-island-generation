@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a2.generator;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import org.locationtech.jts.algorithm.ConvexHull;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 
@@ -11,6 +12,8 @@ public class IrregularMesh extends MyMesh{
     private final int NUM_POLYGONS;
     private final Random rand = new Random();
     private final int RELAXATION_LEVEL;
+
+    private final PrecisionModel precisionModel = new PrecisionModel(1);
  //   private Set<Coordinate> voronoiPoints = new LinkedHashSet<>();
 
 
@@ -66,6 +69,7 @@ public class IrregularMesh extends MyMesh{
     }
     // RIGHT NOW ONLY INTEGERS
     // Generates the voronoi diagram Geometry object
+    // Generates the voronoi diagram Geometry object
     private List<Geometry> createVoronoiAboutPoints(Set<Coordinate> voronoiPoints) {
         List<Geometry> polyList = new ArrayList<>();
         VoronoiDiagramBuilder voronoi = new VoronoiDiagramBuilder();
@@ -74,16 +78,21 @@ public class IrregularMesh extends MyMesh{
         voronoi.setSites(voronoiPoints);
 
         Geometry g =  voronoi.getDiagram(factory); // creates voronoi
+        for (Coordinate c : g.getCoordinates()) {
+            precisionModel.makePrecise(c);
+        }
 
         // Specifies size of canvas
         Envelope envelope = new Envelope(0, width, 0, height);
         g = g.intersection(factory.toGeometry(envelope));
 
-
         // Adding all geometries that make the voronoi to an arraylist
         for (int k = 0; k < g.getNumGeometries(); k++) {
-            polyList.add(g.getGeometryN(k));
+            polyList.add(new ConvexHull(g.getGeometryN(k)).getConvexHull());
+            // polyList.add(g.getGeometryN(k));
         }
+
+
         return polyList;
     }
 
@@ -114,16 +123,10 @@ public class IrregularMesh extends MyMesh{
                 polyCoords = p.getCoordinates();
                 // Create 2 segments at a time by looking at 2 coordinates at once -> coordinates correspond to every vertex in the polygon
                 ArrayList<MySegment> polySegments = new ArrayList<>();
-                for (int i = 0; i < polyCoords.length; i++) {
+                for (int i = 0; i < polyCoords.length - 1; i++) {
                     // Gets Coordinate pair
                     c1 = polyCoords[i];
-                    // Handles edge case of the last point not having a + 1 index
-                    // Last point should connect to the originally FIRST point
-                    if (i == polyCoords.length - 1) {
-                        c2 = polyCoords[0];
-                    } else {
-                        c2 = polyCoords[i + 1];
-                    }
+                    c2 = polyCoords[i + 1];
 
                     // Checks if (x,y) pair is a preexisting vertex -> will make new one if not
                     v1 = findVertex(myVertices, c1.getX(), c1.getY());
