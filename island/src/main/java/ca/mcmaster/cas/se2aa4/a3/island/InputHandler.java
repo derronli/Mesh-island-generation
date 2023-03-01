@@ -1,7 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import org.apache.commons.cli.*;
 
@@ -75,8 +74,8 @@ public class InputHandler {
         // Ensures we have an input and output file before creating island.
         if (!(inputFile == null || outputFile == null)){
             Mesh aMesh = new MeshFactory().read(inputFile);
-            Mesh newMesh = null;
-            return newMesh;
+            DoEverythingTemp d = new DoEverythingTemp();
+            return d.makeMesh(aMesh);
         }
 
         return null;
