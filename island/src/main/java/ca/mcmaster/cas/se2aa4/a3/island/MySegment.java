@@ -11,5 +11,5 @@ public class MySegment implements MyShape{
         segment = s;
     }
 
-    public void changeColor(int[] color){}
+    public void changeColor(String colorCode){}
 }

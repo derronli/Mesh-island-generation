@@ -13,5 +13,5 @@ public class MyPolygon implements MyShape{
         polygon = p;
     }
 
-    public void changeColor(int[] color){}
+    public void changeColor(String colorCode){}
 }

@@ -1,5 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 
 public class MyVertex implements MyShape{
@@ -10,5 +11,8 @@ public class MyVertex implements MyShape{
         vertex = v;
     }
 
-    public void changeColor(int[] color){}
+    public void changeColor(String colorCode){
+        Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        vertex = Vertex.newBuilder(vertex).setProperties(0, color).build();
+    }
 }
