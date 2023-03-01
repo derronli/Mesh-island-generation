@@ -23,4 +23,14 @@ public class MySegment implements MyShape{
 
     // Getters
     public int getIndex(){ return index; }
+    public int getV1Index(){
+        return segment.getV1Idx();
+    }
+    public int getV2Index(){
+        return segment.getV2Idx();
+    }
+    public java.util.List<Structs.Property> getPropertiesList() {
+        return segment.getPropertiesList();
+    }
+    public Segment getSegment() { return segment; }
 }
