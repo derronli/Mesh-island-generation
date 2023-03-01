@@ -1,7 +1,11 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
+import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import org.apache.commons.cli.*;
+
+import java.io.IOException;
 
 public class InputHandler {
 
@@ -16,7 +20,7 @@ public class InputHandler {
             CommandLine line = parser.parse(options, args);
             return checkOptions(line, options);
         }
-        catch (ParseException exp) {
+        catch (ParseException | IOException exp) {
             // oops, something went wrong
             System.err.println("Parsing failed.  Reason: " + exp.getMessage());
             return null;
@@ -52,7 +56,7 @@ public class InputHandler {
         formatter.printHelp("island help", options);
     }
 
-    private Mesh checkOptions(CommandLine line, Options options){
+    private Mesh checkOptions(CommandLine line, Options options)  throws IOException {
 
         String inputFile = null, outputFile = null;
 
@@ -70,7 +74,9 @@ public class InputHandler {
 
         // Ensures we have an input and output file before creating island.
         if (!(inputFile == null || outputFile == null)){
-            
+            Mesh aMesh = new MeshFactory().read(inputFile);
+            Mesh newMesh = null;
+            return newMesh;
         }
 
         return null;
