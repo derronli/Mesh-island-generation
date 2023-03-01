@@ -9,6 +9,7 @@ public class MySegment implements MyShape{
     private static int totalIndex = 0;
     private final int index;
     private Segment segment;
+    private MyVertex v1, v2;
 
     public MySegment(Segment s){
         segment = s;
@@ -19,6 +20,14 @@ public class MySegment implements MyShape{
     public void changeColor(String colorCode){
         Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
         segment = Segment.newBuilder(segment).setProperties(0, color).build();
+    }
+
+    // Setters
+    public void setV1(MyVertex v1) {
+        this.v1 = v1;
+    }
+    public void setV2(MyVertex v2) {
+        this.v2 = v2;
     }
 
     // Getters

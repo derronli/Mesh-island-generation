@@ -31,4 +31,7 @@ public class MyPolygon implements MyShape{
 
     // Getters
     public int getIndex(){ return index; }
+    public Polygon getPolygon() {
+        return polygon;
+    }
 }
