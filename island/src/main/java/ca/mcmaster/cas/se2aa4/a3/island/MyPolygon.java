@@ -1,4 +1,4 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
-public class MyPolygon {
+public class MyPolygon implements MyShape{
 }
