@@ -5,7 +5,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 
 public class MySegment implements MyShape{
 
-    Segment segment;
+    private Segment segment;
 
     public MySegment(Segment s){
         segment = s;
