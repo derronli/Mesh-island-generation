@@ -17,6 +17,26 @@ public class DoEverythingTemp {
         List<Vertex> vertices = aMesh.getVerticesList();
         List<Segment> segments = aMesh.getSegmentsList();
         List<Polygon> polygons = aMesh.getPolygonsList();
+        List<MyVertex> myVertices = new ArrayList<>();
+        List<MySegment> mySegments = new ArrayList<>();
+        List<MyPolygon> myPolygons = new ArrayList<>();
+
+        // Add all items to my structure.
+        for (Vertex v : vertices){
+            MyVertex myV = new MyVertex(v);
+            myV.changeColor("0, 0, 0");
+            myVertices.add(myV);
+        }
+        for (Segment s : segments){
+            MySegment myS = new MySegment(s);
+            myS.changeColor("0, 0, 0");
+            mySegments.add(myS);
+        }
+        for (Polygon p : polygons){
+            MyPolygon myP = new MyPolygon(p);
+            myP.changeColor("0, 0, 0");
+            myPolygons.add(myP);
+        }
 
         return null;
     }
