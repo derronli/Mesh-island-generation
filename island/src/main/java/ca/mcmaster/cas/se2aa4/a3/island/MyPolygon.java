@@ -1,9 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import org.locationtech.jts.geom.*;
 
 import java.util.List;
 
@@ -13,6 +11,8 @@ public class MyPolygon implements MyShape{
     private final int index;
     private Polygon polygon;
     private TileType myTile;
+    private List <MySegment> segments;
+    private List <double[]> vertices;
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -29,9 +29,15 @@ public class MyPolygon implements MyShape{
 //        polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
 
+    // Adds segment to segment list.
+    public void addSegment(MySegment s){
+        segments.add(s);
+    }
+
     // Getters
     public int getIndex(){ return index; }
     public Polygon getPolygon() {
         return polygon;
     }
+    public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
 }

@@ -42,4 +42,8 @@ public class MySegment implements MyShape{
         return segment.getPropertiesList();
     }
     public Segment getSegment() { return segment; }
+    public double getV1X(){ return v1.getX(); }
+    public double getV1Y(){ return v1.getY(); }
+    public double getV2X(){ return v2.getX(); }
+    public double getV2Y(){ return v2.getY(); }
 }

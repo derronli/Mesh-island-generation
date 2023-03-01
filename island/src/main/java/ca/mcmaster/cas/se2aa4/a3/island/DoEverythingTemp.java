@@ -39,6 +39,7 @@ public class DoEverythingTemp {
         }
 
         addVerticesToSegments(myVertices, mySegments);
+        addSegmentsToPolygons(mySegments, myPolygons);
 
         return null;
     }
@@ -51,6 +52,16 @@ public class DoEverythingTemp {
             MyVertex v1 = myVertices.get(v1Idx);
             MyVertex v2 = myVertices.get(v2Idx);
             s.setV1(v1); s.setV2(v2);
+        }
+    }
+
+    // Add MySegment instances to MyPolygon as a field.
+    private void addSegmentsToPolygons(List<MySegment> mySegments, List<MyPolygon> myPolygons){
+        for (MyPolygon p : myPolygons){
+            for (Integer idx : p.getSegmentIdxsList()){
+                MySegment s = mySegments.get(idx);
+                p.addSegment(s);
+            }
         }
     }
 
