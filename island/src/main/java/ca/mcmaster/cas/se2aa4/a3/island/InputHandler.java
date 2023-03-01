@@ -54,23 +54,23 @@ public class InputHandler {
 
     private Mesh checkOptions(CommandLine line, Options options){
 
+        String inputFile = null, outputFile = null;
+
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
-     //       polyTrans = Integer.parseInt(line.getOptionValue("pa"));
             return null;
         }
-        // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("i")){
-            displayHelp(options);
-            //       polyTrans = Integer.parseInt(line.getOptionValue("pa"));
-            return null;
+            inputFile = line.getOptionValue("i");
         }
-        // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("o")){
-            displayHelp(options);
-            //       polyTrans = Integer.parseInt(line.getOptionValue("pa"));
-            return null;
+            outputFile = line.getOptionValue("o");
+        }
+
+        // Ensures we have an input and output file before creating island.
+        if (!(inputFile == null || outputFile == null)){
+            
         }
 
         return null;
