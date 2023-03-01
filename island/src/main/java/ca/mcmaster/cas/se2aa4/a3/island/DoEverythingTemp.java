@@ -15,6 +15,8 @@ public class DoEverythingTemp {
     public Mesh makeMesh(Mesh aMesh){
 
         List<Vertex> vertices = aMesh.getVerticesList();
+        List<Segment> segments = aMesh.getSegmentsList();
+        List<Polygon> polygons = aMesh.getPolygonsList();
 
         return null;
     }
