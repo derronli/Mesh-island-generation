@@ -6,8 +6,8 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 
 public class MyPolygon implements MyShape{
 
-    Polygon polygon;
-    TileType myTile;
+    private Polygon polygon;
+    private TileType myTile;
 
     public MyPolygon(Polygon p){
         polygon = p;
