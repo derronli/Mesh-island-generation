@@ -30,6 +30,23 @@ public class MySegment implements MyShape{
         this.v2 = v2;
     }
 
+    /**
+     * Returns the index of the comment vertex between segments.
+     * @param other other segment to be compared against.
+     * @return the index of the common vertex, 0 if not adjacent.
+     */
+    public int isAdjacent(MySegment other){
+        if (other.getV1Index() == this.getV1Index() && other.getV2Index() != this.getV2Index())
+            return getV1Index();
+        if (other.getV1Index() != this.getV1Index() && other.getV2Index() == this.getV2Index())
+            return getV2Index();
+        if (other.getV1Index() == this.getV2Index() && other.getV2Index() != this.getV1Index())
+            return getV2Index();
+        if (other.getV1Index() != this.getV2Index() && other.getV2Index() == this.getV1Index())
+            return getV1Index();
+        return 0;
+    }
+
     // Getters
     public int getIndex(){ return index; }
     public int getV1Index(){

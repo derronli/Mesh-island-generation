@@ -34,7 +34,7 @@ public class DoEverythingTemp {
         }
         for (Polygon p : polygons){
             MyPolygon myP = new MyPolygon(p);
-            myP.changeColor("0, 0, 0");
+            myP.changeColor("255, 255, 255");
             myPolygons.add(myP);
         }
 
@@ -62,6 +62,7 @@ public class DoEverythingTemp {
                 MySegment s = mySegments.get(idx);
                 p.addSegment(s);
             }
+            p.orderSegments();
         }
     }
 

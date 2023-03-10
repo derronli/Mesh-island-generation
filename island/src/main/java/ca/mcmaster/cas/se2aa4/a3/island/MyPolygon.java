@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPolygon implements MyShape{
@@ -10,8 +11,8 @@ public class MyPolygon implements MyShape{
     private final int index;
     private Polygon polygon;
     private Tile myTile;
-    private List <MySegment> segments;
-    private List <double[]> vertices;
+    private List <MySegment> segments = new ArrayList<>();
+    private List <double[]> vertices = new ArrayList<>();
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -22,6 +23,45 @@ public class MyPolygon implements MyShape{
     private void initPolygon(){
 
     }
+
+    // Orders the segments and sets the vertices list.
+    public void orderSegments (){
+        List <MySegment> orderedSegments = new ArrayList<>();
+        MySegment firstSeg = segments.get(0);
+        orderedSegments.add(firstSeg);
+        vertices.add(new double[]{firstSeg.getV1X(), firstSeg.getV1Y()});
+        vertices.add(new double[]{firstSeg.getV2X(), firstSeg.getV2Y()});
+        int count = 0;
+
+        //while
+
+        while (count < segments.size()){
+            for (MySegment segment : segments) {
+                if (!orderedSegments.contains(segment)) {
+                    MySegment last = orderedSegments.get(orderedSegments.size() - 1);
+                    int commonVertex = last.isAdjacent(segment);
+                    if (commonVertex != 0) {
+
+                        // If we are adding the second segment, checks the vertices on both to ensure proper ordering.
+                        if (orderedSegments.size() == 1){
+                            // First adds the vertex not in common, then the vertex in common.
+                            double[] firstVertex = (commonVertex == last.getV1Index()) ? new double[] {last.getV2X(), last.getV2Y()} : new double[] {last.getV1X(), last.getV1Y()};
+                            double[] secondVertex = (commonVertex == last.getV1Index()) ? new double[] {last.getV1X(), last.getV1Y()} : new double[] {last.getV2X(), last.getV2Y()};
+                            vertices.add(firstVertex); vertices.add(secondVertex);
+                        }
+
+                        // Next adds the vertex not already in the list which is in the new segment.
+                        //double[] newVertex = ()
+
+                        orderedSegments.add(segment);
+                    }
+                }
+            }
+            count++;
+        }
+        segments = orderedSegments;
+    }
+
 
     public void changeColor(String colorCode){
 //        Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
