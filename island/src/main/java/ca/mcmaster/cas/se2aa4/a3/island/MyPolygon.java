@@ -1,7 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
-import org.locationtech.jts.geom.*;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public class MyPolygon implements MyShape{
     private static int totalIndex = 0;
     private final int index;
     private Polygon polygon;
-    private TileType myTile;
+    private Tile myTile;
     private List <MySegment> segments;
     private List <double[]> vertices;
 

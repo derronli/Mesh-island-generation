@@ -2,7 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island;
 
 import java.awt.Color;
 
-public class LandTile implements GroundTile{
+public class LandTile implements Tile {
 
     @Override
     public Color getColor() {
