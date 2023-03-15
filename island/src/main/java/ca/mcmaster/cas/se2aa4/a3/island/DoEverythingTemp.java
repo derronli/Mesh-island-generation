@@ -27,17 +27,17 @@ public class DoEverythingTemp {
         // Add all items to my structure.
         for (Vertex v : vertices){
             MyVertex myV = new MyVertex(v);
-            myV.changeColor("0, 0, 0");
+            myV.changeColor("0,0,0");
             myVertices.add(myV);
         }
         for (Segment s : segments){
             MySegment myS = new MySegment(s);
-            myS.changeColor("0, 0, 0");
+            myS.changeColor("0,0,0");
             mySegments.add(myS);
         }
         for (Polygon p : polygons){
             MyPolygon myP = new MyPolygon(p);
-            myP.changeColor("255, 255, 255");
+            myP.changeColor("255,255,255");
             myPolygons.add(myP);
         }
 
