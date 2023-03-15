@@ -20,7 +20,7 @@ public class MyPolygon implements MyShape{
     private org.locationtech.jts.geom.Polygon jtsPolygon;
     private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
-    private Coordinate[] coordinates;
+    private List<Coordinate> coordinates;
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -34,13 +34,12 @@ public class MyPolygon implements MyShape{
         MySegment firstSeg = segments.get(0);
         orderedSegments.add(firstSeg);
 
-        coordinates = new Coordinate[segments.size()];
-        int coordCounter = 0;
+        coordinates.clear();
 
         Coordinate c1 = new Coordinate(firstSeg.getV1X(), firstSeg.getV1Y());
         Coordinate c2 = new Coordinate(firstSeg.getV2X(), firstSeg.getV2Y());
-        coordinates[coordCounter] = c1; coordCounter++;
-        coordinates[coordCounter] = c2; coordCounter++;
+        coordinates.add(c1);
+        coordinates.add(c2);
 
         // Orders segments and adds vertices in order to vertices list.
         for (int count = 0; count < segments.size(); count++){
@@ -55,17 +54,14 @@ public class MyPolygon implements MyShape{
                             // First adds the vertex not in common, then the vertex in common.
                             Coordinate firstCoord = (commonVertex == last.getV1Index()) ? new Coordinate(last.getV2X(), last.getV2Y()) : new Coordinate(last.getV1X(), last.getV1Y());
                             Coordinate secondCoord = (commonVertex == last.getV1Index()) ? new Coordinate(last.getV1X(), last.getV1Y()) : new Coordinate(last.getV2X(), last.getV2Y());
-                            coordinates[coordCounter] = firstCoord; coordCounter++;
-                            coordinates[coordCounter] = secondCoord; coordCounter++;
+                            coordinates.add(firstCoord);
+                            coordinates.add(secondCoord);
                         }
 
                         // Next adds the vertex not already in the list which is in the new segment.
                         commonVertex = segment.isAdjacent(last);
                         Coordinate newCoord = (commonVertex == segment.getV1Index()) ? new Coordinate(segment.getV2X(), segment.getV2Y()) : new Coordinate(segment.getV1X(), segment.getV1Y());
-                        if (coordCounter < coordinates.length) {
-                            coordinates[coordCounter] = newCoord;
-                            coordCounter++;
-                        }
+                        coordinates.add(newCoord);
 
                         orderedSegments.add(segment);
                     }
@@ -77,7 +73,8 @@ public class MyPolygon implements MyShape{
 
     // Creates a new JTS polygon based on the current segments.
     private void setJTSPoly(){
-        jtsPolygon = new GeometryFactory().createPolygon(coordinates);
+        Coordinate[] newCoords = new Coordinate[coordinates.size()];
+        jtsPolygon = new GeometryFactory().createPolygon(coordinates.toArray(newCoords));
     }
 
 
