@@ -10,7 +10,7 @@ public class Circle implements IslandShape{
     public Geometry getShape(int width, int height) {
         Coordinate midpoint = new Coordinate(width / 2.0, height / 2.0);
         GeometricShapeFactory gsf = new GeometricShapeFactory();
-        gsf.setSize(Math.min(width, height) * 0.4);
+        gsf.setSize(Math.min(width, height) * 0.8);
         gsf.setCentre(midpoint);
 
         return gsf.createCircle();
