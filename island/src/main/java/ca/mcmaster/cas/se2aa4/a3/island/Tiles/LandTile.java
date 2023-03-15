@@ -6,6 +6,6 @@ public class LandTile implements Tile {
 
     @Override
     public Color getColor() {
-        return new Color(152, 72, 27);
+        return new Color(45, 194, 28);
     }
 }
