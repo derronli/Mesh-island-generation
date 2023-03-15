@@ -7,10 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LagoonTile;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.OceanTile;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.*;
 import org.locationtech.jts.geom.*;
 
 public class MyPolygon implements MyShape{
@@ -22,6 +20,7 @@ public class MyPolygon implements MyShape{
     private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
     private List<Coordinate> coordinates = new ArrayList<>();
+    private List <MyPolygon> neighbours = new ArrayList<>();
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -137,6 +136,33 @@ public class MyPolygon implements MyShape{
         myTile = tile;
         Color tileColor = myTile.getColor();
         changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+    }
+
+    // Checks for a neighbour and sets it as a neighbour if the input polygon is a neighbour.
+    public void checkForNeighbour(MyPolygon other){
+        for (int i = 0; i < other.segments.size(); i++){
+            for (int j = 0; j < this.segments.size(); j++){
+                if (other.segments.get(i).getIndex() == this.segments.get(j).getIndex() &&
+                        !neighbours.contains(other) && !(other.index == this.index)){
+                    addNeighbour(other);
+                }
+            }
+        }
+    }
+
+    public void addNeighbour (MyPolygon other){
+        //add to list of neighbours
+        neighbours.add(other);
+
+        // After adding a neighbour, change tile if neighbour is a water tile and makes this a beach tile if so.
+        if (other.isWaterTile()){
+            changeTile(new BeachTile());
+        }
+
+    }
+
+    public boolean isWaterTile(){
+        return myTile instanceof WaterSource;
     }
 
 }
