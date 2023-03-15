@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.OceanTile;
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
 import org.locationtech.jts.geom.*;
 
@@ -101,6 +102,12 @@ public class MyPolygon implements MyShape{
 
     public void makeLandTile(){
         myTile = new LandTile();
+        Color tileColor = myTile.getColor();
+        changeColor(String.valueOf(tileColor.getRGB()));
+    }
+
+    public void makeOceanTile(){
+        myTile = new OceanTile();
         Color tileColor = myTile.getColor();
         changeColor(String.valueOf(tileColor.getRGB()));
     }

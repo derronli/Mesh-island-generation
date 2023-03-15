@@ -47,10 +47,16 @@ public class DoEverythingTemp {
         // Creates island shape.
         IslandShape island = new Circle();
         Geometry islandShape = island.getShape(500, 500);
+
+        // Sets ocean tiles first and then land tiles.
+        setOceanPolygons(myPolygons);
         setLandPolygons(islandShape, myPolygons);
 
+        vertices = extractVertices(myVertices);
+        segments = extractSegments(mySegments);
+        polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
 
-        return null;
     }
 
     // Adds MyVertex instances to MySegment as a field.
@@ -81,6 +87,40 @@ public class DoEverythingTemp {
                 p.makeLandTile();
             }
         }
+    }
+
+    // Goes through polygons and sets the ocean tiles.
+    private void setOceanPolygons(List<MyPolygon> myPolygons){
+        for (MyPolygon p : myPolygons){
+            p.makeOceanTile();
+        }
+    }
+
+    // Goes through PolygonClass list and returns list of all the polygons each one contains.
+    private List<Polygon> extractPolygons(List<MyPolygon> myPolygons) {
+        List<Polygon> oPolygons = new ArrayList<>();
+        for (MyPolygon polygon : myPolygons) {
+            oPolygons.add(polygon.getPolygon());
+        }
+        return oPolygons;
+    }
+
+    // Goes through MySegment list and returns list of all the segments each one contains.
+    private List<Segment> extractSegments(List<MySegment> mySegments) {
+        List<Segment> oSegments = new ArrayList<>();
+        for (MySegment segment : mySegments) {
+            oSegments.add(segment.getSegment());
+        }
+        return oSegments;
+    }
+
+    // Goes through MySegment list and returns list of all the segments each one contains.
+    private List<Vertex> extractVertices(List<MyVertex> myVertices) {
+        List<Vertex> oVertices = new ArrayList<>();
+        for (MyVertex vertex : myVertices) {
+            oVertices.add(vertex.getVertex());
+        }
+        return oVertices;
     }
 
 }
