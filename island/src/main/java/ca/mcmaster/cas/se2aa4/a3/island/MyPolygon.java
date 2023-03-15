@@ -155,7 +155,7 @@ public class MyPolygon implements MyShape{
         neighbours.add(other);
 
         // After adding a neighbour, change tile if neighbour is a water tile and makes this a beach tile if so.
-        if (other.isWaterTile()){
+        if (other.isWaterTile() && !this.isWaterTile()){
             changeTile(new BeachTile());
         }
 
