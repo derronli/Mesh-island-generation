@@ -33,8 +33,7 @@ public class MyPolygon implements MyShape{
         vertices.add(new double[]{firstSeg.getV2X(), firstSeg.getV2Y()});
         int count = 0;
 
-        //while
-
+        // Orders segments and adds vertices in order to vertices list.
         while (count < segments.size()){
             for (MySegment segment : segments) {
                 if (!orderedSegments.contains(segment)) {
@@ -51,7 +50,9 @@ public class MyPolygon implements MyShape{
                         }
 
                         // Next adds the vertex not already in the list which is in the new segment.
-                        //double[] newVertex = ()
+                        commonVertex = segment.isAdjacent(last);
+                        double[] newVertex = (commonVertex == segment.getV1Index()) ? new double[] {segment.getV2X(), segment.getV2Y()} : new double[] {segment.getV1X(), segment.getV1Y()};
+                        vertices.add(newVertex);
 
                         orderedSegments.add(segment);
                     }
