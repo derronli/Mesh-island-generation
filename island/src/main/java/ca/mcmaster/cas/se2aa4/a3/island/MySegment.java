@@ -44,7 +44,7 @@ public class MySegment implements MyShape{
             return getV2Index();
         if (other.getV1Index() != this.getV2Index() && other.getV2Index() == this.getV1Index())
             return getV1Index();
-        return 0;
+        return -1;
     }
 
     // Getters
