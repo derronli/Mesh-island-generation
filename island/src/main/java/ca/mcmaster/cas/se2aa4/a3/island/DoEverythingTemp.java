@@ -60,6 +60,9 @@ public class DoEverythingTemp {
         Geometry innerCircle = innerLagoon.getShape(500, 500);
         setTileInsideShape(innerCircle, myPolygons, new LagoonTile());
 
+        // Goes through all polygons and sets neighbours, which also changes tiles to beaches if necessary.
+        setPolyNeighbours(myPolygons);
+
         vertices = extractVertices(myVertices);
         segments = extractSegments(mySegments);
         polygons = extractPolygons(myPolygons);
@@ -128,6 +131,14 @@ public class DoEverythingTemp {
             oVertices.add(vertex.getVertex());
         }
         return oVertices;
+    }
+
+    private void setPolyNeighbours(List<MyPolygon> myPolygons){
+        for (MyPolygon p1 : myPolygons){
+            for (MyPolygon p2: myPolygons){
+                p1.checkForNeighbour(p2);
+            }
+        }
     }
 
 }

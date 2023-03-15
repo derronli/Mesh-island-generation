@@ -150,7 +150,7 @@ public class MyPolygon implements MyShape{
         }
     }
 
-    public void addNeighbour (MyPolygon other){
+    private void addNeighbour (MyPolygon other){
         //add to list of neighbours
         neighbours.add(other);
 
