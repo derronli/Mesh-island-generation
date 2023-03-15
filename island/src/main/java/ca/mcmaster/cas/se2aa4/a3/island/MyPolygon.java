@@ -71,12 +71,15 @@ public class MyPolygon implements MyShape{
 
         segments = orderedSegments;
 
-        // Adds the final coordinate to the coordinate array to make a closed loop.
+        // Adds the final coordinate to the coordinate array to make a closed loop if possible and makes the polygon if so.
         MySegment first = segments.get(0);
         MySegment last = segments.get(segments.size() - 1);
         int commonVertex = first.isAdjacent(last);
-        Coordinate lastCoord = (commonVertex == first.getV1Index()) ? new Coordinate(first.getV1X(), first.getV1Y()) : new Coordinate(first.getV2X(), first.getV2Y());
-        coordinates.add(lastCoord);
+        if (commonVertex != 0) {
+            Coordinate lastCoord = (commonVertex == first.getV1Index()) ? new Coordinate(first.getV1X(), first.getV1Y()) : new Coordinate(first.getV2X(), first.getV2Y());
+            coordinates.add(lastCoord);
+            setJTSPoly();
+        }
 
     }
 
@@ -96,7 +99,6 @@ public class MyPolygon implements MyShape{
     public void addSegment(MySegment s){
         segments.add(s);
         orderSegments();
-        setJTSPoly();
     }
 
     // Getters
