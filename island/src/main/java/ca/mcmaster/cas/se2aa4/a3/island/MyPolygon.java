@@ -20,7 +20,7 @@ public class MyPolygon implements MyShape{
     private org.locationtech.jts.geom.Polygon jtsPolygon;
     private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
-    private List<Coordinate> coordinates;
+    private List<Coordinate> coordinates = new ArrayList<>();
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -68,7 +68,16 @@ public class MyPolygon implements MyShape{
                 }
             }
         }
+
         segments = orderedSegments;
+
+        // Adds the final coordinate to the coordinate array to make a closed loop.
+        MySegment first = segments.get(0);
+        MySegment last = segments.get(segments.size() - 1);
+        int commonVertex = first.isAdjacent(last);
+        Coordinate lastCoord = (commonVertex == first.getV1Index()) ? new Coordinate(first.getV1X(), first.getV1Y()) : new Coordinate(first.getV2X(), first.getV2Y());
+        coordinates.add(lastCoord);
+
     }
 
     // Creates a new JTS polygon based on the current segments.
