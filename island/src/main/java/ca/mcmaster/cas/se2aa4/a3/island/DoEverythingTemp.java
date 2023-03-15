@@ -4,6 +4,9 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
+import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,12 @@ public class DoEverythingTemp {
         addVerticesToSegments(myVertices, mySegments);
         addSegmentsToPolygons(mySegments, myPolygons);
 
+        // Creates island shape.
+        IslandShape island = new Circle();
+        Geometry islandShape = island.getShape(500, 500);
+        setLandPolygons(islandShape, myPolygons);
+
+
         return null;
     }
 
@@ -61,6 +70,15 @@ public class DoEverythingTemp {
             for (Integer idx : p.getSegmentIdxsList()){
                 MySegment s = mySegments.get(idx);
                 p.addSegment(s);
+            }
+        }
+    }
+
+    // Goes through polygons in shape and sets the land tiles.
+    private void setLandPolygons(Geometry islandShape, List<MyPolygon> myPolygons){
+        for (MyPolygon p : myPolygons){
+            if (islandShape.contains(p.getJTSPolygon())){
+                p.makeLandTile();
             }
         }
     }

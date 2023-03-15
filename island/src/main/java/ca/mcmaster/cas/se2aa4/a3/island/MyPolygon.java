@@ -1,10 +1,13 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
+import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
 import org.locationtech.jts.geom.*;
 
@@ -75,8 +78,8 @@ public class MyPolygon implements MyShape{
 
 
     public void changeColor(String colorCode){
-//        Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
-//        polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
+        Property color = Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
+        polygon = Polygon.newBuilder(polygon).setProperties(0, color).build();
     }
 
     // Adds segment to segment list.
@@ -95,4 +98,11 @@ public class MyPolygon implements MyShape{
         return jtsPolygon;
     }
     public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
+
+    public void makeLandTile(){
+        myTile = new LandTile();
+        Color tileColor = myTile.getColor();
+        changeColor(String.valueOf(tileColor.getRGB()));
+    }
+
 }
