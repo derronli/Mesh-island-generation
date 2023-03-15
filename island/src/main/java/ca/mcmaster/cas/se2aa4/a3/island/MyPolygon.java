@@ -53,6 +53,8 @@ public class MyPolygon implements MyShape{
             for (MySegment segment : segments) {
                 if (!orderedSegments.contains(segment)) {
                     MySegment last = orderedSegments.get(orderedSegments.size() - 1);
+
+                    // Gets the comment vertex index between the two segments.
                     int commonVertex = last.isAdjacent(segment);
                     if (commonVertex != -1) {
 
@@ -73,9 +75,18 @@ public class MyPolygon implements MyShape{
         MySegment first = segments.get(0);
         MySegment last = segments.get(segments.size() - 1);
         int commonVertex = first.isAdjacent(last);
-        if (commonVertex != -1) {
-            Coordinate lastCoord = (commonVertex == first.getV1Index()) ? new Coordinate(first.getV1X(), first.getV1Y()) : new Coordinate(first.getV2X(), first.getV2Y());
-            coordinates.add(lastCoord);
+        if (commonVertex != -1 && segments.size() > 2) {
+
+            // Before creating the jts polygon, ensures a proper ring exists.
+            Coordinate firstCoord = coordinates.get(0);
+            Coordinate lastCoord = coordinates.get(coordinates.size() - 1);
+
+            // Swaps the first and second elements if the first is not equal to the last, because the second will be.
+            if (!firstCoord.equals2D(lastCoord)){
+                coordinates.set(0, coordinates.get(1));
+                coordinates.set(1, firstCoord);
+            }
+
             setJTSPoly();
         }
 
@@ -83,6 +94,7 @@ public class MyPolygon implements MyShape{
 
     // Creates a new JTS polygon based on the current segments.
     private void setJTSPoly(){
+        System.out.println("\n\nNew poly being tested");
         for (Coordinate c : coordinates){
             System.out.println(c.getX() + "," + c.getY());
         }
