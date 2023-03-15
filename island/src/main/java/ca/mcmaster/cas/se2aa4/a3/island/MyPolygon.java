@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LagoonTile;
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.OceanTile;
 import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
@@ -128,6 +129,12 @@ public class MyPolygon implements MyShape{
 
     public void makeOceanTile(){
         myTile = new OceanTile();
+        Color tileColor = myTile.getColor();
+        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+    }
+
+    public void changeTile(Tile tile){
+        myTile = tile;
         Color tileColor = myTile.getColor();
         changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
     }

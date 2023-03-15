@@ -6,6 +6,10 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.LagoonInnerCircle;
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LagoonTile;
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
+import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
@@ -50,7 +54,11 @@ public class DoEverythingTemp {
 
         // Sets ocean tiles first and then land tiles.
         setOceanPolygons(myPolygons);
-        setLandPolygons(islandShape, myPolygons);
+        setTileInsideShape(islandShape, myPolygons, new LandTile());
+
+        IslandShape innerLagoon = new LagoonInnerCircle();
+        Geometry innerCircle = innerLagoon.getShape(500, 500);
+        setTileInsideShape(innerCircle, myPolygons, new LagoonTile());
 
         vertices = extractVertices(myVertices);
         segments = extractSegments(mySegments);
@@ -80,16 +88,15 @@ public class DoEverythingTemp {
         }
     }
 
-    // Goes through polygons in shape and sets the land tiles.
-    private void setLandPolygons(Geometry islandShape, List<MyPolygon> myPolygons){
+    private void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile){
         for (MyPolygon p : myPolygons){
-            if (islandShape.contains(p.getJTSPolygon())){
-                p.makeLandTile();
+            if (shape.contains(p.getJTSPolygon())){
+                p.changeTile(tile);
             }
         }
     }
 
-    // Goes through polygons and sets the ocean tiles.
+    // Goes through polygons and sets all to one .
     private void setOceanPolygons(List<MyPolygon> myPolygons){
         for (MyPolygon p : myPolygons){
             p.makeOceanTile();
