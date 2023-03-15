@@ -123,7 +123,7 @@ public class MyPolygon implements MyShape{
     public void makeLandTile(){
         myTile = new LandTile();
         Color tileColor = myTile.getColor();
-        changeColor(String.valueOf(tileColor.getRGB()));
+        changeColor(tileColor.getRed() + "," + tileColor.getBlue() + "," + tileColor.getGreen());
     }
 
     public void makeOceanTile(){
