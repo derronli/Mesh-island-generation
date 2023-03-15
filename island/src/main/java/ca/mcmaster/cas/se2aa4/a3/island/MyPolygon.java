@@ -89,5 +89,8 @@ public class MyPolygon implements MyShape{
     public Polygon getPolygon() {
         return polygon;
     }
+    public org.locationtech.jts.geom.Polygon getJTSPolygon() {
+        return jtsPolygon;
+    }
     public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
 }
