@@ -62,7 +62,10 @@ public class MyPolygon implements MyShape{
                         // Next adds the vertex not already in the list which is in the new segment.
                         commonVertex = segment.isAdjacent(last);
                         Coordinate newCoord = (commonVertex == segment.getV1Index()) ? new Coordinate(segment.getV2X(), segment.getV2Y()) : new Coordinate(segment.getV1X(), segment.getV1Y());
-                        coordinates[coordCounter] = newCoord; coordCounter++;
+                        if (coordCounter < coordinates.length) {
+                            coordinates[coordCounter] = newCoord;
+                            coordCounter++;
+                        }
 
                         orderedSegments.add(segment);
                     }
