@@ -94,10 +94,6 @@ public class MyPolygon implements MyShape{
 
     // Creates a new JTS polygon based on the current segments.
     private void setJTSPoly(){
-        System.out.println("\n\nNew poly being tested");
-        for (Coordinate c : coordinates){
-            System.out.println(c.getX() + "," + c.getY());
-        }
         Coordinate[] newCoords = new Coordinate[coordinates.size()];
         jtsPolygon = new GeometryFactory().createPolygon(coordinates.toArray(newCoords));
     }
@@ -133,7 +129,7 @@ public class MyPolygon implements MyShape{
     public void makeOceanTile(){
         myTile = new OceanTile();
         Color tileColor = myTile.getColor();
-        changeColor(String.valueOf(tileColor.getRGB()));
+        changeColor(tileColor.getRed() + "," + tileColor.getBlue() + "," + tileColor.getGreen());
     }
 
 }
