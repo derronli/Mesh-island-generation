@@ -4,15 +4,17 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.locationtech.jts.geom.*;
 
 public class MyPolygon implements MyShape{
 
     private static int totalIndex = 0;
     private final int index;
     private Polygon polygon;
+    private org.locationtech.jts.geom.Polygon jtsPolygon;
     private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
-    private List <double[]> vertices = new ArrayList<>();
+    private Coordinate[] coordinates;
 
     public MyPolygon(Polygon p){
         polygon = p;
@@ -20,21 +22,22 @@ public class MyPolygon implements MyShape{
         totalIndex++;
     }
 
-    private void initPolygon(){
-
-    }
-
     // Orders the segments and sets the vertices list.
-    public void orderSegments (){
+    private void orderSegments (){
         List <MySegment> orderedSegments = new ArrayList<>();
         MySegment firstSeg = segments.get(0);
         orderedSegments.add(firstSeg);
-        vertices.add(new double[]{firstSeg.getV1X(), firstSeg.getV1Y()});
-        vertices.add(new double[]{firstSeg.getV2X(), firstSeg.getV2Y()});
-        int count = 0;
+
+        coordinates = new Coordinate[segments.size()];
+        int coordCounter = 0;
+
+        Coordinate c1 = new Coordinate(firstSeg.getV1X(), firstSeg.getV1Y());
+        Coordinate c2 = new Coordinate(firstSeg.getV2X(), firstSeg.getV2Y());
+        coordinates[coordCounter] = c1; coordCounter++;
+        coordinates[coordCounter] = c2; coordCounter++;
 
         // Orders segments and adds vertices in order to vertices list.
-        while (count < segments.size()){
+        for (int count = 0; count < segments.size(); count++){
             for (MySegment segment : segments) {
                 if (!orderedSegments.contains(segment)) {
                     MySegment last = orderedSegments.get(orderedSegments.size() - 1);
@@ -44,23 +47,28 @@ public class MyPolygon implements MyShape{
                         // If we are adding the second segment, checks the vertices on both to ensure proper ordering.
                         if (orderedSegments.size() == 1){
                             // First adds the vertex not in common, then the vertex in common.
-                            double[] firstVertex = (commonVertex == last.getV1Index()) ? new double[] {last.getV2X(), last.getV2Y()} : new double[] {last.getV1X(), last.getV1Y()};
-                            double[] secondVertex = (commonVertex == last.getV1Index()) ? new double[] {last.getV1X(), last.getV1Y()} : new double[] {last.getV2X(), last.getV2Y()};
-                            vertices.add(firstVertex); vertices.add(secondVertex);
+                            Coordinate firstCoord = (commonVertex == last.getV1Index()) ? new Coordinate(last.getV2X(), last.getV2Y()) : new Coordinate(last.getV1X(), last.getV1Y());
+                            Coordinate secondCoord = (commonVertex == last.getV1Index()) ? new Coordinate(last.getV1X(), last.getV1Y()) : new Coordinate(last.getV2X(), last.getV2Y());
+                            coordinates[coordCounter] = firstCoord; coordCounter++;
+                            coordinates[coordCounter] = secondCoord; coordCounter++;
                         }
 
                         // Next adds the vertex not already in the list which is in the new segment.
                         commonVertex = segment.isAdjacent(last);
-                        double[] newVertex = (commonVertex == segment.getV1Index()) ? new double[] {segment.getV2X(), segment.getV2Y()} : new double[] {segment.getV1X(), segment.getV1Y()};
-                        vertices.add(newVertex);
+                        Coordinate newCoord = (commonVertex == segment.getV1Index()) ? new Coordinate(segment.getV2X(), segment.getV2Y()) : new Coordinate(segment.getV1X(), segment.getV1Y());
+                        coordinates[coordCounter] = newCoord; coordCounter++;
 
                         orderedSegments.add(segment);
                     }
                 }
             }
-            count++;
         }
         segments = orderedSegments;
+    }
+
+    // Creates a new JTS polygon based on the current segments.
+    private void setJTSPoly(){
+        jtsPolygon = new GeometryFactory().createPolygon(coordinates);
     }
 
 
@@ -72,6 +80,8 @@ public class MyPolygon implements MyShape{
     // Adds segment to segment list.
     public void addSegment(MySegment s){
         segments.add(s);
+        orderSegments();
+        setJTSPoly();
     }
 
     // Getters

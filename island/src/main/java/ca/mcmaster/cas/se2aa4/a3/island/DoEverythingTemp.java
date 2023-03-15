@@ -62,7 +62,6 @@ public class DoEverythingTemp {
                 MySegment s = mySegments.get(idx);
                 p.addSegment(s);
             }
-            p.orderSegments();
         }
     }
 
