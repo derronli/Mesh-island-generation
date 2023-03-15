@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class InputHandler {
 
-    public Mesh createMesh(String[] args){
+    public void createMesh(String[] args){
 
         Options options = createOptions();
 
@@ -17,12 +17,11 @@ public class InputHandler {
         try {
             // parse the command line arguments
             CommandLine line = parser.parse(options, args);
-            return checkOptions(line, options);
+            checkOptions(line, options);
         }
         catch (ParseException | IOException exp) {
             // oops, something went wrong
             System.err.println("Parsing failed.  Reason: " + exp.getMessage());
-            return null;
         }
 
     }
@@ -55,14 +54,14 @@ public class InputHandler {
         formatter.printHelp("island help", options);
     }
 
-    private Mesh checkOptions(CommandLine line, Options options)  throws IOException {
+    private void checkOptions(CommandLine line, Options options)  throws IOException {
 
         String inputFile = null, outputFile = null;
 
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
-            return null;
+            return;
         }
         if (line.hasOption("i")){
             inputFile = line.getOptionValue("i");
@@ -75,10 +74,13 @@ public class InputHandler {
         if (!(inputFile == null || outputFile == null)){
             Mesh aMesh = new MeshFactory().read(inputFile);
             DoEverythingTemp d = new DoEverythingTemp();
-            return d.makeMesh(aMesh);
+
+            // Makes mesh factory and writes to it.
+            MeshFactory factory = new MeshFactory();
+            factory.write(d.makeMesh(aMesh), outputFile);
+            
         }
 
-        return null;
     }
 
 }

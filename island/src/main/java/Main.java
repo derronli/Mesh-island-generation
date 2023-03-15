@@ -6,14 +6,9 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
-        Mesh myMesh = inputHandler.createMesh(args);
-        if (myMesh == null){
-            return;
-        }
-        MeshFactory factory = new MeshFactory();
-        factory.write(myMesh, args[0]);
+        inputHandler.createMesh(args);
     }
 
 }
