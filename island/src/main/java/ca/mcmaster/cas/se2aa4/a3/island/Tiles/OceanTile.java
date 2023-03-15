@@ -1,12 +1,20 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Tiles;
 
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
+
 import java.awt.*;
 
-public class OceanTile implements Tile {
+public class OceanTile implements Tile, WaterSource {
 
     @Override
     public Color getColor() {
         return new Color(54, 146, 246);
     }
-    
+
+    // Ocean is salty and bad for vegetation so gets gives negative water value.
+    @Override
+    public int nutritionProvided() {
+        return -1;
+    }
+
 }
