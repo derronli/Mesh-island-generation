@@ -65,6 +65,37 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
+|  F01  |  One preset shape given to user to create island from  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F06  |  User can set maximum number of lakes  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F08  |  River creates a lake when it cannot move to a lower elevation anyomore  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F09  |  User can specify number of rivers to generate  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F10  |  Two rivers can merge, making the new river wider  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F13  |  Soil absorption profile makes only tiles directly connected to lakes absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F14  |  Soil absorption profile makes only tiles directly connected to rivers absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F17  |  Elevation and moisture determines biome of each tile and colour is changed accordingly  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F  |  a  |  a  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+
+## Documentation
+
+
+# A2 Information
+
+## Product Backlog A2
+
+| Id | Feature title | Who? | Start | End | Status |
+|:--:|---------------|------|-------|-----|--------|
 |  F01  |  Draw segments between vertices to visualize squares  |  Everyone  |  02/03/23  |  02/05/23  |  D  |
 |  F02  |  Mesh generates at a precision model of 2 decimal places  |  Derron  |  02/06/23  |  02/08/23  |  D  |
 |  F03  |  Mesh has minimal vertices  |  Kyle  |  02/03/23  |  02/07/23  |  D  |
@@ -89,7 +120,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F22  |  User can enter "help" mode if a -h argument is inputted when running generator |  Kyle  |  02/24/23  |  02/24/23  |  D  |
 |  F23  |  User can select the number of polygons they wish to generate through the command line  |  Kyle/Derron  |  02/24/23  |  02/24/23  |  D  |
 
-# Documentation
+## Documentation
 To get thickness of vertices and lines, extract the thickness from the properties list using the key 'thickness'.
 
 ## Format for user input when running generator main file
@@ -145,5 +176,3 @@ sample.mesh -ir -np 200 -rl 5 -pa 200 -st 10
 
 ## Format for user input when running visualizer main file
 Add '-X' after first 2 arguments to enter debug mode. Anything else is taken as default visualization.
-
-
