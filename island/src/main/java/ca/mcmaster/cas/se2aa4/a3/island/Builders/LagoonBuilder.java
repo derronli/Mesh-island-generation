@@ -53,13 +53,6 @@ public class LagoonBuilder implements IslandBuilder{
         }
     }
 
-    // Goes through polygons and sets all to one .
-    private void setOceanPolygons(List<MyPolygon> myPolygons){
-        for (MyPolygon p : myPolygons){
-            p.makeOceanTile();
-        }
-    }
-
     // Goes through PolygonClass list and returns list of all the polygons each one contains.
     private List<Polygon> extractPolygons(List<MyPolygon> myPolygons) {
         List<Polygon> oPolygons = new ArrayList<>();
