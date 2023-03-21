@@ -12,7 +12,7 @@ public class PlainsElevation implements BaseElevation {
     }
 
     @Override
-    public void selectElevation() {
+    public void setElevation() {
 
     }
 
