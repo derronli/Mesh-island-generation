@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island.Tiles;
+package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
 

@@ -8,15 +8,13 @@ import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.LagoonInnerCircle;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LagoonTile;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.LandTile;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.Tile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LagoonTile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class DoEverythingTemp {
 
