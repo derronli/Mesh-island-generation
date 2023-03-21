@@ -2,6 +2,8 @@ package ca.mcmaster.cas.se2aa4.a3.island.IslandShapes;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
 public class Circle implements IslandShape{
@@ -18,8 +20,9 @@ public class Circle implements IslandShape{
         return gsf.createCircle();
     }
 
-    public Coordinate getCenter() {
-        return midpoint;
+    public Point getCenter() {
+        GeometryFactory gf = new GeometryFactory();
+        return gf.createPoint(midpoint);
     }
 
 }

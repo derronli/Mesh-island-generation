@@ -13,6 +13,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.OceanTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.Point;
 
 public class MyPolygon implements MyShape{
 
@@ -173,6 +174,10 @@ public class MyPolygon implements MyShape{
 
     public boolean isWaterTile(){
         return myTile instanceof WaterSource;
+    }
+
+    public boolean containsPoint(Point point){
+        return jtsPolygon.contains(point);
     }
 
 }
