@@ -12,6 +12,7 @@ public class PlainsElevation extends GeneralElevationProperties {
     private Geometry geom;
     private List <MyPolygon> polygonList;
     private List <Boolean> hasElevation;
+    private List <Integer> elevationValues;
 
     private Random rand = new Random();
     public PlainsElevation(Geometry g, List <MyPolygon> polygons) {
@@ -34,12 +35,21 @@ public class PlainsElevation extends GeneralElevationProperties {
     }
     @Override
     public void generateElevation() {
-
+        for (Boolean aBoolean : hasElevation) {
+            if (aBoolean) {
+                int value = rand.nextInt(maxElevation);
+                elevationValues.add(value);
+            } else {
+                elevationValues.add(0);
+            }
+        }
     }
 
     @Override
     public void setElevation() {
-
+        for (int i = 0; i<polygonList.size(); i++){
+            //SET POLYGON ELEVATIONS 
+        }
     }
 
 }
