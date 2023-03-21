@@ -11,4 +11,9 @@ public class VolcanoElevation implements BaseElevation {
     public void selectElevation() {
 
     }
+
+    private void findCentrePolygon (){
+        
+    }
+
 }
