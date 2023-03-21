@@ -13,7 +13,7 @@ public class LagoonTile implements Tile, WaterSource {
 
     // Lagoon gives 2 nutrition because it is extra nutritious.
     @Override
-    public int nutritionProvided(){
+    public int moistureProvided(){
         return 2;
     }
 }

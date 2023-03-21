@@ -13,7 +13,7 @@ public class OceanTile implements Tile, WaterSource {
 
     // Ocean is salty and bad for vegetation so gets gives negative water value.
     @Override
-    public int nutritionProvided() {
+    public int moistureProvided() {
         return -1;
     }
 
