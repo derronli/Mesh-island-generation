@@ -1,32 +1,27 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.LagoonInnerCircle;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LagoonTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
+import ca.mcmaster.cas.se2aa4.a3.island.*;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LagoonBuilder {
+public class LagoonBuilder implements IslandBuilder{
 
-    public Mesh makeLagoon(Mesh aMesh){
+    public Mesh buildIsland(Mesh aMesh){
 
         // Extracting the Structs from the input mesh and converts to our ADT
         StructsToAdtExtractor extractor = new StructsToAdtExtractor(aMesh);
         List<MyVertex> myVertices = extractor.getMyVertices();
         List<MySegment> mySegments = extractor.getMySegments();
         List<MyPolygon> myPolygons = extractor.getMyPolygons();
-
-
 
         // Creates island shape.
         IslandShape island = new Circle();
