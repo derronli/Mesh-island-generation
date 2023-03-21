@@ -13,6 +13,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.OceanTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.Point;
 
 public class MyPolygon implements MyShape{
 
@@ -146,30 +147,37 @@ public class MyPolygon implements MyShape{
     }
 
     // Checks for a neighbour and sets it as a neighbour if the input polygon is a neighbour.
-    public void checkForNeighbour(MyPolygon other){
+    public boolean checkForNeighbour(MyPolygon other){
         for (int i = 0; i < other.segments.size(); i++){
             for (int j = 0; j < this.segments.size(); j++){
                 if (other.segments.get(i).getIndex() == this.segments.get(j).getIndex() &&
                         !neighbours.contains(other) && !(other.index == this.index)){
                     addNeighbour(other);
+                    return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    private void addNeighbour (MyPolygon other){
+        neighbours.add(other);
+    }
+
+    public void checkNeighboursForBeach(){
+        for (MyPolygon other : neighbours){
+            if (other.isWaterTile() && !this.isWaterTile()){
+                changeTile(new BeachTile());
             }
         }
     }
 
-    private void addNeighbour (MyPolygon other){
-        //add to list of neighbours
-        neighbours.add(other);
-
-        // After adding a neighbour, change tile if neighbour is a water tile and makes this a beach tile if so.
-        if (other.isWaterTile() && !this.isWaterTile()){
-            changeTile(new BeachTile());
-        }
-
-    }
-
     public boolean isWaterTile(){
         return myTile instanceof WaterSource;
+    }
+
+    public boolean containsPoint(Point point){
+        return jtsPolygon.contains(point);
     }
 
 }

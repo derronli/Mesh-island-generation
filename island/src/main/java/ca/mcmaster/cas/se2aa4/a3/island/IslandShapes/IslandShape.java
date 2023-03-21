@@ -4,4 +4,5 @@ import org.locationtech.jts.geom.*;
 
 public interface IslandShape {
     Geometry getShape(int width, int height);
+    Point getCenter();
 }
