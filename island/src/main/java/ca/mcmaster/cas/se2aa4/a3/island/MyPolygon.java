@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
-import ca.mcmaster.cas.se2aa4.a3.island.Tiles.*;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.BeachTile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.OceanTile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import org.locationtech.jts.geom.*;
 
 public class MyPolygon implements MyShape{
