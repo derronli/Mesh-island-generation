@@ -132,6 +132,10 @@ public class MyPolygon implements MyShape{
         changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
     }
 
+    /**
+     * Changes the tile of this polygon to an input tile type, and appropriately changes its colour.
+     * @param tile input tile type to be used
+     */
     public void changeTile(Tile tile){
         myTile = tile;
         Color tileColor = myTile.getColor();
