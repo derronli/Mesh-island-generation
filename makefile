@@ -49,9 +49,9 @@ genis:
 	cd generator && java -jar generator.jar generator/input.mesh -pt 0 -ir -rl 40 -np 400
 
 genlagoon:
-	cd island && java -jar island.jar -i generator/input.mesh -o island/lagoon.mesh
+	cd island && java -jar island.jar -o island/lagoon.mesh -i ../generator/input.mesh
 
 vislagoon:
-	cd visualizer && java -jar visualizer.jar island/lagoon.mesh visualizer/lagoon.svg
+	cd visualizer && java -jar visualizer.jar ../island/lagoon.mesh visualizer/lagoon.svg
 
 runlag: s genis genlagoon vislagoon
