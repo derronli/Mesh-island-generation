@@ -48,7 +48,7 @@ public class PlainsElevation extends GeneralElevationProperties {
     @Override
     public void setElevation() {
         for (int i = 0; i<polygonList.size(); i++){
-            //SET POLYGON ELEVATIONS 
+            //SET POLYGON ELEVATIONS
         }
     }
 

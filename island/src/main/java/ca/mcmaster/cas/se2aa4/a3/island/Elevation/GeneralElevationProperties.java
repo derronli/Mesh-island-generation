@@ -17,7 +17,6 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
         this.geom = g;
         this.polygonList = polygons;
     }
-
     protected void getIslandCentre (){
 
     }
