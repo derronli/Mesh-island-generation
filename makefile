@@ -54,4 +54,4 @@ genlagoon:
 vislagoon:
 	cd visualizer && java -jar visualizer.jar ../island/lagoon.mesh lagoon.svg
 
-runlag: s genis genlagoon vislagoon
+runlag: s genlagoon vislagoon
