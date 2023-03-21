@@ -55,6 +55,24 @@ public class VolcanoElevation implements BaseElevation {
         return allCentroids;
     }
 
+    private MyVertex midCentroid (){
+        double x = 0;
+        double y = 0;
+        List<MyVertex> allCentroids = findAllCentroids();
+        for (MyVertex allCentroid : allCentroids) {
+            x += allCentroid.getX();
+            y += allCentroid.getY();
+        }
+
+        x = x/allCentroids.size();
+        y = y/allCentroids.size();
+
+        MyVertex centreOfMesh = null; //NEED TO SET THE X AND Y HERE ASK LATER
+        return centreOfMesh;
+    }
+
+    
+
     private void findCentrePolygon (){
         
     }
