@@ -27,8 +27,7 @@ public class LagoonBuilder implements IslandBuilder{
         IslandShape island = new Circle();
         Geometry islandShape = island.getShape(500, 500);
 
-        // Sets ocean tiles first and then land tiles.
-        setOceanPolygons(myPolygons);
+        // Sets land tiles.
         setTileInsideShape(islandShape, myPolygons, new LandTile());
 
         IslandShape innerLagoon = new LagoonInnerCircle();
