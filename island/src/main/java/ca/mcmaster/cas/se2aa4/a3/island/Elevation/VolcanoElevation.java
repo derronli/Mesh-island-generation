@@ -3,6 +3,8 @@ package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
 import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
+import org.locationtech.jts.geom.Geometry;
+
 import java.util.Comparator;
 import java.awt.geom.Point2D;
 
@@ -19,6 +21,10 @@ public class VolcanoElevation extends GeneralElevationProperties {
     private List <MySegment> segments;
     private List <Boolean> markedSegments;
 
+    public VolcanoElevation(Geometry g, List<MyPolygon> polygons) {
+        super(g, polygons);
+    }
+
     @Override
     public void generateElevation() {
 
@@ -28,6 +34,7 @@ public class VolcanoElevation extends GeneralElevationProperties {
     public void setElevation() {
 
     }
+
     private double[] getMiddle(MySegment segment){
         return new double[]{(segment.getV1X() + segment.getV2X()) / 2, (segment.getV1Y() + segment.getV2Y()) / 2};
     }
