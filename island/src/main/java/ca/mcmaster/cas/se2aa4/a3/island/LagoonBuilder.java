@@ -16,12 +16,9 @@ import org.locationtech.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoEverythingTemp {
+public class LagoonBuilder {
 
-    public Mesh makeMesh(Mesh aMesh){
-        List<Vertex> vertices;
-        List<Segment> segments;
-        List<Polygon> polygons;
+    public Mesh makeLagoon(Mesh aMesh){
 
         // Extracting the Structs from the input mesh and converts to our ADT
         StructsToAdtExtractor extractor = new StructsToAdtExtractor(aMesh);
@@ -46,9 +43,9 @@ public class DoEverythingTemp {
         // Goes through all polygons and sets neighbours, which also changes tiles to beaches if necessary.
         setPolyNeighbours(myPolygons);
 
-        vertices = extractVertices(myVertices);
-        segments = extractSegments(mySegments);
-        polygons = extractPolygons(myPolygons);
+        List<Vertex> vertices = extractVertices(myVertices);
+        List<Segment> segments = extractSegments(mySegments);
+        List<Polygon> polygons = extractPolygons(myPolygons);
         return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
 
     }
@@ -101,6 +98,7 @@ public class DoEverythingTemp {
             for (MyPolygon p2: myPolygons){
                 p1.checkForNeighbour(p2);
             }
+            p1.checkNeighboursForBeach();
         }
     }
 

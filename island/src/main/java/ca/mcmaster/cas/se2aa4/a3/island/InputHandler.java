@@ -73,11 +73,11 @@ public class InputHandler {
         // Ensures we have an input and output file before creating island.
         if (!(inputFile == null || outputFile == null)){
             Mesh aMesh = new MeshFactory().read(inputFile);
-            DoEverythingTemp d = new DoEverythingTemp();
+            LagoonBuilder d = new LagoonBuilder();
 
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
-            factory.write(d.makeMesh(aMesh), outputFile);
+            factory.write(d.makeLagoon(aMesh), outputFile);
             
         }
 
