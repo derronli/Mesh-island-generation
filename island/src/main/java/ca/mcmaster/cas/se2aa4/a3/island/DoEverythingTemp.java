@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.LagoonInnerCircle;
@@ -20,33 +21,17 @@ import java.util.Set;
 public class DoEverythingTemp {
 
     public Mesh makeMesh(Mesh aMesh){
+        List<Vertex> vertices;
+        List<Segment> segments;
+        List<Polygon> polygons;
 
-        List<Vertex> vertices = aMesh.getVerticesList();
-        List<Segment> segments = aMesh.getSegmentsList();
-        List<Polygon> polygons = aMesh.getPolygonsList();
-        List<MyVertex> myVertices = new ArrayList<>();
-        List<MySegment> mySegments = new ArrayList<>();
-        List<MyPolygon> myPolygons = new ArrayList<>();
+        // Extracting the Structs from the input mesh and converts to our ADT
+        StructsToAdtExtractor extractor = new StructsToAdtExtractor(aMesh);
+        List<MyVertex> myVertices = extractor.getMyVertices();
+        List<MySegment> mySegments = extractor.getMySegments();
+        List<MyPolygon> myPolygons = extractor.getMyPolygons();
 
-        // Add all items to my structure.
-        for (Vertex v : vertices){
-            MyVertex myV = new MyVertex(v);
-            myV.changeColor("0,0,0");
-            myVertices.add(myV);
-        }
-        for (Segment s : segments){
-            MySegment myS = new MySegment(s);
-            myS.changeColor("0,0,0");
-            mySegments.add(myS);
-        }
-        for (Polygon p : polygons){
-            MyPolygon myP = new MyPolygon(p);
-            myP.changeColor("255,255,255");
-            myPolygons.add(myP);
-        }
 
-        addVerticesToSegments(myVertices, mySegments);
-        addSegmentsToPolygons(mySegments, myPolygons);
 
         // Creates island shape.
         IslandShape island = new Circle();
@@ -70,26 +55,6 @@ public class DoEverythingTemp {
 
     }
 
-    // Adds MyVertex instances to MySegment as a field.
-    private void addVerticesToSegments(List<MyVertex> myVertices, List<MySegment> mySegments){
-        for (MySegment s : mySegments){
-            int v1Idx = s.getV1Index();
-            int v2Idx = s.getV2Index();
-            MyVertex v1 = myVertices.get(v1Idx);
-            MyVertex v2 = myVertices.get(v2Idx);
-            s.setV1(v1); s.setV2(v2);
-        }
-    }
-
-    // Add MySegment instances to MyPolygon as a field.
-    private void addSegmentsToPolygons(List<MySegment> mySegments, List<MyPolygon> myPolygons){
-        for (MyPolygon p : myPolygons){
-            for (Integer idx : p.getSegmentIdxsList()){
-                MySegment s = mySegments.get(idx);
-                p.addSegment(s);
-            }
-        }
-    }
 
     private void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile){
         for (MyPolygon p : myPolygons){
