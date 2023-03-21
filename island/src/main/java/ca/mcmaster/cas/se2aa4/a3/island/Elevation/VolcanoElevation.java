@@ -11,7 +11,8 @@ import java.util.List;
 
 //need getters and setters of elevation in the polygon and segments classes
 //need to modify vertex constructor
-public class VolcanoElevation implements BaseElevation {
+//create a Point and use the jts library
+public class VolcanoElevation extends GeneralElevationProperties {
 
     private List <MyPolygon> polygons;
     private List <MyVertex> vertices;
@@ -71,7 +72,7 @@ public class VolcanoElevation implements BaseElevation {
         return centreOfMesh;
     }
 
-    
+
 
     private void findCentrePolygon (){
         

@@ -5,7 +5,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import java.util.List;
 
 //plains can go here
-public class PlainsElevation implements BaseElevation {
+public class PlainsElevation extends GeneralElevationProperties {
     @Override
     public void generateElevation() {
 
