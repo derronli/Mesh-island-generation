@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.BeachTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.OceanTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.Point;
 
@@ -21,7 +18,8 @@ public class MyPolygon implements MyShape{
     private final int index;
     private Polygon polygon;
     private org.locationtech.jts.geom.Polygon jtsPolygon;
-    private Tile myTile;
+    // Each polygon starts with an ocean tile.
+    private Tile myTile = new OceanTile();
     private List <MySegment> segments = new ArrayList<>();
     private List<Coordinate> coordinates = new ArrayList<>();
     private List <MyPolygon> neighbours = new ArrayList<>();
@@ -30,6 +28,10 @@ public class MyPolygon implements MyShape{
         polygon = p;
         index = totalIndex;
         totalIndex++;
+
+        Color tileColor = myTile.getColor();
+        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+
     }
 
     // Orders the segments and sets the vertices list.
@@ -178,6 +180,26 @@ public class MyPolygon implements MyShape{
 
     public boolean containsPoint(Point point){
         return jtsPolygon.contains(point);
+    }
+
+    // Sets elevation of tile if it is an island tile.
+    // should we tell them something is wrong if they set elevation for an ocean tile????
+    public void setElevation(int elevation){
+        if (myTile instanceof AbstractIslandTile){
+            ((AbstractIslandTile) myTile).setElevation(elevation);
+        }
+        // maybe print this if they try doing that on polygon without a land tile
+        else{
+            System.out.println("You just tried to change the elevation on an ocean tile.");
+        }
+    }
+
+    // Gets elevation of tile if island tile, if not just returns 0.
+    public int getElevation(){
+        if (myTile instanceof AbstractIslandTile){
+            return ((AbstractIslandTile) myTile).getElevation();
+        }
+        return 0;
     }
 
 }
