@@ -1,18 +1,16 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandShapes;
 
-import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
-public class LagoonInnerCircle implements IslandShape{
+public class LagoonInnerCircle extends AbstractIslandShape{
 
-    private Coordinate midpoint;
+    public LagoonInnerCircle(int width, int height) {
+        super(width, height);
+    }
 
     @Override
-    public Geometry getShape(int width, int height) {
-        midpoint = new Coordinate(width / 2.0, height / 2.0);
+    public Geometry getShape() {
         GeometricShapeFactory gsf = new GeometricShapeFactory();
         gsf.setSize(Math.min(width, height) * 0.4);
         gsf.setCentre(midpoint);
@@ -20,9 +18,4 @@ public class LagoonInnerCircle implements IslandShape{
         return gsf.createCircle();
     }
 
-    @Override
-    public Point getCenter() {
-        GeometryFactory gf = new GeometryFactory();
-        return gf.createPoint(midpoint);
-    }
 }

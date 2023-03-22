@@ -18,8 +18,10 @@ public class InputHandler {
     }
     
     private Map<String, IslandShape> createBuilderOptions(){
+        int width = 500; int height = 500;
         Map<String, IslandShape> options = new HashMap<>();
-        options.put("circle", new Circle());
+        options.put("circle", new Circle(width, height));
+        options.put("hexagon", new Hexagon(width, height));
 
         return options;
     }

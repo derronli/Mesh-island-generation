@@ -32,7 +32,7 @@ public class IslandBuilder extends AbstractBuilder {
         List<MyPolygon> myPolygons = extractor.getMyPolygons();
 
         // Creates island shape.
-        Geometry shape = islandShape.getShape(500, 500);
+        Geometry shape = islandShape.getShape();
 
         // Sets land tiles.
         setTileInsideShape(shape, myPolygons, new LandTile());

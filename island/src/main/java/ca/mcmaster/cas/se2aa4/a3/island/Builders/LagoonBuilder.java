@@ -24,14 +24,14 @@ public class LagoonBuilder extends AbstractBuilder {
         List<MyPolygon> myPolygons = extractor.getMyPolygons();
 
         // Creates island shape.
-        IslandShape island = new Circle();
-        Geometry islandShape = island.getShape(500, 500);
+        IslandShape island = new Circle(500, 500);
+        Geometry islandShape = island.getShape();
 
         // Sets land tiles.
         setTileInsideShape(islandShape, myPolygons, new LandTile());
 
-        IslandShape innerLagoon = new LagoonInnerCircle();
-        Geometry innerCircle = innerLagoon.getShape(500, 500);
+        IslandShape innerLagoon = new LagoonInnerCircle(500, 500);
+        Geometry innerCircle = innerLagoon.getShape();
         setTileInsideShape(innerCircle, myPolygons, new LagoonTile());
 
         // Goes through all polygons and sets neighbours, which also changes tiles to beaches if necessary.
