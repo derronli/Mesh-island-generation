@@ -191,4 +191,14 @@ public class MyPolygon implements MyShape{
         }
         return -1;
     }
+
+    public boolean attemptChange(Tile newTile) {
+        if(myTile.tryChange(newTile) != null) {
+            myTile = newTile;
+            Color tileColor = myTile.getColor();
+            changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+            return true;
+        }
+        return false;
+    }
 }

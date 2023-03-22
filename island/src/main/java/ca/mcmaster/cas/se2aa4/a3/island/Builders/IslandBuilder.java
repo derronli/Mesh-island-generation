@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 
 
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
+import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
@@ -31,6 +32,9 @@ public class IslandBuilder extends AbstractBuilder {
 
         // Sets land tiles.
         setTileInsideShape(shape, myPolygons, new LandTile());
+
+        // Lake generator
+        new LakeGenerator(myPolygons, 10);
 
     }
 
