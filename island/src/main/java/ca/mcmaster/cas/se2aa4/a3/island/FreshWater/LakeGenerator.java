@@ -22,9 +22,7 @@ public class LakeGenerator {
         while (count < numLakes) {
             index = rand.nextInt(myPolygons.size());
             p = myPolygons.get(index);
-            if (p.attemptChange(new LakeTile())) {
-                count++;
-            }
+            count += (p.attemptChange(new LakeTile())) ? 1 : 0;
         }
     }
     // Args specify loop bounds

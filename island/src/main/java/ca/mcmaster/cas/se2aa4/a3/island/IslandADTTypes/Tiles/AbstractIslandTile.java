@@ -8,4 +8,8 @@ public abstract class AbstractIslandTile implements Tile {
     public void setElevation(int elevation){ this.elevation = elevation; }
     public int getElevation(){ return elevation; }
 
+    public Tile tryChange(Tile newTile) {
+        return newTile;
+    }
+
 }

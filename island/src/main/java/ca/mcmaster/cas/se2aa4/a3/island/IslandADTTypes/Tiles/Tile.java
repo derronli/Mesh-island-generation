@@ -6,5 +6,5 @@ public interface Tile {
     
     Color getColor();
 
-    public Tile tryChange(Tile newTile);
+    Tile tryChange(Tile newTile);
 }

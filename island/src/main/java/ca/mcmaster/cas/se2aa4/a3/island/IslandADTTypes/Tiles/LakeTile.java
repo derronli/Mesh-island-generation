@@ -2,7 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
 import java.awt.*;
 
-public class LakeTile implements Tile {
+public class LakeTile extends AbstractIslandTile {
 
     @Override
     public Color getColor() {

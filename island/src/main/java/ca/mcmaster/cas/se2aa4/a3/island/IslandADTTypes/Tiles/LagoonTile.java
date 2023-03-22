@@ -17,7 +17,7 @@ public class LagoonTile implements Tile, WaterSource {
         return 2;
     }
 
-    public Tile tryChange(Tile NewTile) {
+    public Tile tryChange(Tile newTile) {
         return null;
     }
 }
