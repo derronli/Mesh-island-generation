@@ -6,6 +6,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.AdtToStructsExtractor;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
+import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
@@ -18,6 +19,9 @@ import java.util.List;
 public abstract class AbstractBuilder implements MeshBuilder{
 
     protected AdtToStructsExtractor adtToStructs = new AdtToStructsExtractor();
+    List<MyVertex> myVertices = new ArrayList<>();
+    List<MySegment> mySegments = new ArrayList<>();
+    List<MyPolygon> myPolygons = new ArrayList<>();
 
     // Goes through MyVertex list and returns list of all the segments each one contains.
     protected List<Vertex> extractVertices(List<MyVertex> myVertices) {
@@ -40,6 +44,17 @@ public abstract class AbstractBuilder implements MeshBuilder{
                 p.changeTile(tile);
             }
         }
+    }
+
+    public Mesh getIsland(){
+        List<Vertex> vertices = extractVertices(myVertices);
+        List<Segment> segments = extractSegments(mySegments);
+        List<Polygon> polygons = extractPolygons(myPolygons);
+        return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
+    }
+
+    public void applyHeatmap(HeatmapPainter painter){
+        painter.createHeatmap(myPolygons, myVertices, mySegments);
     }
 
 }
