@@ -183,12 +183,12 @@ public class MyPolygon implements MyShape{
         }
     }
 
-    // Gets elevation of tile if island tile, if not just returns 0.
+    // Gets elevation of tile if island tile, if not just returns -1.
     public int getElevation(){
         if (myTile instanceof AbstractIslandTile){
             return ((AbstractIslandTile) myTile).getElevation();
         }
-        return 0;
+        return -1;
     }
 
 }

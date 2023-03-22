@@ -85,6 +85,8 @@ When you develop features and enrich the product, remember that you have first t
 |  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F21  |  User can select a heatmap to view elevation properties  |  Kyle  |  22/03/23  |  dd/mm/yy  |  s  |
+|  F22  |  User can select a heatmap to view moisture properties  |  Kyle  |  22/03/23  |  dd/mm/yy  |  s  |
 |  F  |  a  |  a  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 
 ## Documentation
