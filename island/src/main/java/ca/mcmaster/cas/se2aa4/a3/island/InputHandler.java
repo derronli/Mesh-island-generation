@@ -37,7 +37,7 @@ public class InputHandler {
         // Makes a mesh of the specified type if not lagoon mode.
         IslandShape shape = builderOptions.get(mode);
         if (shape == null){
-            throw new IllegalArgumentException("mode must be of a valid type");
+            throw new IllegalArgumentException("mode must be of a valid type. Check documentation for more information.");
         }
 
         d = new IslandBuilder(shape);

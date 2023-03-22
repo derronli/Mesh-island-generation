@@ -89,6 +89,13 @@ When you develop features and enrich the product, remember that you have first t
 
 ## Documentation
 
+## Legend
+- -i = input file path to use
+- -o = output file path to use
+- -mode = either 'lagoon' or valid shape
+
+### List of valid shapes
+1. Circle
 
 # A2 Information
 
