@@ -5,7 +5,6 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
-import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.LagoonInnerCircle;

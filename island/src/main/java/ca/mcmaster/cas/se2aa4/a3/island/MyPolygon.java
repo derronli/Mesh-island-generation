@@ -171,14 +171,4 @@ public class MyPolygon implements MyShape{
     public boolean isWaterTile(){
         return myTile instanceof WaterSource;
     }
-
-    public boolean attemptChange(Tile newTile) {
-        if(myTile.tryChange(newTile) != null) {
-            myTile = newTile;
-            Color tileColor = myTile.getColor();
-            changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
-            return true;
-        }
-        return false;
-    }
 }
