@@ -20,12 +20,12 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
     protected IslandShape island;
     protected List <MyPolygon> polygons;
     protected int maxElevation = 100;
-    protected List <Integer> elevationValues;
+    protected List <Integer> elevationValues = new ArrayList<>();
 
     protected Point islandCentre;
     public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons){
         this.island = i;
-        this.polygons = checkPolygonsWithinIsland(polygons);
+        this.polygons = checkPolygonsWithinIsland(polygons, i.getShape());
     }
 
     protected void getIslandCentre (){
@@ -41,13 +41,14 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
         return null; //CHECK LATER IF THIS IS FINE
     }
 
-    protected List<MyPolygon> checkPolygonsWithinIsland (List <MyPolygon> polygons){
+    protected List<MyPolygon> checkPolygonsWithinIsland (List <MyPolygon> polygons, Geometry island){
         List<MyPolygon> withinIsland = new ArrayList<>();
-        for (MyPolygon polygon : polygons) {
-            if (!polygon.isWaterTile()) {
-                withinIsland.add(polygon);
+        for (MyPolygon p : polygons){
+            if (island.contains(p.getJTSPolygon())){
+                withinIsland.add(p);
             }
         }
+
         return withinIsland;
     }
 

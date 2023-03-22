@@ -25,7 +25,7 @@ public class VolcanoElevation extends GeneralElevationProperties {
 
     public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
         super(i, polygons);
-        centrePolygon = getMiddlePolygon();
+        //centrePolygon = getMiddlePolygon();
 
     }
 
@@ -35,10 +35,5 @@ public class VolcanoElevation extends GeneralElevationProperties {
             markedPolygons.add(false);
         }
     }
-
-//    @Override
-//    public void setElevation() {
-//
-//    }
 
 }
