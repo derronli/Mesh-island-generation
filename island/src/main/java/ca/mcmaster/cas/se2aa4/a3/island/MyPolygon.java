@@ -194,9 +194,7 @@ public class MyPolygon implements MyShape{
 
     public boolean attemptChange(Tile newTile) {
         if(myTile.tryChange(newTile) != null) {
-            myTile = newTile;
-            Color tileColor = myTile.getColor();
-            changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+            changeTile(newTile);
             return true;
         }
         return false;

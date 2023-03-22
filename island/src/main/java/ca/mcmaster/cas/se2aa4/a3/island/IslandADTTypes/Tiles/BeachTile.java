@@ -8,7 +8,7 @@ public class BeachTile extends AbstractIslandTile {
         return new Color(250, 216, 168);
     }
 
-    public Tile tryChange(Tile NewTile) {
+    public Tile tryChange(Tile newTile) {
         return null;
     }
 }
