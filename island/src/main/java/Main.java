@@ -1,4 +1,4 @@
-import ca.mcmaster.cas.se2aa4.a3.island.InputParser;
+import ca.mcmaster.cas.se2aa4.a3.island.InputFactories.InputParser;
 
 public class Main {
 

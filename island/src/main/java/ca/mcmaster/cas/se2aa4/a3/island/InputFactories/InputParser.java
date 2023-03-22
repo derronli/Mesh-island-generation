@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
@@ -68,7 +68,7 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
-        String inputFile = null, outputFile = null, mode = null, heatmap = null;
+        String inputFile = null, outputFile = null, mode = "default", heatmap = null;
 
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
