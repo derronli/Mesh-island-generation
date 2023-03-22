@@ -5,4 +5,6 @@ import java.awt.Color;
 public interface Tile {
     
     Color getColor();
+
+    public Tile tryChange(Tile newTile);
 }
