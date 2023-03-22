@@ -34,7 +34,7 @@ public class InputParser {
         Option heatmap = Option.builder("heatmap")
                 .argName("field")
                 .hasArg()
-                .desc("Choose which field a heatmap is produced from on island")
+                .desc("Choose which field a heatmap is produced from an island")
                 .build();
         Option input = Option.builder("i")
                 .argName("input file")
