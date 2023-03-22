@@ -1,4 +1,5 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
 import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
@@ -8,22 +9,28 @@ import java.util.Random;
 import java.util.List;
 
 //plains can go here
+//convert polygons to jts form using kyle's stuff in order to actually compare wow
 public class PlainsElevation extends GeneralElevationProperties {
-    private Geometry geom;
+    private IslandShape island;
     private List <MyPolygon> polygonList;
+    private List <MyPolygon> islandPolygons;
+    private MyPolygon centrePolygon;
     private List <Boolean> hasElevation;
     private List <Integer> elevationValues;
 
     private Random rand = new Random();
-    public PlainsElevation(Geometry g, List <MyPolygon> polygons) {
-        super(g, polygons);
-        this.geom = g;
+    public PlainsElevation(IslandShape g, List <MyPolygon> polygons, List <MySegment> segments) {
+        super(g, polygons, segments);
+        this.island = g;
         this.polygonList = polygons;
     }
 
 
     private void decideElevation (){
-        for (int i = 0; i<polygonList.size(); i++){
+
+        islandPolygons = checkPolygonsWithinIsland();
+
+        for (int i = 0; i<islandPolygons.size(); i++){
             int assignElevation = rand.nextInt(15);
             if (assignElevation == 0){
                 hasElevation.add(true);
@@ -47,7 +54,7 @@ public class PlainsElevation extends GeneralElevationProperties {
 
     @Override
     public void setElevation() {
-        for (int i = 0; i<polygonList.size(); i++){
+        for (int i = 0; i<islandPolygons.size(); i++){
             //SET POLYGON ELEVATIONS
         }
     }
