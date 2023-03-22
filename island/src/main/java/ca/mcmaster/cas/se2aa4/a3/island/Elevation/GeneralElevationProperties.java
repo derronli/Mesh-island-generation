@@ -26,10 +26,9 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
     protected int maxElevation = 100;
 
     protected Point islandCentre;
-    public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons, List <MySegment> segments){
+    public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons){
         this.island = i;
         this.polygons = polygons;
-        this.segments = segments;
     }
 
     private double[] getMiddle(MySegment segment){

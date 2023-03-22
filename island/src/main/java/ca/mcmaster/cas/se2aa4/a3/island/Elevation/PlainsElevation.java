@@ -17,8 +17,8 @@ public class PlainsElevation extends GeneralElevationProperties {
     private List <Integer> elevationValues;
 
     private Random rand = new Random();
-    public PlainsElevation(IslandShape g, List <MyPolygon> polygons, List <MySegment> segments) {
-        super(g, polygons, segments);
+    public PlainsElevation(IslandShape g, List <MyPolygon> polygons) {
+        super(g, polygons);
         this.island = g;
         this.polygonList = polygons;
     }

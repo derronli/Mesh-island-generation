@@ -25,8 +25,8 @@ public class VolcanoElevation extends GeneralElevationProperties {
     private List <MyPolygon> islandPolygons;
     private MyPolygon centrePolygon;
 
-    public VolcanoElevation(IslandShape i, List<MyPolygon> polygons, List <MySegment> segments) {
-        super(i, polygons, segments);
+    public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
+        super(i, polygons);
         centrePolygon = getMiddlePolygon();
         islandPolygons = checkPolygonsWithinIsland();
     }
