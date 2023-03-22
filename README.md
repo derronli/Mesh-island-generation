@@ -94,14 +94,17 @@ When you develop features and enrich the product, remember that you have first t
 ## Legend
 - -i = input file path to use
 - -o = output file path to use
-- -mode = either 'lagoon' or valid shape
+- -mode = (optional, defaults to circle) either 'lagoon' for lagoon mode or valid shape
+- -heatmap = (optional) heatmap type to use for visualizing properties (see list of valid heatmaps for more details)
 
 ### List of valid shapes
-1. Circle
+1. Circle (default)
 2. Hexagon
 
-## Running Heatmaps
-To run a heatmap, use the following commands in visualizer:
+### List of valid heatmaps
+1. Elevation (default)
+2. Moisture
+
 
 # A2 Information
 
