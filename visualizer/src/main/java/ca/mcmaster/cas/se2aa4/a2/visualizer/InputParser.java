@@ -31,11 +31,6 @@ public class InputParser {
 
         Option help = new Option("h", "display all possible inputs");
         Option debug = new Option("X", "Enter debug mode (A2)");
-        Option heatmap = Option.builder("heatmap")
-                .argName("field")
-                .hasArg()
-                .desc("Choose which field a heatmap is produced from an island")
-                .build();
         Option input = Option.builder("i")
                 .argName("input file")
                 .hasArg()
@@ -52,7 +47,6 @@ public class InputParser {
         options.addOption(debug);
         options.addOption(input);
         options.addOption(output);
-        options.addOption(heatmap);
 
         return options;
     }
@@ -64,7 +58,7 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options) throws IOException {
 
-        String inputFile = null, outputFile = null, heatmap = null, debug = null;
+        String inputFile = null, outputFile = null, debug = null;
 
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
@@ -80,24 +74,12 @@ public class InputParser {
         if (line.hasOption("debug")){
             debug = line.getOptionValue("debug");
         }
-        if (line.hasOption("heatmap")){
-            heatmap = line.getOptionValue("heatmap");
-        }
 
         InputHandler handler = new InputHandler();
 
         // Ensures we have an input and output file before visualizing island.
         if (!(inputFile == null || outputFile == null)){
-            if (heatmap != null && debug != null){
-                throw new IllegalArgumentException("Error, cannot activate mesh debug and heatmap at same time");
-            }
-            if (heatmap == null){
-                handler.visualizeMesh(inputFile, outputFile, debug);
-            }
-            else{
-                handler.visualizeHeatmap(inputFile, outputFile, heatmap);
-            }
-
+            handler.visualizeMesh(inputFile, outputFile, debug);
         }
 
     }

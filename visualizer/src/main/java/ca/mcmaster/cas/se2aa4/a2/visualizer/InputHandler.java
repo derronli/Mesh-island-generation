@@ -5,20 +5,8 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class InputHandler {
-
-    private final Map<String, MapDebugRenderer> heatmapOptions = createHeatmapOptions();
-
-    private Map<String, MapDebugRenderer> createHeatmapOptions(){
-        Map<String, MapDebugRenderer> options = new HashMap<>();
-        options.put("elevation", new ElevationRenderer());
-        options.put("moisture", new MoistureRenderer());
-
-        return options;
-    }
 
     // Visualize mesh in debug mode or regular.
     public void visualizeMesh(String input, String output, String debug) throws IOException {
@@ -36,23 +24,6 @@ public class InputHandler {
         else{
             renderer = new NormalRender();
         }
-        renderer.render(aMesh, canvas);
-
-        meshToFile(output, canvas, aMesh);
-
-    }
-
-    // Visualize mesh in heatmap mode.
-    public void visualizeHeatmap(String input, String output, String heatmap) throws IOException {
-
-        // Getting width and height for the canvas
-        Structs.Mesh aMesh = new MeshFactory().read(input);
-
-        // Creating the Canvas to draw the mesh
-        Graphics2D canvas = canvasFromMesh(aMesh);
-
-        // Painting the mesh on the canvas
-        MapDebugRenderer renderer = heatmapOptions.get(heatmap);
         renderer.render(aMesh, canvas);
 
         meshToFile(output, canvas, aMesh);
