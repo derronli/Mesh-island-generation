@@ -98,6 +98,9 @@ When you develop features and enrich the product, remember that you have first t
 1. Circle
 2. Hexagon
 
+## Running Heatmaps
+To run a heatmap, use the following commands in visualizer:
+
 # A2 Information
 
 ## Product Backlog A2

@@ -11,7 +11,7 @@ public class InputHandler {
     private final int numPolygons = 100;
     private final int relaxation = 0;
 
-    public Mesh createMesh(String[] args){
+    public void visualizeMesh(String[] args){
 
         Options options = createOptions();
 
@@ -20,12 +20,11 @@ public class InputHandler {
         try {
             // parse the command line arguments
             CommandLine line = parser.parse(options, args);
-            return checkOptions(line, options);
+            checkOptions(line, options);
         }
         catch (ParseException exp) {
             // oops, something went wrong
             System.err.println("Parsing failed.  Reason: " + exp.getMessage());
-            return null;
         }
 
     }
@@ -96,58 +95,26 @@ public class InputHandler {
         formatter.printHelp("generator help", options);
     }
 
-    private Mesh checkOptions(CommandLine line, Options options){
-        // Setting parameters for dotgen to default values.
-        int polyTrans = alpha;
-        int segTrans = alpha;
-        int vertexTrans = alpha;
-        float polyThick = POLYSEGTHICKNESS;
-        float segThick = POLYSEGTHICKNESS;
-        float vertexThick = VERTEXTHICKNESS;
-        int numPoly = numPolygons;
-        int relax = relaxation;
+    private void checkOptions(CommandLine line, Options options){
+
+        String inputFile = null, outputFile = null, mode = null;
 
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
-            return null;
+            return;
+        }
+        if (line.hasOption("i")){
+            inputFile = line.getOptionValue("i");
+        }
+        if (line.hasOption("o")){
+            outputFile = line.getOptionValue("o");
+        }
+        if (line.hasOption("mode")){
+            mode = line.getOptionValue("mode");
         }
 
-        // logic to see which options were used and set variables accordingly.
-        if(line.hasOption("pa")) {
-            // initialise the member variable
-            polyTrans = Integer.parseInt(line.getOptionValue("pa"));
-        }
-        if(line.hasOption("sa")) {
-            // initialise the member variable
-            segTrans = Integer.parseInt(line.getOptionValue("sa"));
-        }
-        if(line.hasOption("va")) {
-            // initialise the member variable
-            vertexTrans = Integer.parseInt(line.getOptionValue("va"));
-        }
-        if(line.hasOption("pt")) {
-            // initialise the member variable
-            polyThick = Float.parseFloat(line.getOptionValue("pt"));
-        }
-        if(line.hasOption("st")) {
-            // initialise the member variable
-            segThick = Float.parseFloat(line.getOptionValue("st"));
-        }
-        if(line.hasOption("vt")) {
-            // initialise the member variable
-            vertexThick = Float.parseFloat(line.getOptionValue("vt"));
-        }
-        if(line.hasOption("np")) {
-            // initialise the member variable
-            numPoly = Integer.parseInt(line.getOptionValue("np"));
-        }
-        if(line.hasOption("rl")) {
-            // initialise the member variable
-            relax = Integer.parseInt(line.getOptionValue("rl"));
-        }
-
-        return null;
+        return;
 
 
     }
