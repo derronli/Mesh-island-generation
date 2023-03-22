@@ -38,46 +38,37 @@ public class InputHandler {
     }
     
     public Mesh makeMesh(Mesh aMesh){
-
-        MeshBuilder d;
-
-        // Checks for a lagoon mesh.
-        if (mode.equals("lagoon")){
-            d = new LagoonBuilder();
-            return d.buildIsland(aMesh);
-        }
-
-        // Makes a mesh of the specified type if not lagoon mode.
-        IslandShape shape = builderOptions.get(mode);
-        if (shape == null){
-            throw new IllegalArgumentException("mode must be of a valid type. Check documentation for more information.");
-        }
-
-        d = new IslandBuilder(shape);
-        return d.buildIsland(aMesh);
+        MeshBuilder d = buildIsland(aMesh);
+        return d.getIsland();
     }
 
-    public Mesh makeMesh(Mesh aMesh, String heatmap){
-
+    private MeshBuilder buildIsland(Mesh aMesh){
         MeshBuilder d;
-        HeatmapPainter heatmapPainter = heatmapOptions.get(heatmap);
 
         // Checks for a lagoon mesh.
         if (mode.equals("lagoon")){
             d = new LagoonBuilder();
         }
         else {
+
             // Makes a mesh of the specified type if not lagoon mode.
             IslandShape shape = builderOptions.get(mode);
             if (shape == null) {
                 throw new IllegalArgumentException("mode must be of a valid type. Check documentation for more information.");
             }
-
             d = new IslandBuilder(shape);
+
         }
 
+        d.buildIsland(aMesh);
+        return d;
+    }
 
-        return d.buildIsland(aMesh);
+    public Mesh makeMesh(Mesh aMesh, String heatmap){
+        MeshBuilder d = buildIsland(aMesh);
+        HeatmapPainter heatmapPainter = heatmapOptions.get(heatmap);
+        d.applyHeatmap(heatmapPainter);
+        return d.getIsland();
     }
 
 }

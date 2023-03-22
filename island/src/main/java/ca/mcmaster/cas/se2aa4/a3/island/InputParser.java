@@ -92,11 +92,17 @@ public class InputParser {
         if (!(inputFile == null || outputFile == null)){
             Mesh aMesh = new MeshFactory().read(inputFile);
 
-            InputHandler parser = new InputHandler(mode);
+            InputHandler handler = new InputHandler(mode);
 
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
-            factory.write(parser.makeMesh(aMesh), outputFile);
+            if (heatmap != null){
+                aMesh = handler.makeMesh(aMesh, heatmap);
+            }
+            else{
+                aMesh = handler.makeMesh(aMesh);
+            }
+            factory.write(aMesh, outputFile);
             
         }
 

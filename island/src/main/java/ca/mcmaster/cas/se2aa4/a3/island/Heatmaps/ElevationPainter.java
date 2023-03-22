@@ -9,7 +9,8 @@ public class ElevationPainter extends HeatmapPainter{
     public Color determineColor(MyPolygon p) {
         int elevation = p.getElevation();
 
-        return switch ((0 <= elevation && elevation <= 10) ? 0 :
+        return switch ((elevation == -1) ? 6 :
+                (0 <= elevation && elevation <= 10) ? 0 :
                 (11 <= elevation && elevation <= 20) ? 1 :
                         (21 <= elevation && elevation <= 30) ? 2 :
                                 (31 <= elevation && elevation <= 50) ? 3 :
@@ -21,6 +22,7 @@ public class ElevationPainter extends HeatmapPainter{
             case 3 -> new Color(30, 175, 255);
             case 4 -> new Color(0, 150, 230);
             case 5 -> new Color(0, 130, 200);
+            case 6 -> new Color(0, 39, 54);
             default -> Color.BLACK;
         };
     }

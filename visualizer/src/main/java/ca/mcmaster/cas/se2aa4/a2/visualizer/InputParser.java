@@ -91,11 +91,11 @@ public class InputParser {
             if (heatmap != null && debug != null){
                 throw new IllegalArgumentException("Error, cannot activate mesh debug and heatmap at same time");
             }
-            if (heatmap != null){
-                handler.visualizeHeatmap(inputFile, outputFile, heatmap);
+            if (heatmap == null){
+                handler.visualizeMesh(inputFile, outputFile, debug);
             }
             else{
-                handler.visualizeMesh(inputFile, outputFile, debug);
+                handler.visualizeHeatmap(inputFile, outputFile, heatmap);
             }
 
         }
