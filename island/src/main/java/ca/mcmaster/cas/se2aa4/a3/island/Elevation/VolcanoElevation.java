@@ -17,31 +17,23 @@ import java.util.List;
 //create a Point and use the jts library
 public class VolcanoElevation extends GeneralElevationProperties {
 
-    private List <MyPolygon> polygons;
     private List <MyVertex> vertices;
     private List <MySegment> segments;
     private List <Boolean> markedSegments;
+    private List <Boolean> markedPolygons;
+    private MyPolygon centrePolygon;
 
-    public VolcanoElevation(IslandShape i, List<MyPolygon> polygons, List <MySegment> segments) {
-        super(i, polygons, segments);
+    public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
+        super(i, polygons);
+        //centrePolygon = getMiddlePolygon();
+
     }
 
     @Override
-    public void generateElevation() {
-
-    }
-
-    @Override
-    public void setElevation() {
-
-    }
-
-
-
-
-
-    private void findCentrePolygon (){
-        
+    protected void generateElevationProfile() {
+        for (int i = 0; i<polygons.size(); i++){
+            markedPolygons.add(false);
+        }
     }
 
 }

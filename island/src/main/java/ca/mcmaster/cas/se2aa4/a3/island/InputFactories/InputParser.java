@@ -50,6 +50,11 @@ public class InputParser {
                 .hasArg()
                 .desc("Choose which type of heatmap is produced from an island")
                 .build();
+        Option elevation = Option.builder("elevation")
+                .argName("elevation type")
+                .hasArg()
+                .desc("Choose which type of elevation is produced from an island")
+                .build();
 
         // add all options
         options.addOption(help);
@@ -57,6 +62,7 @@ public class InputParser {
         options.addOption(output);
         options.addOption(mode);
         options.addOption(heatmap);
+        options.addOption(elevation);
 
         return options;
     }
@@ -68,7 +74,7 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
-        String inputFile = null, outputFile = null, mode = "default", heatmap = null;
+        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null;
 
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
@@ -87,6 +93,9 @@ public class InputParser {
         if (line.hasOption("heatmap")){
             heatmap = line.getOptionValue("heatmap");
         }
+        if (line.hasOption("elevation")){
+            elevation = line.getOptionValue("elevation");
+        }
 
         // Ensures we have an input and output file before creating island.
         if (!(inputFile == null || outputFile == null)){
@@ -97,10 +106,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation);
             }
             else{
-                aMesh = handler.makeMesh(aMesh);
+                aMesh = handler.makeMesh(aMesh, elevation);
             }
             factory.write(aMesh, outputFile);
             
