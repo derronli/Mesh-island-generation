@@ -65,7 +65,7 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
-|  F01  |  One preset shape given to user to create island from  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F01  |  One preset shape given to user to create island from (circle)  |  Kyle  |  20/03/23  |  21/03/23  |  D  |
 |  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |

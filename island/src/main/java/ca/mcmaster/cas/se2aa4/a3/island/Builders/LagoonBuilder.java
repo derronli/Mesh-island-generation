@@ -13,7 +13,7 @@ import org.locationtech.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LagoonBuilder implements IslandBuilder{
+public class LagoonBuilder extends AbstractBuilder {
 
     public Mesh buildIsland(Mesh aMesh){
 
@@ -42,42 +42,6 @@ public class LagoonBuilder implements IslandBuilder{
         List<Polygon> polygons = extractPolygons(myPolygons);
         return Mesh.newBuilder().addAllVertices(vertices).addAllSegments(segments).addAllPolygons(polygons).build();
 
-    }
-
-
-    private void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile){
-        for (MyPolygon p : myPolygons){
-            if (shape.contains(p.getJTSPolygon())){
-                p.changeTile(tile);
-            }
-        }
-    }
-
-    // Goes through PolygonClass list and returns list of all the polygons each one contains.
-    private List<Polygon> extractPolygons(List<MyPolygon> myPolygons) {
-        List<Polygon> oPolygons = new ArrayList<>();
-        for (MyPolygon polygon : myPolygons) {
-            oPolygons.add(polygon.getPolygon());
-        }
-        return oPolygons;
-    }
-
-    // Goes through MySegment list and returns list of all the segments each one contains.
-    private List<Segment> extractSegments(List<MySegment> mySegments) {
-        List<Segment> oSegments = new ArrayList<>();
-        for (MySegment segment : mySegments) {
-            oSegments.add(segment.getSegment());
-        }
-        return oSegments;
-    }
-
-    // Goes through MySegment list and returns list of all the segments each one contains.
-    private List<Vertex> extractVertices(List<MyVertex> myVertices) {
-        List<Vertex> oVertices = new ArrayList<>();
-        for (MyVertex vertex : myVertices) {
-            oVertices.add(vertex.getVertex());
-        }
-        return oVertices;
     }
 
     private void setPolyNeighbours(List<MyPolygon> myPolygons){
