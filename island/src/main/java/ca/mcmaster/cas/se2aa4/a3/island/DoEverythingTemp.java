@@ -47,9 +47,6 @@ public class DoEverythingTemp {
         // Goes through all polygons and sets neighbours, which also changes tiles to beaches if necessary.
         setPolyNeighbours(myPolygons);
 
-        // Lake generator
-        new LakeGenerator(myPolygons, 10);
-
         vertices = extractVertices(myVertices);
         segments = extractSegments(mySegments);
         polygons = extractPolygons(myPolygons);
