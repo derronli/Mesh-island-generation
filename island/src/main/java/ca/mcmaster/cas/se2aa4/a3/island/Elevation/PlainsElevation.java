@@ -25,7 +25,6 @@ public class PlainsElevation extends GeneralElevationProperties {
         this.polygonList = polygons;
     }
 
-
     private void decideElevation (){
 
         islandPolygons = checkPolygonsWithinIsland();
@@ -51,12 +50,17 @@ public class PlainsElevation extends GeneralElevationProperties {
             }
         }
     }
-
     @Override
     public void setElevation() {
         for (int i = 0; i<islandPolygons.size(); i++){
             //SET POLYGON ELEVATIONS
+            islandPolygons.get(i).setElevation(elevationValues.get(i));
         }
+    }
+    public void createPlains (){
+        decideElevation();
+        generateElevation();
+        setElevation();
     }
 
 }
