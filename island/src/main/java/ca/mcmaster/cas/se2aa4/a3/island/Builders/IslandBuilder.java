@@ -1,5 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 
+import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
+import ca.mcmaster.cas.se2aa4.a3.island.Extractor.StructsToAdtExtractor;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
@@ -11,7 +13,9 @@ public class IslandBuilder extends AbstractBuilder {
 
     private final IslandShape islandShape;
 
-
+    public void constructElevation (BaseElevation elevation){
+        elevation.generateElevation();
+    }
     public IslandBuilder(IslandShape shape){
         islandShape = shape;
     }
@@ -30,6 +34,9 @@ public class IslandBuilder extends AbstractBuilder {
         // Lake generator
         new LakeGenerator(myPolygons, 10);
 
+    }
+    public IslandShape getIslandShape (){
+        return islandShape;
     }
 
 

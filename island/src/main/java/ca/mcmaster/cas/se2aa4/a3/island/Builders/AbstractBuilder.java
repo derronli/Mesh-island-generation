@@ -47,4 +47,8 @@ public abstract class AbstractBuilder implements MeshBuilder{
         painter.createHeatmap(myPolygons, myVertices, mySegments);
     }
 
+    public List <MyPolygon> extractPolygonsFromBuilder() {
+        return myPolygons;
+    }
+
 }

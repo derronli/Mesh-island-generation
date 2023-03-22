@@ -17,49 +17,15 @@ import java.util.List;
 //WHEN IMPLEMENTING LAKES AND RIVERS, NOT WATER TILE
 public abstract class GeneralElevationProperties implements  BaseElevation{
 
-    private IslandShape island;
-    private List <MyPolygon> polygons;
-    private List <MySegment> segments;
-
-    private List <Coordinate> allCentroids;
-
+    protected IslandShape island;
+    protected List <MyPolygon> polygons;
     protected int maxElevation = 100;
+    protected List <Integer> elevationValues = new ArrayList<>();
 
     protected Point islandCentre;
-    public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons, List <MySegment> segments){
+    public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons){
         this.island = i;
-        this.polygons = polygons;
-        this.segments = segments;
-    }
-
-    private double[] getMiddle(MySegment segment){
-        return new double[]{(segment.getV1X() + segment.getV2X()) / 2, (segment.getV1Y() + segment.getV2Y()) / 2};
-    }
-    private Coordinate calcCentroid(){
-        double midX = 0;
-        double midY = 0;
-        double [] middle;
-        for (MySegment segment : segments) {
-            middle = getMiddle(segment);
-            midX += middle[0];
-            midY += middle[1];
-        }
-        double x = midX/segments.size();
-        double y = midY/segments.size();
-        Coordinate temp = new Coordinate();
-        temp.setX(x);
-        temp.setY(y);
-        return temp; //NEED TO SET THE VERTEX ASK KYLE LATER
-
-    }
-
-    private List<Coordinate> findAllCentroids () {
-        List<Coordinate> allCentroids = new ArrayList<>();
-        for (int i = 0; i<polygons.size(); i++){
-            Coordinate cent = calcCentroid();
-            allCentroids.add(cent);
-        }
-        return allCentroids;
+        this.polygons = checkPolygonsWithinIsland(polygons, i.getShape());
     }
 
     protected void getIslandCentre (){
@@ -75,15 +41,29 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
         return null; //CHECK LATER IF THIS IS FINE
     }
 
-    protected List<MyPolygon> checkPolygonsWithinIsland (){
+    protected List<MyPolygon> checkPolygonsWithinIsland (List <MyPolygon> polygons, Geometry island){
         List<MyPolygon> withinIsland = new ArrayList<>();
-        for (MyPolygon polygon : polygons) {
-            if (!polygon.isWaterTile()) {
-                withinIsland.add(polygon);
+        for (MyPolygon p : polygons){
+            if (island.contains(p.getJTSPolygon())){
+                withinIsland.add(p);
             }
         }
+
         return withinIsland;
     }
 
+    private void setElevation() {
+        for (int i = 0; i<polygons.size(); i++){
+            //SET POLYGON ELEVATIONS
+            polygons.get(i).setElevation(elevationValues.get(i));
+        }
+    }
 
+    protected abstract void generateElevationProfile ();
+
+    @Override
+    public void generateElevation() {
+        generateElevationProfile();
+        setElevation();
+    }
 }
