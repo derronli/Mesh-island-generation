@@ -32,7 +32,7 @@ public class InputHandler {
     private Map<String, HeatmapPainter> createHeatmapOptions(){
         Map<String, HeatmapPainter> options = new HashMap<>();
         options.put("elevation", new ElevationPainter());
-//        options.put("moisture", new MoisturePainter());
+        options.put("moisture", new MoisturePainter());
 
         return options;
     }

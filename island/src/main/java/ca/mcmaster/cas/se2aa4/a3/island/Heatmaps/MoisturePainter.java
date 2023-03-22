@@ -8,7 +8,7 @@ import java.util.Random;
 public class MoisturePainter extends HeatmapPainter{
     @Override
     public Color determineColor(MyPolygon p) {
-        int moisture = new Random().nextInt();
+        int moisture = new Random().nextInt(-1, 10);
 
         return switch ((0 <= moisture && moisture <= 2) ? 0 :
                 (2 <= moisture && moisture <= 3) ? 1 :
