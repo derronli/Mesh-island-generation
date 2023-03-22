@@ -13,6 +13,8 @@ import java.util.List;
 public class PlainsElevation extends GeneralElevationProperties {
     private IslandShape island;
     private List <MyPolygon> polygonList;
+    private List <MyPolygon> islandPolygons;
+    private MyPolygon centrePolygon;
     private List <Boolean> hasElevation;
     private List <Integer> elevationValues;
 
@@ -25,7 +27,10 @@ public class PlainsElevation extends GeneralElevationProperties {
 
 
     private void decideElevation (){
-        for (int i = 0; i<polygonList.size(); i++){
+
+        islandPolygons = checkPolygonsWithinIsland();
+
+        for (int i = 0; i<islandPolygons.size(); i++){
             int assignElevation = rand.nextInt(15);
             if (assignElevation == 0){
                 hasElevation.add(true);
@@ -49,7 +54,7 @@ public class PlainsElevation extends GeneralElevationProperties {
 
     @Override
     public void setElevation() {
-        for (int i = 0; i<polygonList.size(); i++){
+        for (int i = 0; i<islandPolygons.size(); i++){
             //SET POLYGON ELEVATIONS
         }
     }
