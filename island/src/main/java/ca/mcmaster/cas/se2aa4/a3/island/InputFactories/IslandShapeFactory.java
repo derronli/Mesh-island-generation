@@ -7,7 +7,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuilderFactory {
+public class IslandShapeFactory {
     private final Map<String, IslandShape> builderOptions = createBuilderOptions();
 
     private Map<String, IslandShape> createBuilderOptions(){

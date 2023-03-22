@@ -9,22 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InputHandler {
-    private final Map<String, HeatmapPainter> heatmapOptions = createHeatmapOptions();
-
-
 
     private final String mode;
 
     public InputHandler(String mode){
         this.mode = mode;
-    }
-
-    private Map<String, HeatmapPainter> createHeatmapOptions(){
-        Map<String, HeatmapPainter> options = new HashMap<>();
-        options.put("elevation", new ElevationPainter());
-        options.put("moisture", new MoisturePainter());
-
-        return options;
     }
     
     public Mesh makeMesh(Mesh aMesh){
@@ -41,8 +30,8 @@ public class InputHandler {
         }
         else {
             // Makes a mesh of the specified type if not lagoon mode.
-            BuilderFactory builderFactory = new BuilderFactory();
-            IslandShape shape = builderFactory.getIslandShape(mode);
+            IslandShapeFactory islandShapeFactory = new IslandShapeFactory();
+            IslandShape shape = islandShapeFactory.getIslandShape(mode);
             d = new IslandBuilder(shape);
         }
 
@@ -52,7 +41,8 @@ public class InputHandler {
 
     public Mesh makeMesh(Mesh aMesh, String heatmap){
         MeshBuilder d = buildIsland(aMesh);
-        HeatmapPainter heatmapPainter = heatmapOptions.get(heatmap);
+        HeatmapFactory heatFactory = new HeatmapFactory();
+        HeatmapPainter heatmapPainter = heatFactory.getHeatmap(heatmap);
         d.applyHeatmap(heatmapPainter);
         return d.getIsland();
     }
