@@ -62,6 +62,18 @@ visisland:
 gencir:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle
 
+gencirel:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap elevation
+
+genhexel:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap elevation
+
+gencirmo:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture
+
+genhexmo:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture
+
 runcir: s gencir visisland
 
 genhex:
@@ -69,7 +81,10 @@ genhex:
 
 runhex: s genhex visisland
 
-visheatel:
-	cd visualizer && java -jar visualizer.jar -i ../island/island.mesh -o island.svg -heatmap elevation
+cirel: s gencirel visisland
 
-heatel: s visheatel
+cirmo: s gencirmo visisland
+
+hexel: s genhexel visisland
+
+hexmo: s genhexmo visisland
