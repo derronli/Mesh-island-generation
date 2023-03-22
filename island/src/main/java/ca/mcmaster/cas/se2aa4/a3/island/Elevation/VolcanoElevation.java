@@ -21,27 +21,26 @@ public class VolcanoElevation extends GeneralElevationProperties {
     private List <MyVertex> vertices;
     private List <MySegment> segments;
     private List <Boolean> markedSegments;
+    private List <Boolean> markedPolygons;
+    private List <MyPolygon> islandPolygons;
+    private MyPolygon centrePolygon;
 
     public VolcanoElevation(IslandShape i, List<MyPolygon> polygons, List <MySegment> segments) {
         super(i, polygons, segments);
+        centrePolygon = getMiddlePolygon();
+        islandPolygons = checkPolygonsWithinIsland();
     }
 
     @Override
     public void generateElevation() {
-
+        for (int i = 0; i<islandPolygons.size(); i++){
+            markedPolygons.add(false);
+        }
     }
 
     @Override
     public void setElevation() {
 
-    }
-
-
-
-
-
-    private void findCentrePolygon (){
-        
     }
 
 }

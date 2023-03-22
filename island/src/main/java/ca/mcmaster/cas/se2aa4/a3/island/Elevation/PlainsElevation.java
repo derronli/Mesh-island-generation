@@ -1,9 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
 import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
-import org.locationtech.jts.geom.Geometry;
 import java.util.Random;
 
 import java.util.List;
