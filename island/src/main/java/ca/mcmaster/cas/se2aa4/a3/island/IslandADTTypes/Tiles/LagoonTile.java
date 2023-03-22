@@ -16,4 +16,8 @@ public class LagoonTile implements Tile, WaterSource {
     public int moistureProvided(){
         return 2;
     }
+
+    public Tile tryChange(Tile NewTile) {
+        return null;
+    }
 }

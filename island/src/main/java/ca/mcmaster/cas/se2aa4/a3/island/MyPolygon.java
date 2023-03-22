@@ -167,6 +167,7 @@ public class MyPolygon implements MyShape{
         return myTile instanceof WaterSource;
     }
 
+
     public boolean containsPoint(Point point){
         return jtsPolygon.contains(point);
     }
@@ -190,5 +191,4 @@ public class MyPolygon implements MyShape{
         }
         return -1;
     }
-
 }

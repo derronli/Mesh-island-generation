@@ -17,4 +17,8 @@ public class OceanTile  implements Tile, WaterSource {
         return -1;
     }
 
+    public Tile tryChange(Tile NewTile) {
+        return null;
+    }
+
 }
