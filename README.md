@@ -65,14 +65,14 @@ When you develop features and enrich the product, remember that you have first t
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
-|  F01  |  One preset shape given to user to create island from  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F01  |  One preset shape given to user to create island from (circle)  |  Kyle  |  20/03/23  |  21/03/23  |  D  |
+|  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  21/03/23  |  21/03/23  |  D  |
 |  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F06  |  User can set maximum number of lakes  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F08  |  River creates a lake when it cannot move to a lower elevation anyomore  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F08  |  River creates a lake when it cannot move to a lower elevation anymore  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F09  |  User can specify number of rivers to generate  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F10  |  Two rivers can merge, making the new river wider  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
@@ -85,10 +85,23 @@ When you develop features and enrich the product, remember that you have first t
 |  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F21  |  User can select a heatmap to view elevation properties  |  Kyle  |  22/03/23  |  22/03/23  |  D  |
+|  F22  |  User can select a heatmap to view moisture properties  |  Kyle  |  22/03/23  |  22/03/23  |  D  |
 |  F  |  a  |  a  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 
 ## Documentation
 
+## Legend
+- -i = input file path to use
+- -o = output file path to use
+- -mode = either 'lagoon' or valid shape
+
+### List of valid shapes
+1. Circle
+2. Hexagon
+
+## Running Heatmaps
+To run a heatmap, use the following commands in visualizer:
 
 # A2 Information
 

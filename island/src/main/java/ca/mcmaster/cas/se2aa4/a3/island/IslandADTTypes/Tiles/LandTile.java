@@ -5,7 +5,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Changer;
 
 import java.awt.Color;
 
-public class LandTile implements Tile {
+public class LandTile extends AbstractIslandTile {
 
 
     @Override

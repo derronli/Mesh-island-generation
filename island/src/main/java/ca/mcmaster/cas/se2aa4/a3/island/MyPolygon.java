@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.BeachTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.OceanTile;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.Point;
 
 public class MyPolygon implements MyShape{
 
@@ -20,6 +18,7 @@ public class MyPolygon implements MyShape{
     private final int index;
     private Polygon polygon;
     private org.locationtech.jts.geom.Polygon jtsPolygon;
+    // Each polygon starts with an ocean tile.
     private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
     private List<Coordinate> coordinates = new ArrayList<>();
@@ -29,6 +28,11 @@ public class MyPolygon implements MyShape{
         polygon = p;
         index = totalIndex;
         totalIndex++;
+
+        myTile = new OceanTile();
+        Color tileColor = myTile.getColor();
+        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
+
     }
 
     // Orders the segments and sets the vertices list.
@@ -123,18 +127,6 @@ public class MyPolygon implements MyShape{
     }
     public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
 
-    public void makeLandTile(){
-        myTile = new LandTile();
-        Color tileColor = myTile.getColor();
-        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
-    }
-
-    public void makeOceanTile(){
-        myTile = new OceanTile();
-        Color tileColor = myTile.getColor();
-        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
-    }
-
     /**
      * Changes the tile of this polygon to an input tile type, and appropriately changes its colour.
      * @param tile input tile type to be used
@@ -146,29 +138,57 @@ public class MyPolygon implements MyShape{
     }
 
     // Checks for a neighbour and sets it as a neighbour if the input polygon is a neighbour.
-    public void checkForNeighbour(MyPolygon other){
+    public boolean checkForNeighbour(MyPolygon other){
         for (int i = 0; i < other.segments.size(); i++){
             for (int j = 0; j < this.segments.size(); j++){
                 if (other.segments.get(i).getIndex() == this.segments.get(j).getIndex() &&
                         !neighbours.contains(other) && !(other.index == this.index)){
                     addNeighbour(other);
+                    return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    private void addNeighbour (MyPolygon other){
+        neighbours.add(other);
+    }
+
+    public void checkNeighboursForBeach(){
+        for (MyPolygon other : neighbours){
+            if (other.isWaterTile() && !this.isWaterTile()){
+                changeTile(new BeachTile());
             }
         }
     }
 
-    private void addNeighbour (MyPolygon other){
-        //add to list of neighbours
-        neighbours.add(other);
-
-        // After adding a neighbour, change tile if neighbour is a water tile and makes this a beach tile if so.
-        if (other.isWaterTile() && !this.isWaterTile()){
-            changeTile(new BeachTile());
-        }
-
-    }
-
     public boolean isWaterTile(){
         return myTile instanceof WaterSource;
+    }
+
+
+    public boolean containsPoint(Point point){
+        return jtsPolygon.contains(point);
+    }
+
+    // Sets elevation of tile if it is an island tile.
+    // should we tell them something is wrong if they set elevation for an ocean tile????
+    public void setElevation(int elevation){
+        if (myTile instanceof AbstractIslandTile){
+            ((AbstractIslandTile) myTile).setElevation(elevation);
+        }
+        // maybe print this if they try doing that on polygon without a land tile
+        else{
+            System.out.println("You just tried to change the elevation on an ocean tile.");
+        }
+    }
+
+    // Gets elevation of tile if island tile, if not just returns -1.
+    public int getElevation(){
+        if (myTile instanceof AbstractIslandTile){
+            return ((AbstractIslandTile) myTile).getElevation();
+        }
+        return -1;
     }
 }

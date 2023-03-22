@@ -1,86 +1,74 @@
 package ca.mcmaster.cas.se2aa4.a3.island;
 
-import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
-import org.apache.commons.cli.*;
+import ca.mcmaster.cas.se2aa4.a3.island.Builders.*;
+import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.*;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InputHandler {
 
-    public void createMesh(String[] args){
+    private final Map<String, IslandShape> builderOptions = createBuilderOptions();
+    private final Map<String, HeatmapPainter> heatmapOptions = createHeatmapOptions();
 
-        Options options = createOptions();
 
-        // Parses options with arguments.
-        CommandLineParser parser = new DefaultParser();
-        try {
-            // parse the command line arguments
-            CommandLine line = parser.parse(options, args);
-            checkOptions(line, options);
-        }
-        catch (ParseException | IOException exp) {
-            // oops, something went wrong
-            System.err.println("Parsing failed.  Reason: " + exp.getMessage());
-        }
 
+    private final String mode;
+
+    public InputHandler(String mode){
+        this.mode = mode;
     }
-
-    private Options createOptions(){
-        Options options = new Options();
-
-        Option help = new Option("h", "display all possible inputs");
-        Option input = Option.builder("i")
-                .argName("input file")
-                .hasArg()
-                .desc("file to read mesh from")
-                .build();
-        Option output = Option.builder("o")
-                .argName("output file")
-                .hasArg()
-                .desc("file to output mesh to")
-                .build();
-
-        // add all options
-        options.addOption(help);
-        options.addOption(input);
-        options.addOption(output);
+    
+    private Map<String, IslandShape> createBuilderOptions(){
+        int width = 500; int height = 500;
+        Map<String, IslandShape> options = new HashMap<>();
+        options.put("circle", new Circle(width, height));
+        options.put("hexagon", new Hexagon(width, height));
 
         return options;
     }
+    private Map<String, HeatmapPainter> createHeatmapOptions(){
+        Map<String, HeatmapPainter> options = new HashMap<>();
+        options.put("elevation", new ElevationPainter());
+        options.put("moisture", new MoisturePainter());
 
-    private void displayHelp(Options options){
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("island help", options);
+        return options;
+    }
+    
+    public Mesh makeMesh(Mesh aMesh){
+        MeshBuilder d = buildIsland(aMesh);
+        return d.getIsland();
     }
 
-    private void checkOptions(CommandLine line, Options options)  throws IOException {
+    private MeshBuilder buildIsland(Mesh aMesh){
+        MeshBuilder d;
 
-        String inputFile = null, outputFile = null;
-
-        // If they ask for help, displays options, and exits without generating a mesh.
-        if (line.hasOption("h")){
-            displayHelp(options);
-            return;
+        // Checks for a lagoon mesh.
+        if (mode.equals("lagoon")){
+            d = new LagoonBuilder();
         }
-        if (line.hasOption("i")){
-            inputFile = line.getOptionValue("i");
-        }
-        if (line.hasOption("o")){
-            outputFile = line.getOptionValue("o");
-        }
+        else {
 
-        // Ensures we have an input and output file before creating island.
-        if (!(inputFile == null || outputFile == null)){
-            Mesh aMesh = new MeshFactory().read(inputFile);
-            DoEverythingTemp d = new DoEverythingTemp();
+            // Makes a mesh of the specified type if not lagoon mode.
+            IslandShape shape = builderOptions.get(mode);
+            if (shape == null) {
+                throw new IllegalArgumentException("mode must be of a valid type. Check documentation for more information.");
+            }
+            d = new IslandBuilder(shape);
 
-            // Makes mesh factory and writes to it.
-            MeshFactory factory = new MeshFactory();
-            factory.write(d.makeMesh(aMesh), outputFile);
-            
         }
 
+        d.buildIsland(aMesh);
+        return d;
+    }
+
+    public Mesh makeMesh(Mesh aMesh, String heatmap){
+        MeshBuilder d = buildIsland(aMesh);
+        HeatmapPainter heatmapPainter = heatmapOptions.get(heatmap);
+        d.applyHeatmap(heatmapPainter);
+        return d.getIsland();
     }
 
 }

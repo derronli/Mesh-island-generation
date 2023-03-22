@@ -32,7 +32,6 @@ public class StructsToAdtExtractor {
         }
         for (Structs.Polygon p : polygons){
             MyPolygon myP = new MyPolygon(p);
-            myP.changeColor("255,255,255");
             myPolygons.add(myP);
         }
 
