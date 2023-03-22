@@ -5,9 +5,6 @@ import ca.mcmaster.cas.se2aa4.a3.island.Builders.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class InputHandler {
 
     private final String mode;
@@ -16,31 +13,33 @@ public class InputHandler {
         this.mode = mode;
     }
     
-    public Mesh makeMesh(Mesh aMesh){
-        MeshBuilder d = buildIsland(aMesh);
+    public Mesh makeMesh(Mesh aMesh, String elevation){
+        MeshBuilder d = buildIsland(aMesh, elevation);
         return d.getIsland();
     }
 
-    private MeshBuilder buildIsland(Mesh aMesh){
+    private MeshBuilder buildIsland(Mesh aMesh, String elevation){
         MeshBuilder d;
 
         // Checks for a lagoon mesh.
         if (mode.equals("lagoon")){
             d = new LagoonBuilder();
+            d.buildIsland(aMesh);
         }
         else {
             // Makes a mesh of the specified type if not lagoon mode.
             IslandShapeFactory islandShapeFactory = new IslandShapeFactory();
             IslandShape shape = islandShapeFactory.getIslandShape(mode);
             d = new IslandBuilder(shape);
+            d.buildIsland(aMesh);
+            ElevationFactory elevationFactory = new ElevationFactory(((IslandBuilder) d).getIslandShape(), d.extractPolygonsFromBuilder());
+            ((IslandBuilder) d).constructElevation(elevationFactory.getElevation("plains")); //fix later
         }
-
-        d.buildIsland(aMesh);
         return d;
     }
 
-    public Mesh makeMesh(Mesh aMesh, String heatmap){
-        MeshBuilder d = buildIsland(aMesh);
+    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation){
+        MeshBuilder d = buildIsland(aMesh, elevation);
         HeatmapFactory heatFactory = new HeatmapFactory();
         HeatmapPainter heatmapPainter = heatFactory.getHeatmap(heatmap);
         d.applyHeatmap(heatmapPainter);

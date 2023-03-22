@@ -9,56 +9,23 @@ import java.util.List;
 //plains can go here
 //convert polygons to jts form using kyle's stuff in order to actually compare wow
 public class PlainsElevation extends GeneralElevationProperties {
-    private IslandShape island;
-    private List <MyPolygon> polygonList;
-    private List <MyPolygon> islandPolygons;
-    private MyPolygon centrePolygon;
-    private List <Boolean> hasElevation;
-    private List <Integer> elevationValues;
 
-    private Random rand = new Random();
+    private final Random rand = new Random();
     public PlainsElevation(IslandShape g, List <MyPolygon> polygons) {
         super(g, polygons);
-        this.island = g;
-        this.polygonList = polygons;
     }
 
-    private void decideElevation (){
-
-        islandPolygons = checkPolygonsWithinIsland();
-
-        for (int i = 0; i<islandPolygons.size(); i++){
+    @Override
+    protected void generateElevationProfile() {
+        for (int i = 0; i<polygons.size(); i++){
             int assignElevation = rand.nextInt(15);
             if (assignElevation == 0){
-                hasElevation.add(true);
-            }
-            else {
-                hasElevation.add(false);
-            }
-        }
-    }
-    @Override
-    public void generateElevation() {
-        for (Boolean aBoolean : hasElevation) {
-            if (aBoolean) {
                 int value = rand.nextInt(maxElevation);
                 elevationValues.add(value);
-            } else {
+            }
+            else {
                 elevationValues.add(0);
             }
         }
     }
-    @Override
-    public void setElevation() {
-        for (int i = 0; i<islandPolygons.size(); i++){
-            //SET POLYGON ELEVATIONS
-            islandPolygons.get(i).setElevation(elevationValues.get(i));
-        }
-    }
-    public void createPlains (){
-        decideElevation();
-        generateElevation();
-        setElevation();
-    }
-
 }

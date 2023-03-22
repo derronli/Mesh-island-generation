@@ -3,9 +3,6 @@ package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.PlainsElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.VolcanoElevation;
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.ElevationPainter;
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.MoisturePainter;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 
@@ -28,7 +25,7 @@ public class ElevationFactory {
         return options;
     }
 
-    public BaseElevation getHeatmap(String key){
+    public BaseElevation getElevation(String key){
         try {
             return elevationOptions.get(key);
         }
