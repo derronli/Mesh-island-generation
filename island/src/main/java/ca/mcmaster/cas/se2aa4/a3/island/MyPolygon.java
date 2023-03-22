@@ -19,7 +19,7 @@ public class MyPolygon implements MyShape{
     private Polygon polygon;
     private org.locationtech.jts.geom.Polygon jtsPolygon;
     // Each polygon starts with an ocean tile.
-    private Tile myTile = new OceanTile();
+    private Tile myTile;
     private List <MySegment> segments = new ArrayList<>();
     private List<Coordinate> coordinates = new ArrayList<>();
     private List <MyPolygon> neighbours = new ArrayList<>();
@@ -29,6 +29,7 @@ public class MyPolygon implements MyShape{
         index = totalIndex;
         totalIndex++;
 
+        myTile = new OceanTile();
         Color tileColor = myTile.getColor();
         changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
 
@@ -125,18 +126,6 @@ public class MyPolygon implements MyShape{
         return jtsPolygon;
     }
     public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
-
-    public void makeLandTile(){
-        myTile = new LandTile();
-        Color tileColor = myTile.getColor();
-        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
-    }
-
-    public void makeOceanTile(){
-        myTile = new OceanTile();
-        Color tileColor = myTile.getColor();
-        changeColor(tileColor.getRed() + "," + tileColor.getGreen() + "," + tileColor.getBlue());
-    }
 
     /**
      * Changes the tile of this polygon to an input tile type, and appropriately changes its colour.
