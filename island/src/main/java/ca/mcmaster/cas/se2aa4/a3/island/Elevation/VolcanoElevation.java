@@ -56,15 +56,13 @@ public class VolcanoElevation extends GeneralElevationProperties {
             }
         }
     }
-    private Boolean checkIfAllFalse (){
-        boolean check = true;
-        for (Boolean markedPolygon : markedPolygons) {
+    private boolean checkIfAllFalse (){
+        for (boolean markedPolygon : markedPolygons) {
             if (!markedPolygon) {
-                check = false;
-                break;
+                return false;
             }
         }
-        return check;
+        return true;
     }
     @Override
     protected void generateElevationProfile() {
