@@ -20,7 +20,7 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
     protected IslandShape island;
     protected List <MyPolygon> polygons;
     protected int maxElevation = 100;
-    protected List <Integer> elevationValues = new ArrayList<>();
+    protected List <Integer> elevationValues = new ArrayList<>(polygons.size());
 
     protected Point islandCentre;
     public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons){
