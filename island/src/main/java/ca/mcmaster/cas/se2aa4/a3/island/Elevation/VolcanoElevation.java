@@ -28,13 +28,9 @@ public class VolcanoElevation extends GeneralElevationProperties {
     public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
         super(i, polygons);
         centrePolygon = getMiddlePolygon();
-        for (int j = 0; j<polygons.size(); j++){
-            markedPolygons.add(false);
-        }
         Collections.fill(elevationValues, 0);
-
+        Collections.fill(markedPolygons, false);
     }
-
     private void markCentre () {
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i) == centrePolygon) {
@@ -43,7 +39,6 @@ public class VolcanoElevation extends GeneralElevationProperties {
             }
         }
     }
-
     private void iterateThroughCentreIsland (){
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i).checkForNeighbour(centrePolygon)){
@@ -51,23 +46,37 @@ public class VolcanoElevation extends GeneralElevationProperties {
             }
         }
     }
-
     private void setIfTrue () {
+        count++;
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)) {
-                elevationValues.add(i, 100 - count*3);
+                elevationValues.set(i, 100 - count*3);
+            }
+        }
+    }
+    private void iterateThroughUntilAllAreSet (){
+        count++;
+        for (int i = 0; i<markedPolygons.size(); i++){
+            if (markedPolygons.get(i)){
+                for (int j = 0; j<polygons.size(); j++){
+                    if (polygons.get(i).checkForNeighbour(polygons.get(j)) && elevationValues.get(j) == 0){
+                        elevationValues.set(j, 100 - count*3);
+                        markedPolygons.set(i, true);
+                    }
+                }
             }
         }
     }
 
-    private void loopThroughUntilAllAreSet (){
-
-    }
+//    private Boolean checkIfAllFalse (){
+//
+//    }
     @Override
     protected void generateElevationProfile() {
         markCentre();
         iterateThroughCentreIsland();
         setIfTrue();
+        iterateThroughUntilAllAreSet();
     }
 
 }
