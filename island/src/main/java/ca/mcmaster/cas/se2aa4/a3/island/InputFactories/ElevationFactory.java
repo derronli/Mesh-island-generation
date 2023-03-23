@@ -12,15 +12,12 @@ import java.util.Map;
 
 public class ElevationFactory {
 
-    private final Map<String, BaseElevation> elevationOptions;
+    private final Map<String, BaseElevation> elevationOptions = createElevationOptions();
 
-    public ElevationFactory (IslandShape i, List <MyPolygon> polygons){
-        elevationOptions = createElevationOptions(i, polygons);
-    }
-    private Map<String, BaseElevation> createElevationOptions(IslandShape i, List<MyPolygon> polygons){
+    private Map<String, BaseElevation> createElevationOptions(){
         Map<String, BaseElevation> options = new HashMap<>();
-        options.put("plains", new PlainsElevation(i, polygons));
-        options.put("volcano", new VolcanoElevation(i, polygons));
+        options.put("plains", new PlainsElevation());
+        options.put("volcano", new VolcanoElevation());
 
         return options;
     }

@@ -1,44 +1,40 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 
+import ca.mcmaster.cas.se2aa4.a2.io.Structs;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
+
 import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //take in geometry in the constructor
 //set protected fields island.getCentre (Point object)
 //pass in list of polygons, set protected my centre polygon in the field
 //WHEN IMPLEMENTING LAKES AND RIVERS, NOT WATER TILE
-public abstract class GeneralElevationProperties implements  BaseElevation{
-
-    protected IslandShape island;
-    protected List <MyPolygon> polygons;
-    protected int maxElevation = 100;
-    protected List <Integer> elevationValues = new ArrayList<>();
-
+public abstract class GeneralElevationProperties implements BaseElevation{
+    protected int maxElevation = 80;
     protected Point islandCentre;
-    public GeneralElevationProperties (IslandShape i, List <MyPolygon> polygons){
-        this.island = i;
-        this.polygons = checkPolygonsWithinIsland(polygons, i.getShape());
+
+    protected Point getIslandCentre (IslandShape island){
+        islandCentre = island.getCenter();
+        return islandCentre;
     }
 
-    protected void getIslandCentre (){
-       islandCentre = island.getCenter();
-    }
-
-    protected MyPolygon getMiddlePolygon (){
+    protected MyPolygon getMiddlePolygon (List <MyPolygon> polygons, IslandShape islandShape){
         for (MyPolygon polygon : polygons) {
-            if (polygon.containsPoint(islandCentre)) {
+            if (polygon.containsPoint(getIslandCentre(islandShape))) {
                 return polygon;
             }
         }
-        return null; //CHECK LATER IF THIS IS FINE
+        return polygons.get(0);
     }
 
     protected List<MyPolygon> checkPolygonsWithinIsland (List <MyPolygon> polygons, Geometry island){
@@ -52,18 +48,26 @@ public abstract class GeneralElevationProperties implements  BaseElevation{
         return withinIsland;
     }
 
-    private void setElevation() {
+    private void setPolygonElevation(List<MyPolygon> polygons, List<Integer> elevationValues) {
+        System.out.println("Setting elevation values in elevation");
         for (int i = 0; i<polygons.size(); i++){
             //SET POLYGON ELEVATIONS
             polygons.get(i).setElevation(elevationValues.get(i));
+            System.out.println(polygons.get(i).hashCode() + ": " + elevationValues.get(i));
         }
     }
+    public void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
 
-    protected abstract void generateElevationProfile ();
+    }
+
+    protected abstract void generateElevationProfile (IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues);
+
 
     @Override
-    public void generateElevation() {
-        generateElevationProfile();
-        setElevation();
+    public void generateElevation(IslandShape i, List <MyPolygon> polygons) {
+        List <MyPolygon> islandPolygons = checkPolygonsWithinIsland(polygons, i.getShape());
+        List <Integer> elevationValues = new ArrayList<>(Collections.nCopies(islandPolygons.size(), 0));
+        generateElevationProfile(i, islandPolygons, elevationValues);
+        setPolygonElevation(islandPolygons, elevationValues);
     }
 }
