@@ -50,11 +50,14 @@ public abstract class GeneralElevationProperties implements BaseElevation{
         return withinIsland;
     }
 
-    private void setElevation() {
+    private void setPolygonElevation() {
         for (int i = 0; i<polygons.size(); i++){
             //SET POLYGON ELEVATIONS
             polygons.get(i).setElevation(elevationValues.get(i));
         }
+    }
+    private void setVertexElevation () {
+        
     }
 
     protected abstract void generateElevationProfile ();
@@ -62,6 +65,6 @@ public abstract class GeneralElevationProperties implements BaseElevation{
     @Override
     public void generateElevation() {
         generateElevationProfile();
-        setElevation();
+        setPolygonElevation();
     }
 }
