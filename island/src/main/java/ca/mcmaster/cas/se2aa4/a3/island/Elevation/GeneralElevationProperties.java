@@ -2,11 +2,9 @@ package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
+
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 //set protected fields island.getCentre (Point object)
 //pass in list of polygons, set protected my centre polygon in the field
 //WHEN IMPLEMENTING LAKES AND RIVERS, NOT WATER TILE
-public abstract class GeneralElevationProperties implements  BaseElevation{
+public abstract class GeneralElevationProperties implements BaseElevation{
 
     protected IslandShape island;
     protected List <MyPolygon> polygons;

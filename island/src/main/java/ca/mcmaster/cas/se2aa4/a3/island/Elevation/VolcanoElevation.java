@@ -2,14 +2,8 @@ package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
-import org.locationtech.jts.geom.Geometry;
 
 import java.util.Collections;
-import java.util.Comparator;
-import java.awt.geom.Point2D;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +11,9 @@ import java.util.List;
 //need to modify vertex constructor
 //create a Point and use the jts library
 public class VolcanoElevation extends GeneralElevationProperties {
-
-    private List <MyVertex> vertices;
-    private List <MySegment> segments;
-    private List <Boolean> markedSegments;
-    private List <Boolean> markedPolygons = new ArrayList<>();
-    private MyPolygon centrePolygon;
+    private final List <Boolean> markedPolygons = new ArrayList<>();
+    private final MyPolygon centrePolygon;
     private int count = 0;
-
     public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
         super(i, polygons);
         centrePolygon = getMiddlePolygon();
@@ -61,22 +50,31 @@ public class VolcanoElevation extends GeneralElevationProperties {
                 for (int j = 0; j<polygons.size(); j++){
                     if (polygons.get(i).checkForNeighbour(polygons.get(j)) && elevationValues.get(j) == 0){
                         elevationValues.set(j, 100 - count*3);
-                        markedPolygons.set(i, true);
+                        markedPolygons.set(j, true);
                     }
                 }
             }
         }
     }
-
-//    private Boolean checkIfAllFalse (){
-//
-//    }
+    private Boolean checkIfAllFalse (){
+        boolean check = true;
+        for (Boolean markedPolygon : markedPolygons) {
+            if (!markedPolygon) {
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
     @Override
     protected void generateElevationProfile() {
+        boolean check;
         markCentre();
         iterateThroughCentreIsland();
         setIfTrue();
-        iterateThroughUntilAllAreSet();
+        do {
+            iterateThroughUntilAllAreSet();
+            check = checkIfAllFalse();
+        } while (!check);
     }
-
 }
