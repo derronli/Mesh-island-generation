@@ -12,44 +12,39 @@ import java.util.List;
 //create a Point and use the jts library
 public class VolcanoElevation extends GeneralElevationProperties {
     private final List <Boolean> markedPolygons = new ArrayList<>();
-    private final MyPolygon centrePolygon;
-    private int count = 0;
-    public VolcanoElevation(IslandShape i, List<MyPolygon> polygons) {
-        super(i, polygons);
-        centrePolygon = getMiddlePolygon();
-        Collections.fill(elevationValues, 0);
-        Collections.fill(markedPolygons, false);
-    }
-    private void markCentre () {
+    private MyPolygon centrePolygon;
+    private int levelsOfElevationDecrease = 0;
+    private final int elevationDecreaseFactor = 10;
+    private void markCentre (List<MyPolygon>polygons, List<Integer> elevationValues) {
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i) == centrePolygon) {
-                //markedPolygons.set(i, true);
-                elevationValues.add(i, 100);
+                markedPolygons.set(i, true);
+                elevationValues.add(i, maxElevation);
             }
         }
     }
-    private void iterateThroughCentreIsland (){
+    private void iterateThroughCentreIsland (List<MyPolygon>polygons){
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i).checkForNeighbour(centrePolygon)){
                 markedPolygons.set(i, true);
             }
         }
     }
-    private void setIfTrue () {
-        count++;
+    private void setIfTrue (List<Integer>elevationValues) {
+        levelsOfElevationDecrease++;
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)) {
-                elevationValues.set(i, 100 - count*3);
+                elevationValues.set(i, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor);
             }
         }
     }
-    private void iterateThroughUntilAllAreSet (){
-        count++;
+    private void iterateThroughUntilAllAreSet (List<MyPolygon>polygons, List <Integer> elevationValues){
+        levelsOfElevationDecrease++;
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)){
                 for (int j = 0; j<polygons.size(); j++){
                     if (polygons.get(i).checkForNeighbour(polygons.get(j)) && elevationValues.get(j) == 0){
-                        elevationValues.set(j, 100 - count*3);
+                        elevationValues.set(j, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor);
                         markedPolygons.set(j, true);
                     }
                 }
@@ -65,14 +60,20 @@ public class VolcanoElevation extends GeneralElevationProperties {
         return true;
     }
     @Override
-    protected void generateElevationProfile() {
+    protected void generateElevationProfile(IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues) {
+        centrePolygon = getMiddlePolygon(polygons, i);
+        Collections.fill(markedPolygons, false);
+
         boolean check;
-        markCentre();
-        iterateThroughCentreIsland();
-        setIfTrue();
+        markCentre(polygons, elevationValues);
+        iterateThroughCentreIsland(polygons);
+        setIfTrue(elevationValues);
         do {
-            iterateThroughUntilAllAreSet();
+            iterateThroughUntilAllAreSet(polygons, elevationValues);
             check = checkIfAllFalse();
         } while (!check);
+        for (int k = 0; k<elevationValues.size(); k++){
+            System.out.println("elevation:" + k);
+        }
     }
 }

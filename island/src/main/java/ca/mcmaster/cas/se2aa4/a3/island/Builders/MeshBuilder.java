@@ -11,6 +11,4 @@ public interface MeshBuilder {
     Mesh getIsland();
     void applyHeatmap(HeatmapPainter painter);
 
-    List <MyPolygon> extractPolygonsFromBuilder();
-
 }

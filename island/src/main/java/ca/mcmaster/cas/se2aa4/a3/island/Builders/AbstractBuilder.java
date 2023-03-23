@@ -6,10 +6,12 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.AbstractIslandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import ca.mcmaster.cas.se2aa4.a3.island.*;
 import org.locationtech.jts.geom.Geometry;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public abstract class AbstractBuilder implements MeshBuilder{
         myPolygons = extractor.getMyPolygons();
     }
 
-    protected void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile){
+    protected void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile) {
         for (MyPolygon p : myPolygons){
             if (shape.contains(p.getJTSPolygon())){
                 p.changeTile(tile);
@@ -45,10 +47,6 @@ public abstract class AbstractBuilder implements MeshBuilder{
 
     public void applyHeatmap(HeatmapPainter painter){
         painter.createHeatmap(myPolygons, myVertices, mySegments);
-    }
-
-    public List <MyPolygon> extractPolygonsFromBuilder() {
-        return myPolygons;
     }
 
 }
