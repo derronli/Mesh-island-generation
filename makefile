@@ -71,6 +71,18 @@ genhexel:
 gencirmo:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture
 
+genhexmovol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture
+
+gencirelvol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap elevation
+
+genhexelvol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap elevation
+
+gencirmovol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture
+
 genhexmo:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture
 
@@ -88,3 +100,11 @@ cirmo: s gencirmo visisland
 hexel: s genhexel visisland
 
 hexmo: s genhexmo visisland
+
+cirelvol: s gencirelvol visisland
+
+cirmovol: s gencirmovol visisland
+
+hexelvol: s genhexelvol visisland
+
+hexmovol: s genhexmovol visisland
