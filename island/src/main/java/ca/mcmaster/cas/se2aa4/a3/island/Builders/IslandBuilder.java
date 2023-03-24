@@ -32,16 +32,11 @@ public class IslandBuilder extends AbstractBuilder {
         Geometry shape = islandShape.getShape();
 
         // Sets land tiles.
-        setTileInsideShape(shape, myPolygons, new LandTile());
+        setTileInsideShape(shape, myPolygons, LandTile.class);
 
         // Lake generator
         new LakeGenerator(myPolygons, 10);
 
     }
-    public IslandShape getIslandShape (){
-        return islandShape;
-    }
-
-
 
 }

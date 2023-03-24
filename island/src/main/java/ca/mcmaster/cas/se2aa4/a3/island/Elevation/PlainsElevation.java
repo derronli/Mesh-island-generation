@@ -18,7 +18,6 @@ public class PlainsElevation extends GeneralElevationProperties {
             if (assignElevation == 0){
                 int value = rand.nextInt(11, maxElevation);
                 elevationValues.set(j, value);
-            //    System.out.println(value);
             }
         }
     }

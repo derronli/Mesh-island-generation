@@ -30,10 +30,16 @@ public abstract class AbstractBuilder implements MeshBuilder{
         myPolygons = extractor.getMyPolygons();
     }
 
-    protected void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Tile tile) {
+    protected void setTileInsideShape(Geometry shape, List<MyPolygon> myPolygons, Class<? extends Tile> tile) {
         for (MyPolygon p : myPolygons){
             if (shape.contains(p.getJTSPolygon())){
-                p.changeTile(tile);
+                try {
+                    p.changeTile(tile.getDeclaredConstructor().newInstance());
+                }
+                catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException |
+                       InvocationTargetException exp){
+                    System.out.println("Error in changing tile for polygon " + p.getIndex() + ": " + exp.getMessage());
+                }
             }
         }
     }

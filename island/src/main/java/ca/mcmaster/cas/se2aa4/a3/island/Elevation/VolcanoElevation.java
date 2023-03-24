@@ -11,7 +11,7 @@ import java.util.List;
 //need to modify vertex constructor
 //create a Point and use the jts library
 public class VolcanoElevation extends GeneralElevationProperties {
-    private final List <Boolean> markedPolygons = new ArrayList<>();
+    private List <Boolean> markedPolygons = new ArrayList<>();
     private MyPolygon centrePolygon;
     private int levelsOfElevationDecrease = 0;
     private final int elevationDecreaseFactor = 10;
@@ -62,7 +62,7 @@ public class VolcanoElevation extends GeneralElevationProperties {
     @Override
     protected void generateElevationProfile(IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues) {
         centrePolygon = getMiddlePolygon(polygons, i);
-        Collections.fill(markedPolygons, false);
+        markedPolygons = new ArrayList<>(Collections.nCopies(polygons.size(), false));
 
         boolean check;
         markCentre(polygons, elevationValues);

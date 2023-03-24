@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Hexagon;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class IslandShapeFactory {
@@ -12,8 +12,7 @@ public class IslandShapeFactory {
 
     private Map<String, IslandShape> createBuilderOptions(){
         int width = 500; int height = 500;
-        Map<String, IslandShape> options = new HashMap<>();
-        options.put("default", new Circle(width, height));
+        Map<String, IslandShape> options = new Hashtable<>();
         options.put("circle", new Circle(width, height));
         options.put("hexagon", new Hexagon(width, height));
 
@@ -25,7 +24,7 @@ public class IslandShapeFactory {
             return builderOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){
-            return builderOptions.get("default");
+            return builderOptions.get("circle");
         }
     }
 
