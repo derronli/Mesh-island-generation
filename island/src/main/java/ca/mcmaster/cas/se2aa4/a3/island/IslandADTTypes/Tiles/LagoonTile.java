@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
 
 import java.awt.*;
 
-public class LagoonTile implements Tile, WaterSource {
+public class LagoonTile extends AbstractNonIslandTile implements WaterSource {
 
     @Override
     public Color getColor() {
