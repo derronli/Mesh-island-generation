@@ -163,8 +163,12 @@ public class MyPolygon implements MyShape{
         }
     }
 
-    public boolean isWaterTile(){
-        return myTile instanceof WaterSource;
+//    public boolean isWaterTile(){
+//        return myTile instanceof WaterSource;
+//    }
+
+    public boolean isWaterTile() {
+        return myTile.isWaterSource();
     }
 
 

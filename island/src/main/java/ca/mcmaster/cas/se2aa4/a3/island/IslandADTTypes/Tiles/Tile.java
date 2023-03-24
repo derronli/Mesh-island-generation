@@ -11,4 +11,8 @@ public interface Tile {
     void setElevation(int elevation);
 
     int getElevation();
+
+    int moistureProvided();
+
+    boolean isWaterSource();
 }
