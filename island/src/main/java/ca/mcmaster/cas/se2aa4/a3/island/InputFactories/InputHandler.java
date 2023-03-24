@@ -32,6 +32,7 @@ public class InputHandler {
             IslandShape shape = islandShapeFactory.getIslandShape(mode);
             d = new IslandBuilder(shape);
             d.buildIsland(aMesh);
+            ((IslandBuilder) d).addMoistureToPolygons();
             ElevationFactory elevationFactory = new ElevationFactory();
             ((IslandBuilder) d).constructElevation(elevationFactory.getElevation(elevation));
         }
