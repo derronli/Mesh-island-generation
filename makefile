@@ -72,19 +72,19 @@ gencirmo:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture
 
 genhexmovol:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture -elevation volcano
 
 gencirelvol:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap elevation
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap elevation -elevation volcano
 
 genhexelvol:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap elevation
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap elevation -elevation volcano
 
 gencirmovol:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap moisture -elevation volcano
 
-genhexmo:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture
+genhexmovol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon -heatmap moisture -elevation volcano
 
 runcir: s gencir visisland
 
