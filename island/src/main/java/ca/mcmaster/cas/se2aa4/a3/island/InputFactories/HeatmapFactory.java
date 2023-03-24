@@ -21,6 +21,9 @@ public class HeatmapFactory {
 
     public HeatmapPainter getHeatmap(String key){
         try {
+            if (!heatmapOptions.containsKey(key)){
+                throw new NullPointerException();
+            }
             return heatmapOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){
