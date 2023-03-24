@@ -55,4 +55,6 @@ public abstract class AbstractBuilder implements MeshBuilder{
         painter.createHeatmap(myPolygons, myVertices, mySegments);
     }
 
+    protected abstract void setPolyNeighbours(List<MyPolygon> myPolygons);
+
 }

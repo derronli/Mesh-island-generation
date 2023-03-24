@@ -144,8 +144,9 @@ public class MyPolygon implements MyShape{
     public boolean checkForNeighbour(MyPolygon other){
         for (int i = 0; i < other.segments.size(); i++){
             for (int j = 0; j < this.segments.size(); j++){
-                if (other.segments.get(i).getIndex() == this.segments.get(j).getIndex() &&
-                        !neighbours.contains(other) && !(other.index == this.index)){
+                MySegment thisSeg = this.segments.get(j), otherSeg = other.segments.get(i);
+                if (otherSeg.getIndex() == thisSeg.getIndex() &&
+                        !neighbours.contains(other) && other.index != this.index){
                     addNeighbour(other);
                     return true;
                 }
@@ -155,9 +156,7 @@ public class MyPolygon implements MyShape{
     }
 
     private void addNeighbour (MyPolygon other){
-        if (!neighbours.contains(other)) {
-            neighbours.add(other);
-        }
+        neighbours.add(other);
     }
 
     public void checkNeighboursForBeach(){
@@ -179,15 +178,15 @@ public class MyPolygon implements MyShape{
     public int getMoistureProvided(){
         int moisture = 0;
         if (myTile instanceof WaterSource){
-            moisture = 1;
+            moisture = 4;
         }
         return moisture;
     }
 
     // Don't confuse below with above, that is for moisture that this tile provides, this is for moisture that this tile has.
-    public void addMoisture(int moisture){ this.moisture = moisture; }
-    // Temporarily returns 100 moisture if looking at lake.
-    public int getMoisture(){ return (myTile instanceof WaterSource) ? 100 : moisture; }
+    public void addMoisture(int moisture){ this.moisture += moisture; }
+    // Temporarily returns 100 moisture if looking at lake and -1 for ocean.
+    public int getMoisture(){ return (myTile instanceof LakeTile) ? 100 : (myTile instanceof OceanTile) ? -1: moisture; }
 
 
     public boolean containsPoint(Point point){

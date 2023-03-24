@@ -43,7 +43,7 @@ public class VolcanoElevation extends GeneralElevationProperties {
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)){
                 for (int j = 0; j<polygons.size(); j++){
-                    if (polygons.get(i).checkForNeighbour(polygons.get(j)) && !markedCopy.get(j)){
+                    if (polygons.get(i).isNeighbour(polygons.get(j)) && !markedCopy.get(j)){
                         elevationValues.set(j, Math.max(0, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor));
                         markedCopy.set(j, true);
                     }
@@ -66,13 +66,11 @@ public class VolcanoElevation extends GeneralElevationProperties {
         centrePolygon = getMiddlePolygon(polygons, i);
         markedPolygons = new ArrayList<>(Collections.nCopies(polygons.size(), false));
 
-        boolean check;
         markCentre(polygons, elevationValues);
         iterateThroughCentreIsland(polygons);
         setIfTrue(elevationValues);
         do {
             iterateThroughUntilAllAreSet(polygons, elevationValues);
-            check = checkIfAllFalse();
-        } while (!check);
+        } while (!checkIfAllFalse());
     }
 }
