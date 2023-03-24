@@ -6,10 +6,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 
 import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,8 +51,31 @@ public abstract class GeneralElevationProperties implements BaseElevation{
             polygons.get(i).setElevation(elevationValues.get(i));
         }
     }
-    public void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
 
+    private Point convertVertexToPoint (MyVertex v){
+        GeometryFactory geom = new GeometryFactory();
+        double x = v.getX();
+        double y = v.getY();
+
+        Coordinate bruh = new Coordinate(x,y);
+
+        Point goodPoint = new Point((CoordinateSequence) bruh, geom);
+        return goodPoint;
+    }
+    public void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
+        for (MyVertex vertex : vertices) {
+            Point check = convertVertexToPoint(vertex);
+            for (int j = 0; j < polygons.size(); j++) {
+                for (MyPolygon polygon : polygons) {
+                    if ((polygons.get(j).containsPoint(check) && polygon.containsPoint(check)) && polygons.get(j) != polygon) {
+                        int elevationOne = polygons.get(j).getElevation();
+                        int elevationTwo = polygon.getElevation();
+                        float average = (elevationOne + elevationTwo) / 2;
+                        //set vertex here to average elevation
+                    }
+                }
+            }
+        }
     }
 
     protected abstract void generateElevationProfile (IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues);

@@ -14,7 +14,7 @@ public class AquiferGenerator {
     private final Random rand = new Random();
     private List <Integer> aquiferValues;
     public AquiferGenerator(List<MyPolygon> myPolygons, int numAquifers) {
-        //Collections.fill(); fill all tile moistures with 0 initially to be reassigned accordingly 
+        //Collections.fill(); fill all tile moistures with 0 initially to be reassigned accordingly
         this.numAquifers = numAquifers;
         createAquifers(myPolygons);
         //generateRandomAquifers(myPolygons);
