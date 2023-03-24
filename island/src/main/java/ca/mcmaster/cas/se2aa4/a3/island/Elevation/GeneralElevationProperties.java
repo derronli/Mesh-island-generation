@@ -49,11 +49,9 @@ public abstract class GeneralElevationProperties implements BaseElevation{
     }
 
     private void setPolygonElevation(List<MyPolygon> polygons, List<Integer> elevationValues) {
-        System.out.println("Setting elevation values in elevation");
         for (int i = 0; i<polygons.size(); i++){
             //SET POLYGON ELEVATIONS
             polygons.get(i).setElevation(elevationValues.get(i));
-            System.out.println(polygons.get(i).hashCode() + ": " + elevationValues.get(i));
         }
     }
     public void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {

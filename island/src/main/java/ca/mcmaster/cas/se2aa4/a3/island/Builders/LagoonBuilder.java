@@ -19,11 +19,11 @@ public class LagoonBuilder extends AbstractBuilder {
         Geometry islandShape = island.getShape();
 
         // Sets land tiles.
-        setTileInsideShape(islandShape, myPolygons, new LandTile());
+        setTileInsideShape(islandShape, myPolygons, LandTile.class);
 
         IslandShape innerLagoon = new LagoonInnerCircle(500, 500);
         Geometry innerCircle = innerLagoon.getShape();
-        setTileInsideShape(innerCircle, myPolygons, new LagoonTile());
+        setTileInsideShape(innerCircle, myPolygons, LagoonTile.class);
 
         // Goes through all polygons and sets neighbours, which also changes tiles to beaches if necessary.
         setPolyNeighbours(myPolygons);

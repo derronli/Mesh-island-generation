@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.ElevationPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.MoisturePainter;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class HeatmapFactory {
@@ -12,7 +12,7 @@ public class HeatmapFactory {
     private final Map<String, HeatmapPainter> heatmapOptions = createHeatmapOptions();
 
     private Map<String, HeatmapPainter> createHeatmapOptions(){
-        Map<String, HeatmapPainter> options = new HashMap<>();
+        Map<String, HeatmapPainter> options = new Hashtable<>();
         options.put("elevation", new ElevationPainter());
         options.put("moisture", new MoisturePainter());
 

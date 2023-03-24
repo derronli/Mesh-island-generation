@@ -33,7 +33,7 @@ public class InputHandler {
             d = new IslandBuilder(shape);
             d.buildIsland(aMesh);
             ElevationFactory elevationFactory = new ElevationFactory();
-            ((IslandBuilder) d).constructElevation(elevationFactory.getElevation("plains")); //fix later
+            ((IslandBuilder) d).constructElevation(elevationFactory.getElevation(elevation));
         }
         return d;
     }
