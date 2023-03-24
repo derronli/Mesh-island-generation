@@ -16,12 +16,12 @@ public class ElevationPainter extends HeatmapPainter{
                                 (31 <= elevation && elevation <= 50) ? 3 :
                                         (51 <= elevation && elevation <= 75) ? 4 : 5
                 ) {
-            case 0 -> new Color(200, 240, 255);
-            case 1 -> new Color(130, 220, 255);
-            case 2 -> new Color(55, 210, 255);
+            case 0 -> new Color(210, 240, 255);
+            case 1 -> new Color(140, 220, 255);
+            case 2 -> new Color(60, 210, 253);
             case 3 -> new Color(30, 175, 255);
-            case 4 -> new Color(0, 150, 230);
-            case 5 -> new Color(0, 130, 200);
+            case 4 -> new Color(0, 100, 230);
+            case 5 -> new Color(0, 40, 200);
             case 6 -> new Color(0, 39, 54);
             default -> Color.BLACK;
         };

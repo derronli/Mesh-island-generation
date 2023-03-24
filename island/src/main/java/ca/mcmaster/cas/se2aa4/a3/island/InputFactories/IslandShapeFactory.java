@@ -21,6 +21,9 @@ public class IslandShapeFactory {
 
     public IslandShape getIslandShape(String key){
         try {
+            if (!builderOptions.containsKey(key)){
+                throw new NullPointerException();
+            }
             return builderOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){

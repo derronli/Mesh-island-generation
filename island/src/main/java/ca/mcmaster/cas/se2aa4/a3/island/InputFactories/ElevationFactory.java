@@ -21,6 +21,9 @@ public class ElevationFactory {
 
     public BaseElevation getElevation(String key){
         try {
+            if (!elevationOptions.containsKey(key)){
+                throw new NullPointerException();
+            }
             return elevationOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){

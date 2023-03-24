@@ -19,7 +19,7 @@ public class VolcanoElevation extends GeneralElevationProperties {
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i) == centrePolygon) {
                 markedPolygons.set(i, true);
-                elevationValues.add(i, maxElevation);
+                elevationValues.set(i, maxElevation);
             }
         }
     }
@@ -31,15 +31,15 @@ public class VolcanoElevation extends GeneralElevationProperties {
         }
     }
     private void setIfTrue (List<Integer>elevationValues) {
-        levelsOfElevationDecrease++;
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)) {
-                elevationValues.set(i, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor);
+                elevationValues.set(i, Math.max(0, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor));
             }
         }
+        levelsOfElevationDecrease++;
     }
     private void iterateThroughUntilAllAreSet (List<MyPolygon>polygons, List <Integer> elevationValues){
-        levelsOfElevationDecrease++;
+        List<Boolean> markedCopy = new ArrayList<>(markedPolygons);
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)){
                 for (int j = 0; j<polygons.size(); j++){
@@ -50,6 +50,8 @@ public class VolcanoElevation extends GeneralElevationProperties {
                 }
             }
         }
+        markedPolygons = markedCopy;
+        levelsOfElevationDecrease++;
     }
     private boolean checkIfAllFalse (){
         for (boolean markedPolygon : markedPolygons) {
