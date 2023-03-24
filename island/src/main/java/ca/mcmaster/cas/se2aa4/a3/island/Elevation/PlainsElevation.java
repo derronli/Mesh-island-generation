@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.Seed.GenerateSeed;
 
 import java.util.Random;
 
@@ -10,7 +11,11 @@ import java.util.List;
 //plains can go here
 //convert polygons to jts form using kyle's stuff in order to actually compare wow
 public class PlainsElevation extends GeneralElevationProperties {
-    private final Random rand = new Random();
+
+    public PlainsElevation(Random rand) {
+        super(rand);
+    }
+
     @Override
     protected void generateElevationProfile(IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues) {
         for (int j = 0; j<polygons.size(); j++){

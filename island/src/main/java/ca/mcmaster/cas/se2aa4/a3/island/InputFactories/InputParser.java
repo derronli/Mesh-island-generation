@@ -55,6 +55,11 @@ public class InputParser {
                 .hasArg()
                 .desc("Choose which type of elevation is produced from an island")
                 .build();
+        Option seed = Option.builder("seed")
+                .argName("long seed")
+                .hasArg()
+                .desc("Enter the seed for what map generation you want")
+                .build();
 
         // add all options
         options.addOption(help);
@@ -63,6 +68,7 @@ public class InputParser {
         options.addOption(mode);
         options.addOption(heatmap);
         options.addOption(elevation);
+        options.addOption(seed);
 
         return options;
     }
@@ -74,8 +80,8 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
-        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null;
-
+        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null;
+        long seed;
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
@@ -95,6 +101,17 @@ public class InputParser {
         }
         if (line.hasOption("elevation")){
             elevation = line.getOptionValue("elevation");
+        }
+        if (line.hasOption("seed")){
+            stringSeed = line.getOptionValue("seed");
+            try {
+                seed = Long.parseLong(stringSeed);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for seed, using random seed instead");
+                stringSeed = null;
+            }
+
         }
 
         // Ensures we have an input and output file before creating island.

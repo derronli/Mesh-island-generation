@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LakeTile;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LakeTile;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -13,8 +14,9 @@ public class AquiferGenerator {
     private final int numAquifers;
     private final Random rand = new Random();
     private List <Integer> aquiferValues;
+    private List <Integer> moistureValues;
     public AquiferGenerator(List<MyPolygon> myPolygons, int numAquifers) {
-        //Collections.fill(); fill all tile moistures with 0 initially to be reassigned accordingly
+        moistureValues = new ArrayList<>(Collections.nCopies(moistureValues.size(), 0)); ///fill all tile moistures with 0 initially to be reassigned accordingly
         this.numAquifers = numAquifers;
         createAquifers(myPolygons);
         //generateRandomAquifers(myPolygons);
