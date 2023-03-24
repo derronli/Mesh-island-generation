@@ -24,6 +24,9 @@ public class MyPolygon implements MyShape{
     private List<Coordinate> coordinates = new ArrayList<>();
     private List <MyPolygon> neighbours = new ArrayList<>();
 
+    // change to have tile contain this instead and change addMoisture method to reflect.
+    private int moisture = 0;
+
     public MyPolygon(Polygon p){
         polygon = p;
         index = totalIndex;
@@ -152,7 +155,9 @@ public class MyPolygon implements MyShape{
     }
 
     private void addNeighbour (MyPolygon other){
-        neighbours.add(other);
+        if (!neighbours.contains(other)) {
+            neighbours.add(other);
+        }
     }
 
     public void checkNeighboursForBeach(){
@@ -166,6 +171,23 @@ public class MyPolygon implements MyShape{
     public boolean isWaterTile(){
         return myTile instanceof WaterSource;
     }
+
+    /**
+     * Returns the amount of moisture this tile provides (0 for regular tiles).
+     * @return amount of moisture this tile provides.
+     */
+    public int getMoistureProvided(){
+        int moisture = 0;
+        if (myTile instanceof WaterSource){
+            moisture = 1;
+        }
+        return moisture;
+    }
+
+    // Don't confuse below with above, that is for moisture that this tile provides, this is for moisture that this tile has.
+    public void addMoisture(int moisture){ this.moisture = moisture; }
+    // Temporarily returns 100 moisture if looking at lake.
+    public int getMoisture(){ return (myTile instanceof WaterSource) ? 100 : moisture; }
 
 
     public boolean containsPoint(Point point){
@@ -199,4 +221,11 @@ public class MyPolygon implements MyShape{
         }
         return false;
     }
+
+    /**
+     * Tells if input polygon is in neighbour polygon list.
+     * @param other polygon to be checked
+     * @return if other is a neighbour
+     */
+    public boolean isNeighbour(MyPolygon other){ return neighbours.contains(other); }
 }
