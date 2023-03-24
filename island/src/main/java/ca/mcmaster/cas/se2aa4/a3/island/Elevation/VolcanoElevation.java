@@ -43,9 +43,9 @@ public class VolcanoElevation extends GeneralElevationProperties {
         for (int i = 0; i<markedPolygons.size(); i++){
             if (markedPolygons.get(i)){
                 for (int j = 0; j<polygons.size(); j++){
-                    if (polygons.get(i).checkForNeighbour(polygons.get(j)) && !markedPolygons.get(j)){
+                    if (polygons.get(i).checkForNeighbour(polygons.get(j)) && !markedCopy.get(j)){
                         elevationValues.set(j, Math.max(0, maxElevation - levelsOfElevationDecrease * elevationDecreaseFactor));
-                        markedPolygons.set(j, true);
+                        markedCopy.set(j, true);
                     }
                 }
             }
