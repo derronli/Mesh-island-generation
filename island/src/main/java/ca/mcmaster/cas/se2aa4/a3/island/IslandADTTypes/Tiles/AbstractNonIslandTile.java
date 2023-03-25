@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumidityBehaviour;
 
 public abstract class AbstractNonIslandTile implements Tile{
 
-    HumidityBehaviour humidityBehaviour;
+    protected HumidityBehaviour humidityBehaviour;
 
     public void setElevation(int elevation){ return; }
 
