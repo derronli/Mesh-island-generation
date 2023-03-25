@@ -20,6 +20,7 @@ public class IslandBuilder extends AbstractBuilder {
     public void constructElevation (BaseElevation elevation){
         elevation.generateElevation(islandShape, findPolygonsWithinIsland());
     }
+
     public IslandBuilder(IslandShape shape){
         islandShape = shape;
     }
