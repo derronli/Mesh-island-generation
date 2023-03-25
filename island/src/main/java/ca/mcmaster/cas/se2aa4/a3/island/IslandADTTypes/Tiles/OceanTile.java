@@ -9,7 +9,7 @@ public class OceanTile extends NonIslandTile {
 
     public OceanTile() {
 
-        super(null);
+        super();
         humidityBehaviour = new HumiditySource();
     }
 

@@ -8,7 +8,7 @@ import java.awt.*;
 public class LakeTile extends IslandTile {
 
     public LakeTile() {
-        super(null);
+        super();
         humidityBehaviour = new HumiditySource();
     }
 

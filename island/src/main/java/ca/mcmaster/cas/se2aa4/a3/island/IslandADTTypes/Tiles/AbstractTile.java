@@ -1,19 +1,18 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
-import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.Aquifer;
-import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.DoesNotHaveAquifer;
+import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumidityBehaviour;
-import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.TileSoil;
 
 public abstract class AbstractTile implements Tile {
 
     protected Aquifer aquifer;
     protected HumidityBehaviour humidityBehaviour;
-    protected SoilProfile soilProfile;
+    protected TileSoil soil;
 
-    public AbstractTile (SoilProfile soilProfile) {
+    public AbstractTile () {
         aquifer = new DoesNotHaveAquifer();
-        this.soilProfile = soilProfile;
+        this.soil = new TileSoil();
     }
 
     public abstract void setElevation(int elevation);
