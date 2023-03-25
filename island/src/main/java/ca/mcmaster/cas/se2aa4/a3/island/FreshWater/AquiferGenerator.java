@@ -1,10 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.FreshWater;
 
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LakeTile;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
