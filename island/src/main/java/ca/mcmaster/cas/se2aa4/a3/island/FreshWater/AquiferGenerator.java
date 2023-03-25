@@ -18,24 +18,21 @@ public class AquiferGenerator {
 
     private final int numAquifers;
     private final Random rand;
-    public AquiferGenerator(List<MyPolygon> myPolygons, int numAquifers, Random seedRandom) {
+    public AquiferGenerator(List<MyPolygon> myPolygons, int numAquifers, Random random) {
         this.numAquifers = numAquifers;
-        this.rand = seedRandom;
+        this.rand = random;
         createAquifers(myPolygons);
     }
 
     private void createAquifers (List <MyPolygon> polygons){
-    int counter = 0;
-        for (int j = 0; j<polygons.size(); j++){
-            int assignToPolygon = rand.nextInt(0,2);
-            if (assignToPolygon== 0){
-                //set to tile
-                counter++;
-            }
-            if (counter == numAquifers){
-                break;
-            }
+        int counter = 0;
+        int index;
+        MyPolygon p;
+
+        while (counter < numAquifers){
+            index = rand.nextInt(polygons.size());
+            p = polygons.get(index);
+            counter += (p.setAquifer()) ? 1 : 0;
         }
     }
-
 }

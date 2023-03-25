@@ -1,6 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
+import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.AquiferGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.MoistureAdder;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
@@ -11,6 +12,7 @@ import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class IslandBuilder extends AbstractBuilder {
@@ -38,7 +40,10 @@ public class IslandBuilder extends AbstractBuilder {
         setPolyNeighbours(myPolygons);
 
         // Lake generator
-        new LakeGenerator(myPolygons, 10);
+        new LakeGenerator(findPolygonsWithinIsland(), 0);
+
+        // Aquifer generator
+        new AquiferGenerator(findPolygonsWithinIsland(), 1, new Random());
 
     }
 

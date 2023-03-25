@@ -15,4 +15,6 @@ public interface Tile {
     int moistureProvided();
 
     boolean isWaterSource();
+
+    boolean setAquifer();
 }

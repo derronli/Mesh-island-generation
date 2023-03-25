@@ -7,6 +7,7 @@ import java.awt.Color;
 public class LandTile extends IslandTile {
 
     public LandTile() {
+        super();
         humidityBehaviour = new NonHumiditySource();
     }
 
