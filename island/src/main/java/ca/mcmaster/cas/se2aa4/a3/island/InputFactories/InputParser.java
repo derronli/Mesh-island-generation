@@ -87,7 +87,7 @@ public class InputParser {
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
         String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null, aquifer = null;
-        long seed;
+        long seed = -1;
         int aquiferNumber = 0;
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
@@ -116,7 +116,6 @@ public class InputParser {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid format for seed, using random seed instead");
-                stringSeed = null;
             }
         }
         if (line.hasOption("aquifer")){
@@ -139,10 +138,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation);
+                aMesh = handler.makeMesh(aMesh, elevation, seed);
             }
             factory.write(aMesh, outputFile);
             

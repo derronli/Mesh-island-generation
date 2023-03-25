@@ -192,6 +192,16 @@ public class MyPolygon implements MyShape{
         return jtsPolygon.contains(point);
     }
 
+    public boolean containsCoordinate(Coordinate coord){
+
+        for (Coordinate c: coordinates){
+            if (c.equals2D(coord)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Sets elevation of tile if it is an island tile.
     // should we tell them something is wrong if they set elevation for an ocean tile????
     public void setElevation(int elevation){
