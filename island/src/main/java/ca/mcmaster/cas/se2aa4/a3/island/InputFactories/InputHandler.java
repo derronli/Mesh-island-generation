@@ -25,7 +25,7 @@ public class InputHandler {
 
         // Checks if using an island builder or lagoon builder.
         if (builder.getClass() == IslandBuilder.class){
-            BaseElevation elevationProfile = getElevationProfile(elevation);
+            BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, rand, aquiferNum);
         }
 
@@ -38,8 +38,8 @@ public class InputHandler {
         return islandShapeFactory.getIslandShape(mode);
     }
 
-    private BaseElevation getElevationProfile(String elevation){
-        ElevationFactory elevationFactory = new ElevationFactory();
+    private BaseElevation getElevationProfile(String elevation, Random rand){
+        ElevationFactory elevationFactory = new ElevationFactory(rand);
         return elevationFactory.getElevation(elevation);
     }
 
@@ -71,7 +71,7 @@ public class InputHandler {
 
         // Checks if using an island builder or lagoon builder.
         if (builder.getClass() == IslandBuilder.class){
-            BaseElevation elevationProfile = getElevationProfile(elevation);
+            BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             HeatmapPainter heatmapPainter = getHeatmapPainter(heatmap);
             return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, rand, aquiferNum);
         }
