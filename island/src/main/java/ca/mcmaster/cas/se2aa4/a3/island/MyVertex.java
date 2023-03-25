@@ -41,4 +41,6 @@ public class MyVertex implements MyShape{
 
     public void setElevation(int elevation){ islandVertex.setElevation(elevation);}
 
+    public int getElevation() { return islandVertex.getElevation(); }
+
 }

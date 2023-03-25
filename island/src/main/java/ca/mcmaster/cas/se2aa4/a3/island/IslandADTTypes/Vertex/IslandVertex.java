@@ -6,4 +6,6 @@ public abstract class IslandVertex {
 
     public void setElevation(int elevation){ this.elevation = elevation; }
 
+    public int getElevation() { return this.elevation; }
+
 }
