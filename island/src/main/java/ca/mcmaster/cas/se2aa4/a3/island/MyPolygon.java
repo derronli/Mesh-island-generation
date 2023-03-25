@@ -217,4 +217,8 @@ public class MyPolygon implements MyShape{
      * @return if other is a neighbour
      */
     public boolean isNeighbour(MyPolygon other){ return neighbours.contains(other); }
+
+    public boolean setAquifer (){
+        return myTile.setAquifer();
+    }
 }
