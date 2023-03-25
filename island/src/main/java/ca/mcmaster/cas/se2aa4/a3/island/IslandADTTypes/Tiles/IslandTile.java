@@ -28,5 +28,6 @@ public abstract class IslandTile extends AbstractTile {
     }
 
     public void addMoisture(int moisture){ soil.addMoisture(moisture);}
+    public int getMoisture(){ return soil.getMoisture(); }
 
 }

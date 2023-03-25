@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.Builders.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 
 public class InputHandler {
@@ -15,14 +16,15 @@ public class InputHandler {
     }
 
     // Makes a regular island.
-    public Mesh makeMesh(Mesh aMesh, String elevation){
+    public Mesh makeMesh(Mesh aMesh, String elevation, String soil){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
 
         // Checks if using an island builder or lagoon builder.
         if (builder.getClass() == IslandBuilder.class){
             BaseElevation elevationProfile = getElevationProfile(elevation);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile);
+            SoilProfile soilProfile = getSoilProfile(soil);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, soilProfile);
         }
 
         // Returns the lagoon if just using a lagoon builder.
@@ -44,6 +46,11 @@ public class InputHandler {
         return heatFactory.getHeatmap(heatmap);
     }
 
+    private SoilProfile getSoilProfile(String soil){
+        SoilFactory soilFactory = new SoilFactory();
+        return soilFactory.getSoilProfile(soil);
+    }
+
     private MeshBuilder getBuilder(){
         MeshBuilder builder;
         // Checks for a lagoon mesh.
@@ -60,15 +67,16 @@ public class InputHandler {
     }
 
     // Makes an island with a heatmap, unless making a lagoon.
-    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation){
+    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation, String soil){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
 
         // Checks if using an island builder or lagoon builder.
         if (builder.getClass() == IslandBuilder.class){
             BaseElevation elevationProfile = getElevationProfile(elevation);
+            SoilProfile soilProfile = getSoilProfile(soil);
             HeatmapPainter heatmapPainter = getHeatmapPainter(heatmap);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, soilProfile);
         }
 
         // Returns the lagoon if just using a lagoon builder.

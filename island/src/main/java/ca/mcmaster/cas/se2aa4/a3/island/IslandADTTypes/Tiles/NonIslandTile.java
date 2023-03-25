@@ -18,5 +18,6 @@ public abstract class NonIslandTile extends AbstractTile{
     }
 
     public void addMoisture(int moisture){}
+    public int getMoisture(){return 0;}
 
 }

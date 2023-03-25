@@ -1,8 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.PlainsElevation;
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.VolcanoElevation;
+import ca.mcmaster.cas.se2aa4.a3.island.Elevation.*;
 
 import java.util.Hashtable;
 import java.util.Map;
