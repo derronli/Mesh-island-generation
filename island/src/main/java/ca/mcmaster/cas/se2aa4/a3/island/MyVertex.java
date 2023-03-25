@@ -2,17 +2,20 @@ package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Vertex.*;
 
 public class MyVertex implements MyShape{
 
     private static int totalIndex = 0;
     private final int index;
     private Vertex vertex;
+    private IslandVertex islandVertex;
 
     public MyVertex(Vertex v){
         vertex = v;
         index = totalIndex;
         totalIndex++;
+        islandVertex = new LandVertex();
     }
 
     public void changeColor(String colorCode){
@@ -27,4 +30,15 @@ public class MyVertex implements MyShape{
     public double getY(){ return vertex.getY(); }
     public Vertex getVertex(){ return vertex; }
     public java.util.List<Structs.Property> getPropertiesList() { return vertex.getPropertiesList(); }
+
+    public boolean makeRiverVertex(){
+        if (islandVertex.getClass() == RiverVertex.class){
+            return false;
+        }
+        islandVertex = new RiverVertex(1);
+        return true;
+    }
+
+    public void setElevation(int elevation){ islandVertex.setElevation(elevation);}
+
 }

@@ -2,7 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Vertex;
 
 import java.awt.*;
 
-public class RiverVertex {
+public class RiverVertex extends IslandVertex {
 
     private int discharge;
     // Randomly set discharge value
