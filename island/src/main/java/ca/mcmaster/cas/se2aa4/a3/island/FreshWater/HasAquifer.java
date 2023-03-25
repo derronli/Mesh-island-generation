@@ -5,4 +5,7 @@ have AquiferExists class (name whatever wanted) which implements that method and
 AquiferDNE class implements and returns 0
  */
 public class HasAquifer extends Aquifer {
+    public int getMoisture () {
+        return 1;
+    }
 }
