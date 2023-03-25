@@ -125,7 +125,6 @@ public class InputParser {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid format for the number of aquifers, map now has 0 aquifers");
-                aquiferNumber = 0;
             }
         }
 
@@ -138,10 +137,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, seed);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber);
             }
             factory.write(aMesh, outputFile);
             
