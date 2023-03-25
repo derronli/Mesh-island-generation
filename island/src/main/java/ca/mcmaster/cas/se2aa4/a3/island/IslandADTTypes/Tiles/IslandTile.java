@@ -2,13 +2,19 @@ package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumidityBehaviour;
 
-public abstract class AbstractNonIslandTile implements Tile{
+public abstract class IslandTile implements Tile {
 
     protected HumidityBehaviour humidityBehaviour;
 
-    public void setElevation(int elevation){ return; }
+    // Each tile has base elevation of 0.
+    protected int elevation = 0;
 
-    public int getElevation(){ return -1; }
+    public void setElevation(int elevation){ this.elevation = elevation; }
+    public int getElevation(){ return elevation; }
+
+    public Tile tryChange(Tile newTile) {
+        return newTile;
+    }
 
     @Override
     public int moistureProvided() {

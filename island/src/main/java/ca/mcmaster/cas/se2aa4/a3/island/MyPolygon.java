@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.Point;
@@ -180,11 +179,7 @@ public class MyPolygon implements MyShape{
      * @return amount of moisture this tile provides.
      */
     public int getMoistureProvided(){
-        int moisture = 0;
-        if (myTile instanceof WaterSource){
-            moisture = 4;
-        }
-        return moisture;
+        return myTile.moistureProvided();
     }
 
     // Don't confuse below with above, that is for moisture that this tile provides, this is for moisture that this tile has.
