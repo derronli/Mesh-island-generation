@@ -30,7 +30,7 @@ public class LagoonBuilder extends AbstractBuilder {
 
     }
 
-    private void setPolyNeighbours(List<MyPolygon> myPolygons){
+    protected void setPolyNeighbours(List<MyPolygon> myPolygons){
         for (MyPolygon p1 : myPolygons){
             for (MyPolygon p2: myPolygons){
                 p1.checkForNeighbour(p2);

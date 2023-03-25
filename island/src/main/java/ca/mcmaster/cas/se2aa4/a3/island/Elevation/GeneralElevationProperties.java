@@ -37,17 +37,6 @@ public abstract class GeneralElevationProperties implements BaseElevation{
         return polygons.get(0);
     }
 
-    protected List<MyPolygon> checkPolygonsWithinIsland (List <MyPolygon> polygons, Geometry island){
-        List<MyPolygon> withinIsland = new ArrayList<>();
-        for (MyPolygon p : polygons){
-            if (island.contains(p.getJTSPolygon())){
-                withinIsland.add(p);
-            }
-        }
-
-        return withinIsland;
-    }
-
     private void setPolygonElevation(List<MyPolygon> polygons, List<Integer> elevationValues) {
         for (int i = 0; i<polygons.size(); i++){
             //SET POLYGON ELEVATIONS
@@ -63,9 +52,8 @@ public abstract class GeneralElevationProperties implements BaseElevation{
 
     @Override
     public void generateElevation(IslandShape i, List <MyPolygon> polygons) {
-        List <MyPolygon> islandPolygons = checkPolygonsWithinIsland(polygons, i.getShape());
-        List <Integer> elevationValues = new ArrayList<>(Collections.nCopies(islandPolygons.size(), 0));
-        generateElevationProfile(i, islandPolygons, elevationValues);
-        setPolygonElevation(islandPolygons, elevationValues);
+        List <Integer> elevationValues = new ArrayList<>(Collections.nCopies(polygons.size(), 0));
+        generateElevationProfile(i, polygons, elevationValues);
+        setPolygonElevation(polygons, elevationValues);
     }
 }

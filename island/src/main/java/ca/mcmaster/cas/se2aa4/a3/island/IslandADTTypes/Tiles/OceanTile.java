@@ -16,10 +16,10 @@ public class OceanTile extends AbstractNonIslandTile implements WaterSource {
         return new Color(54, 146, 246);
     }
 
-    // Ocean is salty and bad for vegetation so gets gives negative water value.
+    // Ocean does not give moisture.
     @Override
     public int moistureProvided() {
-        return -1;
+        return 0;
     }
 
     public Tile tryChange(Tile newTile) {
