@@ -7,7 +7,7 @@ import java.awt.*;
 public class BeachTile extends IslandTile {
 
     public BeachTile() {
-        super();
+        super(null);
         humidityBehaviour = new NonHumiditySource();
     }
 

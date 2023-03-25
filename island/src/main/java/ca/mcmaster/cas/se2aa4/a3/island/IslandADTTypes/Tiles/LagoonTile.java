@@ -7,6 +7,7 @@ import java.awt.*;
 public class LagoonTile extends NonIslandTile {
 
     public LagoonTile() {
+        super(null);
         humidityBehaviour = new HumiditySource();
     }
 

@@ -1,13 +1,14 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumiditySource;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 
 import java.awt.*;
 
 public class LakeTile extends IslandTile {
 
     public LakeTile() {
-        super();
+        super(null);
         humidityBehaviour = new HumiditySource();
     }
 
