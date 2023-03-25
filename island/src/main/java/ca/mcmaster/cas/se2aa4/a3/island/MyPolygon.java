@@ -167,8 +167,12 @@ public class MyPolygon implements MyShape{
         }
     }
 
-    public boolean isWaterTile(){
-        return myTile instanceof WaterSource;
+//    public boolean isWaterTile(){
+//        return myTile instanceof WaterSource;
+//    }
+
+    public boolean isWaterTile() {
+        return myTile.isWaterSource();
     }
 
     /**
@@ -196,21 +200,12 @@ public class MyPolygon implements MyShape{
     // Sets elevation of tile if it is an island tile.
     // should we tell them something is wrong if they set elevation for an ocean tile????
     public void setElevation(int elevation){
-        if (myTile instanceof AbstractIslandTile){
-            ((AbstractIslandTile) myTile).setElevation(elevation);
-        }
-        // maybe print this if they try doing that on polygon without a land tile
-        else{
-            System.out.println("You just tried to change the elevation on an ocean tile.");
-        }
+        myTile.setElevation(elevation);
     }
 
     // Gets elevation of tile if island tile, if not just returns -1.
     public int getElevation(){
-        if (myTile instanceof AbstractIslandTile){
-            return ((AbstractIslandTile) myTile).getElevation();
-        }
-        return -1;
+        return myTile.getElevation();
     }
 
     public boolean attemptChange(Tile newTile) {

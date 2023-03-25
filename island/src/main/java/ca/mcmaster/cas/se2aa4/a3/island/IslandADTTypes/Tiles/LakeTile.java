@@ -1,10 +1,14 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumiditySource;
 
 import java.awt.*;
 
 public class LakeTile extends AbstractIslandTile implements WaterSource {
+
+    public LakeTile() {
+        humidityBehaviour = new HumiditySource();
+    }
 
     @Override
     public Color getColor() {

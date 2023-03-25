@@ -7,4 +7,12 @@ public interface Tile {
     Color getColor();
 
     Tile tryChange(Tile newTile);
+
+    void setElevation(int elevation);
+
+    int getElevation();
+
+    int moistureProvided();
+
+    boolean isWaterSource();
 }
