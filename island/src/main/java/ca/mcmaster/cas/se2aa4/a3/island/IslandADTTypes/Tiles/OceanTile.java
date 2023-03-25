@@ -20,8 +20,4 @@ public class OceanTile extends NonIslandTile {
         return 0;
     }
 
-    public Tile tryChange(Tile newTile) {
-        return null;
-    }
-
 }

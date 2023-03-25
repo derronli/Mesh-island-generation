@@ -21,7 +21,4 @@ public class LagoonTile extends NonIslandTile {
         return 2;
     }
 
-    public Tile tryChange(Tile newTile) {
-        return null;
-    }
 }
