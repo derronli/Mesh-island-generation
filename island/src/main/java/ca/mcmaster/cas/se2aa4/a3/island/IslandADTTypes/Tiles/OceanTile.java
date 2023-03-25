@@ -1,11 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumiditySource;
-import ca.mcmaster.cas.se2aa4.a3.island.Humidity.WaterSource;
-
 import java.awt.*;
 
-public class OceanTile extends AbstractNonIslandTile implements WaterSource {
+public class OceanTile extends NonIslandTile {
 
     public OceanTile() {
         humidityBehaviour = new HumiditySource();
@@ -20,10 +18,6 @@ public class OceanTile extends AbstractNonIslandTile implements WaterSource {
     @Override
     public int moistureProvided() {
         return 0;
-    }
-
-    public Tile tryChange(Tile newTile) {
-        return null;
     }
 
 }

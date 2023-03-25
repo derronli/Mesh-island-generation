@@ -6,7 +6,6 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.AbstractIslandTile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import ca.mcmaster.cas.se2aa4.a3.island.*;
 import org.locationtech.jts.geom.Geometry;

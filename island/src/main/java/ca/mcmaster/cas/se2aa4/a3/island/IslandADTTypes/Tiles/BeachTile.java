@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Humidity.NonHumiditySource;
 
 import java.awt.*;
 
-public class BeachTile extends AbstractIslandTile {
+public class BeachTile extends IslandTile {
 
     public BeachTile() {
         humidityBehaviour = new NonHumiditySource();

@@ -4,7 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Humidity.HumiditySource;
 
 import java.awt.*;
 
-public class LakeTile extends AbstractIslandTile implements WaterSource {
+public class LakeTile extends IslandTile {
 
     public LakeTile() {
         humidityBehaviour = new HumiditySource();
@@ -20,8 +20,4 @@ public class LakeTile extends AbstractIslandTile implements WaterSource {
         return null;
     }
 
-    @Override
-    public int moistureProvided() {
-        return 1;
-    }
 }
