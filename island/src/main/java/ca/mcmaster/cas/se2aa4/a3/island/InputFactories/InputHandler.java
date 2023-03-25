@@ -85,7 +85,7 @@ public class InputHandler {
         Random rand;
         if (seed == -1) {
             rand = s.getRandom();
-            
+            System.out.println("Your seed for this configuration is: "+s.getSeed());
         }
         else {
             rand = s.getRandom(seed);
