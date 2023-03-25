@@ -6,6 +6,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 //need getters and setters of elevation in the polygon and segments classes
 //need to modify vertex constructor
@@ -15,6 +16,11 @@ public class VolcanoElevation extends GeneralElevationProperties {
     private MyPolygon centrePolygon;
     private int levelsOfElevationDecrease = 0;
     private final int elevationDecreaseFactor = 10;
+
+    public VolcanoElevation(Random rand) {
+        super(rand);
+    }
+
     private void markCentre (List<MyPolygon>polygons, List<Integer> elevationValues) {
         for (int i = 0; i<polygons.size(); i++){
             if (polygons.get(i) == centrePolygon) {

@@ -55,6 +55,16 @@ public class InputParser {
                 .hasArg()
                 .desc("Choose which type of elevation is produced from an island")
                 .build();
+        Option seed = Option.builder("seed")
+                .argName("long seed")
+                .hasArg()
+                .desc("Enter the seed for what map generation you want")
+                .build();
+        Option aquifer = Option.builder("aquifer")
+                .argName("aquifer")
+                .hasArg()
+                .desc("Enter the number of aquifers you want generated")
+                .build();
 
         // add all options
         options.addOption(help);
@@ -63,6 +73,8 @@ public class InputParser {
         options.addOption(mode);
         options.addOption(heatmap);
         options.addOption(elevation);
+        options.addOption(seed);
+        options.addOption(aquifer);
 
         return options;
     }
@@ -74,8 +86,9 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
-        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null;
-
+        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null, aquifer = null;
+        long seed;
+        int aquiferNumber = 0;
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
@@ -95,6 +108,26 @@ public class InputParser {
         }
         if (line.hasOption("elevation")){
             elevation = line.getOptionValue("elevation");
+        }
+        if (line.hasOption("seed")){
+            stringSeed = line.getOptionValue("seed");
+            try {
+                seed = Long.parseLong(stringSeed);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for seed, using random seed instead");
+                stringSeed = null;
+            }
+        }
+        if (line.hasOption("aquifer")){
+            aquifer = line.getOptionValue("aquifer");
+            try {
+                aquiferNumber = Integer.parseInt(aquifer);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for the number of aquifers, map now has 0 aquifers");
+                aquiferNumber = 0;
+            }
         }
 
         // Ensures we have an input and output file before creating island.

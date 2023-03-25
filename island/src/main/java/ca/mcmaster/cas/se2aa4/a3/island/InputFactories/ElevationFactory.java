@@ -6,6 +6,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Elevation.VolcanoElevation;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Random;
 
 public class ElevationFactory {
 
@@ -13,8 +14,8 @@ public class ElevationFactory {
 
     private Map<String, BaseElevation> createElevationOptions(){
         Map<String, BaseElevation> options = new Hashtable<>();
-        options.put("plains", new PlainsElevation());
-        options.put("volcano", new VolcanoElevation());
+        options.put("plains", new PlainsElevation(new Random()));
+        options.put("volcano", new VolcanoElevation(new Random()));
 
         return options;
     }
