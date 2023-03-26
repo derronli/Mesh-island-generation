@@ -82,7 +82,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F17  |  Elevation and moisture determines biome of each tile and colour is changed accordingly  |  Kyle  |  25/03/23  |  26/03/23  |  D  |
-|  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  26/03/23  |  26/03/23  |  D  |
 |  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F21  |  User can select a heatmap to view elevation properties  |  Kyle  |  22/03/23  |  22/03/23  |  D  |
@@ -98,8 +98,11 @@ When you develop features and enrich the product, remember that you have first t
 - -heatmap = (optional) heatmap type to use for visualizing properties (see list of valid heatmaps for more details)
 - -elevation = (defaults to plains) elevation profile to use (see list of valid profiles for more details)
 - -soil = (defaults to wet profile) soil absorption profile to use, determines how much moisture is absorbed from water sources
-- -aquifer = maximum number of aquifers to create
+- -aquifer = maximum number of aquifers to create (default = 0)
 - -seed = seed to use which will always generate the same map for the same seed
+- -biome = Whittaker diagram to take biomes from when visualizing (defaults to only visualizing with general green land tiles)
+- -lake = maximum number of lakes to generate (default = 0)
+- -river = maximum number of rivers to generate (default = 0)
 
 ### List of valid shapes
 1. 'circle' (default)
@@ -114,9 +117,13 @@ When you develop features and enrich the product, remember that you have first t
 1. 'plains' (default) : Randomly generated elevations per tile in low range
 2. 'volcano' : Largest elevation in middle of island, slopes down
 
-### List of valid soil absportion profiles
+### List of valid soil absorption profiles
 1. 'wet' (default) : Polygons within a large range gain moisture from surrounding water sources
 2. 'dry' : Has 1/4 the range of wet
+
+### List of valid soil Whittaker profiles
+1. 'arctic' : contains Dry, Moist, Wet, and Rain tundra tiles
+2. 'warmtemperate' : contains Desert, Desert Scrub, Woodland, Dry forest, Moist Forest, Wet Forest, and Rain forest tiles
 
 
 # A2 Information

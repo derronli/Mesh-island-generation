@@ -1,10 +1,10 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Whittaker.Biomes;
 
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
-import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.DryTundra;
-import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.MoistTundra;
-import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.RainTundra;
-import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.WetTundra;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.Arctic.DryTundra;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.Arctic.MoistTundra;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.Arctic.RainTundra;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.Arctic.WetTundra;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
