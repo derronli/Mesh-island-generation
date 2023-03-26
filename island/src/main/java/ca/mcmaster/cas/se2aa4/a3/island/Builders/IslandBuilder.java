@@ -4,6 +4,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.AquiferGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.MoistureAdder;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
@@ -47,9 +48,9 @@ public class IslandBuilder extends AbstractBuilder {
 
     }
 
-    public void addMoistureToPolygons(){
+    public void addMoistureToPolygons(SoilProfile soilProfile){
         MoistureAdder moistureAdder = new MoistureAdder();
-        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland());
+        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland(), soilProfile);
     }
 
     private List<MyPolygon> findPolygonsWithinIsland(){

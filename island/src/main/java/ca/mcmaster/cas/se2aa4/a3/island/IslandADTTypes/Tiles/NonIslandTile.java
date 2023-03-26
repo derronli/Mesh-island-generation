@@ -1,8 +1,5 @@
 package ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles;
 
-import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.DoesNotHaveAquifer;
-import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.HasAquifer;
-
 public abstract class NonIslandTile extends AbstractTile{
 
     public NonIslandTile () {
@@ -19,5 +16,8 @@ public abstract class NonIslandTile extends AbstractTile{
     public boolean setAquifer () {
         return false;
     }
+
+    public void addMoisture(int moisture){}
+    public int getMoisture(){return 0;}
 
 }

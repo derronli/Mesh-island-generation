@@ -17,4 +17,7 @@ public interface Tile {
     boolean isWaterSource();
 
     boolean setAquifer();
+
+    void addMoisture(int moisture);
+    int getMoisture();
 }
