@@ -8,7 +8,7 @@ import java.util.Random;
 
 public interface MeshBuilder {
 
-    void buildIsland(Mesh aMesh, Random rand);
+    void buildIsland(Mesh aMesh, Random rand, int aquiferNum);
     Mesh getIsland();
     void applyHeatmap(HeatmapPainter painter);
 

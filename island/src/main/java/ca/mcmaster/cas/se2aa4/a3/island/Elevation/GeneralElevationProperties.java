@@ -52,13 +52,7 @@ public abstract class GeneralElevationProperties implements BaseElevation{
 
         return new Coordinate(x,y);
     }
-    private Point convertVertexToPoint (MyVertex v){
-        GeometryFactory geom = new GeometryFactory();
-        int x = (int) v.getX();
-        int y = (int) v.getY();
-        Coordinate coord = new Coordinate(x,y);
-        return geom.createPoint(coord);
-    }
+
     private void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
         int sum;
         int average;
@@ -67,14 +61,13 @@ public abstract class GeneralElevationProperties implements BaseElevation{
             sum = 0;
             counter = 0;
             Coordinate coord = convertVertexToCoordinate(vertex);
-            Point point = convertVertexToPoint(vertex);
             for (MyPolygon polygon : polygons) {
-                if (polygon.containsCoordinate(coord) || polygon.containsPoint(point)) {
+                if (polygon.containsCoordinate(coord)) {
                     sum += polygon.getElevation();
                     counter++;
                 }
             }
-            average = (counter == 0) ? 0 : sum/counter;
+            average = (counter == 0) ? -1 : sum/counter;
             vertex.setElevation(average);
         }
     }

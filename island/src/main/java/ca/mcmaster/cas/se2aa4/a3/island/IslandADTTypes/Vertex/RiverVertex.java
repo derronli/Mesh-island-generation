@@ -18,4 +18,5 @@ public class RiverVertex extends IslandVertex {
     public void addToDischarge(int n) {
         this.discharge += n;
     }
+    public int getDischarge(){ return discharge; }
 }

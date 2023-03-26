@@ -79,8 +79,8 @@ When you develop features and enrich the product, remember that you have first t
 |  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F13  |  Soil absorption profile makes only tiles directly connected to lakes absorb their humidity  |  Kyle  |  23/03/23  |  24/03/23  |  D  |
 |  F14  |  Soil absorption profile makes only tiles directly connected to rivers absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
+|  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F17  |  Elevation and moisture determines biome of each tile and colour is changed accordingly  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
@@ -96,14 +96,27 @@ When you develop features and enrich the product, remember that you have first t
 - -o = output file path to use
 - -mode = (optional, defaults to circle) either 'lagoon' for lagoon mode or valid shape
 - -heatmap = (optional) heatmap type to use for visualizing properties (see list of valid heatmaps for more details)
+- -elevation = (defaults to plains) elevation profile to use (see list of valid profiles for more details)
+- -soil = (defaults to wet profile) soil absorption profile to use, determines how much moisture is absorbed from water sources
+- -aquifer = maximum number of aquifers to create
+- -seed = seed to use which will always generate the same map for the same seed
 
 ### List of valid shapes
-1. Circle (default)
-2. Hexagon
+1. 'circle' (default)
+2. 'hexagon'
 
 ### List of valid heatmaps
-1. Elevation (default if non-valid heatmap is input when heatmap command is used)
-2. Moisture
+1. 'elevation' : Shows elevation of polygons (default if non-valid heatmap is input when heatmap command is used)
+2. 'moisture' : Shows moisture of polygons
+3. 'vertexelevation' : Shows elevation of vertices
+
+### List of valid elevation profiles
+1. 'plains' (default) : Randomly generated elevations per tile in low range
+2. 'volcano' : Largest elevation in middle of island, slopes down
+
+### List of valid soil absportion profiles
+1. 'wet' (default) : Polygons within a large range gain moisture from surrounding water sources
+2. 'dry' : Has 1/4 the range of wet
 
 
 # A2 Information

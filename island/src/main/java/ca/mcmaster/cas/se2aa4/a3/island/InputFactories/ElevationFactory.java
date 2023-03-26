@@ -1,8 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.PlainsElevation;
-import ca.mcmaster.cas.se2aa4.a3.island.Elevation.VolcanoElevation;
+import ca.mcmaster.cas.se2aa4.a3.island.Elevation.*;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -10,12 +8,16 @@ import java.util.Random;
 
 public class ElevationFactory {
 
-    private final Map<String, BaseElevation> elevationOptions = createElevationOptions();
+    private final Map<String, BaseElevation> elevationOptions;
 
-    private Map<String, BaseElevation> createElevationOptions(){
+    public ElevationFactory (Random rand) {
+        elevationOptions = createElevationOptions(rand);
+    }
+
+    private Map<String, BaseElevation> createElevationOptions(Random rand){
         Map<String, BaseElevation> options = new Hashtable<>();
-        options.put("plains", new PlainsElevation(new Random()));
-        options.put("volcano", new VolcanoElevation(new Random()));
+        options.put("plains", new PlainsElevation(rand));
+        options.put("volcano", new VolcanoElevation(rand));
 
         return options;
     }

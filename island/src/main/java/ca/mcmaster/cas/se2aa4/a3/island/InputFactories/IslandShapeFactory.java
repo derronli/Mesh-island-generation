@@ -1,8 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Hexagon;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -10,8 +8,9 @@ import java.util.Map;
 public class IslandShapeFactory {
     private final Map<String, IslandShape> builderOptions = createBuilderOptions();
 
+    private final int width = 500, height = 500;
+
     private Map<String, IslandShape> createBuilderOptions(){
-        int width = 500; int height = 500;
         Map<String, IslandShape> options = new Hashtable<>();
         options.put("circle", new Circle(width, height));
         options.put("hexagon", new Hexagon(width, height));
@@ -27,7 +26,7 @@ public class IslandShapeFactory {
             return builderOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){
-            return builderOptions.get("circle");
+            return new Circle(width, height);
         }
     }
 
