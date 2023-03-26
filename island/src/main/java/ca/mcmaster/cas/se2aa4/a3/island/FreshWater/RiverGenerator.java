@@ -47,6 +47,11 @@ public class RiverGenerator {
         while (true) {
             RiverNeighbourExtractor extractor = new RiverNeighbourExtractor(mySegments, current);
             neighbour = extractor.getLowestNeighbour();
+            // Check if we have reached ocean yet
+            if (neighbour.getElevation() == -1) {
+                break;
+            }
+
             if (current.getElevation() > neighbour.getElevation()) {
                 neighbour.makeRiverVertex(); // Will need to edit later -> this would be the case we combine rivers
                 path = extractor.getRiverSegmentPath();
