@@ -1,10 +1,9 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
 
-public class MySegment implements MyShape{
+public class MySegment implements MyShape {
 
     private static int totalIndex = 0;
     private final int index;

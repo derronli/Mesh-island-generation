@@ -1,9 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Extractor;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MySegment;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyVertex;
 
 import java.util.ArrayList;
 import java.util.List;

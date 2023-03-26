@@ -1,9 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.FreshWater;
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
 import org.locationtech.jts.geom.Coordinate;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MySegment;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyVertex;
 
 import java.util.ArrayList;
 import java.util.List;

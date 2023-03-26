@@ -1,13 +1,13 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Vertex.*;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyShape;
 
 import java.awt.*;
 
-public class MyVertex implements MyShape{
+public class MyVertex implements MyShape {
 
     private static int totalIndex = 0;
     private final int index;

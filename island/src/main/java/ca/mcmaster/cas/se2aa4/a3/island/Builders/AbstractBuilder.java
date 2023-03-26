@@ -7,7 +7,9 @@ import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a3.island.Extractor.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
-import ca.mcmaster.cas.se2aa4.a3.island.*;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MySegment;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyVertex;
 import org.locationtech.jts.geom.Geometry;
 
 import java.lang.reflect.InvocationTargetException;

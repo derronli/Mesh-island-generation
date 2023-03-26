@@ -1,6 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Heatmaps;
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyShape;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyShape;
 
 import java.awt.*;
 
