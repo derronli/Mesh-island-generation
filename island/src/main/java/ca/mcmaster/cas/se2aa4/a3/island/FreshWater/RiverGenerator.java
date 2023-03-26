@@ -24,24 +24,30 @@ public class RiverGenerator {
     private final Random rand;
     public RiverGenerator(List<MyPolygon> landPolygons, List<MyPolygon> allPolygons, List<MySegment> mySegments, int numRivers, Random rand){
         this.rand = rand;
-        int polygonidx;
+        int polygonidx, riverDischarge, randomSegmentIdx;
         MySegment segment;
         MyVertex spring;
+        MyPolygon polygon;
 
         while (numRivers != 0) {
             polygonidx = this.rand.nextInt(landPolygons.size());
-            segment = landPolygons.get(polygonidx).getSegmentByIndex(0);
+            polygon = landPolygons.get(polygonidx);
+            randomSegmentIdx = this.rand.nextInt(polygon.getSegmentIdxsList().size());
+            segment = polygon.getSegmentByIndex(0);
             spring = segment.getV1();
 
+            // Starting river discharge is randomly set between 1 - 3
+            riverDischarge = this.rand.nextInt(3 - 1) + 1;
+
             // Ensure the starting point is valid
-            if (spring.makeRiverVertex()) {
+            if (spring.makeRiverVertex(riverDischarge)) {
                 numRivers--;
-                generate(spring, mySegments, allPolygons);
+                generate(spring, mySegments, allPolygons, riverDischarge);
             }
         }
     }
 
-    private void generate(MyVertex spring, List<MySegment> mySegments, List<MyPolygon> allPolygons){
+    private void generate(MyVertex spring, List<MySegment> mySegments, List<MyPolygon> allPolygons, int startingDischarge){
         MyVertex current = spring;
         MyVertex neighbour;
         MySegment path;
@@ -62,9 +68,16 @@ public class RiverGenerator {
             }
 
             if (current.getElevation() > neighbour.getElevation()) {
-                neighbour.makeRiverVertex(); // Will need to edit later -> this would be the case we combine rivers
+
+                // if neighbour is already a river
+                if (!neighbour.makeRiverVertex(startingDischarge)) {
+                    neighbour.addToDischarge(startingDischarge); // add onto the preexisting discharge
+                }
+                // else -> the river vertex will be made by the method
+
                 path = extractor.getRiverSegmentPath();
                 path.changeColor("135,206,235");
+                path.setThick(current.getDischarge());
 
                 current = neighbour;
             }
@@ -116,7 +129,6 @@ public class RiverGenerator {
         // (prevents the creation of an endo lake right beside a normal lake)
         for (MyPolygon neighbour : adjacentPolygons) {
             if (neighbour.isWaterTile()) {
-                System.out.println("WORKING");
                 return neighbour;
             }
         }

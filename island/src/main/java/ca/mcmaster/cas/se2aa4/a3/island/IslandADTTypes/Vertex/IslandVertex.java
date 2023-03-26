@@ -13,5 +13,9 @@ public abstract class IslandVertex {
         return new Color(0, 0, 0);
     }
 
+    public void addToDischarge(int n) { return; }
+
+    public int getDischarge() { return -1; }
+
 
 }

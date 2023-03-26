@@ -34,12 +34,12 @@ public class MyVertex implements MyShape{
     public Vertex getVertex(){ return vertex; }
     public java.util.List<Structs.Property> getPropertiesList() { return vertex.getPropertiesList(); }
 
-    public boolean makeRiverVertex(){
+    public boolean makeRiverVertex(int discharge){
         if (islandVertex.getClass() == RiverVertex.class){
             return false;
         }
         // Ensure that the originally set elevation is maintained, when changing the vertex type
-        islandVertex = new RiverVertex(1, islandVertex.getElevation());
+        islandVertex = new RiverVertex(discharge, islandVertex.getElevation());
         Color riverColor = islandVertex.getColor();
         changeColor(riverColor.getRed() + "," + riverColor.getGreen() + "," + riverColor.getBlue());
         return true;
@@ -56,5 +56,11 @@ public class MyVertex implements MyShape{
 
     public double getMoistureProvided(){ return (islandVertex.getClass() == RiverVertex.class) ?
             ((RiverVertex) islandVertex).getDischarge() : 0; }
+
+    public void addToDischarge(int n) {
+        islandVertex.addToDischarge(n);
+    }
+
+    public int getDischarge() { return islandVertex.getDischarge(); }
 
 }
