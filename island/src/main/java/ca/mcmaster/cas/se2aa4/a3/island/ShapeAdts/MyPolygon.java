@@ -243,4 +243,9 @@ public class MyPolygon implements MyShape {
         return false;
     }
 
+    public void attemptChange(Tile newTile) {
+        if(myTile.tryChange(newTile) != null) {
+            changeTile(newTile);
+        }
+    }
 }
