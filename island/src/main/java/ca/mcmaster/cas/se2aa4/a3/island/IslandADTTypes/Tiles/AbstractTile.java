@@ -22,7 +22,7 @@ public abstract class AbstractTile implements Tile {
 
     public abstract Tile tryChange(Tile newTile);
 
-
+    // Moisture provided by a tile is the sum of its humidity behaviour and aquifer moisture.
     public int moistureProvided() {
         return humidityBehaviour.moistureProvided() + aquifer.getMoisture();
     }
