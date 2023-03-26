@@ -190,7 +190,6 @@ public class MyPolygon implements MyShape{
     }
 
     // Sets elevation of tile if it is an island tile.
-    // should we tell them something is wrong if they set elevation for an ocean tile????
     public void setElevation(int elevation){
         myTile.setElevation(elevation);
     }
