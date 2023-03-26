@@ -21,23 +21,20 @@ public class RiverGenerator {
     // iterate through vertice list, looking for the smallest elevation.
     // Check if smallest elevation < current Vertex elevation
         // Yes -> set the current node =
-    private final Random rand;
     public RiverGenerator(List<MyPolygon> landPolygons, List<MyPolygon> allPolygons, List<MySegment> mySegments, int numRivers, Random rand){
-        this.rand = rand;
-        int polygonidx, riverDischarge, randomSegmentIdx;
+        int polygonidx, riverDischarge;
         MySegment segment;
         MyVertex spring;
         MyPolygon polygon;
 
         while (numRivers != 0) {
-            polygonidx = this.rand.nextInt(landPolygons.size());
+            polygonidx = rand.nextInt(landPolygons.size());
             polygon = landPolygons.get(polygonidx);
-            randomSegmentIdx = this.rand.nextInt(polygon.getSegmentIdxsList().size());
             segment = polygon.getSegmentByIndex(0);
             spring = segment.getV1();
 
             // Starting river discharge is randomly set between 1 - 3
-            riverDischarge = this.rand.nextInt(3 - 1) + 1;
+            riverDischarge = rand.nextInt(3) + 1;
 
             // Ensure the starting point is valid
             if (spring.makeRiverVertex(riverDischarge)) {
@@ -77,7 +74,7 @@ public class RiverGenerator {
 
                 path = extractor.getRiverSegmentPath();
                 path.changeColor("135,206,235");
-                path.setThick(current.getDischarge());
+                path.setThick((int) current.getMoisture());
 
                 current = neighbour;
             }

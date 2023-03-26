@@ -7,9 +7,9 @@ public class HumiditySource implements HumidityBehaviour {
         return true;
     }
 
-    // Basic humidity sources return a value of 1.
+    // Basic humidity sources return a value of 2.
     @Override
     public int moistureProvided() {
-        return 1;
+        return 2;
     }
 }

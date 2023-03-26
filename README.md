@@ -78,7 +78,7 @@ When you develop features and enrich the product, remember that you have first t
 |  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F13  |  Soil absorption profile makes only tiles directly connected to lakes absorb their humidity  |  Kyle  |  23/03/23  |  24/03/23  |  D  |
-|  F14  |  Soil absorption profile makes only tiles directly connected to rivers absorb their humidity  |  Kyle  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F14  |  Soil absorption profile makes only tiles directly connected to rivers absorb their humidity  |  Kyle  |  26/03/23  |  26/03/23  |  D  |
 |  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F17  |  Elevation and moisture determines biome of each tile and colour is changed accordingly  |  Kyle  |  25/03/23  |  26/03/23  |  D  |

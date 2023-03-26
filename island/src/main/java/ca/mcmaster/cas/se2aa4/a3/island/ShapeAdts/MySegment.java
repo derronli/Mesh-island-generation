@@ -2,6 +2,10 @@ package ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Segment;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 
 public class MySegment implements MyShape {
 
@@ -99,6 +103,13 @@ public class MySegment implements MyShape {
     public double getMoisture(){ return (v1.getMoisture() + v2.getMoisture()) / 2; }
 
     public double getMoistureProvided(){ return (v1.getMoistureProvided() + v2.getMoistureProvided()) / 2; }
+
+    public Point getMidpoint(){
+        GeometryFactory geom = new GeometryFactory();
+        double x = (getV1X() + getV2X()) / 2;
+        double y = (getV1Y() + getV2Y()) / 2;
+        return geom.createPoint(new Coordinate(x, y));
+    }
 
 
 }

@@ -15,7 +15,7 @@ public abstract class IslandVertex {
 
     public void addToDischarge(int n) { return; }
 
-    public int getDischarge() { return -1; }
+    public int getDischarge() { return 0; }
 
 
 }

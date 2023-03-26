@@ -21,9 +21,9 @@ public class IslandCreator {
     // Does the basic construction for an island, including moisture and elevation.
     private void constructBaseIsland(IslandBuilder islandBuilder, Mesh aMesh, BaseElevation elevation, Random rand, int numAquifers, SoilProfile soilProfile, int numLakes, int numRivers){
         islandBuilder.buildIsland(aMesh, rand, numAquifers, numLakes, numRivers);
-        islandBuilder.addMoistureToPolygons(soilProfile);
         islandBuilder.constructElevation(elevation);
-        islandBuilder.constructRivers(rand);
+        islandBuilder.constructRivers(rand, numRivers);
+        islandBuilder.addMoistureToPolygons(soilProfile);
     }
 
     // Creates a regular island.
