@@ -63,4 +63,19 @@ public class MySegment implements MyShape{
     public double getV1Y(){ return v1.getY(); }
     public double getV2X(){ return v2.getX(); }
     public double getV2Y(){ return v2.getY(); }
+
+
+    public MyVertex getV1(){return v1;}
+    public MyVertex getV2(){return v2;}
+
+    @Override
+    public int getElevation() {
+        return (v1.getElevation() + v2.getElevation()) / 2;
+    }
+
+    public double getMoisture(){ return (v1.getMoisture() + v2.getMoisture()) / 2; }
+
+    public double getMoistureProvided(){ return (v1.getMoistureProvided() + v2.getMoistureProvided()) / 2; }
+
+
 }

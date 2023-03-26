@@ -3,7 +3,9 @@ package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.AquiferGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.LakeGenerator;
+import ca.mcmaster.cas.se2aa4.a3.island.FreshWater.RiverGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.MoistureAdder;
+import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
@@ -23,6 +25,12 @@ public class IslandBuilder extends AbstractBuilder {
         elevation.generateElevation(islandShape, findPolygonsWithinIsland(), myVertices);
     }
 
+    public void constructRivers(Random rand) {
+        // River generator
+        new RiverGenerator(findPolygonsWithinIsland(), mySegments, 15, rand);
+
+    }
+
     public IslandBuilder(IslandShape shape){
         islandShape = shape;
     }
@@ -40,16 +48,16 @@ public class IslandBuilder extends AbstractBuilder {
         setPolyNeighbours(myPolygons);
 
         // Lake generator
-        new LakeGenerator(findPolygonsWithinIsland(), 0, rand);
+        new LakeGenerator(findPolygonsWithinIsland(), 3, rand);
 
         // Aquifer generator
         new AquiferGenerator(findPolygonsWithinIsland(), aquiferNum, rand);
 
     }
 
-    public void addMoistureToPolygons(){
+    public void addMoistureToPolygons(SoilProfile soilProfile){
         MoistureAdder moistureAdder = new MoistureAdder();
-        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland());
+        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland(), soilProfile);
     }
 
     private List<MyPolygon> findPolygonsWithinIsland(){

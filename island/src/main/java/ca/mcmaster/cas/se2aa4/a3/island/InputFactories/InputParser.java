@@ -74,6 +74,10 @@ public class InputParser {
                 .argName("river")
                 .hasArg()
                 .desc("Enter the number of rivers you want generated")
+        Option soil = Option.builder("soil")
+                .argName("soil profile")
+                .hasArg()
+                .desc("Enter the soil profile you want used")
                 .build();
 
         // add all options
@@ -87,6 +91,7 @@ public class InputParser {
         options.addOption(aquifer);
         options.addOption(lake);
         options.addOption(river);
+        options.addOption(soil);
 
         return options;
     }
@@ -98,11 +103,14 @@ public class InputParser {
 
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
-        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null, aquifer = null, lake = null, river = null;
+        String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null;
+        String aquifer = null, soil = null, lake = null, river = null;
         long seed = -1;
+
         int aquiferNumber = 0;
         int numLakes = 0;
         int numRivers = 0;
+        
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
@@ -122,6 +130,9 @@ public class InputParser {
         }
         if (line.hasOption("elevation")){
             elevation = line.getOptionValue("elevation");
+        }
+        if (line.hasOption("soil")){
+            soil = line.getOptionValue("soil");
         }
         if (line.hasOption("seed")){
             stringSeed = line.getOptionValue("seed");
@@ -169,10 +180,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, numLakes, numRivers);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, numLakes, numRivers);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
             }
             factory.write(aMesh, outputFile);
             
