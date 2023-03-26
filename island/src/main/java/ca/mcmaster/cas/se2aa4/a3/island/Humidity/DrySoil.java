@@ -4,6 +4,6 @@ public class DrySoil implements SoilProfile {
 
     @Override
     public int calcMoisture(int moisture, double distance) {
-        return (int)(moisture * (150 / Math.sqrt(distance)));
+        return (int)(moisture * (150 / distance));
     }
 }

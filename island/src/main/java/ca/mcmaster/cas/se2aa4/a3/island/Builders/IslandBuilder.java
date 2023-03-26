@@ -26,9 +26,9 @@ public class IslandBuilder extends AbstractBuilder {
         elevation.generateElevation(islandShape, findPolygonsWithinIsland(), myVertices);
     }
 
-    public void constructRivers(Random rand) {
+    public void constructRivers(Random rand, int numRivers) {
         // River generator
-        new RiverGenerator(findPolygonsWithinIsland(), myPolygons,  mySegments, 15, rand);
+        new RiverGenerator(findPolygonsWithinIsland(), myPolygons,  mySegments, numRivers, rand);
 
     }
 
@@ -58,7 +58,7 @@ public class IslandBuilder extends AbstractBuilder {
 
     public void addMoistureToPolygons(SoilProfile soilProfile){
         MoistureAdder moistureAdder = new MoistureAdder();
-        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland(), soilProfile);
+        moistureAdder.addMoistureToPolygons(findPolygonsWithinIsland(), soilProfile, mySegments);
     }
 
     private List<MyPolygon> findPolygonsWithinIsland(){
