@@ -2,9 +2,9 @@ package ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles;
 
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
 
-import java.awt.Color;
+import java.awt.*;
 
-public class Tundra extends LandTile {
+public class DryTundra extends LandTile {
 
     @Override
     public Color getColor() {
