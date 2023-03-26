@@ -36,7 +36,7 @@ public class IslandBuilder extends AbstractBuilder {
     }
 
     @Override
-    public void buildIsland(Mesh aMesh, Random rand, int aquiferNum, int numLakes, int numRivers){
+    public void buildIsland(Mesh aMesh, Random rand, int numAquifers, int numLakes, int numRivers){
 
         extractFromMesh(aMesh);
 
@@ -48,10 +48,10 @@ public class IslandBuilder extends AbstractBuilder {
         setPolyNeighbours(myPolygons);
 
         // Lake generator
-        new LakeGenerator(findPolygonsWithinIsland(), 3, rand);
+        new LakeGenerator(findPolygonsWithinIsland(), numLakes, rand);
 
         // Aquifer generator
-        new AquiferGenerator(findPolygonsWithinIsland(), aquiferNum, rand);
+        new AquiferGenerator(findPolygonsWithinIsland(), numAquifers, rand);
 
     }
 

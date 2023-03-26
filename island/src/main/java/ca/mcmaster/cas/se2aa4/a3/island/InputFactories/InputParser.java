@@ -108,7 +108,7 @@ public class InputParser {
         String aquifer = null, soil = null, lake = null, river = null;
         long seed = -1;
 
-        int aquiferNumber = 0;
+        int numAquifers = 0;
         int numLakes = 0;
         int numRivers = 0;
         
@@ -147,7 +147,7 @@ public class InputParser {
         if (line.hasOption("aquifer")){
             aquifer = line.getOptionValue("aquifer");
             try {
-                aquiferNumber = Integer.parseInt(aquifer);
+                numAquifers = Integer.parseInt(aquifer);
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid format for the number of aquifers, map now has 0 aquifers");
@@ -181,10 +181,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, numAquifers, soil, numLakes, numRivers);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, numAquifers, soil, numLakes, numRivers);
             }
             factory.write(aMesh, outputFile);
             

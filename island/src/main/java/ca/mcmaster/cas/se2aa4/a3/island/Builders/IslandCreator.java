@@ -17,22 +17,22 @@ public class IslandCreator {
     }
 
     // Does the basic construction for an island, including moisture and elevation.
-    private void constructBaseIsland(IslandBuilder islandBuilder, Mesh aMesh, BaseElevation elevation, Random rand, int aquiferNum, SoilProfile soilProfile, int numLakes, int numRivers){
-        islandBuilder.buildIsland(aMesh, rand, aquiferNum, numLakes, numRivers);
+    private void constructBaseIsland(IslandBuilder islandBuilder, Mesh aMesh, BaseElevation elevation, Random rand, int numAquifers, SoilProfile soilProfile, int numLakes, int numRivers){
+        islandBuilder.buildIsland(aMesh, rand, numAquifers, numLakes, numRivers);
         islandBuilder.addMoistureToPolygons(soilProfile);
         islandBuilder.constructElevation(elevation);
         islandBuilder.constructRivers(rand);
     }
 
     // Creates a regular island.
-    public Mesh createIsland(IslandBuilder islandBuilder, Mesh aMesh, BaseElevation elevation, Random rand, int aquiferNum, SoilProfile soilProfile, int numLakes, int numRivers){
-        constructBaseIsland(islandBuilder, aMesh, elevation, rand, aquiferNum, soilProfile, numLakes, numRivers);
+    public Mesh createIsland(IslandBuilder islandBuilder, Mesh aMesh, BaseElevation elevation, Random rand, int numAquifers, SoilProfile soilProfile, int numLakes, int numRivers){
+        constructBaseIsland(islandBuilder, aMesh, elevation, rand, numAquifers, soilProfile, numLakes, numRivers);
         return islandBuilder.getIsland();
     }
 
     // Creates a lagoon.
-    public Mesh createIsland(MeshBuilder lagoonBuilder, Mesh aMesh, Random rand, int aquiferNum, int numLakes, int numRivers){
-        lagoonBuilder.buildIsland(aMesh, rand, aquiferNum, numLakes, numRivers);
+    public Mesh createIsland(MeshBuilder lagoonBuilder, Mesh aMesh, Random rand, int numAquifers, int numLakes, int numRivers){
+        lagoonBuilder.buildIsland(aMesh, rand, numAquifers, numLakes, numRivers);
         return lagoonBuilder.getIsland();
     }
 
