@@ -209,7 +209,8 @@ public class MyPolygon implements MyShape{
         return myTile.getElevation();
     }
 
-    public boolean attemptChange(Tile newTile) {
+    public boolean tryChangeTileToLake() {
+        Tile newTile = new LakeTile();
         if(myTile.tryChange(newTile) != null) {
             changeTile(newTile);
             return true;
@@ -233,6 +234,13 @@ public class MyPolygon implements MyShape{
 
     public Point getCenterOfPolygon(){
         return jtsPolygon.getCentroid();
+    }
+
+    public boolean isIsland() {
+        if (IslandTile.class.isAssignableFrom(myTile.getClass())) {
+            return true;
+        }
+        return false;
     }
 
 }
