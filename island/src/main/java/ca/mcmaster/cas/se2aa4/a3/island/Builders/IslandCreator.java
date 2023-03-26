@@ -21,6 +21,7 @@ public class IslandCreator {
         islandBuilder.buildIsland(aMesh, rand, aquiferNum);
         islandBuilder.addMoistureToPolygons(soilProfile);
         islandBuilder.constructElevation(elevation);
+        islandBuilder.constructRivers(rand);
     }
 
     // Creates a regular island.

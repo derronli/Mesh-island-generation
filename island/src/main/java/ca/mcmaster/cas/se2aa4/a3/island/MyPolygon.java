@@ -228,7 +228,11 @@ public class MyPolygon implements MyShape{
         return myTile.setAquifer();
     }
 
+
+    public MySegment getSegmentByIndex(int i) { return segments.get(i); }
+
     public Point getCenterOfPolygon(){
         return jtsPolygon.getCentroid();
     }
+
 }
