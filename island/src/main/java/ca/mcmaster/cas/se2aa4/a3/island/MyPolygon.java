@@ -231,4 +231,6 @@ public class MyPolygon implements MyShape{
     public boolean setAquifer (){
         return myTile.setAquifer();
     }
+
+    public MySegment getSegmentByIndex(int i) { return segments.get(i); }
 }

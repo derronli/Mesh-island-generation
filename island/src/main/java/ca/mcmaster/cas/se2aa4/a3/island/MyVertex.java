@@ -2,7 +2,10 @@ package ca.mcmaster.cas.se2aa4.a3.island;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Vertex;
+import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.Tile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Vertex.*;
+
+import java.awt.*;
 
 public class MyVertex implements MyShape{
 
@@ -35,7 +38,10 @@ public class MyVertex implements MyShape{
         if (islandVertex.getClass() == RiverVertex.class){
             return false;
         }
-        islandVertex = new RiverVertex(1);
+        // Ensure that the originally set elevation is maintained, when changing the vertex type
+        islandVertex = new RiverVertex(1, islandVertex.getElevation());
+        Color riverColor = islandVertex.getColor();
+        changeColor(riverColor.getRed() + "," + riverColor.getGreen() + "," + riverColor.getBlue());
         return true;
     }
 
