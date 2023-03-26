@@ -10,6 +10,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.WhittakerDiagram;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class IslandBuilder extends AbstractBuilder {
     }
 
     @Override
-    public void buildIsland(Mesh aMesh, Random rand, int aquiferNum, int numLakes, int numRivers){
+    public void buildIsland(Mesh aMesh, Random rand, int numAquifers, int numLakes, int numRivers){
 
         extractFromMesh(aMesh);
 
@@ -48,10 +49,10 @@ public class IslandBuilder extends AbstractBuilder {
         setPolyNeighbours(myPolygons);
 
         // Lake generator
-        new LakeGenerator(findPolygonsWithinIsland(), 3, rand);
+        new LakeGenerator(findPolygonsWithinIsland(), numLakes, rand);
 
         // Aquifer generator
-        new AquiferGenerator(findPolygonsWithinIsland(), aquiferNum, rand);
+        new AquiferGenerator(findPolygonsWithinIsland(), numAquifers, rand);
 
     }
 
@@ -77,6 +78,16 @@ public class IslandBuilder extends AbstractBuilder {
             for (MyPolygon p2: myPolygons){
                 p1.checkForNeighbour(p2);
             }
+        }
+    }
+
+    public void generateBiome(WhittakerDiagram biome){
+        if (biome == null){
+            return;
+        }
+        for (MyPolygon p : findPolygonsWithinIsland()){
+            Tile newTile = biome.getTile((int) p.getMoisture(), p.getElevation());
+            p.attemptChange(newTile);
         }
     }
 

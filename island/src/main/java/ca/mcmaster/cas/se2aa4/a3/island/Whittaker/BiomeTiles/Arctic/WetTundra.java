@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles;
+package ca.mcmaster.cas.se2aa4.a3.island.Whittaker.BiomeTiles.Arctic;
 
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LandTile;
 

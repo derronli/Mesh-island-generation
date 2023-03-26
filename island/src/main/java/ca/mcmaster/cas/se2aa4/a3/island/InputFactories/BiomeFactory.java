@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
 import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.*;
 import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.Biomes.Arctic;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.Biomes.WarmTemperate;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class BiomeFactory {
     private Map<String, WhittakerDiagram> createBiomeOptions(){
         Map<String, WhittakerDiagram> options = new Hashtable<>();
         options.put("arctic", new Arctic());
+        options.put("warmtemperate", new WarmTemperate());
 
         return options;
     }
@@ -25,8 +27,8 @@ public class BiomeFactory {
             return biomeOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){
-            // Sets arctic biome as default if issue arises when searching for biome.
-            return biomeOptions.get("arctic");
+            // Sets no biome as default.
+            return null;
         }
     }
 

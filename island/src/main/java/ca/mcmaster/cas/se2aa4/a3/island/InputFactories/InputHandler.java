@@ -6,6 +6,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.WhittakerDiagram;
 
 import java.util.Random;
 
@@ -18,7 +19,8 @@ public class InputHandler {
     }
 
     // Makes a regular island.
-    public Mesh makeMesh(Mesh aMesh, String elevation, long seed, int aquiferNum, String soil, int numLakes, int numRivers){
+    public Mesh makeMesh(Mesh aMesh, String elevation, long seed, int numAquifers, String soil, int numLakes, int numRivers,
+                         String biome){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
         Random rand = getRandom(seed);
@@ -27,11 +29,12 @@ public class InputHandler {
         if (builder.getClass() == IslandBuilder.class){
             BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             SoilProfile soilProfile = getSoilProfile(soil);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, rand, aquiferNum, soilProfile, numLakes, numRivers);
+            WhittakerDiagram whittakerDiagram = getWhittakerBiome(biome);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, rand, numAquifers, soilProfile, numLakes, numRivers, whittakerDiagram);
         }
 
         // Returns the lagoon if just using a lagoon builder.
-        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum, numLakes, numRivers);
+        return islandCreator.createIsland(builder, aMesh, rand, numAquifers, numLakes, numRivers);
     }
 
     private IslandShape getIslandShape(){
@@ -54,6 +57,11 @@ public class InputHandler {
         return soilFactory.getSoilProfile(soil);
     }
 
+    private WhittakerDiagram getWhittakerBiome(String biome){
+        BiomeFactory biomeFactory = new BiomeFactory();
+        return biomeFactory.getBiome(biome);
+    }
+
     private MeshBuilder getBuilder(){
         MeshBuilder builder;
         // Checks for a lagoon mesh.
@@ -70,7 +78,7 @@ public class InputHandler {
     }
 
     // Makes an island with a heatmap, unless making a lagoon.
-    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation, long seed, int aquiferNum, String soil, int numLakes, int numRivers){
+    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation, long seed, int numAquifers, String soil, int numLakes, int numRivers){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
         Random rand = getRandom(seed);
@@ -80,11 +88,11 @@ public class InputHandler {
             BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             SoilProfile soilProfile = getSoilProfile(soil);
             HeatmapPainter heatmapPainter = getHeatmapPainter(heatmap);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, rand, aquiferNum, soilProfile, numLakes, numRivers);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, rand, numAquifers, soilProfile, numLakes, numRivers);
         }
 
         // Returns the lagoon if just using a lagoon builder.
-        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum, numLakes, numRivers);
+        return islandCreator.createIsland(builder, aMesh, rand, numAquifers, numLakes, numRivers);
     }
 
     private Random getRandom (long seed) {
