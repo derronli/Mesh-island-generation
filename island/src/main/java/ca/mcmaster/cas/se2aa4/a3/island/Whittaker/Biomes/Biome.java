@@ -31,7 +31,7 @@ public abstract class Biome implements WhittakerDiagram {
         Class<? extends Tile> klass;
 
         // Checks for out of bounds, returning first item in biomes if more moisture than the height.
-        if (moisture > height) {
+        if (moisture > height || moisture < 0) {
             klass = biomeMappings.get(regions.get(0));
             try{
                 return klass.getDeclaredConstructor().newInstance();
@@ -43,7 +43,7 @@ public abstract class Biome implements WhittakerDiagram {
             }
         }
         // Returns last item in biomes if more elevation than width.
-        if (elevation > width){
+        if (elevation > width || elevation < 0){
             klass = biomeMappings.get(regions.get(regions.size() - 1));
             try{
                 return klass.getDeclaredConstructor().newInstance();
@@ -58,7 +58,7 @@ public abstract class Biome implements WhittakerDiagram {
         GeometryFactory geom = new GeometryFactory();
         Point p = geom.createPoint(new Coordinate(elevation, moisture));
         for (Geometry g : regions){
-           if (g.contains(p)){
+           if (g.intersects(p)){
                klass = biomeMappings.get(g);
                try{
                    return klass.getDeclaredConstructor().newInstance();
