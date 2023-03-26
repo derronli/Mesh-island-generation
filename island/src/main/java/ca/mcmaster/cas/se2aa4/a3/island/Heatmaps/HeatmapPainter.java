@@ -1,9 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Heatmaps;
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.MyShape;
-import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
-import ca.mcmaster.cas.se2aa4.a3.island.MySegment;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyShape;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyVertex;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MySegment;
 import java.util.List;
 
 import java.awt.*;

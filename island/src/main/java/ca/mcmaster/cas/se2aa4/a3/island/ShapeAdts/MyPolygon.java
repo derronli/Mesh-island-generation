@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island;
+package ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts;
 
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Polygon;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Property;
@@ -11,7 +11,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.Point;
 
-public class MyPolygon implements MyShape{
+public class MyPolygon implements MyShape {
 
     private static int totalIndex = 0;
     private final int index;

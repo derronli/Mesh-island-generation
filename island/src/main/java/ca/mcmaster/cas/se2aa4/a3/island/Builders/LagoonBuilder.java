@@ -3,7 +3,7 @@ package ca.mcmaster.cas.se2aa4.a3.island.Builders;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
-import ca.mcmaster.cas.se2aa4.a3.island.*;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.List;

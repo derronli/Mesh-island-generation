@@ -6,7 +6,6 @@ import ca.mcmaster.cas.se2aa4.a3.island.Elevation.BaseElevation;
 import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
 import ca.mcmaster.cas.se2aa4.a3.island.Humidity.SoilProfile;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
-import ca.mcmaster.cas.se2aa4.a3.island.Seed.GenerateSeed;
 
 import java.util.Random;
 
