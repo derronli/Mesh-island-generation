@@ -74,6 +74,7 @@ public class InputParser {
                 .argName("river")
                 .hasArg()
                 .desc("Enter the number of rivers you want generated")
+                .build();
         Option soil = Option.builder("soil")
                 .argName("soil profile")
                 .hasArg()
