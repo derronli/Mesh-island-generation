@@ -6,5 +6,6 @@ public interface MyShape {
 
     int getElevation();
 
-    int getMoisture();
+    double getMoisture();
+    double getMoistureProvided();
 }
