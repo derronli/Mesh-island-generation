@@ -6,6 +6,6 @@ AquiferDNE class implements and returns 0
  */
 public class HasAquifer extends Aquifer {
     public int getMoisture () {
-        return 1;
+        return 2;
     }
 }
