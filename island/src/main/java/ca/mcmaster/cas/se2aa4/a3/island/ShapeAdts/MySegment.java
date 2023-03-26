@@ -46,6 +46,30 @@ public class MySegment implements MyShape {
         return -1;
     }
 
+    /**
+     * Sets the thickness of this segment.
+     * @param thickness int value of thickness wanted
+     */
+    public void setThick(float thickness){
+        Structs.Property thick = Structs.Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
+
+        String val = null;
+        for(Structs.Property p: this.getPropertiesList()) {
+            if (p.getKey().equals("thickness")) {
+                val = p.getValue();
+            }
+        }
+
+        // If thickness property does not already exist.
+        if (val == null) {
+            segment = Segment.newBuilder(segment).addProperties(thick).build();
+        }
+        // If thickness value needs to be changed.
+        else{
+            segment = Segment.newBuilder(segment).setProperties(1, thick).build();
+        }
+    }
+
     // Getters
     public int getIndex(){ return index; }
     public int getV1Index(){

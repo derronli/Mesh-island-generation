@@ -1,6 +1,5 @@
 package ca.mcmaster.cas.se2aa4.a3.island.FreshWater;
 
-import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.LakeTile;
 import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class LakeGenerator {
         while (count < numLakes) {
             index = rand.nextInt(myPolygons.size());
             p = myPolygons.get(index);
-            count += (p.attemptChange(new LakeTile())) ? 1 : 0;
+            count += (p.tryChangeTileToLake()) ? 1 : 0;
         }
     }
     // Args specify loop bounds

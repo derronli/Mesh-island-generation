@@ -62,6 +62,9 @@ visisland:
 gencir:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle
 
+gencirvol:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano
+
 gencirel:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -heatmap elevation
 
@@ -108,3 +111,5 @@ cirmovol: s gencirmovol visisland
 hexelvol: s genhexelvol visisland
 
 hexmovol: s genhexmovol visisland
+
+cirvol: s gencirvol visisland

@@ -27,7 +27,7 @@ public class IslandBuilder extends AbstractBuilder {
 
     public void constructRivers(Random rand) {
         // River generator
-        new RiverGenerator(findPolygonsWithinIsland(), mySegments, 15, rand);
+        new RiverGenerator(findPolygonsWithinIsland(), myPolygons,  mySegments, 15, rand);
 
     }
 
