@@ -25,8 +25,8 @@ public class BiomeFactory {
             return biomeOptions.get(key);
         }
         catch (ClassCastException | NullPointerException exception){
-            // Sets arctic biome as default if issue arises when searching for biome.
-            return biomeOptions.get("arctic");
+            // Sets no biome as default.
+            return null;
         }
     }
 

@@ -10,6 +10,7 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.WhittakerDiagram;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.ArrayList;
@@ -77,6 +78,16 @@ public class IslandBuilder extends AbstractBuilder {
             for (MyPolygon p2: myPolygons){
                 p1.checkForNeighbour(p2);
             }
+        }
+    }
+
+    public void generateBiome(WhittakerDiagram biome){
+        if (biome == null){
+            return;
+        }
+        for (MyPolygon p : findPolygonsWithinIsland()){
+            Tile newTile = biome.getTile((int) p.getMoisture(), p.getElevation());
+            p.attemptChange(newTile);
         }
     }
 

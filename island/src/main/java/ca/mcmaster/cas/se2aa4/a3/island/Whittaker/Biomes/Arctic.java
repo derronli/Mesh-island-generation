@@ -81,7 +81,7 @@ public class Arctic extends Biome {
                 new Coordinate((int) (width / 2.0), 0),
                 new Coordinate(width, (int) (height / 2.0)),
                 new Coordinate(width, 0),
-                new Coordinate((int) (height / 2.0), 0)
+                new Coordinate((int) (width / 2.0), 0)
         };
         return geom.createPolygon(coords);
     }
