@@ -65,6 +65,15 @@ public class InputParser {
                 .hasArg()
                 .desc("Enter the number of aquifers you want generated")
                 .build();
+        Option lake = Option.builder("lake")
+                .argName("aquifer")
+                .hasArg()
+                .desc("Enter the number of lakes you want generated")
+                .build();
+        Option river = Option.builder("river")
+                .argName("river")
+                .hasArg()
+                .desc("Enter the number of rivers you want generated")
         Option soil = Option.builder("soil")
                 .argName("soil profile")
                 .hasArg()
@@ -80,6 +89,8 @@ public class InputParser {
         options.addOption(elevation);
         options.addOption(seed);
         options.addOption(aquifer);
+        options.addOption(lake);
+        options.addOption(river);
         options.addOption(soil);
 
         return options;
@@ -93,10 +104,13 @@ public class InputParser {
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
         String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null;
-        String aquifer = null, soil = null;
+        String aquifer = null, soil = null, lake = null, river = null;
         long seed = -1;
 
         int aquiferNumber = 0;
+        int numLakes = 0;
+        int numRivers = 0;
+        
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
             displayHelp(options);
@@ -138,6 +152,24 @@ public class InputParser {
                 System.out.println("Invalid format for the number of aquifers, map now has 0 aquifers");
             }
         }
+        if (line.hasOption("lake")){
+            lake = line.getOptionValue("lake");
+            try {
+                numLakes = Integer.parseInt(lake);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for the number of lakes, map now has 0 lakes");
+            }
+        }
+        if (line.hasOption("river")){
+            river = line.getOptionValue("river");
+            try {
+                numRivers = Integer.parseInt(river);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for the number of lakes, map now has 0 lakes");
+            }
+        }
 
         // Ensures we have an input and output file before creating island.
         if (!(inputFile == null || outputFile == null)){
@@ -148,10 +180,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, soil);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, soil);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, soil, numLakes, numRivers);
             }
             factory.write(aMesh, outputFile);
             

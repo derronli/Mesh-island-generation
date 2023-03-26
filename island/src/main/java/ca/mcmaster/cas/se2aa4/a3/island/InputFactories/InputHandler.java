@@ -19,7 +19,7 @@ public class InputHandler {
     }
 
     // Makes a regular island.
-    public Mesh makeMesh(Mesh aMesh, String elevation, long seed, int aquiferNum, String soil){
+    public Mesh makeMesh(Mesh aMesh, String elevation, long seed, int aquiferNum, String soil, int numLakes, int numRivers){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
         Random rand = getRandom(seed);
@@ -28,11 +28,11 @@ public class InputHandler {
         if (builder.getClass() == IslandBuilder.class){
             BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             SoilProfile soilProfile = getSoilProfile(soil);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, rand, aquiferNum, soilProfile);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, rand, aquiferNum, soilProfile, numLakes, numRivers);
         }
 
         // Returns the lagoon if just using a lagoon builder.
-        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum);
+        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum, numLakes, numRivers);
     }
 
     private IslandShape getIslandShape(){
@@ -71,7 +71,7 @@ public class InputHandler {
     }
 
     // Makes an island with a heatmap, unless making a lagoon.
-    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation, long seed, int aquiferNum, String soil){
+    public Mesh makeMesh(Mesh aMesh, String heatmap, String elevation, long seed, int aquiferNum, String soil, int numLakes, int numRivers){
         IslandCreator islandCreator = new IslandCreator();
         MeshBuilder builder = getBuilder();
         Random rand = getRandom(seed);
@@ -81,11 +81,11 @@ public class InputHandler {
             BaseElevation elevationProfile = getElevationProfile(elevation, rand);
             SoilProfile soilProfile = getSoilProfile(soil);
             HeatmapPainter heatmapPainter = getHeatmapPainter(heatmap);
-            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, rand, aquiferNum, soilProfile);
+            return islandCreator.createIsland((IslandBuilder) builder, aMesh, elevationProfile, heatmapPainter, rand, aquiferNum, soilProfile, numLakes, numRivers);
         }
 
         // Returns the lagoon if just using a lagoon builder.
-        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum);
+        return islandCreator.createIsland(builder, aMesh, rand, aquiferNum, numLakes, numRivers);
     }
 
     private Random getRandom (long seed) {
