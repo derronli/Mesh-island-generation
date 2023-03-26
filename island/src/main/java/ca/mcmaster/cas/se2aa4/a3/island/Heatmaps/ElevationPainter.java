@@ -1,13 +1,13 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Heatmaps;
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.MyShape;
 
 import java.awt.*;
 
 public class ElevationPainter extends HeatmapPainter{
     @Override
-    public Color determineColor(MyPolygon p) {
-        int elevation = p.getElevation();
+    public Color determineColor(MyShape s) {
+        int elevation = s.getElevation();
 
         return switch ((elevation == -1) ? 6 :
                 (0 <= elevation && elevation <= 10) ? 0 :

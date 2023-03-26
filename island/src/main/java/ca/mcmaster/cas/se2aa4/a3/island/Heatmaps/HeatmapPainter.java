@@ -10,21 +10,21 @@ import java.awt.*;
 
 public abstract class HeatmapPainter {
 
-    private void normalizeShapeColor(List<? extends MyShape> shapeList){
+    protected void normalizeShapeColor(List<? extends MyShape> shapeList, String color){
         for (MyShape shape: shapeList){
-            shape.changeColor("0,0,0");
+            shape.changeColor(color);
         }
     }
 
     public void createHeatmap(List<MyPolygon> myPolygons, List<MyVertex> myVertices, List<MySegment> mySegments){
-        normalizeShapeColor(myVertices);
-        normalizeShapeColor(mySegments);
+        normalizeShapeColor(myVertices, "0,0,0");
+        normalizeShapeColor(mySegments, "0,0,0");
         for (MyPolygon p : myPolygons){
             Color newColor = determineColor(p);
             p.changeColor(newColor.getRed() + "," + newColor.getGreen() + "," + newColor.getBlue());
         }
     }
 
-    public abstract Color determineColor(MyPolygon p);
+    public abstract Color determineColor(MyShape s);
 
 }

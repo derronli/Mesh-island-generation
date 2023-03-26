@@ -1,13 +1,13 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Heatmaps;
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.MyShape;
 
 import java.awt.*;
 
 public class MoisturePainter extends HeatmapPainter{
     @Override
-    public Color determineColor(MyPolygon p) {
-        int moisture = p.getMoisture() * 100;
+    public Color determineColor(MyShape s) {
+        int moisture = s.getMoisture() * 100;
 
         return switch ((moisture < 0) ? 0 :
                 (moisture == 0) ? 1 :

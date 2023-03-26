@@ -1,8 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.ElevationPainter;
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.HeatmapPainter;
-import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.MoisturePainter;
+import ca.mcmaster.cas.se2aa4.a3.island.Heatmaps.*;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -15,6 +13,7 @@ public class HeatmapFactory {
         Map<String, HeatmapPainter> options = new Hashtable<>();
         options.put("elevation", new ElevationPainter());
         options.put("moisture", new MoisturePainter());
+        options.put("vertexelevation", new VertexElevationPainter());
 
         return options;
     }
