@@ -94,7 +94,8 @@ public class InputParser {
 
         String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null;
         String aquifer = null, soil = null;
-        long seed;
+        long seed = -1;
+
         int aquiferNumber = 0;
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
@@ -126,7 +127,6 @@ public class InputParser {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid format for seed, using random seed instead");
-                stringSeed = null;
             }
         }
         if (line.hasOption("aquifer")){
@@ -148,10 +148,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, soil);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, aquiferNumber, soil);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, soil);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, aquiferNumber, soil);
             }
             factory.write(aMesh, outputFile);
             

@@ -8,10 +8,11 @@ import java.util.Random;
 
 public class LakeGenerator {
     private final int numLakes;
-    private final Random rand = new Random();
+    private final Random rand;
 
-    public LakeGenerator(List<MyPolygon> myPolygons, int numLakes) {
+    public LakeGenerator(List<MyPolygon> myPolygons, int numLakes, Random rand) {
         this.numLakes = numLakes;
+        this.rand = rand;
         generate(myPolygons);
     }
     private void generate(List<MyPolygon> myPolygons) {

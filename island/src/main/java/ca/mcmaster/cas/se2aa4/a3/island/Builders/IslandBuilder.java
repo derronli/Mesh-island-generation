@@ -21,7 +21,7 @@ public class IslandBuilder extends AbstractBuilder {
     private final IslandShape islandShape;
 
     public void constructElevation (BaseElevation elevation){
-        elevation.generateElevation(islandShape, findPolygonsWithinIsland());
+        elevation.generateElevation(islandShape, findPolygonsWithinIsland(), myVertices);
     }
 
     public IslandBuilder(IslandShape shape){
@@ -29,7 +29,7 @@ public class IslandBuilder extends AbstractBuilder {
     }
 
     @Override
-    public void buildIsland(Mesh aMesh){
+    public void buildIsland(Mesh aMesh, Random rand, int aquiferNum){
 
         extractFromMesh(aMesh);
 
@@ -41,10 +41,10 @@ public class IslandBuilder extends AbstractBuilder {
         setPolyNeighbours(myPolygons);
 
         // Lake generator
-        new LakeGenerator(findPolygonsWithinIsland(), 0);
+        new LakeGenerator(findPolygonsWithinIsland(), 0, rand);
 
         // Aquifer generator
-        new AquiferGenerator(findPolygonsWithinIsland(), 1, new Random());
+        new AquiferGenerator(findPolygonsWithinIsland(), aquiferNum, rand);
 
     }
 

@@ -1,12 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 
-import ca.mcmaster.cas.se2aa4.a2.io.Structs;
-import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.Circle;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
 import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
 
 import ca.mcmaster.cas.se2aa4.a3.island.MyVertex;
-import ca.mcmaster.cas.se2aa4.a3.island.Seed.GenerateSeed;
 import org.locationtech.jts.geom.*;
 
 import java.util.ArrayList;
@@ -49,39 +46,37 @@ public abstract class GeneralElevationProperties implements BaseElevation{
         }
     }
 
-    private Point convertVertexToPoint (MyVertex v){
-        GeometryFactory geom = new GeometryFactory();
-        double x = v.getX();
-        double y = v.getY();
+    private Coordinate convertVertexToCoordinate (MyVertex v){
+        int x = (int) v.getX();
+        int y = (int) v.getY();
 
-        Coordinate bruh = new Coordinate(x,y);
-
-        Point goodPoint = new Point((CoordinateSequence) bruh, geom);
-        return goodPoint;
+        return new Coordinate(x,y);
     }
-    public void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
+
+    private void setVertexElevation (List<MyPolygon> polygons, List <MyVertex> vertices) {
+        int sum;
+        int average;
+        int counter;
         for (MyVertex vertex : vertices) {
-            Point check = convertVertexToPoint(vertex);
-            for (int j = 0; j < polygons.size(); j++) {
-                for (MyPolygon polygon : polygons) {
-                    if ((polygons.get(j).containsPoint(check) && polygon.containsPoint(check)) && polygons.get(j) != polygon) {
-                        int elevationOne = polygons.get(j).getElevation();
-                        int elevationTwo = polygon.getElevation();
-                        float average = (elevationOne + elevationTwo) / 2;
-                        //set vertex here to average elevation
-                    }
+            sum = 0;
+            counter = 0;
+            Coordinate coord = convertVertexToCoordinate(vertex);
+            for (MyPolygon polygon : polygons) {
+                if (polygon.containsCoordinate(coord)) {
+                    sum += polygon.getElevation();
+                    counter++;
                 }
             }
+            average = (counter == 0) ? -1 : sum/counter;
+            vertex.setElevation(average);
         }
     }
-
     protected abstract void generateElevationProfile (IslandShape i, List <MyPolygon> polygons, List<Integer>elevationValues);
-
-
     @Override
-    public void generateElevation(IslandShape i, List <MyPolygon> polygons) {
+    public void generateElevation(IslandShape i, List <MyPolygon> polygons, List <MyVertex> vertices) {
         List <Integer> elevationValues = new ArrayList<>(Collections.nCopies(polygons.size(), 0));
         generateElevationProfile(i, polygons, elevationValues);
         setPolygonElevation(polygons, elevationValues);
+        setVertexElevation(polygons, vertices);
     }
 }

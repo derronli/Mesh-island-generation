@@ -7,10 +7,11 @@ import ca.mcmaster.cas.se2aa4.a3.island.*;
 import org.locationtech.jts.geom.Geometry;
 
 import java.util.List;
+import java.util.Random;
 
 public class LagoonBuilder extends AbstractBuilder {
 
-    public void buildIsland(Mesh aMesh){
+    public void buildIsland(Mesh aMesh, Random rand, int aquiferNum){
 
         extractFromMesh(aMesh);
 

@@ -13,6 +13,7 @@ public class HeatmapFactory {
         Map<String, HeatmapPainter> options = new Hashtable<>();
         options.put("elevation", new ElevationPainter());
         options.put("moisture", new MoisturePainter());
+        options.put("vertexelevation", new VertexElevationPainter());
 
         return options;
     }
