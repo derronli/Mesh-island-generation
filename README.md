@@ -96,14 +96,27 @@ When you develop features and enrich the product, remember that you have first t
 - -o = output file path to use
 - -mode = (optional, defaults to circle) either 'lagoon' for lagoon mode or valid shape
 - -heatmap = (optional) heatmap type to use for visualizing properties (see list of valid heatmaps for more details)
+- -elevation = (defaults to plains) elevation profile to use (see list of valid profiles for more details)
+- -soil = (defaults to wet profile) soil absorption profile to use, determines how much moisture is absorbed from water sources
+- -aquifer = maximum number of aquifers to create
+- -seed = seed to use which will always generate the same map for the same seed
 
 ### List of valid shapes
-1. Circle (default)
-2. Hexagon
+1. 'circle' (default)
+2. 'hexagon'
 
 ### List of valid heatmaps
-1. Elevation (default if non-valid heatmap is input when heatmap command is used)
-2. Moisture
+1. 'elevation' : Shows elevation of polygons (default if non-valid heatmap is input when heatmap command is used)
+2. 'moisture' : Shows moisture of polygons
+3. 'vertexelevation' : Shows elevation of vertices
+
+### List of valid elevation profiles
+1. 'plains' (default) : Randomly generated elevations per tile in low range
+2. 'volcano' : Largest elevation in middle of island, slopes down
+
+### List of valid soil absportion profiles
+1. 'wet' (default) : Polygons within a large range gain moisture from surrounding water sources
+2. 'dry' : Has 1/4 the range of wet
 
 
 # A2 Information
