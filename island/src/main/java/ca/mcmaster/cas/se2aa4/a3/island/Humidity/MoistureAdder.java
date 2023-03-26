@@ -12,7 +12,7 @@ public class MoistureAdder {
     public void addMoistureToPolygons(List<MyPolygon> myPolygons, SoilProfile soilProfile){
         for (MyPolygon p : myPolygons){
             for (MyPolygon other : myPolygons){
-                int otherMoisture = other.getMoistureProvided();
+                int otherMoisture = (int) other.getMoistureProvided();
                 double distance = p.getCenterOfPolygon().distance(other.getCenterOfPolygon());
 
                 // If checking the polygon against itself, sets distance to 1.

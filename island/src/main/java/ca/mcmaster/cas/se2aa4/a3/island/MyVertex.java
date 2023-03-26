@@ -43,8 +43,11 @@ public class MyVertex implements MyShape{
 
     public int getElevation(){ return islandVertex.getElevation(); }
 
-    public int getMoisture(){
+    public double getMoisture(){
         return (islandVertex.getClass() == RiverVertex.class) ? ((RiverVertex)islandVertex).getDischarge() : 0;
     }
+
+    public double getMoistureProvided(){ return (islandVertex.getClass() == RiverVertex.class) ?
+            ((RiverVertex) islandVertex).getDischarge() : 0; }
 
 }

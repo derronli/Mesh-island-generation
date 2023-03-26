@@ -69,5 +69,8 @@ public class MySegment implements MyShape{
         return (v1.getElevation() + v2.getElevation()) / 2;
     }
 
-    public int getMoisture(){ return (v1.getMoisture() + v2.getMoisture()) / 2; }
+    public double getMoisture(){ return (v1.getMoisture() + v2.getMoisture()) / 2; }
+
+    public double getMoistureProvided(){ return (v1.getMoistureProvided() + v2.getMoistureProvided()) / 2; }
+
 }

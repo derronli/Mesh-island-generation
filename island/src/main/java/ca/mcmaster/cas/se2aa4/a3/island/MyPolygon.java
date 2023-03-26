@@ -175,14 +175,14 @@ public class MyPolygon implements MyShape{
      * Returns the amount of moisture this tile provides (0 for regular tiles).
      * @return amount of moisture this tile provides.
      */
-    public int getMoistureProvided(){
+    public double getMoistureProvided(){
         return myTile.moistureProvided();
     }
 
     // Don't confuse below with above, that is for moisture that this tile provides, this is for moisture that this tile has.
     public void addMoisture(int moisture){ myTile.addMoisture(moisture); }
     // Temporarily returns 100 moisture if looking at lake and -1 for ocean.
-    public int getMoisture(){ return (myTile instanceof LakeTile) ? 100 : (myTile instanceof OceanTile) ? -1: myTile.getMoisture(); }
+    public double getMoisture(){ return (myTile instanceof LakeTile) ? 100 : (myTile instanceof OceanTile) ? -1: myTile.getMoisture(); }
 
 
     public boolean containsPoint(Point point){
