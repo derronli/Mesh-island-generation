@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island.Seed;
+package ca.mcmaster.cas.se2aa4.a3.island.InputFactories;
 
 import java.util.Random;
 

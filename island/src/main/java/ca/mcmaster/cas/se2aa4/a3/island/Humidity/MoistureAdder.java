@@ -1,7 +1,7 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Humidity;
 
 
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a3.island.Elevation;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.IslandShape;
-import ca.mcmaster.cas.se2aa4.a3.island.MyPolygon;
-import ca.mcmaster.cas.se2aa4.a3.island.Seed.GenerateSeed;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
 
 import java.util.Random;
 
