@@ -19,8 +19,8 @@ public class MoisturePainter extends HeatmapPainter{
             case 0 -> new Color(0, 150, 100);
             case 1 -> new Color(0, 39, 54);
             case 2 -> new Color(255, 200, 255);
-            case 3 -> new Color(100, 0, moisture);
-            case 4 -> new Color(100, Math.min(255, moisture - 255), 255);
+            case 3 -> new Color(50, 0, moisture);
+            case 4 -> new Color(50, Math.min(255, moisture - 255), 255);
             case 5 -> new Color(Math.min(255, moisture - 510), 255, 255);
             default -> Color.BLACK;
         };
