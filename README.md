@@ -69,12 +69,12 @@ When you develop features and enrich the product, remember that you have first t
 |  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  21/03/23  |  21/03/23  |  D  |
 |  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F06  |  User can set maximum number of lakes  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F08  |  River creates a lake when it cannot move to a lower elevation anymore  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F09  |  User can specify number of rivers to generate  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F10  |  Two rivers can merge, making the new river wider  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  21/03/23  |  22/03/23  |  D  |
+|  F06  |  User can set maximum number of lakes  |  Derron/Arjun  |  21/03/23  |  26/03/23  |  D  |
+|  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  25/03/23  |  25/03/23  |  D  |
+|  F08  |  River creates a lake when it cannot move to a lower elevation anymore  |  Derron  |  26/03/23  |  26/03/23  |  D  |
+|  F09  |  User can specify number of rivers to generate  |  Arjun  |  25/03/23  |  26/03/23  |  D  |
+|  F10  |  Two rivers can merge, making the new river wider  |  Derron  |  26/03/23  |  26/03/23  |  D  |
 |  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F13  |  Soil absorption profile makes only tiles directly connected to lakes absorb their humidity  |  Kyle  |  23/03/23  |  24/03/23  |  D  |
