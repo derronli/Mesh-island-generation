@@ -21,6 +21,7 @@ public class WarmTemperate extends Biome {
         regions.add(makeRainForest());
         regions.add(makeWetForest());
         regions.add(makeMoistForest());
+        regions.add(makeDryForest());
         regions.add(makeWoodland());
         regions.add(makeDesertScrub());
         regions.add(makeDesert());
@@ -33,9 +34,10 @@ public class WarmTemperate extends Biome {
         mappings.put(regions.get(0), RainForest.class);
         mappings.put(regions.get(1), WetForest.class);
         mappings.put(regions.get(2), MoistForest.class);
-        mappings.put(regions.get(3), Woodland.class);
-        mappings.put(regions.get(4), DesertScrub.class);
-        mappings.put(regions.get(5), Desert.class);
+        mappings.put(regions.get(3), DryForest.class);
+        mappings.put(regions.get(4), Woodland.class);
+        mappings.put(regions.get(5), DesertScrub.class);
+        mappings.put(regions.get(6), Desert.class);
         return mappings;
     }
 
@@ -64,6 +66,20 @@ public class WarmTemperate extends Biome {
     }
 
     private Geometry makeMoistForest() {
+        GeometryFactory geom = new GeometryFactory();
+        Coordinate[] coords = new Coordinate[]{
+                new Coordinate(0, (int) (height / 2.0)),
+                new Coordinate((int) (width / 2.0), (int) (height * 5 / 8.0)),
+                new Coordinate(width, (int) (height / 2.0)),
+                new Coordinate(width, (int) (height * 3 / 4.0)),
+                new Coordinate((int) (width / 2.0), (int) (height * 5 / 6.0)),
+                new Coordinate(0, (int) (height * 3 / 4.0)),
+                new Coordinate(0, (int) (height / 2.0))
+        };
+        return geom.createPolygon(coords);
+    }
+
+    private Geometry makeDryForest() {
         GeometryFactory geom = new GeometryFactory();
         Coordinate[] coords = new Coordinate[]{
                 new Coordinate(0, (int) (height / 2.0)),
