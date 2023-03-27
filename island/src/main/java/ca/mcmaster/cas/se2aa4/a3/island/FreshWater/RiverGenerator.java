@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RiverGenerator {
+
     public RiverGenerator(List<MyPolygon> landPolygons, List<MyPolygon> allPolygons, List<MySegment> mySegments, int numRivers, Random rand){
         int polygonidx, riverDischarge;
         MySegment segment;
