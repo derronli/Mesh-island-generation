@@ -7,8 +7,6 @@ import java.util.Random;
 
 import java.util.List;
 
-//plains can go here
-//convert polygons to jts form using kyle's stuff in order to actually compare wow
 public class PlainsElevation extends GeneralElevationProperties {
 
     public PlainsElevation(Random rand) {

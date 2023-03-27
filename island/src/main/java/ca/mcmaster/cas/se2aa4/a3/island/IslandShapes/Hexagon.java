@@ -3,7 +3,6 @@ package ca.mcmaster.cas.se2aa4.a3.island.IslandShapes;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.util.GeometricShapeFactory;
 
 import java.util.ArrayList;
 

@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//need getters and setters of elevation in the polygon and segments classes
-//need to modify vertex constructor
-//create a Point and use the jts library
 public class VolcanoElevation extends GeneralElevationProperties {
     private List <Boolean> markedPolygons = new ArrayList<>();
     private MyPolygon centrePolygon;

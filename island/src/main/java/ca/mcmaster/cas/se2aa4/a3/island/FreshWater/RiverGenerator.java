@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RiverGenerator {
-    
+
     public RiverGenerator(List<MyPolygon> landPolygons, List<MyPolygon> allPolygons, List<MySegment> mySegments, int numRivers, Random rand){
         int polygonidx, riverDischarge;
         MySegment segment;
@@ -112,8 +112,7 @@ public class RiverGenerator {
             }
         }
 
-        // check if any neighbours are a water source, if so -> the endo lake will just be this water source instead
-        // (prevents the creation of an endo lake right beside a normal lake)
+        // check if any neighbours are a water source, if so -> the endorheic lake will just be this water source instead
         for (MyPolygon neighbour : adjacentPolygons) {
             if (neighbour.isWaterTile()) {
                 return neighbour;
