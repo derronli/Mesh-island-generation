@@ -163,10 +163,6 @@ public class MyPolygon implements MyShape {
         }
     }
 
-//    public boolean isWaterTile(){
-//        return myTile instanceof WaterSource;
-//    }
-
     public boolean isWaterTile() {
         return myTile.isWaterSource();
     }
@@ -237,10 +233,7 @@ public class MyPolygon implements MyShape {
     }
 
     public boolean isIsland() {
-        if (IslandTile.class.isAssignableFrom(myTile.getClass())) {
-            return true;
-        }
-        return false;
+        return IslandTile.class.isAssignableFrom(myTile.getClass());
     }
 
     public void attemptChange(Tile newTile) {

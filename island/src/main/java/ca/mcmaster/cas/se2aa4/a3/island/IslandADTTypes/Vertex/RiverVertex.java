@@ -5,7 +5,6 @@ import java.awt.*;
 public class RiverVertex extends IslandVertex {
 
     private int discharge;
-    // Randomly set discharge value
     // Discharge will be a 1:1 ratio relative to the amount of moisture provided and the thickness of river on map
     public RiverVertex(int discharge, int elevation) {
         this.discharge = discharge;

@@ -67,7 +67,7 @@ When you develop features and enrich the product, remember that you have first t
 |:--:|---------------|------|-------|-----|--------|
 |  F01  |  One preset shape given to user to create island from (circle)  |  Kyle  |  20/03/23  |  21/03/23  |  D  |
 |  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  21/03/23  |  21/03/23  |  D  |
-|  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  19/03/23  |  25/03/23  |  D  |
 |  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
 |  F06  |  User can set maximum number of lakes  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
@@ -125,6 +125,8 @@ When you develop features and enrich the product, remember that you have first t
 1. 'arctic' : contains Dry, Moist, Wet, and Rain tundra tiles
 2. 'warmtemperate' : contains Desert, Desert Scrub, Woodland, Dry forest, Moist Forest, Wet Forest, and Rain forest tiles
 
+### Information regarding lakes
+1. Note that endorheic lakes do not count towards the maximum number of lakes 
 
 # A2 Information
 
