@@ -113,9 +113,15 @@ When you develop features and enrich the product, remember that you have first t
 2. 'moisture' : Shows moisture of polygons
 3. 'vertexelevation' : Shows elevation of vertices
 
-### List of valid elevation profiles
+### List of valid elevation profiles (and extension capabilities)
 1. 'plains' (default) : Randomly generated elevations per tile in low range
 2. 'volcano' : Largest elevation in middle of island, slopes down
+3. The elevation profiles are open to extension, such that if someone wanted to add their own custom elevation profiles
+to the project without having to edit prior source code. The BaseElevation interface has the general generateElevation 
+method that can be overridden depending on how the profile needs to be generated. Additionally, there is the
+GeneralElevationProperties abstract class that does the basic generation of the profile, which stays the same regardless
+of what profile is being generated. As such, a user would just need to add their own profile with how they would generate
+it, and the program will be able to use it. 
 
 ### List of valid soil absorption profiles
 1. 'wet' (default) : Polygons within a large range gain moisture from surrounding water sources
