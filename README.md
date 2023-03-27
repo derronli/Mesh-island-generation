@@ -155,6 +155,33 @@ that correspond to a certain tile.
 1. Endorheic lakes do not count towards the maximum number of lakes 
 2. Rivers which randomly generate at a vertex where they cannot move any further just begin and end there
 
+### Sample commands to run the program: 
+To run the lagoon, copy and paste the following: 
+cd island
+java -jar island.jar -o lagoon.mesh -i ../generator/input.mesh -mode lagoon
+cd ..
+cd visualizer
+java -jar visualizer.jar -i ../island/lagoon.mesh -o lagoon.svg
+
+To run the main island, copy and paste the following: 
+cd island
+java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -biome warmtemperate -soil wet -lake 2 -river 4 -aquifer 2 -seed 6812161995636894525
+cd ..
+cd visualizer
+java -jar visualizer.jar -i ../island/island.mesh -o island.svg
+
+The island generation command can be customized to have different modes depending on what you wish to generate, and 
+should you choose not to input a seed value, then the program will automatically choose one and output it for you. 
+
+To run the main island while seeing a heatmap, copy and paste the following: 
+cd island
+java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil dry -lake 2 -river 4 -aquifer 2 -seed 6812161995636894525 -heatmap moisture
+cd ..
+cd visualizer
+java -jar visualizer.jar -i ../island/island.mesh -o island.svg
+
+The same customization as outlined in the second example can be applied to the heatmap. 
+
 
 # A2 Information
 
