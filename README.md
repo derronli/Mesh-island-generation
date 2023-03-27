@@ -61,30 +61,30 @@ When you develop features and enrich the product, remember that you have first t
 
 -- Each feature compiles properly on maven, functioning both on the generation side and the visualizing side, following all necessary business requirements.  --
 
-### Product Backlog
+### Product Backlog A3
 
 | Id | Feature title | Who? | Start | End | Status |
 |:--:|---------------|------|-------|-----|--------|
 |  F01  |  One preset shape given to user to create island from (circle)  |  Kyle  |  20/03/23  |  21/03/23  |  D  |
 |  F02  |  Shape interface is open for extension and user can choose between options  |  Kyle  |  21/03/23  |  21/03/23  |  D  |
 |  F03  |  Preset elevation profile given to user to modify island altitudes  |  Arjun  |  19/03/23  |  25/03/23  |  D  |
-|  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F06  |  User can set maximum number of lakes  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F08  |  River creates a lake when it cannot move to a lower elevation anymore  |  Derron  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F09  |  User can specify number of rivers to generate  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F10  |  Two rivers can merge, making the new river wider  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F04  |  Elevation profile is open for extension and user can choose between options  |  Arjun  |  19/03/23  |  26/03/23  |  D  |
+|  F05  |  One tile of lake is shown on each island at lowest elevation  |  Derron  |  20/03/23  |  22/03/23  |  D  |
+|  F06  |  User can set maximum number of lakes  |  Arjun  |  25/03/23  |  25/03/23  |  D  |
+|  F07  |  One river is randomly generated and flows until no lower elevations  |  Derron  |  25/03/23  |  25/03/23  |  D  |
+|  F08  |  River creates a lake when it cannot move to a lower elevation anymore  |  Derron  |  25/03/23  |  26/03/23  |  D  |
+|  F09  |  User can specify number of rivers to generate  |  Arjun  |  25/03/23  |  25/03/23  |  D  |
+|  F10  |  Two rivers can merge, making the new river wider  |  Derron  |  26/03/23  |  26/03/23  |  D  |
+|  F11  |  Randomly generate one aquifer on island of tile size 1  |  Arjun  |  24/03/23  |  25/03/23  |  D  |
+|  F12  |  Allow user to specify number of aquifers to make, each of a random size  |  Arjun  |  25/03/23  |  25/03/23  |  D  |
 |  F13  |  Soil absorption profile makes only tiles directly connected to lakes absorb their humidity  |  Kyle  |  23/03/23  |  24/03/23  |  D  |
 |  F14  |  Soil absorption profile makes only tiles directly connected to rivers absorb their humidity  |  Kyle  |  26/03/23  |  26/03/23  |  D  |
 |  F15  |  Soil absorption profile makes only tiles directly connected to aquifers absorb their humidity  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F16  |  Soil absorption profile is open for extension and user can choose between options  |  Kyle  |  25/03/23  |  25/03/23  |  D  |
 |  F17  |  Elevation and moisture determines biome of each tile and colour is changed accordingly  |  Kyle  |  25/03/23  |  26/03/23  |  D  |
 |  F18  |  User can choose which biomes the terrain can be generated from using Whittaker  |  Kyle  |  26/03/23  |  26/03/23  |  D  |
-|  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
-|  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  dd/mm/yy  |  dd/mm/yy  |  s  |
+|  F19  |  A seed is generated on a run of the creation and output to user  |  Arjun  |  24/03/23  |  25/03/23  |  D  |
+|  F20  |  A seed can be input and will always generate the same mesh  |  Arjun  |  24/03/23  |  25/03/23  |  D  |
 |  F21  |  User can select a heatmap to view elevation properties  |  Kyle  |  22/03/23  |  22/03/23  |  D  |
 |  F22  |  User can select a heatmap to view moisture properties  |  Kyle  |  22/03/23  |  22/03/23  |  D  |
 |  F  |  a  |  a  |  dd/mm/yy  |  dd/mm/yy  |  s  |
@@ -113,26 +113,48 @@ When you develop features and enrich the product, remember that you have first t
 2. 'moisture' : Shows moisture of polygons
 3. 'vertexelevation' : Shows elevation of vertices
 
+The heatmap profiles are open to extension, such that someone may add their own custom heatmap profiles
+to the project without having to edit prior source code. The HeatmapPainter abstract class is implemented to hold the 
+common heatmap methods, that can be used by any potential heatmap profile. As such, a user would just need to
+add their own profile on how to determine colour based on the input shape, and the program will be able to use it.
+
 ### List of valid elevation profiles (and extension capabilities)
 1. 'plains' (default) : Randomly generated elevations per tile in low range
 2. 'volcano' : Largest elevation in middle of island, slopes down
-3. The elevation profiles are open to extension, such that if someone wanted to add their own custom elevation profiles
+
+The elevation profiles are open to extension, such that someone may add their own custom elevation profiles
 to the project without having to edit prior source code. The BaseElevation interface has the general generateElevation 
 method that can be overridden depending on how the profile needs to be generated. Additionally, there is the
-GeneralElevationProperties abstract class that does the basic generation of the profile, which stays the same regardless
-of what profile is being generated. As such, a user would just need to add their own profile with how they would generate
-it, and the program will be able to use it. 
+GeneralElevationProperties abstract class that does the basic generation of the profile should a user extending BaseElevation 
+want access to its methods. As such, a user would just need to add their own profile with how they would generate a profile
+from the input polygon list, vertices list, and island shape, and the program will be able to use it. 
 
 ### List of valid soil absorption profiles
 1. 'wet' (default) : Polygons within a large range gain moisture from surrounding water sources
 2. 'dry' : Has 1/4 the range of wet
 
+The soil absorption profiles are open to extension, such that someone may add their own custom absorption profiles
+to the project without having to edit prior source code. The SoilProfile interface has the abstract calcMoisture
+method that must be overridden depending on how the profile needs to be generated. As such, the user only needs to provide
+how to calculate moisture received based on the input moisture and distance to that source.
+
 ### List of valid soil Whittaker profiles
 1. 'arctic' : contains Dry, Moist, Wet, and Rain tundra tiles
 2. 'warmtemperate' : contains Desert, Desert Scrub, Woodland, Dry forest, Moist Forest, Wet Forest, and Rain forest tiles
 
-### Information regarding lakes
-1. Note that endorheic lakes do not count towards the maximum number of lakes 
+The Whittaker profiles are open to extension, such that someone may add their own custom profiles
+to the project without having to edit prior source code. The diagrams are the source for what kind of biome the mesh
+generates, but the general interface which needs to be extended only need take in elevation and moisture, and return
+the type of tile that corresponds to those values. To make it easier, the user can extend the biome abstract class that 
+implements that interface, and the arctic and WarmTemperate classes inherit from this abstract class. For the user to extend
+biome, it simulates a Whittaker graph as a Geometry and allows the user to populate that geometry with regions (smaller geometries)
+that correspond to a certain tile.
+
+
+### Information regarding lakes and rivers
+1. Endorheic lakes do not count towards the maximum number of lakes 
+2. Rivers which randomly generate at a vertex where they cannot move any further just begin and end there
+
 
 # A2 Information
 
