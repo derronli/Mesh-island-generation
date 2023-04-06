@@ -21,7 +21,7 @@ s:
 	mvn compile
 	mvn package
 
-run: s g v
+runm: s g v
 
 rund: s g vd
 
@@ -91,8 +91,13 @@ genhexmovol:
 
 runcir: s gencir visisland
 
-genhex:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon
+genhex: cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode hexagon
+
+final:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil wet -lake 2 -river 4 -aquifer 2 -seed 6812161995636894525 -heatmap moisture
+
+normal:
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil dry -lake 2 -river 4 -aquifer 2
 
 runhex: s genhex visisland
 
@@ -113,3 +118,7 @@ hexelvol: s genhexelvol visisland
 hexmovol: s genhexmovol visisland
 
 cirvol: s gencirvol visisland
+
+run: s final visisland
+
+runnormal: s normal visisland
