@@ -18,10 +18,10 @@ public class Graph {
     }
 
     // Input must be 2 preexisting nodes in the graph
-    public void addEdge(int idn, int idm) {
+    public void addEdge(int idn, int idm, int weight) {
         Node n = new Node(idn);
         Node m = new Node(idm);
-        UndirectedEdge newEdge = new UndirectedEdge(n, m, 1);
+        UndirectedEdge newEdge = new UndirectedEdge(n, m, weight);
 
         // Ensure that edge doesn't already exist
         for (UndirectedEdge neighbourEdges : adjList.get(n)) {
@@ -52,5 +52,9 @@ public class Graph {
             }
             System.out.println("");
         }
+    }
+
+    public Map<Node, List<UndirectedEdge>> getAdjList() {
+        return adjList;
     }
 }

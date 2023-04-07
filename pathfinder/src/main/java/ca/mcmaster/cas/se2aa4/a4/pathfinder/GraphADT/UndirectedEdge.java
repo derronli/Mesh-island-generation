@@ -19,6 +19,10 @@ public class UndirectedEdge {
         return m;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
     // Given some node, return the other node in the edge
     public Node getOtherNode(Node node) {
         if (n.equals(node)) {
