@@ -85,6 +85,11 @@ public class InputParser {
                 .hasArg()
                 .desc("Enter the Whittaker biome you want used")
                 .build();
+        Option city = Option.builder("city")
+                .argName("city")
+                .hasArg()
+                .desc("Enter the number of cities you want generated")
+                .build();
 
         // add all options
         options.addOption(help);
@@ -99,6 +104,7 @@ public class InputParser {
         options.addOption(river);
         options.addOption(soil);
         options.addOption(biome);
+        options.addOption(city);
 
         return options;
     }
@@ -111,12 +117,13 @@ public class InputParser {
     private void checkOptions(CommandLine line, Options options)  throws IOException {
 
         String inputFile = null, outputFile = null, mode = "default", heatmap = null, elevation = null, stringSeed = null;
-        String aquifer = null, soil = null, lake = null, river = null, biome = null;
+        String aquifer = null, soil = null, lake = null, river = null, biome = null, city = null;
         long seed = -1;
 
         int numAquifers = 0;
         int numLakes = 0;
         int numRivers = 0;
+        int numCities = 0;
         
         // If they ask for help, displays options, and exits without generating a mesh.
         if (line.hasOption("h")){
@@ -177,6 +184,15 @@ public class InputParser {
                 System.out.println("Invalid format for the number of rivers, map now has 0 rivers");
             }
         }
+        if (line.hasOption("city")){
+            city = line.getOptionValue("city");
+            try {
+                numCities = Integer.parseInt(city);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid format for the number of cities, map now has 0 cities");
+            }
+        }
         if (line.hasOption("biome")){
             biome = line.getOptionValue("biome");
         }
@@ -190,10 +206,10 @@ public class InputParser {
             // Makes mesh factory and writes to it.
             MeshFactory factory = new MeshFactory();
             if (heatmap != null){
-                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, numAquifers, soil, numLakes, numRivers);
+                aMesh = handler.makeMesh(aMesh, heatmap, elevation, seed, numAquifers, soil, numLakes, numRivers, numCities);
             }
             else{
-                aMesh = handler.makeMesh(aMesh, elevation, seed, numAquifers, soil, numLakes, numRivers, biome);
+                aMesh = handler.makeMesh(aMesh, elevation, seed, numAquifers, soil, numLakes, numRivers, biome, numCities);
             }
             factory.write(aMesh, outputFile);
             
