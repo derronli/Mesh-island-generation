@@ -43,6 +43,18 @@ public class MyVertex implements MyShape {
         return true;
     }
 
+    public boolean makeCityVertex(int size){
+        // Make sure vertex is not already a city
+        if (islandVertex.getClass() == CityVertex.class){
+            return false;
+        }
+
+        islandVertex = new CityVertex(size);
+        Color riverColor = islandVertex.getColor();
+        changeColor(riverColor.getRed() + "," + riverColor.getGreen() + "," + riverColor.getBlue());
+        return true;
+    }
+
     public void setElevation(int elevation){ islandVertex.setElevation(elevation);}
 
 
