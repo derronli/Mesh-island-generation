@@ -3,7 +3,9 @@ package ca.mcmaster.cas.se2aa4.a4.pathfinder.GraphADT;
 import java.util.*;
 
 public class Graph {
-    private Map<Node, List<Node>> adjList = new HashMap<>();
+    private Map<Node, List<UndirectedEdge>> adjList = new HashMap<>();
+
+    // Maybe create a constructor that can make the graph from an edge list?
 
     public void addNode(int id) {
         adjList.putIfAbsent(new Node(id), new ArrayList<>());
@@ -19,32 +21,34 @@ public class Graph {
     public void addEdge(int idn, int idm) {
         Node n = new Node(idn);
         Node m = new Node(idm);
+        UndirectedEdge newEdge = new UndirectedEdge(n, m, 1);
 
         // Ensure that edge doesn't already exist
-        for (Node neighbour : adjList.get(n)) {
-            if (neighbour.equals(m)) {
+        for (UndirectedEdge neighbourEdges : adjList.get(n)) {
+            if (neighbourEdges.equals(newEdge)) {
                 return;
             }
         }
         // Undirected graph
-        adjList.get(n).add(m);
-        adjList.get(m).add(n);
+        adjList.get(n).add(newEdge);
+        adjList.get(m).add(newEdge);
     }
 
     public void removeEdge(int idn, int idm) {
         Node n = new Node(idn);
         Node m = new Node(idm);
+        UndirectedEdge edge = new UndirectedEdge(n, m, 1);
 
-        adjList.get(n).remove(m);
-        adjList.get(m).remove(n);
+        adjList.get(n).remove(edge);
+        adjList.get(m).remove(edge);
     }
 
     public void printGraph() {
         Set<Node> nodes = adjList.keySet();
         for (Node n : nodes) {
             System.out.print("Node: " + n.getId() + "\tNeighbours:");
-            for (Node adj : adjList.get(n)) {
-                System.out.print(" " + adj.getId());
+            for (UndirectedEdge adj : adjList.get(n)) {
+                System.out.print(" " + adj.getOtherNode(n).getId());
             }
             System.out.println("");
         }

@@ -17,6 +17,10 @@ public class Main {
         g.addNode(3);
         g.addNode(0);
 
+        g.addNode(4);
+        g.removeNode(4);
+
+        g.addEdge(0, 1);
         g.addEdge(0, 1);
         g.addEdge(1, 3);
         g.addEdge(0, 2);
