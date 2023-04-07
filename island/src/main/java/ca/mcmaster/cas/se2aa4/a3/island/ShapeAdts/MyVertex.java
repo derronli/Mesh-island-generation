@@ -52,10 +52,39 @@ public class MyVertex implements MyShape {
         islandVertex = new CityVertex(size);
         Color riverColor = islandVertex.getColor();
         changeColor(riverColor.getRed() + "," + riverColor.getGreen() + "," + riverColor.getBlue());
+        setThick(size);
         return true;
     }
 
+    /**
+     * Sets the thickness of this vertex.
+     * @param thickness int value of thickness wanted
+     */
+    public void setThick(float thickness){
+        Structs.Property thick = Structs.Property.newBuilder().setKey("thickness").setValue("" + thickness).build();
+
+        String val = null;
+        for(Structs.Property p: this.getPropertiesList()) {
+            if (p.getKey().equals("thickness")) {
+                val = p.getValue();
+            }
+        }
+
+        // If thickness property does not already exist.
+        if (val == null) {
+            vertex = Vertex.newBuilder(vertex).addProperties(thick).build();
+        }
+        // If thickness value needs to be changed.
+        else{
+            vertex = Vertex.newBuilder(vertex).setProperties(1, thick).build();
+        }
+    }
+
     public void setElevation(int elevation){ islandVertex.setElevation(elevation);}
+
+    public java.util.List<Structs.Property> getPropertiesList() {
+        return vertex.getPropertiesList();
+    }
 
 
     public int getElevation() { return islandVertex.getElevation(); }

@@ -97,7 +97,7 @@ final:
 	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil wet -lake 2 -river 4 -aquifer 2 -seed 6812161995636894525 -heatmap moisture
 
 normal:
-	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil dry -lake 2 -river 4 -aquifer 2
+	cd island && java -jar island.jar -o island.mesh -i ../generator/input.mesh -mode circle -elevation volcano -soil dry -lake 2 -river 4 -aquifer 2 -city 5
 
 runhex: s genhex visisland
 
