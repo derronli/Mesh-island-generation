@@ -1,6 +1,6 @@
 package ca.mcmaster.cas.se2aa4.a4.pathfinder.GraphADT;
 
-public class UndirectedEdge {
+public class UndirectedEdge implements Edge {
     private final Node n;
     private final Node m;
     private final int weight;
