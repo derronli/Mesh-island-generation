@@ -13,7 +13,7 @@ public class LakeTile extends IslandTile {
 
     @Override
     public Color getColor() {
-        return new Color(255, 0, 28);
+        return new Color(65,105,225);
     }
 
     @Override
