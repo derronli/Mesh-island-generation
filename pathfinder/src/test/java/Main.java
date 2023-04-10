@@ -1,6 +1,5 @@
 import LectureTestSuite.TestFactory;
 import LectureTestSuite.TestReport;
-import LectureTestSuite.tags.Test;
 import Tests.BaseCaseTest;
 import Tests.InductiveCaseTest;
 import Tests.NegativeEdgeTest;
