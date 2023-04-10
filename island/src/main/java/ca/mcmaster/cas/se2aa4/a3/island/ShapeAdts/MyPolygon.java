@@ -125,7 +125,7 @@ public class MyPolygon implements MyShape {
         return jtsPolygon;
     }
     public List<Integer> getSegmentIdxsList(){ return polygon.getSegmentIdxsList(); }
-
+    public List<MyPolygon> getNeighbours() { return neighbours; }
     /**
      * Changes the tile of this polygon to an input tile type, and appropriately changes its colour.
      * @param tile input tile type to be used

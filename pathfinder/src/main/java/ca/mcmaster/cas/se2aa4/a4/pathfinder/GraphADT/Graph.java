@@ -21,6 +21,10 @@ public class Graph {
     public void addEdge(int idn, int idm, int weight) {
         Node n = new Node(idn);
         Node m = new Node(idm);
+        // If either node doesn't exist -> don't do anything
+        if (!adjList.containsKey(n) || !adjList.containsKey(m)) {
+            return;
+        }
         UndirectedEdge newEdge = new UndirectedEdge(n, m, weight);
 
         // Ensure that edge doesn't already exist
