@@ -19,6 +19,22 @@ public class MySegment implements MyShape {
         totalIndex++;
     }
 
+    public MySegment(MyVertex v1, MyVertex v2){
+        this.index = totalIndex;
+        totalIndex++;
+        this.v1 = v1;
+        this.v2 = v2;
+        initSegment();
+    }
+
+    private void initSegment(){
+        Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue("105,105,105").build();
+        // Stores in segment.
+        segment = Segment.newBuilder().setV1Idx(v1.getIndex()).setV2Idx(v2.getIndex()).addProperties(color).build();
+        setThick(2);
+
+    }
+
     public void changeColor(String colorCode){
         Structs.Property color = Structs.Property.newBuilder().setKey("rgb_color").setValue(colorCode).build();
         segment = Segment.newBuilder(segment).setProperties(0, color).build();
