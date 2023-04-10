@@ -8,10 +8,11 @@ import java.util.*;
 
 public class DijkstraShortestPath implements Pathfinder {
 
+    Map<Node, Integer> distance = new HashMap<>();
+
     @Override
     public List<Node> findPath(Map<Node, List<UndirectedEdge>> adjList, Node src, Node target) {
         PriorityQueue<ComparableNode> pqueue = new PriorityQueue<>(adjList.size(), new ComparableNode());
-        Map<Node, Integer> distance = new HashMap<>();
         Map<Node, Node> path = new HashMap<>();
         Set<Node> visited = new HashSet<>();
 
@@ -55,4 +56,8 @@ public class DijkstraShortestPath implements Pathfinder {
 
         return shortestPath;
     }
+    public int getDistance(Node n) {
+        return distance.get(n);
+    }
+
 }
