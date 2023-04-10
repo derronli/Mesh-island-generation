@@ -47,3 +47,4 @@ found through Dijkstra's Algorithm. In order to use the pathfinding library on t
 - "Shortest path" in regards to the mesh is defined as the euclidian distance between nodes. This is accomplished by using the distance formula on a pair of vertices' (x,y) coordinates, and assigning the distance to the weight of an edge.
 - Cities are assigned to polygon centroids, roads are built along neighbourhood relations
 - Edges are assumed to be undirected in the graph, however the interface further supports other forms of edges to be extended
+- The capital city in the star network is depicted by a lighter shade of red
