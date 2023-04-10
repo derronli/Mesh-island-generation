@@ -18,6 +18,7 @@ public class MyVertex implements MyShape {
         index = totalIndex;
         totalIndex++;
         islandVertex = new LandVertex();
+        setThick(0);
     }
 
     public void changeColor(String colorCode){
@@ -50,8 +51,8 @@ public class MyVertex implements MyShape {
         }
 
         islandVertex = new CityVertex(size);
-        Color riverColor = islandVertex.getColor();
-        changeColor(riverColor.getRed() + "," + riverColor.getGreen() + "," + riverColor.getBlue());
+        Color cityColor = islandVertex.getColor();
+        changeColor(cityColor.getRed() + "," + cityColor.getGreen() + "," + cityColor.getBlue());
         setThick(size);
         return true;
     }

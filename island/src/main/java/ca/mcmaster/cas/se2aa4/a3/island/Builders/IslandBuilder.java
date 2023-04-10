@@ -10,7 +10,10 @@ import ca.mcmaster.cas.se2aa4.a3.island.IslandADTTypes.Tiles.*;
 import ca.mcmaster.cas.se2aa4.a3.island.IslandShapes.*;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs.Mesh;
 import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyPolygon;
+import ca.mcmaster.cas.se2aa4.a3.island.ShapeAdts.MyVertex;
 import ca.mcmaster.cas.se2aa4.a3.island.Urbanism.CityGenerator;
+import ca.mcmaster.cas.se2aa4.a3.island.Urbanism.MapToGraphAdapter;
+import ca.mcmaster.cas.se2aa4.a3.island.Urbanism.RoadGenerator;
 import ca.mcmaster.cas.se2aa4.a3.island.Whittaker.WhittakerDiagram;
 import org.locationtech.jts.geom.Geometry;
 
@@ -35,7 +38,10 @@ public class IslandBuilder extends AbstractBuilder {
 
     public void constructCities(Random rand, int numCities) {
         CityGenerator cityGenerator = new CityGenerator();
-        cityGenerator.generate(findPolygonsWithinIsland(), myVertices, numCities, rand);
+        List<MyVertex> citiesList = cityGenerator.generate(findPolygonsWithinIsland(), myVertices, numCities, rand);
+        MapToGraphAdapter graphAdapter = new MapToGraphAdapter(findPolygonsWithinIsland(), myVertices);
+        RoadGenerator roadGenerator = new RoadGenerator();
+        roadGenerator.generate(citiesList, myVertices, mySegments, rand, graphAdapter);
     }
 
     public IslandBuilder(IslandShape shape){
